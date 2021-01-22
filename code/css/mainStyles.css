@@ -1,0 +1,27 @@
+.my-primary{
+    color: lightYellow ;
+    background-color: red;
+}
+
+a.navbar-brand {
+    color: white ;
+}
+
+.nav-link{ 
+    color: white;
+}
+
+.nav-link:hover{ 
+    color:darkgray;
+}
+
+  
+.navbar-brand:hover{
+    color: white;
+}
+
+
+.search, .search-button { 
+    color: white; 
+}
+
