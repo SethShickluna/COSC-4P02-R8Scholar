@@ -24,7 +24,6 @@ export default class Navigation extends Component {
     }
 
     //EVENT HANDELERS
-
     /**
      @param obj: the object which calls this function (in this case, search button )
     **/
@@ -48,55 +47,61 @@ export default class Navigation extends Component {
         }
     }
 
-    //logs out the user 
+    /**
+     * logs out the user 
+     * @param obj: the object which calls this function (logout button)
+    **/
     handleLogoutPressed(obj){
         this.setState({
             signedIn : false, 
         });
     }
 
-  //the JSX that gets outputted when this file is imported as a component 
-  render() {
-    return (
-      <div className="App">
-        <header>
-          <Navbar expand="lg" variant="dark" bg="dark">
-            <Navbar.Brand href="#home">BrockU R8Scholar</Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="mr-auto">
-                    {/* these two are pretty easy -- just show home and about links always*/}
-                    <Nav.Link as={Link} to="/">Home</Nav.Link>
-                    <Nav.Link as={Link} to="/about">About</Nav.Link>
-                    
-                    {/*these are shown only if user is logged out as they are not needed if a user is logged in */}
-                    {!this.state.signedIn ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : null}
-                    {!this.state.signedIn ? <Nav.Link as={Link} to="/signup">Signup</Nav.Link> : null} 
-  
-                    {/*these are shown only if user is logged in accesses full features, and gives a drop down menu for */}
-                    {this.state.signedIn ? <Nav.Link as={Link} to="/courses">Courses</Nav.Link> : null}
-                    {this.state.signedIn ? <Nav.Link as={Link} to="/professors">Professors</Nav.Link>  : null} 
-                    {/* user profile drop down menu*/}
-                    {this.state.signedIn ?
-                        <NavDropdown title={this.state.username} id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/account">Account</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#" onClick={this.handleLogoutPressed}>Logout</NavDropdown.Item>
-                    </NavDropdown> 
-                    : null}                    
-                </Nav>
-                <Form inline>
-                  <FormControl type="text" placeholder="Search" 
-                  className="mr-sm-2" onChange={this.updateSearchQuery}/>
-                  <Button variant="outline-success" onClick={this.performSearchOnQuery}>Search</Button>
-                </Form>
-            </Navbar.Collapse>
-          </Navbar>
-        </header>
-      </div>
-    );
-  }
+    //the JSX that is rendered when this file is imported as a component 
+    render() {
+        return (
+            <div className="App">
+                <header>
+                    <Navbar sticky="top" expand="lg" variant="dark" bg="dark">
+                        <Navbar.Brand >BrockU R8Scholar</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="mr-auto">
+                                {/* these two are pretty easy -- just show home and about links always*/}
+                                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                                
+                                {/*these are shown only if user is logged out as they are not needed if a user is logged in */}
+                                {!this.state.signedIn ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : null}
+                                {!this.state.signedIn ? <Nav.Link as={Link} to="/signup">Signup</Nav.Link> : null} 
+            
+                                {/*these are shown only if user is logged in accesses full features, and gives a drop down menu for */}
+                                {this.state.signedIn ? <Nav.Link as={Link} to="/courses">Courses</Nav.Link> : null}
+                                {this.state.signedIn ? <Nav.Link as={Link} to="/professors">Professors</Nav.Link>  : null} 
+                                {/* user profile drop down menu*/}
+                                    
+                            </Nav>
+                            <Nav> {/* show on the left hand side*/}
+                                {this.state.signedIn ? /* once again only showing if user is logged in */
+                                    <NavDropdown title={this.state.username} id="basic-nav-dropdown">
+                                        <NavDropdown.Item as={Link} to="/account">Account</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="#" onClick={this.handleLogoutPressed}>Logout</NavDropdown.Item>
+                                </NavDropdown> 
+                                : null}                
+                            </Nav>
+                            <Form inline>
+                            <FormControl type="text" placeholder="Search" 
+                            className="mr-sm-2" onChange={this.updateSearchQuery}/>
+                            <Button variant="outline-success" onClick={this.performSearchOnQuery}>Search</Button>
+                            </Form>
+                        </Navbar.Collapse>
+                    </Navbar>
+                </header>
+            </div>
+        );
+    }
 }
   
   
