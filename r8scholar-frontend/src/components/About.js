@@ -1,11 +1,9 @@
-import react from 'react'; 
-import Navigation from './assets/Navigation'; 
+import React from 'react'; 
 
 function About () {
     return (
         <div>
-            <Navigation/>
-            <h1> About Us </h1>
+           
         </div>
     ); 
 }

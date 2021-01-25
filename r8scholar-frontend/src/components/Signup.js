@@ -1,12 +1,9 @@
-import react from 'react'; 
-import Navigation from './assets/Navigation';
-
+import React from 'react'; 
 
 function Signup () {
     return (
         <div>
-            <Navigation/>
-            <h1> Signup with your brock email here </h1>
+           
         </div>
     ); 
 }

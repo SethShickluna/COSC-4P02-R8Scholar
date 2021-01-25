@@ -1,13 +1,11 @@
-import react from 'react'; 
-import Navigation from './assets/Navigation'; 
+import React from 'react'; 
 
 function Home () {
     return (
         <div>
-            <Navigation/>
-            <h1> R8Scholar coming Soon </h1>
-        </div>
-    ); 
+            
+        </div> 
+    );
 }
 
 export default Home; 
