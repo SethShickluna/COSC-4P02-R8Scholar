@@ -5,12 +5,13 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Account from './components/Account'; 
 import Settings from './components/Settings'; 
-import Professors from './components/Professors'; 
+import Instructors from './components/Instructors'; 
 import Courses from './components/Courses'; 
 import Navigation from './components/assets/Navigation'; 
 import Foot from './components/assets/Foot'; 
 import {Route, Link} from 'react-router-dom'; 
 
+//this will be an api call but is here for testing purposes
 const courseInfo = {
   name: "COSC 2P03", 
   avgRating: "2.7",
@@ -26,7 +27,7 @@ function App() {
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/settings' component={Settings} />
         <Route exact path='/account' component={Account} />
-        <Route exact path='/professors' component={Professors} />
+        <Route exact path='/professors' component={Instructors} />
         <Route exact path='/courses' render={(props) => <Courses course={courseInfo}/>} />
       <Foot/>
     </div>

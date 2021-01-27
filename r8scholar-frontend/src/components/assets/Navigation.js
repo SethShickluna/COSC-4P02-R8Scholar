@@ -4,6 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form,  FormControl, Button} from 'react-bootstrap';
 
 
+//styles
+const navlinkStyles = { 
+   // paddingRight: '50px',
+    //paddingLeft: '50px', 
+    color: 'white',
+}
+
+
 export default class Navigation extends Component {
     // this could probably be named better, if true it means user is logged in 
     defaultLoginStatus = false; 
@@ -62,40 +70,42 @@ export default class Navigation extends Component {
         return (
             <div className="App">
                 <header>
-                    <Navbar sticky="top" expand="lg" variant="dark" bg="dark">
+                    <Navbar sticky="top" expand="lg" variant="dark" bg="secondary">
                         <Navbar.Brand >BrockU R8Scholar</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Form inline>
+                            <FormControl type="text" placeholder="Search" 
+                            className="mr-sm-2" onChange={this.updateSearchQuery}/>
+                            <Button variant="danger" onClick={this.performSearchOnQuery}>Search</Button>
+                        </Form>
+                        <Nav> {/* show on the left hand side*/}
+                            {this.state.signedIn ? /* once again only showing if user is logged in */
+                                <NavDropdown title={this.state.username} id="basic-nav-dropdown">
+                                    <NavDropdown.Item as={Link} to="/account">Account</NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                <   NavDropdown.Item href="#" onClick={this.handleLogoutPressed}>Logout</NavDropdown.Item>
+                                </NavDropdown> 
+                            : null}                
+                        </Nav>
+
+                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                             <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="mr-auto">
+                            <Nav className="ml-auto nav-fill w-100">
                                 {/* these two are pretty easy -- just show home and about links always*/}
-                                <Nav.Link as={Link} to="/">Home</Nav.Link>
-                                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                                <Nav.Link style={navlinkStyles} as={Link} to="/">Home</Nav.Link>
+                                <Nav.Link style={navlinkStyles} as={Link} to="/about">About</Nav.Link>
                                 
                                 {/*these are shown only if user is logged out as they are not needed if a user is logged in */}
-                                {!this.state.signedIn ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : null}
-                                {!this.state.signedIn ? <Nav.Link as={Link} to="/signup">Signup</Nav.Link> : null} 
+                                {!this.state.signedIn ? <Nav.Link style={navlinkStyles} as={Link} to="/login">Login</Nav.Link> : null}
+                                {!this.state.signedIn ? <Nav.Link style={navlinkStyles} as={Link} to="/signup">Signup</Nav.Link> : null} 
             
                                 {/*these are shown only if user is logged in accesses full features, and gives a drop down menu for */}
-                                {this.state.signedIn ? <Nav.Link as={Link} to="/courses">Courses</Nav.Link> : null}
-                                {this.state.signedIn ? <Nav.Link as={Link} to="/professors">Professors</Nav.Link>  : null} 
+                                {this.state.signedIn ? <Nav.Link style={navlinkStyles} as={Link} to="/courses">Courses</Nav.Link> : null}
+                                {this.state.signedIn ? <Nav.Link style={navlinkStyles} as={Link} to="/instructors">Instructors</Nav.Link>  : null} 
+                                {this.state.signedIn ? <Nav.Link style={navlinkStyles} as={Link} to="/departments">Departments</Nav.Link>  : null} 
                                 {/* user profile drop down menu*/}
                                     
                             </Nav>
-                            <Nav> {/* show on the left hand side*/}
-                                {this.state.signedIn ? /* once again only showing if user is logged in */
-                                    <NavDropdown title={this.state.username} id="basic-nav-dropdown">
-                                        <NavDropdown.Item as={Link} to="/account">Account</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#" onClick={this.handleLogoutPressed}>Logout</NavDropdown.Item>
-                                </NavDropdown> 
-                                : null}                
-                            </Nav>
-                            <Form inline>
-                            <FormControl type="text" placeholder="Search" 
-                            className="mr-sm-2" onChange={this.updateSearchQuery}/>
-                            <Button variant="outline-success" onClick={this.performSearchOnQuery}>Search</Button>
-                            </Form>
                         </Navbar.Collapse>
                     </Navbar>
                 </header>
