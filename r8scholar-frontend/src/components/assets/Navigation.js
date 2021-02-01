@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import  {Link} from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form,  FormControl, Button} from 'react-bootstrap';
-
+import { VscAccount } from 'react-icons/vsc'; 
 
 //styles
 const navlinkStyles = { 
@@ -79,11 +79,11 @@ export default class Navigation extends Component {
                         </Form>
                         <Nav> {/* show on the left hand side*/}
                             {this.state.signedIn ? /* once again only showing if user is logged in */
-                                <NavDropdown title={this.state.username} id="basic-nav-dropdown">
+                                <NavDropdown title={<VscAccount value={{style: {color: 'white'}}}/>} id="basic-nav-dropdown primary">
                                     <NavDropdown.Item as={Link} to="/account">Account</NavDropdown.Item>
                                     <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                <   NavDropdown.Item href="#" onClick={this.handleLogoutPressed}>Logout</NavDropdown.Item>
+                                <   NavDropdown.Item onClick={this.handleLogoutPressed}>Logout</NavDropdown.Item>
                                 </NavDropdown> 
                             : null}                
                         </Nav>

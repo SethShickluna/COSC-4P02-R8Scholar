@@ -18,95 +18,88 @@ export default class SignupForm extends Component {
             password: "", 
             verifPassword: "", 
             email: "", 
+            termsAgreed: false, 
             formComplete: false, 
         }
 
         //allows us to this "this" inside the methods 
         this.updateEmailInput = this.updateEmailInput.bind(this);
-        this.updateUsernameInput = this.updateUsernameInput.bind(this);
         this.updatePasswordInput = this.updatePasswordInput.bind(this);
+        this.updateUsernameInput = this.updateUsernameInput.bind(this);
         this.updateVerifyPasswordInput = this.updateVerifyPasswordInput.bind(this); 
+        this.checkboxUpdate = this.checkboxUpdate.bind(this); 
+
         this.submitForm = this.submitForm.bind(this);
-        
         this.checkPassword = this.checkPassword.bind(this); 
-        this.verifyEmail = this.verifyEmail.bind(this);
+        this.checkEmail = this.checkEmail.bind(this);
         this.checkUsername = this.checkUsername.bind(this);
     }
 
     updateEmailInput(obj){
         this.setState({
             email: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.verifyEmail()),
+            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
         }); 
     }
 
     updateUsernameInput(obj){
         this.setState({
             username: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.verifyEmail()),
+            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
         }); 
     }
 
     updatePasswordInput(obj){ 
         this.setState({
             password: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.verifyEmail()),
+            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
         });
     }
 
     updateVerifyPasswordInput(obj){
         this.setState({
             verifPassword: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.verifyEmail()),
+            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
         });
     }
 
-    verifyEmail = () => {
+    checkboxUpdate(obj) {
+        this.setState({
+            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
+            termsAgreed: this.target.value,
+        })
+        
+    }
+
+    checkEmail = () => {
         //first check @brocku.ca
-        //send to back to make sure this email hasnt been used 
         let length = this.state.email.length; 
-        if(this.state.email !== null ){
-            console.log(this.state.email.substring(length - 10, length)); 
+        if(length > 10){ // otherwise the next line would be problematic 
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
                 //check backend to make sure that email hasnt been used
                 let emailInUse = false; 
-                if(emailInUse){
-                    //its used 
-                    return false; 
-                }
-                //good to go
-                return true; 
+                //do the api call & set emailInUse to the response 
+                
+                return !emailInUse; // if the email is in use return false cause that email failed the test and vice versa 
             }
         }
         //email no good 
         return false;
     }
 
+    //password boxes match and are at least 8 characters 
     checkPassword = () => {
-        // perform all neccassary validations
-        if (this.state.password === this.state.verifPassword) {
-            if(this.state.password.length < 8){
-                //less than 8 digits 
-                return false; 
-            }
-            //good to go 
-            return true; 
-        }
-        //passwords do not match  
-        return false; 
+        return this.state.password === this.state.verifPassword && this.state.password.length > 7;
     }
 
+    //min 4 character username (this is becuase i really want the username 'seth' but open to discussion of course)
     checkUsername = () => {
-        if(this.state.username.length < 5){ //this is arbitary right now -- bring up with group
-            return true; 
-        }
-        //username too short
-        return false; 
+        return this.state.username.length > 3; 
     }
 
-    submitForm(){
+    submitForm = () => {
         //good to go?
-        if(this.verifyEmail() && this.checkPassword() && this.checkUsername()){ // passwords match, email stuff all worked out 
+        if(this.checkEmail() && this.checkPassword() && this.checkUsername()){ // passwords match, email stuff all worked out 
             //send info to the back end and create the account 
             //route to confirmation page 
             alert("Success! Confirmation email sent to " + this.state.email + "."); 
@@ -126,17 +119,21 @@ export default class SignupForm extends Component {
                             </Form.Group>
                             <Form.Group controlId="formGroupUsername">
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control type="username" onChange={this.updateUsernameInput} minLength={4} placeholder="Username" />
+                                <Form.Control type="username" onChange={this.updateUsernameInput} placeholder="Username" />
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updatePasswordInput} minLength={8} placeholder="Password" />
+                                <Form.Control type="password" onChange={this.updatePasswordInput}  placeholder="Password" />
                             </Form.Group>
                             <Form.Group controlId="formGroupVerifPassword">
                                 <Form.Label>Re-enter Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updateVerifyPasswordInput} minLength={8} placeholder="Password" />
+                                <Form.Control type="password" onChange={this.updateVerifyPasswordInput} placeholder="Password" />
                             </Form.Group>
-                            <Button onClick={this.submitForm} variant="danger" type="submit">
+                            <Form.Group>
+                                <input type="checkbox" id="agree" onChange={this.checkboxUpdate} />
+                                <label htmlFor="agree">   I agree to <b>terms and conditions</b></label>
+                            </Form.Group>
+                            <Button disabled={!this.state.formComplete}onClick={this.submitForm} variant="danger">
                                 Register 
                             </Button>
                         </Form>
