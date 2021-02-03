@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+}
+
+#navbar {
+    padding: 20px;
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+#footer {
+    padding: 20px;
+    background: whitesmoke;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-container {
+    display: grid;
+    grid-template-columns: 2fr 4fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 9fr;
+    gap: 0px 0px;
+    grid-template-areas: "Logo Search Login Teachers Courses Departments About";
+    width: auto;
+    height: 75px;
+}
+
+.Logo {
+    grid-area: Logo;
+    height: 75px;
+    background: #cc0000;
+}
+
+.Logo .label {
+    height: auto;
+    padding: 10px;
+    font-family: Cabin;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 58px;
+    text-align: center;
+    color: #e5e5e5;
+}
+.Search {
+    grid-area: Search;
+    height: 75px;
+    background: #989898;
+    stroke: none;
+}
+
+.Search .Field {
+    height: 35px;
+    width: 100%;
+    margin-top: 20px;
+    font-family: Cabin;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 58px;
+    text-align: left;
+    color: #000000;
+    background-color: #d1d1d1;
+    border: 0;
+}
+
+#NavButton {
+    background-color: #989898;
+}
+
+#NavButton:hover {
+    background-color: #888686;
+    cursor: pointer;
+}
+
+#NavButton .label {
+    padding: 10px;
+    font-family: Cabin;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 58px;
+    text-align: center;
+    color: #fdfdfd;
+}
+
+.Login {
+    grid-area: Login;
+    height: 75px;
+    background: #989898;
+}
+.Teachers {
+    grid-area: Teachers;
+    height: 75px;
+    background: #989898;
+}
+.Courses {
+    grid-area: Courses;
+    height: 75px;
+    background: #989898;
+}
+.Departments {
+    grid-area: Departments;
+    height: 75px;
+    background: #989898;
+}
+.About {
+    grid-area: About;
+    height: 75px;
+    background: #989898;
+}
