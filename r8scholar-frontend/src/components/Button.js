@@ -1,14 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Button(props) {
     return (
-        <div
-            name="button"
-            id="NavButton"
-            className={props.className}
-            onClick={props.onClick}
-        >
-            <div className="label">{props.className}</div>
-        </div>
+        <Link id={props.id} className={props.className} to={props.link}>
+            {props.text}
+        </Link>
     );
 }
