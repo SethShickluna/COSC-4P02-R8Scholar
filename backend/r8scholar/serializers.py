@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Comment, CustomUser, Review
+from .models import Comment, Course, CustomUser, Review
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,4 +16,9 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ('comment_id', 'review_id', 'name', 'content', 'child', 'date', 'numb_reports')
 
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('code', 'name', 'department', 'rating')
 

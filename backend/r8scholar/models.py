@@ -57,15 +57,17 @@ class Course(models.Model):
     code = models.CharField(max_length=10, unique=True)
     department = models.CharField(max_length=20)
     rating = models.IntegerField(default=None)
+    name  = models.CharField(max_length=30,default=None)
 
 class Instructor(models.Model):
     id = models.OneToOneField(Subject,primary_key=True,default=None, on_delete = models.CASCADE)
     department = models.CharField(max_length=20)
     rating = models.IntegerField(default=None)
+    name  = models.CharField(max_length=30,default=None)
     
 class Department(models.Model):
     id = models.OneToOneField(Subject,primary_key=True,default=None, on_delete = models.CASCADE)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20,default=None)
     courses_rating = models.IntegerField(default=None)
     instructors_rating = models.IntegerField(default=None)
 
@@ -75,9 +77,9 @@ class Review(models.Model):
     review_id = models.IntegerField(primary_key=True)
     reviewer = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
     id = models.ForeignKey(Subject, on_delete = models.CASCADE, null=True)
-    content = models.TextField(default=None)
-    rating = models.IntegerField(default=None)
-    date = models.DateTimeField(default=None)
+    content = models.TextField(default=None, null=True)
+    rating = models.IntegerField(default=None,null=True)
+    date = models.DateTimeField(default=None, null=True)
     numb_reports = models.IntegerField(default=None)
 
 
