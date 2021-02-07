@@ -21,6 +21,7 @@ from r8scholar import views                            # add this
 router = routers.DefaultRouter()                      # add this
 router.register(r'User', views.UserView, 'User')     # add this
 router.register(r'Review', views.ReviewView, 'Review') 
+router.register(r'Comment', views.CommentView, 'Comment') 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
