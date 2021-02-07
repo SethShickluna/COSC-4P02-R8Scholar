@@ -33,7 +33,7 @@ export default class List extends Component {
                         <Route
                             path={"/" + e.id}
                             exact
-                            comonent={() => <e.id />}
+                            component={() => <e.id />} // changed spelling mistake "comonent" --> "component"
                         />;
                     })}
                 </Switch>

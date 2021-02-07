@@ -177,6 +177,7 @@ a:active {
     height: 50px;
     background: #989898;
     stroke: none;
+    padding-left: 2%;
 }
 
 .Search .Field {
