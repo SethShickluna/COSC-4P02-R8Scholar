@@ -1,27 +1,41 @@
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
-import Teachers from "./pages/Teachers";
 import About from "./pages/About";
-import Courses from "./pages/Courses";
 import Departments from "./pages/Departments";
+import Department from "./pages/Department";
 import Home from "./pages/Home";
+import Professors from "./pages/Professors";
+import Professor from "./pages/Professor";
+import Course from "./pages/Course";
+import Courses from "./pages/Courses";
 
 export default function Pathfinder() {
+    const pages = {
+        "": Home,
+        login: Login,
+        professors: Professors,
+        courses: Courses,
+        departments: Departments,
+        professor: Professor,
+        course: Course,
+        department: Department,
+        about: About,
+    };
     return (
         <Router>
             <Navbar />
             <Switch>
-                <Route path="/" exact component={() => <Home />} />
-                <Route path="/Login" exact component={() => <Login />} />
-                <Route path="/Teachers" exact component={() => <Teachers />} />
-                <Route path="/Courses" exact component={() => <Courses />} />
-                <Route
-                    path="/Departments"
-                    exact
-                    component={() => <Departments />}
-                />
-                <Route path="/About" exact component={() => <About />} />
+                {Object.keys(pages).map((e) => {
+                    const Page = pages[e];
+                    return (
+                        <Route
+                            path={"/" + e}
+                            exact
+                            component={() => <Page />}
+                        />
+                    );
+                })}
             </Switch>
         </Router>
     );

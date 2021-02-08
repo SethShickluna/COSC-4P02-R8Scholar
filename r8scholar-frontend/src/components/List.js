@@ -25,19 +25,6 @@ export default class List extends Component {
 
     render() {
         const entries = this.getEntries();
-        return (
-            <Router>
-                {entries}
-                <Switch>
-                    {entries.map((e) => {
-                        <Route
-                            path={"/" + e.id}
-                            exact
-                            component={() => <e.id />} // changed spelling mistake "comonent" --> "component"
-                        />;
-                    })}
-                </Switch>
-            </Router>
-        );
+        return entries;
     }
 }

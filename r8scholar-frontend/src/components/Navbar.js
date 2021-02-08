@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 export default class Navbar extends Component {
     constructor() {
         super();
-        this.buttons = ["Login", "Teachers", "Courses", "Departments", "About"];
+        this.buttons = [
+            "Login",
+            "Professors",
+            "Courses",
+            "Departments",
+            "About",
+        ];
     }
 
     render() {

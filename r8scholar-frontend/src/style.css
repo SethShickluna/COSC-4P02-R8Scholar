@@ -30,7 +30,7 @@ a:active {
     grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 9fr;
     gap: 0px 0px;
-    grid-template-areas: "Logo Search Login Teachers Courses Departments About";
+    grid-template-areas: "Logo Search Login Professors Courses Departments About";
     width: auto;
     height: 50px;
 }
@@ -38,7 +38,7 @@ a:active {
 .home-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 12fr 1fr 1fr 1fr;
+    grid-template-rows: 10fr 1fr 1fr 1fr;
     gap: 0px 0px;
     grid-template-areas:
         "List1 List2 List3"
@@ -104,7 +104,7 @@ a:active {
     grid-area: ViewAll;
     background-color: #989898;
     width: 65%;
-    margin-top: 50px;
+    margin-top: 35px;
     padding: 5px;
     font-style: normal;
     text-align: center;
@@ -113,8 +113,12 @@ a:active {
 
 .listButton:hover {
     background-color: #888686;
-    color: #000000;
-    cursor: pointer;
+    color: #e5e5e5;
+}
+
+.listEntry:hover {
+    background-color: #989898;
+    color: #e5e5e5;
 }
 
 .top-professors {
@@ -177,7 +181,6 @@ a:active {
     height: 50px;
     background: #989898;
     stroke: none;
-    padding-left: 2%;
 }
 
 .Search .Field {
@@ -192,6 +195,7 @@ a:active {
     color: #000000;
     background-color: #d1d1d1;
     border: 0;
+    padding-left: 20px;
 }
 
 .NavButton {
@@ -215,8 +219,8 @@ a:active {
     height: 50px;
     background: #989898;
 }
-.Teachers {
-    grid-area: Teachers;
+.Professors {
+    grid-area: Professors;
     height: 50px;
     background: #989898;
 }
