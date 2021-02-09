@@ -1,0 +1,52 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "name": "Mcneill Joy",
+            "rating": "4.34",
+            "number_of_courses": "1"
+        },
+        {
+            "id": "2",
+            "name": "Moran Victoria",
+            "rating": "4.76",
+            "number_of_courses": "3"
+        },
+        {
+            "id": "3",
+            "name": "Selby Carter",
+            "rating": "2.12",
+            "number_of_courses": "4"
+        },
+        {
+            "id": "4",
+            "name": "Forester Aeris",
+            "rating": "0.83",
+            "number_of_courses": "1"
+        },
+        {
+            "id": "5",
+            "name": "Olson Gabriel",
+            "rating": "4.27",
+            "number_of_courses": "1"
+        },
+        {
+            "id": "6",
+            "name": "Uddin Stella",
+            "rating": "1.39",
+            "number_of_courses": "4"
+        },
+        {
+            "id": "7",
+            "name": "Jones Kamila",
+            "rating": "0.17",
+            "number_of_courses": "2"
+        },
+        {
+            "id": "8",
+            "name": "Rothwell Colleen",
+            "rating": "4.17",
+            "number_of_courses": "1"
+        }
+    ]
+}

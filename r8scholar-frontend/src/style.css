@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+body {
+    margin: 0;
+    font-family: Cabin;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.navbar-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 9fr;
+    gap: 0px 0px;
+    grid-template-areas: "Logo Search Login Professors Courses Departments About";
+    width: auto;
+    height: 50px;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 10fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "List1 List2 List3"
+        "Rating1 Rating1 Rating1"
+        "Rating2 Rating2 Rating2"
+        "Rating3 Rating3 Rating3";
+    width: auto;
+}
+
+.home-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin: 100px 0px 20px 0px;
+}
+
+.home-container h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.home-container ul {
+    padding-inline-start: 0px;
+}
+
+.home-container li {
+    background-color: #d1d1d1;
+    text-align: center;
+    list-style-type: none;
+    margin: 15px;
+}
+
+.home-container li:hover {
+    background-color: #989898;
+    cursor: pointer;
+}
+
+.home-container .top-list-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "Entry"
+        "Entry"
+        "Entry"
+        "Entry"
+        "Entry"
+        "ViewAll";
+    width: 100%;
+    height: 250px;
+    justify-content: center;
+    justify-items: center;
+}
+
+.home-container .listEntry {
+    height: 25px;
+    min-width: 250px;
+    background-color: #d1d1d1;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "Name" "Rating";
+    justify-items: center;
+}
+
+.listButton {
+    grid-area: ViewAll;
+    background-color: #989898;
+    width: 65%;
+    margin-top: 35px;
+    padding: 5px;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+}
+
+.listButton:hover {
+    background-color: #888686;
+    color: #e5e5e5;
+}
+
+.listEntry:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
+}
+
+.top-professors {
+    grid-area: List1;
+    max-width: 500px;
+    justify-self: center;
+    width: 80%;
+    min-width: 300px;
+}
+
+.top-courses {
+    grid-area: List2;
+    max-width: 500px;
+    min-width: 300px;
+    width: 80%;
+    justify-self: center;
+}
+
+.top-departments {
+    grid-area: List3;
+    max-width: 500px;
+    width: 80%;
+    min-width: 300px;
+    justify-self: center;
+}
+
+.average-professors {
+    grid-area: Rating1;
+}
+
+.average-courses {
+    grid-area: Rating2;
+}
+
+.average-departments {
+    grid-area: Rating3;
+}
+
+.Logo {
+    grid-area: Logo;
+    height: 50px;
+    background: #cc0000;
+}
+
+.Logo:hover {
+    cursor: pointer;
+}
+
+.Logo .label {
+    height: auto;
+    padding: 0px 10px 0px 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    color: #e5e5e5;
+}
+.Search {
+    grid-area: Search;
+    height: 50px;
+    background: #989898;
+    stroke: none;
+}
+
+.Search .Field {
+    height: 35px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 7.5px;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 58px;
+    text-align: left;
+    color: #000000;
+    background-color: #d1d1d1;
+    border: 0;
+    padding-left: 20px;
+    padding-right: 1%;
+}
+
+.NavButton {
+    background-color: #989898;
+
+    padding: 10px;
+    font-style: normal;
+    font-size: 20px;
+    text-align: center;
+    color: #fdfdfd;
+}
+
+.NavButton:hover {
+    background-color: #888686;
+    color: #fdfdfd;
+    cursor: pointer;
+}
+
+.Login {
+    grid-area: Login;
+    height: 50px;
+    background: #989898;
+}
+.Professors {
+    grid-area: Professors;
+    height: 50px;
+    background: #989898;
+}
+.Courses {
+    grid-area: Courses;
+    height: 50px;
+    background: #989898;
+}
+.Departments {
+    grid-area: Departments;
+    height: 50px;
+    background: #989898;
+}
+.About {
+    grid-area: About;
+    height: 50px;
+    background: #989898;
+}
