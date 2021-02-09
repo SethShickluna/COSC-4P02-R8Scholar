@@ -9,6 +9,17 @@ export default class Home extends Component {
         this.list = ["professors", "courses", "departments"];
     }
 
+    // TODO: GET top 5 profs, courses and departs
+    getEntries() {
+        return {
+            uid1: { name: "Entry1", rating: "4.7" },
+            uid2: { name: "Entry2", rating: "4.7" },
+            uid3: { name: "Entry3", rating: "4.7" },
+            uid4: { name: "Entry4", rating: "4.7" },
+            uid5: { name: "Entry5", rating: "4.7" },
+        };
+    }
+
     render() {
         return (
             <div className="home-container">
@@ -18,7 +29,7 @@ export default class Home extends Component {
                             <h1>{"Top 5 " + e}</h1>
                             <div className="top-list-container">
                                 <List
-                                    size="5"
+                                    data={this.getEntries()}
                                     id={e}
                                     key={index}
                                     link={"/" + e.slice(0, e.length - 1)}

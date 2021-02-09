@@ -14,12 +14,12 @@ export default function Pathfinder() {
     const pages = {
         "": Home,
         login: Login,
-        professors: Professors,
-        courses: Courses,
-        departments: Departments,
         professor: Professor,
+        professors: Professors,
         course: Course,
+        courses: Courses,
         department: Department,
+        departments: Departments,
         about: About,
     };
     return (
@@ -32,7 +32,9 @@ export default function Pathfinder() {
                         <Route
                             path={"/" + e}
                             exact
-                            component={() => <Page />}
+                            component={(props) => {
+                                return <Page {...props} />;
+                            }}
                         />
                     );
                 })}
