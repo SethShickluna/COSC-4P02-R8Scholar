@@ -10,7 +10,7 @@ import Professor from "./pages/Professor";
 import Course from "./pages/Course";
 import Courses from "./pages/Courses";
 
-export default function Pathfinder() {
+export default function R8Scholar() {
     const pages = {
         "": Home,
         login: Login,
