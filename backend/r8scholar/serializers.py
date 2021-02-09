@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('review_id', 'reviewer', 'subject', 'content', 'rating', 'date', 'numb_reports')
+        fields = ('review_id', 'reviewer', 'id','content', 'rating', 'date', 'numb_reports')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

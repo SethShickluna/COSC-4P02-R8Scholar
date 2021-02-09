@@ -76,9 +76,9 @@ class Department(models.Model):
 class Review(models.Model):
     review_id = models.IntegerField(primary_key=True)
     reviewer = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
-    id = models.ForeignKey(Subject, on_delete = models.CASCADE, null=True)
+    id = models.OneToOneField(Subject, on_delete = models.CASCADE, null=True)
     content = models.TextField(default=None, null=True)
-    rating = models.IntegerField(default=None,null=True)
+    rating = models.FloatField(default=None,null=True)
     date = models.DateTimeField(default=None, null=True)
     numb_reports = models.IntegerField(default=None)
 
