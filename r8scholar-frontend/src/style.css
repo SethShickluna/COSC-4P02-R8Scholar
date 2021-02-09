@@ -99,7 +99,12 @@ a:active {
     height: 25px;
     min-width: 250px;
     background-color: #d1d1d1;
-    text-align: center;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "Name" "Rating";
+    justify-items: center;
 }
 
 .listButton {
@@ -121,6 +126,7 @@ a:active {
 .listEntry:hover {
     background-color: #989898;
     color: #e5e5e5;
+    cursor: pointer;
 }
 
 .top-professors {

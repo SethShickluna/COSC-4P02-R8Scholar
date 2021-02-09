@@ -10,17 +10,16 @@ import Professor from "./pages/Professor";
 import Course from "./pages/Course";
 import Courses from "./pages/Courses";
 
-export default function Pathfinder() { 
-
-  const pages = {
+export default function R8Scholar() {
+    const pages = {
         "": Home,
         login: Login,
-        professors: Professors,
-        courses: Courses,
-        departments: Departments,
         professor: Professor,
+        professors: Professors,
         course: Course,
+        courses: Courses,
         department: Department,
+        departments: Departments,
         about: About,
     };
     return (
@@ -33,7 +32,9 @@ export default function Pathfinder() {
                         <Route
                             path={"/" + e}
                             exact
-                            component={() => <Page />}
+                            component={(props) => {
+                                return <Page {...props} />;
+                            }}
                         />
                     );
                 })}

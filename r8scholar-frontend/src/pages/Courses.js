@@ -5,6 +5,6 @@ export default class Courses extends Component {
         super();
     }
     render() {
-        return <div className="Courses-container">Here be Courses.</div>;
+        return <div className="courses-container">Here be Courses.</div>;
     }
 }
