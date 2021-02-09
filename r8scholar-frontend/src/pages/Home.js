@@ -26,26 +26,26 @@ export default class Home extends Component {
                 data = mockDepartments;
                 break;
         }
-        var sortIndex = data.cols.indexOf("rating");
-        data.data.sort((a, b) => {
-            return b[sortIndex] - a[sortIndex];
-        });
-        data.data = data.data.slice(0, 5);
-        return [data.data, data.cols];
+        // var sortIndex = data.cols.indexOf("rating");
+        // data.data.sort((a, b) => {
+        //     return b[sortIndex] - a[sortIndex];
+        // });
+        // data.data = data.data.slice(0, 5);
+        // return [data.data, data.cols];
     }
 
     render() {
         return (
             <div className="home-container">
                 {this.list.map((e, index) => {
-                    var [data, labels] = this.getEntries(e);
+                    //var [data, labels] = this.getEntries(e);
                     return (
                         <div className={"top-" + e}>
                             <h1>{"Top 5 " + e}</h1>
                             <div className="top-list-container">
                                 <List
-                                    data={data}
-                                    labels={labels}
+                                    //data={data}
+                                    //labels={labels}
                                     key={index}
                                     link={"/" + e.slice(0, e.length - 1)}
                                 />
