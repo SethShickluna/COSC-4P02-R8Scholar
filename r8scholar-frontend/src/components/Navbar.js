@@ -3,10 +3,16 @@ import Button from "./Button";
 import Search from "./Search";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class Navbar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        this.state = { 
+            activeIndex: 0, 
+        }
+
         this.buttons = [
             "Login",
             "Professors",
@@ -27,7 +33,7 @@ export default class Navbar extends Component {
                     return (
                         <Button
                             id={e}
-                            className="NavButton"
+                            className={"NavButton"}
                             text={e}
                             key={index}
                             link={"/" + e}

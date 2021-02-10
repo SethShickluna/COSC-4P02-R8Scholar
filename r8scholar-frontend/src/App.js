@@ -9,11 +9,13 @@ import Professors from "./pages/Professors";
 import Professor from "./pages/Professor";
 import Course from "./pages/Course";
 import Courses from "./pages/Courses";
+import Signup from "./pages/Signup";
 
 export default function R8Scholar() {
     const pages = {
         "": Home,
         login: Login,
+        signup: Signup, 
         professor: Professor,
         professors: Professors,
         course: Course,

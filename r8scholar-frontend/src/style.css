@@ -15,7 +15,7 @@ a:link {
 }
 
 a:hover {
-    color: #000000;
+    color: #cc0000;
     text-decoration: none;
 }
 
@@ -74,7 +74,7 @@ a:active {
 }
 
 .home-container li:hover {
-    background-color: #989898;
+    background-color: #cc0000;
     cursor: pointer;
 }
 
@@ -203,8 +203,12 @@ a:active {
     color: #000000;
     background-color: #d1d1d1;
     border: 0;
-    padding-left: 20px;
-    padding-right: 1%;
+    margin-left: 1%;
+}
+
+.Field::selection{ 
+    background-color: #FFF;
+    color: #000;
 }
 
 .NavButton {
@@ -218,7 +222,7 @@ a:active {
 }
 
 .NavButton:hover {
-    background-color: #888686;
+    background-color: #000;
     color: #fdfdfd;
     cursor: pointer;
 }
@@ -247,4 +251,17 @@ a:active {
     grid-area: About;
     height: 50px;
     background: #989898;
+}
+
+.loginContainer { 
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-title { 
+    font-size: 33;
+}
+
+.carousel-paragraph{ 
+    font-size: 20;
 }

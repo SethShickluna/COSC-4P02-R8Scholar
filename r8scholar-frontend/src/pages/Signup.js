@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LoginForm from '../components/LoginForm'
+import SignupForm from '../components/SignupForm'
 
 const formStyle = {
     alignItems: 'center', 
@@ -8,7 +8,7 @@ const formStyle = {
     marginTop: '8%',
 }
 
-export default class Login extends Component {
+export default class Signup extends Component {
     constructor() {
         super();
     }
@@ -16,7 +16,7 @@ export default class Login extends Component {
     render() {
         return ( 
             <div style={formStyle}>
-                <LoginForm/>            
+                <SignupForm/>            
             </div>
-        )}
+    )}
 }
