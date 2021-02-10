@@ -11,35 +11,27 @@ import Course from "./pages/Course";
 import Courses from "./pages/Courses";
 import Signup from "./pages/Signup";
 
+/*EXPLAINING HOW SPECIFYING COURSE, DEPARTMENTS, AND PROF NAMES WORK 
+the router specifies that a course can include a course name using a route like: /department/:coursename
+this is then accessed in the component under 'this.props.match.params.courseName
+then using that name we make the API call 
+//----------------------------------------------------------------- */
+
 export default function R8Scholar() {
-    const pages = {
-        "": Home,
-        login: Login,
-        signup: Signup, 
-        professor: Professor,
-        professors: Professors,
-        course: Course,
-        courses: Courses,
-        department: Department,
-        departments: Departments,
-        about: About,
-    };
     return (
         <Router>
             <Navbar />
             <Switch>
-                {Object.keys(pages).map((e) => {
-                    const Page = pages[e];
-                    return (
-                        <Route
-                            path={"/" + e}
-                            exact
-                            component={(props) => {
-                                return <Page {...props} />;
-                            }}
-                        />
-                    );
-                })}
+                <Route exact path='/'component={Home} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/signup' component={Signup} />
+                <Route exact path='/professors' component={Professors} />
+                <Route exact path='/about' component={About} />
+                <Route exact path='/courses' component={Courses} />
+                <Route exact path='/departments' component={Departments} />
+                <Route path = '/course/:courseName' component={Course} /> 
+                <Route path = '/professor/:profName' component={Professor} /> 
+                <Route path = '/department/:deptName' component={Department} /> 
             </Switch>
         </Router>
     );
