@@ -2,51 +2,45 @@
     "data": [
         {
             "id": "1",
-            "name": "Mcneill Joy",
+            "name": "Humanities",
             "rating": "4.34",
-            "number_of_courses": "1"
+            "courses": "123"
         },
         {
             "id": "2",
-            "name": "Moran Victoria",
+            "name": "Math and Computer Science",
             "rating": "4.76",
-            "number_of_courses": "3"
+            "courses": "72"
         },
         {
             "id": "3",
-            "name": "Selby Carter",
+            "name": "Social Sciences",
             "rating": "2.12",
-            "number_of_courses": "4"
+            "courses": "84"
         },
         {
             "id": "4",
-            "name": "Forester Aeris",
+            "name": "Visual and Performance Arts",
             "rating": "0.83",
-            "number_of_courses": "1"
+            "courses": "43"
         },
         {
             "id": "5",
-            "name": "Olson Gabriel",
+            "name": "Goodman School of Business",
             "rating": "4.27",
-            "number_of_courses": "1"
+            "courses": "68"
         },
         {
             "id": "6",
-            "name": "Uddin Stella",
+            "name": "Applied Health Sciences",
             "rating": "1.39",
-            "number_of_courses": "4"
+            "courses": "39"
         },
         {
             "id": "7",
-            "name": "Jones Kamila",
+            "name": "Education",
             "rating": "0.17",
-            "number_of_courses": "2"
-        },
-        {
-            "id": "8",
-            "name": "Rothwell Colleen",
-            "rating": "4.17",
-            "number_of_courses": "1"
+            "courses": "54"
         }
     ]
 }

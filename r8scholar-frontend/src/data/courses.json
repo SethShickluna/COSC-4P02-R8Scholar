@@ -4,601 +4,701 @@
             "id": "1",
             "name": "Mcneill Joy",
             "rating": "4.34",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Social Sciences"
         },
         {
             "id": "2",
             "name": "Moran Victoria",
             "rating": "4.76",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "3",
             "name": "Selby Carter",
             "rating": "2.12",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Math and Computer Science"
         },
         {
             "id": "4",
             "name": "Forester Aeris",
             "rating": "0.83",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "5",
             "name": "Olson Gabriel",
             "rating": "4.27",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Education"
         },
         {
             "id": "6",
             "name": "Uddin Stella",
             "rating": "1.39",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Education"
         },
         {
             "id": "7",
             "name": "Jones Kamila",
             "rating": "0.17",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Goodman School of Business"
         },
         {
             "id": "8",
             "name": "Rothwell Colleen",
             "rating": "4.17",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Goodman School of Business"
         },
         {
             "id": "9",
             "name": "Pierce Paige",
             "rating": "1.36",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "10",
             "name": "Richards Jenna",
             "rating": "1.20",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Education"
         },
         {
             "id": "11",
             "name": "Yates Shannon",
             "rating": "1.81",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Math and Computer Science"
         },
         {
             "id": "12",
             "name": "Townend Nate",
             "rating": "4.91",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Social Sciences"
         },
         {
             "id": "13",
             "name": "Jones Cameron",
             "rating": "3.89",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "14",
             "name": "Hooper Chelsea",
             "rating": "4.98",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Education"
         },
         {
             "id": "15",
             "name": "Stewart Carrie",
             "rating": "0.08",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Goodman School of Business"
         },
         {
             "id": "16",
             "name": "Jackson Ivy",
             "rating": "4.86",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Social Sciences"
         },
         {
             "id": "17",
             "name": "Holmes Shannon",
             "rating": "0.30",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Humanities"
         },
         {
             "id": "18",
             "name": "Cassidy Javier",
             "rating": "0.96",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Social Sciences"
         },
         {
             "id": "19",
             "name": "Drew Meredith",
             "rating": "0.07",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Education"
         },
         {
             "id": "20",
             "name": "Watson Mavis",
             "rating": "1.33",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "21",
             "name": "Greenwood Michael",
             "rating": "1.68",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Social Sciences"
         },
         {
             "id": "22",
             "name": "White Michelle",
             "rating": "0.83",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Goodman School of Business"
         },
         {
             "id": "23",
             "name": "Farmer Adeline",
             "rating": "4.31",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Goodman School of Business"
         },
         {
             "id": "24",
             "name": "Yates Erick",
             "rating": "2.65",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Math and Computer Science"
         },
         {
             "id": "25",
             "name": "Russell Leroy",
             "rating": "1.60",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Math and Computer Science"
         },
         {
             "id": "26",
             "name": "Roman Ryan",
             "rating": "2.91",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "27",
             "name": "Dyson Mark",
             "rating": "2.54",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "28",
             "name": "Mcnally Rae",
             "rating": "2.15",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Social Sciences"
         },
         {
             "id": "29",
             "name": "Yang Mabel",
             "rating": "3.28",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Social Sciences"
         },
         {
             "id": "30",
             "name": "Harrison Janelle",
             "rating": "4.96",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Math and Computer Science"
         },
         {
             "id": "31",
             "name": "Page  Lauren",
             "rating": "4.54",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Goodman School of Business"
         },
         {
             "id": "32",
             "name": "Roman Lucy",
             "rating": "4.89",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Goodman School of Business"
         },
         {
             "id": "33",
             "name": "Bradshaw Bristol",
             "rating": "0.08",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Education"
         },
         {
             "id": "34",
             "name": "Thomas Noah",
             "rating": "1.51",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Education"
         },
         {
             "id": "35",
             "name": "Chapman Janice",
             "rating": "4.22",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "36",
             "name": "Terry Erin",
             "rating": "3.24",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "37",
             "name": "Snell Danielle",
             "rating": "1.14",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "38",
             "name": "Holmes Renee",
             "rating": "4.05",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Humanities"
         },
         {
             "id": "39",
             "name": "Nurton Chloe",
             "rating": "2.80",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Education"
         },
         {
             "id": "40",
             "name": "Terry Sydney",
             "rating": "2.09",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Social Sciences"
         },
         {
             "id": "41",
             "name": "Simmons Jacob",
             "rating": "4.27",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "42",
             "name": "Vaughn Bristol",
             "rating": "4.32",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Math and Computer Science"
         },
         {
             "id": "43",
             "name": "Upsdell Matthew",
             "rating": "1.33",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "44",
             "name": "Reid Alexander",
             "rating": "2.62",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "45",
             "name": "Gilmour Dani",
             "rating": "1.95",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "46",
             "name": "Cann Renee",
             "rating": "4.42",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Math and Computer Science"
         },
         {
             "id": "47",
             "name": "Simpson Goldie",
             "rating": "3.24",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "48",
             "name": "Darcy Mya",
             "rating": "0.66",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "49",
             "name": "Lindop Courtney",
             "rating": "0.01",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Education"
         },
         {
             "id": "50",
             "name": "Todd Drew",
             "rating": "0.32",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "51",
             "name": "Warner Dasha",
             "rating": "0.39",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Math and Computer Science"
         },
         {
             "id": "52",
             "name": "Umney Nicholas",
             "rating": "0.14",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Education"
         },
         {
             "id": "53",
             "name": "Potts Benjamin",
             "rating": "4.86",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Social Sciences"
         },
         {
             "id": "54",
             "name": "Addley Isabel",
             "rating": "1.92",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "55",
             "name": "Lindop Parker",
             "rating": "1.13",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "56",
             "name": "Walsh Mason",
             "rating": "2.30",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "57",
             "name": "Ryan Gina",
             "rating": "3.33",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Humanities"
         },
         {
             "id": "58",
             "name": "Quinn Sonya",
             "rating": "2.19",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Goodman School of Business"
         },
         {
             "id": "59",
             "name": "Harris Christy",
             "rating": "3.74",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Education"
         },
         {
             "id": "60",
             "name": "Farrant Nick",
             "rating": "2.72",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "61",
             "name": "Williams Enoch",
             "rating": "1.10",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "62",
             "name": "Robertson Rufus",
             "rating": "3.91",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Math and Computer Science"
         },
         {
             "id": "63",
             "name": "Kennedy Henry",
             "rating": "3.49",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "64",
             "name": "Ward Hank",
             "rating": "0.74",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "65",
             "name": "Wigley Leroy",
             "rating": "3.73",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "66",
             "name": "York Elly",
             "rating": "0.95",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Goodman School of Business"
         },
         {
             "id": "67",
             "name": "Goodman Barry",
             "rating": "0.75",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Math and Computer Science"
         },
         {
             "id": "68",
             "name": "Allwood Barney",
             "rating": "1.52",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Goodman School of Business"
         },
         {
             "id": "69",
             "name": "Bell Matthew",
             "rating": "4.17",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Humanities"
         },
         {
             "id": "70",
             "name": "Newman Mike",
             "rating": "3.95",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Humanities"
         },
         {
             "id": "71",
             "name": "Widdows Abdul",
             "rating": "2.40",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         },
         {
             "id": "72",
             "name": "Cox Harriet",
             "rating": "1.69",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Social Sciences"
         },
         {
             "id": "73",
             "name": "Hudson Ethan",
             "rating": "2.40",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "74",
             "name": "King Mike",
             "rating": "1.89",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "75",
             "name": "Addison Alan",
             "rating": "0.23",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Humanities"
         },
         {
             "id": "76",
             "name": "Hill Sadie",
             "rating": "2.21",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Humanities"
         },
         {
             "id": "77",
             "name": "Collis Makena",
             "rating": "2.77",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Education"
         },
         {
             "id": "78",
             "name": "Saunders Denny",
             "rating": "3.47",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "79",
             "name": "Hamilton Brad",
             "rating": "4.64",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Math and Computer Science"
         },
         {
             "id": "80",
             "name": "Irving Regina",
             "rating": "0.12",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Math and Computer Science"
         },
         {
             "id": "81",
             "name": "Griffiths Rocco",
             "rating": "2.26",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Goodman School of Business"
         },
         {
             "id": "82",
             "name": "Asher Robyn",
             "rating": "1.58",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Education"
         },
         {
             "id": "83",
             "name": "Woods Denny",
             "rating": "1.09",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Goodman School of Business"
         },
         {
             "id": "84",
             "name": "Appleton Bart",
             "rating": "1.40",
-            "number_of_courses": "4"
+            "courses": "4",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "85",
             "name": "Armstrong Johnathan",
             "rating": "3.40",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "86",
             "name": "Whatson Sage",
             "rating": "2.33",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Social Sciences"
         },
         {
             "id": "87",
             "name": "Adler Nicholas",
             "rating": "4.04",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Education"
         },
         {
             "id": "88",
             "name": "Vangness Matthew",
             "rating": "0.36",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Math and Computer Science"
         },
         {
             "id": "89",
             "name": "Ramsey Caleb",
             "rating": "3.76",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Goodman School of Business"
         },
         {
             "id": "90",
             "name": "Jarrett Roger",
             "rating": "4.49",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "91",
             "name": "Parker Ryan",
             "rating": "2.62",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Goodman School of Business"
         },
         {
             "id": "92",
             "name": "Mackenzie Barney",
             "rating": "0.69",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Goodman School of Business"
         },
         {
             "id": "93",
             "name": "Morley Benjamin",
             "rating": "2.45",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Goodman School of Business"
         },
         {
             "id": "94",
             "name": "Preston Mike",
             "rating": "2.16",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Humanities"
         },
         {
             "id": "95",
             "name": "Stevens Henry",
             "rating": "3.69",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "96",
             "name": "Connor Javier",
             "rating": "1.32",
-            "number_of_courses": "1"
+            "courses": "1",
+            "department": "Humanities"
         },
         {
             "id": "97",
             "name": "Gordon Benjamin",
             "rating": "4.08",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Social Sciences"
         },
         {
             "id": "98",
             "name": "York Matt",
             "rating": "0.73",
-            "number_of_courses": "2"
+            "courses": "2",
+            "department": "Applied Health Sciences"
         },
         {
             "id": "99",
             "name": "Nanton Rufus",
             "rating": "4.77",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Visual and Performance Arts"
         },
         {
             "id": "100",
             "name": "Gilbert Rocco",
             "rating": "4.38",
-            "number_of_courses": "3"
+            "courses": "3",
+            "department": "Education"
         }
     ]
 }

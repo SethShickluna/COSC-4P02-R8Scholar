@@ -17,62 +17,64 @@ export default class Home extends Component {
         var data;
         switch (type) {
             case "professors":
-                data = mockProfessors;
+                data = mockProfessors.data;
                 break;
             case "courses":
-                data = mockCourses;
+                data = mockCourses.data;
                 break;
             case "departments":
-                data = mockDepartments;
+                data = mockDepartments.data;
                 break;
         }
-        // var sortIndex = data.cols.indexOf("rating");
-        // data.data.sort((a, b) => {
-        //     return b[sortIndex] - a[sortIndex];
-        // });
-        // data.data = data.data.slice(0, 5);
-        // return [data.data, data.cols];
+        data.sort((a, b) => {
+            return b.rating - a.rating;
+        });
+        return data.slice(0, 5);
     }
 
     render() {
         return (
+            //Body
             <div className="home-container">
-                {this.list.map((e, index) => {
-                    //var [data, labels] = this.getEntries(e);
-                    return (
-                        <div className={"top-" + e}>
-                            <h1>{"Top 5 " + e}</h1>
-                            <div className="top-list-container">
+                {
+                    //Three top 5 lists
+                    this.list.map((e, index) => {
+                        return (
+                            <div className="list-container">
+                                <h1>{"Top 5 " + e}</h1>
                                 <List
-                                    //data={data}
-                                    //labels={labels}
+                                    data={this.getEntries(e)}
+                                    columns={["name", "rating"]}
                                     key={index}
                                     link={"/" + e.slice(0, e.length - 1)}
                                 />
                                 <Button
                                     id={e}
-                                    className="listButton"
+                                    className="list-button"
                                     text={"View all " + e}
                                     link={"/" + e}
                                 />
                             </div>
-                        </div>
-                    );
-                })}
-                {this.list.map((e, index) => {
-                    return (
-                        <Rating
-                            title={
-                                "Average " +
-                                e.slice(0, e.length - 1) +
-                                " rating"
-                            }
-                            className={"average-" + e}
-                            id={e}
-                            key={index}
-                        />
-                    );
-                })}
+                        );
+                    })
+                }
+                {
+                    //Average ratings
+                    this.list.map((e, index) => {
+                        return (
+                            <Rating
+                                title={
+                                    "Average " +
+                                    e.slice(0, e.length - 1) +
+                                    " rating"
+                                }
+                                className={"average-" + e}
+                                id={e}
+                                key={index}
+                            />
+                        );
+                    })
+                }
             </div>
         );
     }

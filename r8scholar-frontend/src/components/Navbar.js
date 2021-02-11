@@ -27,7 +27,7 @@ export default class Navbar extends Component {
                     return (
                         <Button
                             id={e}
-                            className="NavButton"
+                            className="nav-button"
                             text={e}
                             key={index}
                             link={"/" + e}

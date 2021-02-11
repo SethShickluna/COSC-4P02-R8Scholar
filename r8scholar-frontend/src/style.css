@@ -1,3 +1,8 @@
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~RANDOM SHIT~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
 body {
     margin: 0;
     font-family: Cabin;
@@ -25,6 +30,12 @@ a:active {
     text-decoration: none;
 }
 
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~NAVBAR~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
 .navbar-container {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
@@ -33,134 +44,6 @@ a:active {
     grid-template-areas: "Logo Search Login Professors Courses Departments About";
     width: auto;
     height: 50px;
-}
-
-.home-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 10fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "List1 List2 List3"
-        "Rating1 Rating1 Rating1"
-        "Rating2 Rating2 Rating2"
-        "Rating3 Rating3 Rating3";
-    width: auto;
-}
-
-.home-container h1 {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin: 100px 0px 20px 0px;
-}
-
-.home-container h2 {
-    font-weight: bold;
-    text-align: center;
-}
-
-.home-container ul {
-    padding-inline-start: 0px;
-}
-
-.home-container li {
-    background-color: #d1d1d1;
-    text-align: center;
-    list-style-type: none;
-    margin: 15px;
-}
-
-.home-container li:hover {
-    background-color: #989898;
-    cursor: pointer;
-}
-
-.home-container .top-list-container {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "Entry"
-        "Entry"
-        "Entry"
-        "Entry"
-        "Entry"
-        "ViewAll";
-    width: 100%;
-    height: 250px;
-    justify-content: center;
-    justify-items: center;
-}
-
-.home-container .listEntry {
-    height: 25px;
-    min-width: 250px;
-    background-color: #d1d1d1;
-    text-align: left;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas: "Name" "Rating";
-    justify-items: center;
-}
-
-.listButton {
-    grid-area: ViewAll;
-    background-color: #989898;
-    width: 65%;
-    margin-top: 35px;
-    padding: 5px;
-    font-style: normal;
-    text-align: center;
-    color: #000000;
-}
-
-.listButton:hover {
-    background-color: #888686;
-    color: #e5e5e5;
-}
-
-.listEntry:hover {
-    background-color: #989898;
-    color: #e5e5e5;
-    cursor: pointer;
-}
-
-.top-professors {
-    grid-area: List1;
-    max-width: 500px;
-    justify-self: center;
-    width: 80%;
-    min-width: 300px;
-}
-
-.top-courses {
-    grid-area: List2;
-    max-width: 500px;
-    min-width: 300px;
-    width: 80%;
-    justify-self: center;
-}
-
-.top-departments {
-    grid-area: List3;
-    max-width: 500px;
-    width: 80%;
-    min-width: 300px;
-    justify-self: center;
-}
-
-.average-professors {
-    grid-area: Rating1;
-}
-
-.average-courses {
-    grid-area: Rating2;
-}
-
-.average-departments {
-    grid-area: Rating3;
 }
 
 .Logo {
@@ -204,7 +87,7 @@ a:active {
     padding-left: 20px;
 }
 
-.NavButton {
+.nav-button {
     background-color: #989898;
 
     padding: 10px;
@@ -214,7 +97,7 @@ a:active {
     color: #fdfdfd;
 }
 
-.NavButton:hover {
+.nav-button:hover {
     background-color: #888686;
     color: #fdfdfd;
     cursor: pointer;
@@ -244,4 +127,207 @@ a:active {
     grid-area: About;
     height: 50px;
     background: #989898;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~HOME PAGE~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 10fr 1fr 1fr 1fr;
+    gap: 0px 10px;
+    grid-template-areas:
+        "List1 List2 List3"
+        "Rating1 Rating1 Rating1"
+        "Rating2 Rating2 Rating2"
+        "Rating3 Rating3 Rating3";
+    width: auto;
+}
+
+.home-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin: 100px 0px 20px 0px;
+}
+
+.home-container h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+ul {
+    padding-inline-start: 0px;
+}
+
+li {
+    background-color: #d1d1d1;
+    text-align: center;
+    list-style-type: none;
+    margin: 15px;
+}
+
+li:hover {
+    background-color: #989898;
+    cursor: pointer;
+}
+
+.home-container .list-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px 0px;
+    grid-template-areas:
+        "Label"
+        "Entry"
+        "Entry"
+        "Entry"
+        "Entry"
+        "Entry"
+        "ViewAll";
+    width: 100%;
+    height: 250px;
+    justify-content: center;
+    justify-items: center;
+}
+
+.home-container .listEntry {
+    height: 25px;
+    min-width: 350px;
+    width: 100%;
+    background-color: #d1d1d1;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "Name" "Rating";
+}
+
+.home-container .name {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.home-container .rating {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.list-button {
+    grid-area: ViewAll;
+    background-color: #989898;
+    width: 65%;
+    max-width: 175px;
+    margin-top: 35px;
+    padding: 5px;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+}
+
+.list-button:hover {
+    background-color: #888686;
+    color: #e5e5e5;
+}
+
+.listEntry:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
+}
+
+.average-professors {
+    grid-area: Rating1;
+}
+
+.average-courses {
+    grid-area: Rating2;
+}
+
+.average-departments {
+    grid-area: Rating3;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~COURSES PAGE~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.courses-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Buttons"
+        "List";
+    width: auto;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.sort-buttons {
+    grid-area: Buttons;
+    height: 30px;
+    display: grid;
+    width: auto;
+    grid-auto-flow: column;
+    gap: 100px;
+}
+
+.sort-button {
+    width: 150px;
+    margin-top: 0px;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    color: #000000;
+}
+
+.sort-button:hover {
+    cursor: pointer;
+}
+
+.courses-container .list-container {
+    grid-area: List;
+    width: 900px;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.courses-container .listEntry {
+    height: 25px;
+    min-width: 350px;
+    width: 100%;
+    background-color: #d1d1d1;
+    display: grid;
+    grid-template-columns: 3.5fr 1.5fr 3.5fr 1.5fr;
+    gap: 0px 0px;
+    grid-template-areas: "Name Rating Department Courses";
+    margin-top: 15px;
+}
+
+.courses-container .listEntry .name {
+    grid-area: Name;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.courses-container .listEntry .rating {
+    grid-area: Rating;
+}
+
+.courses-container .listEntry .department {
+    grid-area: Department;
+    padding-left: 20%;
+}
+
+.courses-container .listEntry .courses {
+    grid-area: Courses;
+    text-align: right;
+    padding-right: 80px;
 }

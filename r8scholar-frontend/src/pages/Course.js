@@ -12,6 +12,7 @@ export default class Course extends Component {
     }
 
     render() {
+        console.log(this.id);
         return (
             <div className="course-container">
                 Here be a Course with id of {this.id}.

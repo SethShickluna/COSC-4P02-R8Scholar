@@ -2,23 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function List(props) {
-    const { data, labels, link } = { ...props };
-    // return data.map((e) => {
-    //     console.log(e);
-    return (
-        <Link className="listEntry" to="/courses">
-            {/* {e.map(([label, value]) => {
-                    return <div key={label}>{value}</div>;
-                })} */}
-            <div>placeholder</div>
-        </Link>
-    );
-    // return (
-    //     <Link className="listEntry" to={{ pathname: link, id: key }}>
-    //         {Object.entries(entry).map(([label, value]) => {
-    //             return <div key={label}>{value}</div>;
-    //         })}
-    //     </Link>
-    // );
-    // });
+    const { data, columns, link } = { ...props };
+    return data.map((row) => {
+        return (
+            <Link className="listEntry" to={{ pathname: link, id: row.id }}>
+                {Object.entries(row).map((col) => {
+                    if (columns.includes(col[0])) {
+                        return <div className={col[0]}>{col[1]}</div>;
+                    }
+                })}
+            </Link>
+        );
+    });
 }
