@@ -258,10 +258,7 @@ a:active {
     justify-content: center;
 }
 
-.carousel-title { 
-    font-size: 33;
-}
-
-.carousel-paragraph{ 
-    font-size: 20;
+.content-line{ 
+    border-bottom: 2px #888686;
+    display: inline;
 }
