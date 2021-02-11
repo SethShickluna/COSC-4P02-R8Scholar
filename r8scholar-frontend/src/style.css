@@ -262,3 +262,31 @@ a:active {
     border-bottom: 2px #888686;
     display: inline;
 }
+
+.footer{
+    color: white;
+    background:#cc0000;
+    border-radius: 10px;
+
+}
+.about-container{
+position: absolute;
+width: 1440px;
+height: 1566px;
+left: calc(50% - 1440px/2);
+top: 75px;
+background: #FDFDFD;
+mix-blend-mode: normal;
+}
+
+.footer-link{
+    color: white;
+    background-color: white;
+
+}
+.footer-link:hover {
+    color: white;
+}
+.copyright-text{
+    text-align: right;
+}
