@@ -3,6 +3,8 @@ import {Container, Row, Col, Tab, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'; 
 import ReviewItem from '../components/ReviewItem'; 
 import Tabs from 'react-bootstrap/Tabs'
+import StarRatings from 'react-star-ratings';
+import ReviewForm from '../components/ReviewForm'; 
 
 const pageStyles={
     margin: '0 auto', 
@@ -36,12 +38,14 @@ export default class Course extends Component {6
         //use state because react forces an update when it is modifed in some way 
         this.state = { //all the content that is gonna be retrieved from the api stored here locally
             name: this.props.match.params.deptName,
-            avgRating: "", 
+            avgRating: 1.7,
+            instructorRating: 2.5, 
+            courseRating: 1.3,
             reviews:[ 
                 {//reviews would be an object 
                     title: "Worst Department on Earth!",
                     content: "This place is depression incarnate",
-                    rating: '3.9', 
+                    rating: 2.5, 
                     user: "seth", 
                     comments: null, 
                 },
@@ -92,7 +96,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="avg-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.avgRating}
+                                        starDimension="40px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='avgRating'
+                                    />
                                 </div>
                             </div>
                             
@@ -102,7 +113,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="course-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.courseRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='courseRating'
+                                    />
                                 </div>
                             </div>
                             
@@ -112,7 +130,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="instructor-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.instructorRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='instructorRating'
+                                    />
                                 </div>
                             </div>
 
@@ -141,12 +166,6 @@ export default class Course extends Component {6
                             </div>
 
                             <div style={pageBreak}/> {/* underline */}
-
-                            <div style={buttonStyle} name="review-button-container">
-                                <Button size="lg" variant="danger">
-                                    Review this department
-                                </Button>
-                            </div>
                             
                         </Col>
                         <Col sm={7}>
@@ -158,6 +177,9 @@ export default class Course extends Component {6
                                 </Tab>
                                 <Tab eventKey="forums" title="Forums">
                                     <h6>Nothing to show yet; come back soon!</h6>
+                                </Tab>
+                                <Tab eventKey="create-review" title="Create Review">
+                                    <ReviewForm review="department"/>
                                 </Tab>
                             </Tabs>
                             

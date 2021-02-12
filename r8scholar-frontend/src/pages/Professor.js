@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import {Container, Row, Col, Tab, Button} from 'react-bootstrap'; 
 import {Link} from 'react-router-dom'; 
 import ReviewItem from '../components/ReviewItem'; 
-import Tabs from 'react-bootstrap/Tabs'
+import Tabs from 'react-bootstrap/Tabs'; 
+import StarRatings from 'react-star-ratings';
+import ReviewForm from '../components/ReviewForm'; 
 
 const pageStyles={
     margin: '0 auto', 
@@ -20,6 +22,7 @@ const buttonStyle={
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles 
     marginBottom: '2%', 
+    marginTop: '2%',
     height: '1px',
     backgroundColor: '#dedede',
     border: 'none',
@@ -40,12 +43,15 @@ export default class Course extends Component {6
                 "COSC 2P12", 
                 "COSC 3P94",
             ],
-            avgRating: "", 
+            avgRating: 2.7, 
+            lectureRating: 2, 
+            homeworkRating: 3.8, 
+            courseRating: 3.2, 
             reviews: [
                 {
                     title: "Tough love type prof !",
                     content: "If you put the work in and show that you actually want to be there, Bockus will do everything in his power to help you succeed. Otherwise you're SOL",
-                    rating: '3.9', 
+                    rating: 2.3, 
                     user: "seth", 
                     comments: null, 
                 }
@@ -91,7 +97,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="avg-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.avgRating}
+                                        starDimension="40px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='avgRating'
+                                    />
                                 </div>
                             </div>
 
@@ -101,7 +114,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="lecture-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.lectureRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='lectureRating'
+                                    />
                                 </div>
                             </div>
                             
@@ -111,7 +131,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="homework-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.homeworkRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='homeworkRating'
+                                    />
                                 </div>
                             </div>
                             
@@ -121,7 +148,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="course-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.courseRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='courseRating'
+                                    />
                                 </div>
                             </div>
 
@@ -138,12 +172,6 @@ export default class Course extends Component {6
                             </div>
 
                             <div style={pageBreak}/> {/* underline */}
-
-                            <div style={buttonStyle} name="review-button-container">
-                                <Button size="lg" variant="danger">
-                                    Review this Instructor
-                                </Button>
-                            </div>
                             
                         </Col>
                         <Col sm={7}>
@@ -156,8 +184,10 @@ export default class Course extends Component {6
                                 <Tab eventKey="forums" title="Forums">
                                     <h6>Nothing to show yet; come back soon!</h6>
                                 </Tab>
+                                <Tab eventKey="create-review" title="Create Review">
+                                    <ReviewForm review="instructor"/>
+                                </Tab>
                             </Tabs>
-                            
                         </Col>
                     </Row>
                 </Container>

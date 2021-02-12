@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, Accordion, Button, ListGroup, ListGroupItem} from 'react-bootstrap'; 
+import StarRatings from 'react-star-ratings';
 
 
 const noCommentMessage = "No comments yet!";
@@ -30,7 +31,16 @@ export default class ReviewItem extends Component {
                         <Accordion>
                             <Card.Body>
                                 <Card.Title>{this.props.reviewItem.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.user + " - " + this.props.reviewItem.rating + "/5"} </Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.user + " "} 
+                                    <StarRatings
+                                        rating={this.props.reviewItem.rating}
+                                        starDimension="25px"
+                                        starSpacing="5px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='avgRating'
+                                    />
+                                </Card.Subtitle>
                                 <Card.Text>
                                     {this.props.reviewItem.content}
                                 </Card.Text>

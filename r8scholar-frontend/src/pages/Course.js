@@ -3,6 +3,8 @@ import {Container, Row, Col, Tab, Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom'; 
 import ReviewItem from '../components/ReviewItem'; 
 import Tabs from 'react-bootstrap/Tabs'
+import StarRatings from 'react-star-ratings';
+import ReviewForm from '../components/ReviewForm'; 
 
 const pageStyles={
     margin: '0 auto', 
@@ -10,16 +12,10 @@ const pageStyles={
     width: '90%', 
 }; 
 
-const buttonStyle={
-    //height: '100vh',  
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles 
     marginBottom: '2%', 
+    marginTop: '2%', 
     height: '1px',
     backgroundColor: '#dedede',
     border: 'none',
@@ -38,19 +34,36 @@ export default class Course extends Component {6
             name: this.props.match.params.courseName,
             department: "COSC", 
             code: "2P03", 
-            avgRating: "", 
+            avgRating: 3.6, 
+            lectureRating: 2.5, 
+            instructorRating: 4.8, 
+            homeworkRating: 3.2, 
             reviews:[ 
                 {//reviews would be an object 
                     title: "Difficult but Important course!",
                     content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
-                    rating: '3.9', 
+                    rating: 3.9, 
                     user: "seth", 
                     comments: null, 
                 },
                 {
                     title: "Difficult but Important course!",
                     content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
-                    rating: '3.9', 
+                    rating: 2.5, 
+                    user: "seth", 
+                    comments: null, 
+                }, 
+                {
+                    title: "Difficult but Important course!",
+                    content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
+                    rating: 2.5, 
+                    user: "seth", 
+                    comments: null, 
+                }, 
+                {
+                    title: "Difficult but Important course!",
+                    content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
+                    rating: 2.5, 
                     user: "seth", 
                     comments: null, 
                 }, 
@@ -61,8 +74,6 @@ export default class Course extends Component {6
             ], //another object 
             aliases: "", 
         }
-       
-
         //this.componentDidMount(); 
     }
 
@@ -100,7 +111,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="avg-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.avgRating}
+                                        starDimension="40px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='avgRating'
+                                    />
                                 </div>
                             </div>
 
@@ -110,7 +128,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="lecture-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.lectureRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='lectureRating'
+                                    />
                                 </div>
                             </div>
                             
@@ -120,7 +145,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="homework-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.homeworkRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='homeworkRating'
+                                    />
                                 </div>
                             </div>
                             
@@ -130,7 +162,14 @@ export default class Course extends Component {6
                                 </div>  
                                 <div style={{textAlign: 'center'}} name="instructor-rating">
                                     {/* this displays average # of stars*/}
-                                    <p>Placeholder for star rating system</p>
+                                    <StarRatings
+                                        rating={this.state.instructorRating}
+                                        starDimension="30px"
+                                        starSpacing="10px"
+                                        starRatedColor="red"
+                                        numberOfStars={5}
+                                        name='instructorRating'
+                                    />
                                 </div>
                             </div>
 
@@ -147,12 +186,6 @@ export default class Course extends Component {6
                             </div>
 
                             <div style={pageBreak}/> {/* underline */}
-
-                            <div style={buttonStyle} name="review-button-container">
-                                <Button size="lg" variant="danger">
-                                    Review this course
-                                </Button>
-                            </div>
                             
                         </Col>
                         <Col sm={7}>
@@ -165,8 +198,10 @@ export default class Course extends Component {6
                                 <Tab eventKey="forums" title="Forums">
                                     <h6>Nothing to show yet; come back soon!</h6>
                                 </Tab>
+                                <Tab eventKey="create-review" title="Create Review">
+                                    <ReviewForm review="course"/>
+                                </Tab>
                             </Tabs>
-                            
                         </Col>
                     </Row>
                 </Container>
