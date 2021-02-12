@@ -42,20 +42,20 @@ export default class Dropdown extends Component {
 
     render() {
         return (
-            <div ref={this.container} className="filter-button-container">
+            <div ref={this.container} className={this.props.className}>
                 <Button
                     text={
                         this.props.selected
                             ? this.props.selected
                             : this.props.text
                     }
-                    className="filter-button"
+                    className="button"
                     onClick={this.handleOpen}
                     icon={this.props.icon}
                     iconSize={this.props.iconSize}
                 />
                 {this.state.open && (
-                    <div class="dropdown">
+                    <div className="dropdown">
                         <ul>
                             {this.props.options.map((e) => {
                                 return (

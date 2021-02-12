@@ -262,9 +262,9 @@ a:active {
     grid-auto-flow: row;
     grid-template-areas:
         "Filters"
-        "Navigation"
         "Buttons"
-        "List";
+        "List"
+        "Navigation";
     width: auto;
     justify-self: center;
     justify-content: center;
@@ -280,7 +280,9 @@ a:active {
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
+    justify-self: center;
     gap: 5px;
+    margin-top: 20px;
 }
 
 .courses-container .navigation-container .label {
@@ -292,18 +294,19 @@ a:active {
     cursor: pointer;
 }
 
-.courses-container .filter-buttons {
-    grid-area: Filters;
+.courses-container .filter-container {
     display: grid;
-    margin-top: 100px;
-    grid-auto-flow: column;
-    height: 100px;
-    justify-self: left;
+    grid-auto-flow: row;
+    gap: 20px;
+    margin: 50px 0px;
 }
 
-.courses-container .filter-button-container {
-    width: 200px;
-    text-align: -webkit-center;
+.courses-container .filter-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 50px;
+    height: 0px;
 }
 
 .courses-container .filter-label {
@@ -311,9 +314,10 @@ a:active {
     font-size: larger;
 }
 
-.courses-container .filter-buttons .filter-button {
+.courses-container .filter-buttons .button {
     background-color: #d1d1d1;
-    width: 120px;
+    width: 240px;
+    text-align: center;
 }
 
 .courses-container ul {
@@ -321,7 +325,7 @@ a:active {
 }
 
 .courses-container .dropdown {
-    width: 200px;
+    width: 240px;
     z-index: 2;
     background: #fdfdfd;
     box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
@@ -393,8 +397,8 @@ a:active {
 
 .courses-container .listEntry .department {
     grid-area: Department;
-    padding-right: 50px;
-    text-align: right;
+    padding-left: 100px;
+    text-align: center;
 }
 
 .courses-container .listEntry .rating {
@@ -418,9 +422,9 @@ a:active {
     grid-auto-flow: row;
     grid-template-areas:
         "Filters"
-        "Navigation"
         "Buttons"
-        "List";
+        "List"
+        "Navigation";
     width: auto;
     justify-self: center;
     justify-content: center;
@@ -437,6 +441,7 @@ a:active {
     grid-auto-flow: column;
     justify-content: center;
     gap: 5px;
+    margin-top: 20px;
 }
 
 .professors-container .navigation-container .label {
@@ -444,19 +449,23 @@ a:active {
     text-align: center;
 }
 
-.professors-container .filter-buttons {
-    grid-area: Filters;
-    display: grid;
-    gap: 0px;
-    margin-top: 100px;
-    grid-auto-flow: column;
-    height: 100px;
-    justify-self: left;
+.professors-container .navigation-container .navigate-button {
+    cursor: pointer;
 }
 
-.professors-container .filter-button-container {
-    width: 200px;
-    text-align: -webkit-center;
+.professors-container .filter-container {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 20px;
+    margin: 50px 0px;
+}
+
+.professors-container .filter-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 50px;
+    height: 0px;
 }
 
 .professors-container .filter-label {
@@ -464,9 +473,10 @@ a:active {
     font-size: larger;
 }
 
-.professors-container .filter-buttons .filter-button {
+.professors-container .filter-buttons .button {
     background-color: #d1d1d1;
-    width: 120px;
+    width: 240px;
+    text-align: center;
 }
 
 .professors-container ul {
@@ -474,7 +484,7 @@ a:active {
 }
 
 .professors-container .dropdown {
-    width: 200px;
+    width: 240px;
     z-index: 2;
     background: #fdfdfd;
     box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
@@ -557,4 +567,32 @@ a:active {
     grid-area: Courses;
     text-align: right;
     padding-right: 80px;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~ABOUT PAGE~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.about-container {
+    padding-top: 80px;
+    display: grid;
+    grid-auto-flow: row;
+    justify-items: center;
+}
+
+.about-container .label {
+    position: relative;
+    font-weight: bolder;
+    font-size: xx-large;
+    text-align: left;
+    width: 60%;
+}
+
+.about-container .text {
+    position: relative;
+    width: 60%;
+    padding-top: 10px;
+    padding-bottom: 90px;
 }
