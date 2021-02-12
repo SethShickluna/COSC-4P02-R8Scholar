@@ -3,6 +3,7 @@
 ~~~~~~~~~~~~RANDOM STUFF~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
 body {
     margin: 0;
     font-family: Cabin;
@@ -160,18 +161,18 @@ a:active {
     text-align: center;
 }
 
-ul {
+.home-container ul {
     padding-inline-start: 0px;
 }
 
-li {
+.home-container li {
     background-color: #d1d1d1;
     text-align: center;
     list-style-type: none;
     margin: 15px;
 }
 
-li:hover {
+.home-container li:hover {
     background-color: #989898;
     cursor: pointer;
 }
@@ -260,12 +261,85 @@ li:hover {
     display: grid;
     grid-auto-flow: row;
     grid-template-areas:
+        "Filters"
+        "Navigation"
         "Buttons"
         "List";
     width: auto;
     justify-self: center;
     justify-content: center;
-    justify-items: center;
+}
+
+.courses-container i {
+    pointer-events: none;
+    padding: 0px 5px;
+}
+
+.courses-container .navigation-container {
+    grid-area: Navigation;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.courses-container .navigation-container .label {
+    width: 40px;
+    text-align: center;
+}
+
+.courses-container .navigation-container .navigate-button {
+    cursor: pointer;
+}
+
+.courses-container .filter-buttons {
+    grid-area: Filters;
+    display: grid;
+    margin-top: 100px;
+    grid-auto-flow: column;
+    height: 100px;
+    justify-self: left;
+}
+
+.courses-container .filter-button-container {
+    width: 200px;
+    text-align: -webkit-center;
+}
+
+.courses-container .filter-label {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.courses-container .filter-buttons .filter-button {
+    background-color: #d1d1d1;
+    width: 120px;
+}
+
+.courses-container ul {
+    padding-inline-start: 0px;
+}
+
+.courses-container .dropdown {
+    width: 200px;
+    z-index: 2;
+    background: #fdfdfd;
+    box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
+    padding: 0px 0px;
+}
+
+.courses-container .dropdown .dropdown-option {
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    list-style-type: none;
+    padding: 5px 0px;
+}
+
+.courses-container .dropdown .dropdown-option:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
 }
 
 .sort-buttons {
@@ -305,28 +379,181 @@ li:hover {
     width: 100%;
     background-color: #d1d1d1;
     display: grid;
+    grid-template-columns: 1.5fr 4fr 1fr 3.5fr;
+    gap: 0px 0px;
+    grid-template-areas: "Code Name Rating Department";
+    margin-top: 15px;
+}
+
+.courses-container .listEntry .code {
+    grid-area: Code;
+    text-align: left;
+    padding-left: 50px;
+}
+
+.courses-container .listEntry .department {
+    grid-area: Department;
+    padding-right: 50px;
+    text-align: right;
+}
+
+.courses-container .listEntry .rating {
+    grid-area: Rating;
+    padding-left: 70%;
+}
+
+.courses-container .listEntry .name {
+    grid-area: Name;
+    text-align: center;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~PROFESSORS PAGE~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.professors-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Filters"
+        "Navigation"
+        "Buttons"
+        "List";
+    width: auto;
+    justify-self: center;
+    justify-content: center;
+}
+
+.professors-container i {
+    pointer-events: none;
+    padding: 0px 5px;
+}
+
+.professors-container .navigation-container {
+    grid-area: Navigation;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.professors-container .navigation-container .label {
+    width: 40px;
+    text-align: center;
+}
+
+.professors-container .filter-buttons {
+    grid-area: Filters;
+    display: grid;
+    gap: 0px;
+    margin-top: 100px;
+    grid-auto-flow: column;
+    height: 100px;
+    justify-self: left;
+}
+
+.professors-container .filter-button-container {
+    width: 200px;
+    text-align: -webkit-center;
+}
+
+.professors-container .filter-label {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.professors-container .filter-buttons .filter-button {
+    background-color: #d1d1d1;
+    width: 120px;
+}
+
+.professors-container ul {
+    padding-inline-start: 0px;
+}
+
+.professors-container .dropdown {
+    width: 200px;
+    z-index: 2;
+    background: #fdfdfd;
+    box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
+    padding: 0px 0px;
+}
+
+.professors-container .dropdown .dropdown-option {
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    list-style-type: none;
+    padding: 5px 0px;
+}
+
+.professors-container .dropdown .dropdown-option:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
+}
+
+.professors-container .sort-buttons {
+    grid-area: Buttons;
+    height: 30px;
+    display: grid;
+    width: auto;
+    grid-auto-flow: column;
+    gap: 100px;
+}
+
+.professors-container .sort-button {
+    width: 150px;
+    margin-top: 0px;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    color: #000000;
+}
+
+.professors-container .sort-button:hover {
+    cursor: pointer;
+}
+
+.professors-container .list-container {
+    grid-area: List;
+    width: 900px;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.professors-container .listEntry {
+    height: 25px;
+    min-width: 350px;
+    width: 100%;
+    background-color: #d1d1d1;
+    display: grid;
     grid-template-columns: 3.5fr 1.5fr 3.5fr 1.5fr;
     gap: 0px 0px;
     grid-template-areas: "Name Rating Department Courses";
     margin-top: 15px;
 }
 
-.courses-container .listEntry .name {
+.professors-container .listEntry .name {
     grid-area: Name;
     text-align: left;
     padding-left: 30px;
 }
 
-.courses-container .listEntry .rating {
+.professors-container .listEntry .rating {
     grid-area: Rating;
 }
 
-.courses-container .listEntry .department {
+.professors-container .listEntry .department {
     grid-area: Department;
     padding-left: 20%;
 }
 
-.courses-container .listEntry .courses {
+.professors-container .listEntry .courses {
     grid-area: Courses;
     text-align: right;
     padding-right: 80px;

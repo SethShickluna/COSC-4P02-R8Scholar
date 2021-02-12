@@ -12,10 +12,7 @@ export default function Button(props) {
             >
                 {props.text}
                 {props.icon == null ? null : (
-                    <>
-                        {"  "}
-                        <Icon size={props.iconSize} icon={props.icon} />
-                    </>
+                    <Icon size={props.iconSize} icon={props.icon} />
                 )}
             </div>
         );
