@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     margin: 0;
     font-family: Cabin;
+    background-color: #ecf0f1;
+    padding-bottom:600px;
 }
 
 a {
@@ -266,27 +273,28 @@ a:active {
 .footer{
     color: white;
     background:#cc0000;
-    border-radius: 10px;
-
+    /*border-radius: 10px;*/
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
 }
 .about-container{
-position: absolute;
-width: 1440px;
-height: 1566px;
-left: calc(50% - 1440px/2);
-top: 75px;
-background: #FDFDFD;
-mix-blend-mode: normal;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .footer-link{
     color: white;
     background-color: white;
-
 }
 .footer-link:hover {
     color: white;
 }
 .copyright-text{
     text-align: right;
+    margin-right: 1%;
 }

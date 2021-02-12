@@ -10,6 +10,7 @@ import Professor from "./pages/Professor";
 import Course from "./pages/Course";
 import Courses from "./pages/Courses";
 import Signup from "./pages/Signup";
+import Footer from "./components/Footer"; 
 
 /*EXPLAINING HOW SPECIFYING COURSE, DEPARTMENTS, AND PROF NAMES WORK 
 the router specifies that a course can include a course name using a route like: /department/:coursename
@@ -33,6 +34,7 @@ export default function R8Scholar() {
                 <Route path = '/professor/:profName' component={Professor} /> 
                 <Route path = '/department/:deptName' component={Department} /> 
             </Switch>
+            <Footer/>
         </Router>
     );
 }
