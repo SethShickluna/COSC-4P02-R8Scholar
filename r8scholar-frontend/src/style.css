@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap');    
 
 html {
     position: relative;
@@ -7,7 +7,7 @@ html {
 
 body {
     margin: 0;
-    font-family: Cabin;
+    font-family: 'IBM Plex Sans', sans-serif;
     background-color: #ecf0f1;
     padding-bottom:600px;
 }
@@ -319,6 +319,7 @@ a:active {
     border-radius: 4px;
     box-shadow: 1px 1px rgba(0,0,0,.05)
 }
+
 @media(max-width: 1024px){
     .post-editor{
         margin: 1em;
