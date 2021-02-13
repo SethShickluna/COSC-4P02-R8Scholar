@@ -22,7 +22,6 @@ class LoginForm extends Component {
         this.state = { 
             email: "", 
             password: "", 
-            loginSuccess: false, 
         }
         
         this.updateEmailInput = this.updateEmailInput.bind(this);
@@ -50,13 +49,12 @@ class LoginForm extends Component {
             //this.state.password
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
-            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
-                cookie.save('email', this.state.email, {path :'/'}); 
-                cookie.save('isLoggedIn', true, {path: '/'}); 
+            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){; 
+                cookie.save('isLoggedIn', "true", {path: '/'}); 
                 
                 //redirect home
                 this.props.history.push('/');
-                window.location.reload(); 
+                
             }
         }else{ 
             alert("Invalid Email. Please try again.");

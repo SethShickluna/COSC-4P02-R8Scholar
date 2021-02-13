@@ -56,12 +56,6 @@ export default class Course extends Component {6
             aliases: "", 
         }
         //this.componentDidMount(); 
-
-        if(cookie.load('testReview')){
-            this.setState({
-                review: cookie.load('testReview'), 
-            }); 
-        }
     }
 
     //TODO: GET req goes here that fetches data based on uid
@@ -187,7 +181,10 @@ export default class Course extends Component {6
                                     <h6>Nothing to show yet; come back soon!</h6>
                                 </Tab>
                                 <Tab eventKey="create-review" title="Create Review">
-                                    <ReviewForm review="course"/>
+                                {cookie.load('isLoggedIn') === "true" ? 
+                                        (<ReviewForm review="course"/>)
+                                        : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
+                                    }
                                 </Tab>
                             </Tabs>
                         </Col>

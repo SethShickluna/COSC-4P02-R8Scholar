@@ -5,6 +5,7 @@ import ReviewItem from '../components/ReviewItem';
 import Tabs from 'react-bootstrap/Tabs'
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
+import cookie from 'react-cookies'; 
 
 const pageStyles={
     margin: '0 auto', 
@@ -179,7 +180,10 @@ export default class Course extends Component {6
                                     <h6>Nothing to show yet; come back soon!</h6>
                                 </Tab>
                                 <Tab eventKey="create-review" title="Create Review">
-                                    <ReviewForm review="department"/>
+                                {cookie.load('isLoggedIn') === "true" ? 
+                                        (<ReviewForm review="department"/>)
+                                        : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
+                                    }
                                 </Tab>
                             </Tabs>
                             

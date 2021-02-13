@@ -10,10 +10,6 @@ class Navbar extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
-            loggedIn: false,  
-        }
-
         this.buttons = [
             "Professors",
             "Courses",
@@ -37,11 +33,11 @@ class Navbar extends Component {
                     <Logo className="Logo" />
                 </Link>
                 <Search className="Search" />
-                <Button id={this.state.loggedIn? "account" : "login"} 
+                <Button id={cookie.load('isLoggedIn') === "true" ? "account" : "login"} 
                     className="NavButton"
-                    text={this.state.loggedIn? "Account" : "Login"}
-                    key={this.state.loggedIn? 98 : 97} 
-                    link={this.state.loggedIn? "/account" : "/login"}
+                    text={cookie.load('isLoggedIn') === "true"? "Account" : "Login"}
+                    key={cookie.load('isLoggedIn') === "true"? 98 : 97} 
+                    link={cookie.load('isLoggedIn') === "true"? "/account" : "/login"}
                 />
                 {this.buttons.map((e, index) => {
                     return (
@@ -54,11 +50,11 @@ class Navbar extends Component {
                         />
                     );
                 })}
-                <Button id={this.state.loggedIn ? "signout" : "signup"} 
+                <Button id={cookie.load('isLoggedIn') === "true" ? "signout" : "signup"} 
                     className="NavButton"
-                    text={this.state.loggedIn ? "Sign Out" : "Create Account"}
-                    key={this.state.loggedIn ? 99 : 100} 
-                    link={this.state.loggedIn ? "/" : "/signup"}
+                    text={cookie.load('isLoggedIn') === "true" ? "Sign Out" : "Create Account"}
+                    key={cookie.load('isLoggedIn') === "true" ? 99 : 100} 
+                    link={cookie.load('isLoggedIn') === "true" ? "/signout" : "/signup"}
                    
                 ><button function={this.handleInput}/></Button>
             </div>
