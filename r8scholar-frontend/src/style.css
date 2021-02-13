@@ -571,6 +571,96 @@ a:active {
 
 /* 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~DEPARTMENTS PAGE~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.departments-container {
+    padding-top: 80px;
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+}
+
+.departments-container .department-container {
+    position: relative;
+    text-align: left;
+    width: 700px;
+}
+
+.departments-container .label {
+    grid-area: label;
+    font-size: 250%;
+    font-weight: 500;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.departments-container .rating {
+    justify-self: right;
+}
+
+.departments-container .department-info {
+    grid-area: info;
+    display: grid;
+    grid-template-areas:
+        "avgProf topProf buttonProfessors"
+        "avgCourse topCourse buttonCourses";
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 15px 0px;
+    font-size: 110%;
+    width: 100%;
+}
+
+.departments-container .professors-button {
+    grid-area: buttonProfessors;
+    background-color: #d1d1d1;
+    justify-self: right;
+    max-width: fit-content;
+    padding: 0px 10px;
+}
+
+.departments-container .professors-button:hover {
+    background-color: #888686;
+}
+
+.departments-container .courses-button {
+    grid-area: buttonCourses;
+    background-color: #d1d1d1;
+    justify-self: right;
+    max-width: fit-content;
+    padding: 0px 10px;
+}
+
+.departments-container .courses-button:hover {
+    background-color: #888686;
+}
+
+.departments-container .topProfessor {
+    grid-area: topProf;
+    text-align: center;
+}
+
+.departments-container .topProfessor:hover {
+    background-color: #d1d1d1;
+}
+
+.departments-container .avgCourse {
+    grid-area: avgCourse;
+}
+
+.departments-container .topCourse {
+    grid-area: topCourse;
+    text-align: center;
+}
+
+.departments-container .topCourse:hover {
+    background-color: #d1d1d1;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~ABOUT PAGE~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */

@@ -31,6 +31,9 @@ export default class Courses extends Component {
     componentDidMount() {
         this.getOptions();
         this.getEntries();
+        if (this.props.location.id) {
+            this.handleFilter("Department", this.props.location.id.name);
+        }
     }
 
     componentWillUnmount() {

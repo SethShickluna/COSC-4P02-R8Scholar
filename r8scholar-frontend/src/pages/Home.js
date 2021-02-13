@@ -7,25 +7,19 @@ import mockProfessors from "../data/professors.json";
 import mockDepartments from "../data/departments.json";
 
 export default class Home extends Component {
-    constructor() {
-        super();
-        this.list = ["professors", "courses", "departments"];
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: ["professors", "courses", "departments"],
+            professors: mockProfessors.data,
+            courses: mockCourses.data,
+            departments: mockDepartments.data,
+        };
     }
 
     // TODO: GET top 5 profs, courses and departs
     getEntries(type) {
-        var data;
-        switch (type) {
-            case "professors":
-                data = mockProfessors.data;
-                break;
-            case "courses":
-                data = mockCourses.data;
-                break;
-            case "departments":
-                data = mockDepartments.data;
-                break;
-        }
+        var data = this.state[type];
         data.sort((a, b) => {
             return b.rating - a.rating;
         });
@@ -38,7 +32,7 @@ export default class Home extends Component {
             <div className="home-container">
                 {
                     //Three top 5 lists
-                    this.list.map((e, index) => {
+                    this.state.list.map((e, index) => {
                         return (
                             <div className="list-container">
                                 <h1>{"Top 5 " + e}</h1>
@@ -60,7 +54,7 @@ export default class Home extends Component {
                 }
                 {
                     //Average ratings
-                    this.list.map((e, index) => {
+                    this.state.list.map((e, index) => {
                         return (
                             <Rating
                                 title={

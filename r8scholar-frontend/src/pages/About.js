@@ -9,7 +9,7 @@ export default class About extends Component {
     render() {
         return (
             <div className="about-container">
-                <div className="label">Our goal</div>
+                <div className="label">Our Goal</div>
                 <div className="text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
@@ -31,7 +31,7 @@ export default class About extends Component {
                     Risus viverra adipiscing at in tellus integer feugiat
                     scelerisque varius. Lacus laoreet non curabitur gravida.
                 </div>
-                <div className="label">Privacy concerns</div>
+                <div className="label">Your Privacy Our Priority</div>
                 <div className="text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
@@ -53,7 +53,7 @@ export default class About extends Component {
                     Risus viverra adipiscing at in tellus integer feugiat
                     scelerisque varius. Lacus laoreet non curabitur gravida.
                 </div>
-                <div className="label">Project information</div>
+                <div className="label">Project Information</div>
                 <div className="text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna

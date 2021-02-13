@@ -15,19 +15,18 @@ const department = [
 const code = [];
 var index = 0;
 department.forEach((e) => {
-    code.forEach((f) => {
-        index++;
-        data.push({
-            name: "coursename coursename coursename",
-            avgProfessorRating: index,
-            avgCourseRating: (Math.random() * 5.0).toFixed(2),
-            topPro: e,
-            code: f,
-        });
+    data.push({
+        id: index,
+        name: e,
+        avgProfessorRating: (Math.random() * 2.5 + 2.5).toFixed(2),
+        avgCourseRating: (Math.random() * 2.5 + 2.5).toFixed(2),
+        rating: (Math.random() * 2.5 + 2.5).toFixed(2),
+        topProfessor: "John J. Johnson",
+        topCourse: "1p01",
     });
 });
 
-fs.writeFile("./courses.json", JSON.stringify(data), (err) => {
+fs.writeFile("./departments.json", JSON.stringify(data), (err) => {
     if (err) {
         throw err;
     }
