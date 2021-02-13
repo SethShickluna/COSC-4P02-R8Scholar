@@ -1,12 +1,16 @@
-/* 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~RANDOM STUFF~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap');    
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 
 body {
     margin: 0;
-    font-family: Cabin;
+    font-family: 'IBM Plex Sans', sans-serif;
+    background-color: #ecf0f1;
+    padding-bottom:600px;
 }
 
 a {
@@ -19,7 +23,7 @@ a:link {
 }
 
 a:hover {
-    color: #000000;
+    color: #cc0000;
     text-decoration: none;
 }
 
@@ -60,10 +64,10 @@ a:active {
 
 .navbar-container {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 9fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 10fr;
     gap: 0px 0px;
-    grid-template-areas: "Logo Search Login Professors Courses Departments About";
+    grid-template-areas: "Logo Search Login Professors Courses Departments About Signup";
     width: auto;
     height: 50px;
 }
@@ -194,7 +198,7 @@ a:active {
 }
 
 .home-container li:hover {
-    background-color: #989898;
+    background-color: #cc0000;
     cursor: pointer;
 }
 
@@ -374,6 +378,12 @@ a:active {
     width: auto;
     grid-auto-flow: column;
     gap: 100px;
+
+.Search {
+    grid-area: Search;
+    height: 50px;
+    background: #989898;
+    stroke: none;
 }
 
 .sort-button {
@@ -402,6 +412,7 @@ a:active {
     height: 25px;
     min-width: 350px;
     width: 100%;
+
     background-color: #d1d1d1;
     display: grid;
     grid-template-columns: 1.5fr 4fr 1fr 3.5fr;
@@ -412,6 +423,13 @@ a:active {
 
 .courses-container .listEntry .code {
     grid-area: Code;
+
+    max-width: 550px;
+    margin-top: 7.5px;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 58px;
+
     text-align: left;
     padding-left: 50px;
 }
@@ -498,6 +516,13 @@ a:active {
     background-color: #d1d1d1;
     width: 240px;
     text-align: center;
+    border: 0;
+    margin-left: 1%;
+}
+
+.Field::selection{ 
+    background-color: #FFF;
+    color: #000;
 }
 
 .professors-container ul {
@@ -545,7 +570,13 @@ a:active {
     color: #000000;
 }
 
+
 .professors-container .sort-button:hover {
+
+.NavButton:hover {
+    background-color: #000;
+    color: #fdfdfd;
+
     cursor: pointer;
 }
 
@@ -557,6 +588,7 @@ a:active {
     justify-items: center;
 }
 
+
 .professors-container .listEntry {
     height: 25px;
     min-width: 350px;
@@ -567,6 +599,16 @@ a:active {
     gap: 0px 0px;
     grid-template-areas: "Name Rating Department Courses";
     margin-top: 15px;
+
+.Signup {
+    grid-area: Signup;
+    height: 50px;
+    background: #989898;
+}
+.Professors {
+    grid-area: Professors;
+    height: 50px;
+    background: #989898;
 }
 
 .professors-container .listEntry .name {
@@ -706,4 +748,77 @@ a:active {
     width: 60%;
     padding-top: 10px;
     padding-bottom: 90px;
+}
+
+.loginContainer { 
+    align-items: center;
+    justify-content: center;
+}
+
+.content-line{ 
+    border-bottom: 2px #888686;
+    display: inline;
+}
+
+.footer{
+    color: white;
+    background:#cc0000;
+    /*border-radius: 10px;*/
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+}
+.about-container{
+    justify-content: center;
+    text-align: left;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.footer-link{
+    color: white;
+    background-color: white;
+}
+.footer-link:hover {
+    color: white;
+}
+.copyright-text{
+    text-align: right;
+    margin-right: 1%;
+}
+.post-editor { 
+    margin: 0 25%;
+}
+
+.panel-default{
+    border-color: #ddd;
+}
+
+.panel{
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent; 
+    border-radius: 4px;
+    box-shadow: 1px 1px rgba(0,0,0,.05)
+}
+
+@media(max-width: 1024px){
+    .post-editor{
+        margin: 1em;
+    }
+}
+.post-editor-button{
+    float:right;
+    margin-top: 1em; 
+    background-color:red ;
+}
+
+.panel-body{
+    margin: 1em 15%;
+}
+
+.post-body{
+    margin: 1em 20%;
 }

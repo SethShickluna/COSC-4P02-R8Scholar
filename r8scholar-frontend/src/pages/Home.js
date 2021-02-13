@@ -4,6 +4,11 @@ import Rating from "../components/Rating";
 import Button from "../components/Button";
 import { Icon } from "react-icons-kit";
 import { spinner } from "react-icons-kit/fa/spinner";
+import mockCourses from "../data/courses.json";
+import mockProfessors from "../data/professors.json";
+import mockDepartments from "../data/departments.json";
+import HomePageCarosel from '../components/HomeCarosel.js'; 
+
 
 export default class Home extends Component {
     constructor(props) {
@@ -30,11 +35,15 @@ export default class Home extends Component {
         );
     };
 
+  
     render() {
+
         return (
-            //Body
-            <div className="home-container">
-                {
+            <div className="home-page">
+                <div className="brock-images">
+                   <HomePageCarosel/> 
+                </div>
+                <div className="home-container">
                     //Three top 5 lists
                     this.state.list.map((e, index) => {
                         setTimeout(() => {
@@ -69,11 +78,8 @@ export default class Home extends Component {
                                 )}
                             </div>
                         );
-                    })
-                }
-                {
-                    //Average ratings
-                    this.state.list.map((e, index) => {
+                    })}
+                    {this.list.map((e, index) => {
                         return (
                             <Rating
                                 title={
@@ -86,8 +92,8 @@ export default class Home extends Component {
                                 key={index}
                             />
                         );
-                    })
-                }
+                    })}
+                </div>
             </div>
         );
     }
