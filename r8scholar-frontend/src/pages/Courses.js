@@ -34,7 +34,7 @@ export default class Courses extends Component {
         this.getOptions();
         setTimeout(() => {
             this.getEntries();
-        }, 200);
+        }, 75);
         if (this.props.location.id) {
             this.handleFilter("Department", this.props.location.id.name);
         }
@@ -235,7 +235,7 @@ export default class Courses extends Component {
                         <List
                             data={this.getCurrentPage()}
                             columns={["code", "rating", "department", "name"]}
-                            link={"/course"}
+                            link={"/course/"}
                         />
                     </div>
                 }

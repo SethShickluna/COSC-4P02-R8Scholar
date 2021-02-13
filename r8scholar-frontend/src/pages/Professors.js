@@ -32,11 +32,12 @@ export default class Courses extends Component {
 
     componentDidMount() {
         this.getOptions();
+        console.log(this.props.location.name); 
         setTimeout(() => {
             this.getEntries();
         }, 200);
         if (this.props.location.id) {
-            this.handleFilter("Department", this.props.location.id.name);
+            this.handleFilter("Department", this.props.location.name);
         }
     }
 
@@ -236,7 +237,7 @@ export default class Courses extends Component {
                                 "department",
                                 "rating",
                             ]}
-                            link={"/course"}
+                            link={"/course/"}
                         />
                     </div>
                 }

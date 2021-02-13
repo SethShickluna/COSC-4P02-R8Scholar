@@ -5,6 +5,11 @@ export default class About extends Component {
     render() {
         return (
             <div className="about-container">
+                <div>
+                    <h1 style={{textAlign: 'center'}}>
+                        About us
+                    </h1>
+                </div>
                 <div className="label">Our Goal</div>
                 <div className="text">
                     <p>The goal of this website is to centralize the thoughts and opinions of the Brock University community. We aim to provide a comprehensive

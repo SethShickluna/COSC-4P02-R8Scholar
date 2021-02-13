@@ -34,7 +34,7 @@ class Navbar extends Component {
                 </Link>
                 <Search className="Search" />
                 <Button id={cookie.load('isLoggedIn') === "true" ? "account" : "login"} 
-                    className="NavButton"
+                    className="nav-button"
                     text={cookie.load('isLoggedIn') === "true"? "Account" : "Login"}
                     key={cookie.load('isLoggedIn') === "true"? 98 : 97} 
                     link={cookie.load('isLoggedIn') === "true"? "/account" : "/login"}
@@ -51,7 +51,7 @@ class Navbar extends Component {
                     );
                 })}
                 <Button id={cookie.load('isLoggedIn') === "true" ? "signout" : "signup"} 
-                    className="NavButton"
+                    className="nav-button"
                     text={cookie.load('isLoggedIn') === "true" ? "Sign Out" : "Create Account"}
                     key={cookie.load('isLoggedIn') === "true" ? 99 : 100} 
                     link={cookie.load('isLoggedIn') === "true" ? "/signout" : "/signup"}

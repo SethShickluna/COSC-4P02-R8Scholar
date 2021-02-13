@@ -4,9 +4,6 @@ import Rating from "../components/Rating";
 import Button from "../components/Button";
 import { Icon } from "react-icons-kit";
 import { spinner } from "react-icons-kit/fa/spinner";
-import mockCourses from "../data/courses.json";
-import mockProfessors from "../data/professors.json";
-import mockDepartments from "../data/departments.json";
 import HomePageCarosel from '../components/HomeCarosel.js'; 
 
 
@@ -44,11 +41,10 @@ export default class Home extends Component {
                    <HomePageCarosel/> 
                 </div>
                 <div className="home-container">
-                    //Three top 5 lists
-                    this.state.list.map((e, index) => {
+                    {this.state.list.map((e, index) => {
                         setTimeout(() => {
                             this.getEntries(e);
-                        }, 200);
+                        }, 75);
                         return (
                             <div className="list-container">
                                 <h1>{"Top 5 " + e}</h1>
@@ -79,7 +75,7 @@ export default class Home extends Component {
                             </div>
                         );
                     })}
-                    {this.list.map((e, index) => {
+                    {this.state.list.map((e, index) => {
                         return (
                             <Rating
                                 title={

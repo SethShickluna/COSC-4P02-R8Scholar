@@ -378,6 +378,7 @@ a:active {
     width: auto;
     grid-auto-flow: column;
     gap: 100px;
+}
 
 .Search {
     grid-area: Search;
@@ -572,6 +573,8 @@ a:active {
 
 
 .professors-container .sort-button:hover {
+    color: #818181; 
+}
 
 .NavButton:hover {
     background-color: #000;
@@ -599,6 +602,7 @@ a:active {
     gap: 0px 0px;
     grid-template-areas: "Name Rating Department Courses";
     margin-top: 15px;
+}
 
 .Signup {
     grid-area: Signup;
