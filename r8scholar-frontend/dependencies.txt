@@ -1,0 +1,3 @@
+react bootstrap: npm install --save react-bootstrap 
+react cookies: npm install react-cookies --save
+react star ratings: npm install --save react-star-ratings

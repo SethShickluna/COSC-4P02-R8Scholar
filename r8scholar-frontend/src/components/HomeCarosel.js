@@ -36,7 +36,7 @@ export default class Example extends Component {
                     />
                     <Carousel.Caption >
                         <h3 style={{color:'black'}}>Have something to say?</h3>
-                        <Link style={{color:'white'}}exact to='/Signup'><p>Click here to sign up today! </p></Link>
+                        <Link style={{color:'white'}} to='/Signup'><p>Click here to sign up today! </p></Link>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

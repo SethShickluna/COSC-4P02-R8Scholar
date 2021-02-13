@@ -178,7 +178,7 @@ export default class Course extends Component {6
                             <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
                                 <Tab eventKey="reviews" title="Reviews">
                                 {this.state.reviews.map((item, index) => 
-                                            (<ReviewItem id={index} reviewItem={item}/>)
+                                            (<ReviewItem id={index} key={"professor-review"+index} reviewItem={item}/>)
                                         ) /* generate all the reviews for this page */} 
                                 </Tab>
                                 <Tab eventKey="forums" title="Forums">

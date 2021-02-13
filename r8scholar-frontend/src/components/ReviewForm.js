@@ -2,6 +2,7 @@
 import {React, Component} from 'react'; 
 import Form from 'react-bootstrap/Form'; 
 import {Button} from 'react-bootstrap'; 
+import cookie from 'react-cookies'; 
 
 
 const questions = { 
@@ -37,13 +38,71 @@ export default class ReviewForm extends Component {
         super(props); 
         this.state = { 
             reviewType: props.review, 
-            title: null, 
-            content: null, 
-            instructorRating: null, 
-            homeworkRating: null, 
-            lectureRating: null, 
-            avgRating: null,
+            title: "", 
+            content: "", 
+            rating1: 1, 
+            rating2: 1, 
+            rating3: 1, 
             date: (new Date()).toString(), 
+            user: {
+                userName: 'seth', 
+                email: 'ss16wn@brocku.ca', 
+            }
+        }
+
+        this.updateTitleInput = this.updateTitleInput.bind(this); 
+        this.updateContentInput = this.updateContentInput.bind(this); 
+        this.updateRating1 = this.updateRating1.bind(this); 
+        this.updateRating2 = this.updateRating2.bind(this); 
+        this.updateRating3 = this.updateRating3.bind(this); 
+        
+        this.submitReview = this.submitReview.bind(this); 
+    }
+
+    updateTitleInput(obj){
+        this.setState({
+            title: obj.target.value, 
+        }); 
+    }
+
+    updateContentInput(obj){
+        this.setState({
+            content: obj.target.value, 
+        }); 
+    }
+
+    updateRating1(obj){
+        this.setState({
+            rating1: parseFloat(obj.target.value), 
+        }); 
+    }
+
+    updateRating2(obj){
+        this.setState({
+            rating2: parseFloat(obj.target.value), 
+        }); 
+    }
+
+    updateRating3(obj){
+        this.setState({
+            rating3: parseFloat(obj.target.value), 
+        })
+    }
+
+
+    submitReview = () =>{
+
+        let overallRating = (this.state.rating1 + this.state.rating2 + this.state.rating3) / 3; 
+        
+        const newReview = { 
+            title: this.state.title, 
+            content: this.state.content, 
+            avgRating: overallRating, 
+            rating1: this.state.rating1,
+            rating2: this.state.rating2, 
+            rating3: this.state.rating3, 
+            date: this.state.date, 
+            user: this.setState.user.userName, 
         }
     }
 
@@ -54,13 +113,13 @@ export default class ReviewForm extends Component {
                 <Form>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="email" placeholder="Title..." />
+                        <Form.Control isInvalid={this.state.title === null} placeholder="Title..." onChange={this.updateTitleInput}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         {questions[this.state.reviewType].map((question, index) => 
-                        (<div style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
+                        (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                         <Form.Label>{question}</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control onChange={index === 1 ?this.updateRating1 : index === 2 ? this.updateRating2 : this.updateRating3} as="select">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -71,10 +130,10 @@ export default class ReviewForm extends Component {
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>What did you think of this {this.state.reviewType}? </Form.Label>
-                        <Form.Control as="textarea" rows={5} />
+                        <Form.Control onChange={this.updateContentInput} as="textarea" rows={5} />
                     </Form.Group>
                     <div style={buttonStyle}>
-                        <Button variant="danger" size="lg" type="submit">
+                        <Button onClick={this.submitReview} variant="danger" size="lg" type="submit">
                             Submit Review
                         </Button>
                     </div>

@@ -61,6 +61,7 @@ export default class Home extends Component {
                                         className="listButton"
                                         text={"View all " + e}
                                         link={"/" + e}
+                                        key={index+""+e}
                                     />
                                 </div>
                             </div>

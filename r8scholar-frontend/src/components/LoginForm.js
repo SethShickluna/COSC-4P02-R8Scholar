@@ -1,8 +1,7 @@
 import React, { Component } from 'react'; 
 import {Form, Button, Card} from 'react-bootstrap'; 
-import { Router } from 'react-router';
-import {Link} from 'react-router-dom'; 
-
+import cookie from 'react-cookies'; 
+import {Link, withRouter} from 'react-router-dom'; 
 
 
 const formStyle = {
@@ -16,14 +15,16 @@ const buttonStyle = {
     marginRight: '13px', 
 }
 
-export default class LoginForm extends Component {
-
+class LoginForm extends Component {
+    
     constructor(props){
         super(props); 
         this.state = { 
             email: "", 
             password: "", 
+            loginSuccess: false, 
         }
+        
         this.updateEmailInput = this.updateEmailInput.bind(this);
         this.updatePasswordInput = this.updatePasswordInput.bind(this);
 
@@ -47,20 +48,20 @@ export default class LoginForm extends Component {
         //send info to backend 
             //this.state.email 
             //this.state.password
-            
-        let userIsVerified = true; 
-        if(userIsVerified){ // replace with response from back end 
-            //set login status to true 
-            //have user stuff in local storage? 
-            
-            //route to home page 
+        let length = this.state.email.length; 
+        if(length > 10){ // otherwise the next line would be problematic 
+            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
+                cookie.save('email', this.state.email, {path :'/'}); 
+                cookie.save('isLoggedIn', true, {path: '/'}); 
+                
+                //redirect home
+                this.props.history.push('/');
+                window.location.reload(); 
+            }
         }else{ 
-            alert("Invalid Email or Username. Please try again.")
+            alert("Invalid Email. Please try again.");
         }
-    }
-
-    routeToRegister(){ 
-
+        
     }
 
     render() { 
@@ -88,7 +89,11 @@ export default class LoginForm extends Component {
                         </Form>
                     </Card.Body>
                 </Card>
+
+
             </div>
         ); 
     }
 }
+
+export default withRouter(LoginForm); 

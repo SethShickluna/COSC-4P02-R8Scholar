@@ -36,10 +36,10 @@ a:active {
 
 .navbar-container {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 9fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 10fr;
     gap: 0px 0px;
-    grid-template-areas: "Logo Search Login Professors Courses Departments About";
+    grid-template-areas: "Logo Search Login Professors Courses Departments About Signup";
     width: auto;
     height: 50px;
 }
@@ -201,7 +201,7 @@ a:active {
 .Search .Field {
     height: 35px;
     width: 100%;
-    max-width: 600px;
+    max-width: 550px;
     margin-top: 7.5px;
     font-style: normal;
     font-size: 20px;
@@ -236,6 +236,12 @@ a:active {
 
 .Login {
     grid-area: Login;
+    height: 50px;
+    background: #989898;
+}
+
+.Signup {
+    grid-area: Signup;
     height: 50px;
     background: #989898;
 }

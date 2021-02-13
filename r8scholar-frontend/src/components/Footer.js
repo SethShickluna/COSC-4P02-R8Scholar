@@ -11,16 +11,16 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <div class="footer">
+            <div className="footer">
                 <style>
 
                 </style>
-                <div classname="footer-container">
+                <div className="footer-container">
                     <div className="row">
                         {/*Column 1 */}
                         <div className="col-md-3 col-sm-6">
                             <h4>Address </h4>
-                            <ul classname="footer-list">
+                            <ul className="footer-list">
                                 <li> 1812 Sir Isaac Brock Way,</li>
                                 <li>  St. Catharines, ON L2S 3A1</li>
                                 <li> +1 905 XXX-XXXX</li>

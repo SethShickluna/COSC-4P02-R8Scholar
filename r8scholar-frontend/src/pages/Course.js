@@ -5,6 +5,7 @@ import ReviewItem from '../components/ReviewItem';
 import Tabs from 'react-bootstrap/Tabs'
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
+import cookie from 'react-cookies'; 
 
 const pageStyles={
     margin: '0 auto', 
@@ -45,28 +46,8 @@ export default class Course extends Component {6
                     rating: 3.9, 
                     user: "seth", 
                     comments: null, 
-                },
-                {
-                    title: "Difficult but Important course!",
-                    content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
-                    rating: 2.5, 
-                    user: "seth", 
-                    comments: null, 
                 }, 
-                {
-                    title: "Difficult but Important course!",
-                    content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
-                    rating: 2.5, 
-                    user: "seth", 
-                    comments: null, 
-                }, 
-                {
-                    title: "Difficult but Important course!",
-                    content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
-                    rating: 2.5, 
-                    user: "seth", 
-                    comments: null, 
-                }, 
+            
             ],  
             instructors: [
                 "Dave Bockus", 
@@ -75,6 +56,12 @@ export default class Course extends Component {6
             aliases: "", 
         }
         //this.componentDidMount(); 
+
+        if(cookie.load('testReview')){
+            this.setState({
+                review: cookie.load('testReview'), 
+            }); 
+        }
     }
 
     //TODO: GET req goes here that fetches data based on uid
@@ -94,6 +81,7 @@ export default class Course extends Component {6
             });
         }); 
     }
+
     render() {
         return (
             <div style={pageStyles}>
@@ -192,7 +180,7 @@ export default class Course extends Component {6
                             <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
                                 <Tab eventKey="reviews" title="Reviews">
                                 {this.state.reviews.map((item, index) => 
-                                            (<ReviewItem id={index} reviewItem={item}/>)
+                                            (<ReviewItem id={index} key={"course-review"+index}reviewItem={item}/>)
                                         ) /* generate all the reviews for this page */} 
                                 </Tab>
                                 <Tab eventKey="forums" title="Forums">
