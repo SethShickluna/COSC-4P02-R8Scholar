@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap');    
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap");
 
 html {
     position: relative;
     min-height: 100%;
 }
 
-
 body {
     margin: 0;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: "IBM Plex Sans", sans-serif;
     background-color: #ecf0f1;
-    padding-bottom:600px;
+    padding-bottom: 600px;
 }
 
 a {
@@ -424,21 +423,14 @@ a:active {
 
 .courses-container .listEntry .code {
     grid-area: Code;
-
-    max-width: 550px;
-    margin-top: 7.5px;
-    font-style: normal;
-    font-size: 20px;
-    line-height: 58px;
-
     text-align: left;
     padding-left: 50px;
 }
 
 .courses-container .listEntry .department {
     grid-area: Department;
-    padding-left: 100px;
-    text-align: center;
+    padding-right: 10px;
+    text-align: right;
 }
 
 .courses-container .listEntry .rating {
@@ -521,8 +513,8 @@ a:active {
     margin-left: 1%;
 }
 
-.Field::selection{ 
-    background-color: #FFF;
+.Field::selection {
+    background-color: #fff;
     color: #000;
 }
 
@@ -571,9 +563,8 @@ a:active {
     color: #000000;
 }
 
-
 .professors-container .sort-button:hover {
-    color: #818181; 
+    color: #818181;
 }
 
 .NavButton:hover {
@@ -590,7 +581,6 @@ a:active {
     justify-content: center;
     justify-items: center;
 }
-
 
 .professors-container .listEntry {
     height: 25px;
@@ -754,26 +744,26 @@ a:active {
     padding-bottom: 90px;
 }
 
-.loginContainer { 
+.loginContainer {
     align-items: center;
     justify-content: center;
 }
 
-.content-line{ 
+.content-line {
     border-bottom: 2px #888686;
     display: inline;
 }
 
-.footer{
+.footer {
     color: white;
-    background:#cc0000;
+    background: #cc0000;
     /*border-radius: 10px;*/
     position: absolute;
     left: 0;
     width: 100%;
     bottom: 0;
 }
-.about-container{
+.about-container {
     justify-content: center;
     text-align: left;
     margin-top: 2%;
@@ -781,48 +771,48 @@ a:active {
     margin-right: 10%;
 }
 
-.footer-link{
+.footer-link {
     color: white;
     background-color: white;
 }
 .footer-link:hover {
     color: white;
 }
-.copyright-text{
+.copyright-text {
     text-align: right;
     margin-right: 1%;
 }
-.post-editor { 
+.post-editor {
     margin: 0 25%;
 }
 
-.panel-default{
+.panel-default {
     border-color: #ddd;
 }
 
-.panel{
+.panel {
     margin-bottom: 20px;
     background-color: #fff;
-    border: 1px solid transparent; 
+    border: 1px solid transparent;
     border-radius: 4px;
-    box-shadow: 1px 1px rgba(0,0,0,.05)
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-@media(max-width: 1024px){
-    .post-editor{
+@media (max-width: 1024px) {
+    .post-editor {
         margin: 1em;
     }
 }
-.post-editor-button{
-    float:right;
-    margin-top: 1em; 
-    background-color:red ;
+.post-editor-button {
+    float: right;
+    margin-top: 1em;
+    background-color: red;
 }
 
-.panel-body{
+.panel-body {
     margin: 1em 15%;
 }
 
-.post-body{
+.post-body {
     margin: 1em 20%;
 }

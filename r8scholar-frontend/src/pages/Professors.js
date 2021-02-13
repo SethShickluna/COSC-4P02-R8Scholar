@@ -32,30 +32,31 @@ export default class Courses extends Component {
 
     componentDidMount() {
         this.getOptions();
-        console.log(this.props.location.name); 
-        setTimeout(() => {
-            this.getEntries();
-        }, 200);
-        if (this.props.location.id) {
-            this.handleFilter("Department", this.props.location.name);
-        }
+        this.getEntries(() => {
+            if (this.props.location.id) {
+                this.handleFilter("Department", this.props.location.id.name);
+            }
+        });
     }
 
     // TODO: GET profs
-    getEntries = async () => {
-        await fetch("http://localhost:3000/data/courses.json").then((res) => {
-            res.json().then((data) => {
-                this.setState(
-                    { data: data.data, unfilteredData: data.data },
-                    () => {
-                        var length = Math.ceil(
-                            this.state.data.length / this.state.perPage
-                        );
-                        this.setState({ maxPage: length });
-                    }
-                );
-            });
-        });
+    getEntries = async (callback) => {
+        await fetch("http://localhost:3000/data/professors.json").then(
+            (res) => {
+                res.json().then((data) => {
+                    this.setState(
+                        { data: data.data, unfilteredData: data.data },
+                        () => {
+                            var length = Math.ceil(
+                                this.state.data.length / this.state.perPage
+                            );
+                            this.setState({ maxPage: length });
+                            callback();
+                        }
+                    );
+                });
+            }
+        );
     };
 
     getOptions = () => {
@@ -126,8 +127,10 @@ export default class Courses extends Component {
         if (field === "Show per page") {
             this.setState({ perPage: value });
         }
+        console.log(this.state.data, this.state.unfilteredData);
         this.setState({ [field]: value }, () => {
             this.setState({ data: this.state.unfilteredData }, () => {
+                console.log(this.state.data, this.state.unfilteredData);
                 var filteredData = [];
                 this.state.data.forEach((e) => {
                     if (

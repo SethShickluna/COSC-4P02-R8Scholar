@@ -32,16 +32,15 @@ export default class Courses extends Component {
 
     componentDidMount() {
         this.getOptions();
-        setTimeout(() => {
-            this.getEntries();
-        }, 75);
-        if (this.props.location.id) {
-            this.handleFilter("Department", this.props.location.id.name);
-        }
+        this.getEntries(() => {
+            if (this.props.location.id) {
+                this.handleFilter("Department", this.props.location.id.name);
+            }
+        });
     }
 
     // TODO: GET courses
-    getEntries = async () => {
+    getEntries = async (callback) => {
         await fetch("http://localhost:3000/data/courses.json").then((res) => {
             res.json().then((data) => {
                 this.setState(
@@ -51,6 +50,7 @@ export default class Courses extends Component {
                             this.state.data.length / this.state.perPage
                         );
                         this.setState({ maxPage: length });
+                        callback();
                     }
                 );
             });
