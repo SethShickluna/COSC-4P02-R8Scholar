@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import List from "../components/List";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
-import mockCourses from "../data/courses.json";
+import { Icon } from "react-icons-kit";
 import { chevronDown } from "react-icons-kit/fa/chevronDown";
 import { chevronUp } from "react-icons-kit/fa/chevronUp";
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
 import { chevronRight } from "react-icons-kit/fa/chevronRight";
 import { minus } from "react-icons-kit/fa/minus";
+import { spinner } from "react-icons-kit/fa/spinner";
 
 export default class Courses extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: mockCourses.data,
+            data: null,
+            unfilteredData: null,
             filters: ["Rating", "Department", "Show per page"],
             options: { Rating: [], Department: [], "Show per page": [] },
             Rating: null,
@@ -30,21 +32,30 @@ export default class Courses extends Component {
 
     componentDidMount() {
         this.getOptions();
-        this.getEntries();
+        setTimeout(() => {
+            this.getEntries();
+        }, 200);
         if (this.props.location.id) {
             this.handleFilter("Department", this.props.location.id.name);
         }
     }
 
-    componentWillUnmount() {
-        this.setState({ sortIndex: "", accending: true });
-    }
-
-    // TODO: GET profs, courses and departs
-    getEntries() {
-        var length = Math.ceil(this.state.data.length / this.state.perPage);
-        this.setState({ maxPage: length });
-    }
+    // TODO: GET courses
+    getEntries = async () => {
+        await fetch("http://localhost:3000/data/courses.json").then((res) => {
+            res.json().then((data) => {
+                this.setState(
+                    { data: data.data, unfilteredData: data.data },
+                    () => {
+                        var length = Math.ceil(
+                            this.state.data.length / this.state.perPage
+                        );
+                        this.setState({ maxPage: length });
+                    }
+                );
+            });
+        });
+    };
 
     getOptions = () => {
         var options = {
@@ -115,9 +126,7 @@ export default class Courses extends Component {
             this.setState({ perPage: value });
         }
         this.setState({ [field]: value }, () => {
-            this.setState({ currentPage: 1 });
-            var newData = mockCourses.data;
-            this.setState({ data: newData }, () => {
+            this.setState({ data: this.state.unfilteredData }, () => {
                 var filteredData = [];
                 this.state.data.forEach((e) => {
                     if (
@@ -144,7 +153,7 @@ export default class Courses extends Component {
         });
     };
 
-    sortData(sortIndex) {
+    sortData = (sortIndex) => {
         this.setState({
             data: this.state.data.sort((a, b) => {
                 if (
@@ -167,10 +176,12 @@ export default class Courses extends Component {
             }),
             currentPage: 1,
         });
-    }
+    };
 
     render() {
-        return (
+        return !this.state.data ? (
+            <Icon className="loading" size="30" icon={spinner} />
+        ) : (
             //Body
             <div className="courses-container">
                 {
@@ -196,7 +207,6 @@ export default class Courses extends Component {
                     </div>
                 }
                 {
-                    //Sort Buttons
                     <div className="sort-buttons">
                         {this.state.sortButtons.map((e) => {
                             var arrow = minus;
@@ -221,7 +231,6 @@ export default class Courses extends Component {
                     </div>
                 }
                 {
-                    //List
                     <div className="list-container">
                         <List
                             data={this.getCurrentPage()}
@@ -230,34 +239,29 @@ export default class Courses extends Component {
                         />
                     </div>
                 }
-                {
-                    //Navigation Buttons
-                    this.state.perPage < this.state.data.length && (
-                        <div className="navigation-container">
-                            <Button
-                                id="navigate-back"
-                                className="navigate-button"
-                                text=""
-                                onClick={this.handleNavigate}
-                                icon={chevronLeft}
-                                iconSize="12"
-                            />
-                            <div className="label">
-                                {this.state.currentPage +
-                                    "/" +
-                                    this.state.maxPage}
-                            </div>
-                            <Button
-                                id="navigate-forward"
-                                className="navigate-button"
-                                text=""
-                                onClick={this.handleNavigate}
-                                icon={chevronRight}
-                                iconSize="12"
-                            />
+                {this.state.perPage < this.state.data.length && (
+                    <div className="navigation-container">
+                        <Button
+                            id="navigate-back"
+                            className="navigate-button"
+                            text=""
+                            onClick={this.handleNavigate}
+                            icon={chevronLeft}
+                            iconSize="12"
+                        />
+                        <div className="label">
+                            {this.state.currentPage + "/" + this.state.maxPage}
                         </div>
-                    )
-                }
+                        <Button
+                            id="navigate-forward"
+                            className="navigate-button"
+                            text=""
+                            onClick={this.handleNavigate}
+                            icon={chevronRight}
+                            iconSize="12"
+                        />
+                    </div>
+                )}
             </div>
         );
     }

@@ -33,7 +33,28 @@ a:active {
 
 /* 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~NAVBAR~~~~~~~~~~
+~~~~~~~~~~~~LOADING~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.loading {
+    animation-name: rotate-loading;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotate-loading {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~NAVBAR~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 

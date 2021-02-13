@@ -1,19 +1,37 @@
 import React, { Component } from "react";
-import mockDepartments from "../data/departments2.json";
 import Button from "../components/Button";
+import { Icon } from "react-icons-kit";
+import { spinner } from "react-icons-kit/fa/spinner";
 
 export default class Departments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: mockDepartments.data,
+            data: null,
         };
     }
 
-    getEntries = () => {};
+    componentDidMount() {
+        setTimeout(() => {
+            this.getEntries();
+        }, 200);
+    }
+
+    // TODO: GET departs
+    getEntries = async () => {
+        await fetch("http://localhost:3000/data/departments.json").then(
+            (res) => {
+                res.json().then((data) => {
+                    this.setState({ data: data.data });
+                });
+            }
+        );
+    };
 
     render() {
-        return (
+        return !this.state.data ? (
+            <Icon className="loading" size="30" icon={spinner} />
+        ) : (
             <div className="departments-container">
                 {this.state.data.map((e) => {
                     return (

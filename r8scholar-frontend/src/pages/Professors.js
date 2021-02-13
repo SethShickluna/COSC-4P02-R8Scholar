@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import List from "../components/List";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
-import mockProfessors from "../data/professors.json";
+import { Icon } from "react-icons-kit";
+import { spinner } from "react-icons-kit/fa/spinner";
 import { chevronDown } from "react-icons-kit/fa/chevronDown";
 import { chevronUp } from "react-icons-kit/fa/chevronUp";
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
@@ -13,7 +14,8 @@ export default class Courses extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: mockProfessors.data,
+            data: null,
+            unfilteredData: null,
             filters: ["Rating", "Department", "Show per page"],
             options: { Rating: [], Department: [], "Show per page": [] },
             Rating: null,
@@ -30,22 +32,30 @@ export default class Courses extends Component {
 
     componentDidMount() {
         this.getOptions();
-        this.getEntries();
+        setTimeout(() => {
+            this.getEntries();
+        }, 200);
         if (this.props.location.id) {
             this.handleFilter("Department", this.props.location.id.name);
         }
     }
 
-    componentWillUnmount() {
-        this.setState({ sortIndex: "", accending: true });
-    }
-
-    // TODO: GET profs, courses and departs
-    getEntries() {
-        var length = Math.ceil(this.state.data.length / this.state.perPage);
-        console.log(length);
-        this.setState({ maxPage: length });
-    }
+    // TODO: GET profs
+    getEntries = async () => {
+        await fetch("http://localhost:3000/data/courses.json").then((res) => {
+            res.json().then((data) => {
+                this.setState(
+                    { data: data.data, unfilteredData: data.data },
+                    () => {
+                        var length = Math.ceil(
+                            this.state.data.length / this.state.perPage
+                        );
+                        this.setState({ maxPage: length });
+                    }
+                );
+            });
+        });
+    };
 
     getOptions = () => {
         var options = {
@@ -116,8 +126,7 @@ export default class Courses extends Component {
             this.setState({ perPage: value });
         }
         this.setState({ [field]: value }, () => {
-            var newData = mockProfessors.data;
-            this.setState({ data: newData }, () => {
+            this.setState({ data: this.state.unfilteredData }, () => {
                 var filteredData = [];
                 this.state.data.forEach((e) => {
                     if (
@@ -166,7 +175,9 @@ export default class Courses extends Component {
     };
 
     render() {
-        return (
+        return !this.state.data ? (
+            <Icon className="loading" size="30" icon={spinner} />
+        ) : (
             //Body
             <div className="professors-container">
                 {
