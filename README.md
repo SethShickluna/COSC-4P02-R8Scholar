@@ -13,4 +13,4 @@ James Sargant js17sy@brocku.ca 6380356 github: shorinbonsai
 Logan Bell lb16tp@brocku.ca 6047211 loganbe11
 Grant Nike gn17az@brocku.ca 6349302 GrantNike
 Luciano Ugalde lu16xx@brocku.ca 6102545 lu16xx
-
+Munashe Masango mm16rh@brocku.ca 6204911 munashemasango
