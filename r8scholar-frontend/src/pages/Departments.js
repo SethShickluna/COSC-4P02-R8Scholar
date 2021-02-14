@@ -48,14 +48,14 @@ export default class Departments extends Component {
                                     id={e.topProfessor}
                                     className="topProfessor"
                                     text={"Top professor " + e.topProfessor}
-                                    link="/Professor"
+                                    link={"/Professor/" + e.topProfessor}
                                 />
                                 <Button
                                     id={e}
                                     className={"professors-button"}
                                     text="View All"
                                     link={{
-                                        pathname: "/Professors",
+                                        pathname: "/Professors/",
                                         id: e,
                                     }}
                                 />
@@ -67,7 +67,7 @@ export default class Departments extends Component {
                                     id={e.topCourse}
                                     className="topCourse"
                                     text={"Top course " + e.topCourse}
-                                    link={"/Course"}
+                                    link={"/Course/" + e.topCourse}
                                 />
                                 <Button
                                     id={e}

@@ -56,7 +56,7 @@ export default class Home extends Component {
                                         data={this.state[e]}
                                         columns={["name", "rating"]}
                                         key={index}
-                                        link={"/" + e.slice(0, e.length - 1)}
+                                        link={"/" + e.slice(0, e.length - 1) + "/"}
                                     />
                                     <Button
                                         id={e}

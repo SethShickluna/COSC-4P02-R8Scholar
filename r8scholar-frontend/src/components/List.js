@@ -5,7 +5,7 @@ export default function List(props) {
     const { data, columns, link } = { ...props };
     return data.map((row) => {
         return (
-            <Link className="listEntry" to={link + row.id}>
+            <Link className="listEntry" to={link + row.name}>
                 {columns.map((col) => {
                     return <div className={col}>{row[col]}</div>;
                 })}

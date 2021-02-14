@@ -30,7 +30,7 @@ export default class ReviewItem extends Component {
                     <Card style={{marginTop: '4%'}}>
                         <Accordion>
                             <Card.Body>
-                                <Card.Title>{this.props.reviewItem.title}</Card.Title>
+                                <Card.Title>{this.props.reviewItem.title}<p style={{float: "right"}}>{new Date().getFullYear()}</p></Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.user + " "} 
                                     <StarRatings
                                         rating={this.props.reviewItem.rating}

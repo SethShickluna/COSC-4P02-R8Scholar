@@ -27,7 +27,7 @@ const tabStyle = {
     backgroundColor: '#ecf0f1', 
 }
 
-export default class Course extends Component {6
+export default class Course extends Component {
     constructor(props) {
         super(props);
         //use state because react forces an update when it is modifed in some way 
