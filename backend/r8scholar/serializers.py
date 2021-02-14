@@ -4,7 +4,7 @@ from .models import Comment, Course, CustomUser, Department, Forum, Instructor, 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('email', 'nickname', 'reviews', 'comments', 'forum posts')
+        fields = ('email', 'nickname', 'reviews', 'comments', 'forum_posts')
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,7 +25,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class DeparmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('name', 'course rating', 'instructor rating', 'overall rating', 'review')
+        fields = ('name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,7 +35,7 @@ class InstructorSerializer(serializers.ModelSerializer):
 class ForumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Forum
-        fields = ('title', 'comment')
+        fields = ('nickname_id', 'title', 'comment')
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:

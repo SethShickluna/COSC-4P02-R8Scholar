@@ -94,6 +94,7 @@ class Review(models.Model):
 
 class Forum(models.Model):
     subject_id = models.ForeignKey(Subject,default=None, on_delete = models.DO_NOTHING)
+    nickname_id = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
     title = models.CharField(max_length=40)
     comment = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
 
