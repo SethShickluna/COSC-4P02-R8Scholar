@@ -32,7 +32,7 @@ class CustomUser(AbstractUser):
     nickname = models.CharField(max_length=20, default='Anonymous', unique=True)
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
-
+    forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -56,20 +56,26 @@ class Course(models.Model):
     id = models.OneToOneField(Subject,primary_key=True,default=None,  on_delete = models.CASCADE)
     code = models.CharField(max_length=10, unique=True)
     department = models.CharField(max_length=20)
-    rating = models.IntegerField(default=None)
+    rating = models.FloatField(default=None)
     name  = models.CharField(max_length=30,default=None)
+    reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
+    instructor = models.ForeignKey('Instructor', on_delete = models.DO_NOTHING)
 
 class Instructor(models.Model):
     id = models.OneToOneField(Subject,primary_key=True,default=None, on_delete = models.CASCADE)
     department = models.CharField(max_length=20)
-    rating = models.IntegerField(default=None)
+    rating = models.FloatField(default=None)
     name  = models.CharField(max_length=30,default=None)
+    reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
+
     
 class Department(models.Model):
     id = models.OneToOneField(Subject,primary_key=True,default=None, on_delete = models.CASCADE)
     name = models.CharField(max_length=20,default=None)
-    courses_rating = models.IntegerField(default=None)
-    instructors_rating = models.IntegerField(default=None)
+    courses_rating = models.FloatField(default=None)
+    instructors_rating = models.FloatField(default=None)
+    overall_rating = models.FloatField(default=None)
+    review = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
 
 
 
@@ -91,6 +97,9 @@ class Forum(models.Model):
     title = models.CharField(max_length=40)
     comment = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
 
-
+class Ticket(models.Model):
+    user = models.ForeignKey(CustomUser, default=None, on_delete = models.CASCADE)
+    content = models.TextField(default=None, null=True)
+    date = models.DateTimeField(default=None, null=True)
 
 
