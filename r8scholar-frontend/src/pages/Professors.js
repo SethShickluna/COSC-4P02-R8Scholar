@@ -3,19 +3,19 @@ import List from "../components/List";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
 import { Icon } from "react-icons-kit";
-import { spinner } from "react-icons-kit/fa/spinner";
 import { chevronDown } from "react-icons-kit/fa/chevronDown";
 import { chevronUp } from "react-icons-kit/fa/chevronUp";
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
 import { chevronRight } from "react-icons-kit/fa/chevronRight";
 import { minus } from "react-icons-kit/fa/minus";
+import Loading from "../components/Loading";
 
 export default class Courses extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null,
-            unfilteredData: null,
+            data: [],
+            unfilteredData: [],
             filters: ["Rating", "Department", "Show per page"],
             options: { Rating: [], Department: [], "Show per page": [] },
             Rating: null,
@@ -179,8 +179,8 @@ export default class Courses extends Component {
     };
 
     render() {
-        return !this.state.data ? (
-            <Icon className="loading" size="30" icon={spinner} />
+        return !this.state.data.length ? (
+            <Loading size="75" />
         ) : (
             //Body
             <div className="professors-container">

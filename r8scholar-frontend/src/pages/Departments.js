@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import Button from "../components/Button";
-import { Icon } from "react-icons-kit";
-import { spinner } from "react-icons-kit/fa/spinner";
+import Loading from "../components/Loading";
 
 export default class Departments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null,
+            data: [],
         };
     }
 
     componentDidMount() {
         setTimeout(() => {
             this.getEntries();
-        }, 200);
+        }, 1000);
     }
 
     // TODO: GET departs
@@ -29,8 +28,8 @@ export default class Departments extends Component {
     };
 
     render() {
-        return !this.state.data ? (
-            <Icon className="loading" size="30" icon={spinner} />
+        return !this.state.data.length ? (
+            <Loading size="75" />
         ) : (
             <div className="departments-container">
                 {this.state.data.map((e) => {

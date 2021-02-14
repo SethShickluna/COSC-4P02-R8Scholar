@@ -42,12 +42,16 @@ a:active {
 
 .loading {
     animation-name: rotate-loading;
-    animation-duration: 2s;
+    animation-duration: 0.6s;
     animation-iteration-count: infinite;
+    animation-timing-function: steps(8, start);
+    margin-top: 10%;
+    text-align: center;
+    color: #989898;
 }
 
 @keyframes rotate-loading {
-    from {
+    frp {
         transform: rotate(0deg);
     }
     to {
