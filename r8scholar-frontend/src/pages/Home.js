@@ -4,8 +4,7 @@ import Rating from "../components/Rating";
 import Button from "../components/Button";
 import { Icon } from "react-icons-kit";
 import { spinner } from "react-icons-kit/fa/spinner";
-import HomePageCarosel from '../components/HomeCarosel.js'; 
-
+import HomePageCarosel from "../components/HomeCarosel.js";
 
 export default class Home extends Component {
     constructor(props) {
@@ -16,6 +15,14 @@ export default class Home extends Component {
             courses: [],
             departments: [],
         };
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.state.list.map((e) => {
+                this.getEntries(e);
+            });
+        }, 75);
     }
 
     // TODO: GET top 5 profs, courses and departs
@@ -32,19 +39,14 @@ export default class Home extends Component {
         );
     };
 
-  
     render() {
-
         return (
             <div className="home-page">
                 <div className="brock-images">
-                   <HomePageCarosel/> 
+                    <HomePageCarosel />
                 </div>
                 <div className="home-container">
                     {this.state.list.map((e, index) => {
-                        setTimeout(() => {
-                            this.getEntries(e);
-                        }, 75);
                         return (
                             <div className="list-container">
                                 <h1>{"Top 5 " + e}</h1>
