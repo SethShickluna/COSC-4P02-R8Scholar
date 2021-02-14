@@ -1,0 +1,67 @@
+{
+    "data": [
+        {
+            "id": 0,
+            "name": "Goodman School of Business",
+            "avgProfessorRating": "4.07",
+            "avgCourseRating": "3.94",
+            "rating": "2.60",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        },
+        {
+            "id": 0,
+            "name": "Education",
+            "avgProfessorRating": "3.37",
+            "avgCourseRating": "3.82",
+            "rating": "3.59",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        },
+        {
+            "id": 0,
+            "name": "Humanities",
+            "avgProfessorRating": "4.08",
+            "avgCourseRating": "3.14",
+            "rating": "4.34",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        },
+        {
+            "id": 0,
+            "name": "Applied Health Sciences",
+            "avgProfessorRating": "3.92",
+            "avgCourseRating": "4.72",
+            "rating": "4.61",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        },
+        {
+            "id": 0,
+            "name": "Math and Computer Science",
+            "avgProfessorRating": "4.44",
+            "avgCourseRating": "4.60",
+            "rating": "4.29",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        },
+        {
+            "id": 0,
+            "name": "Visual and Performance Arts",
+            "avgProfessorRating": "4.27",
+            "avgCourseRating": "3.74",
+            "rating": "4.22",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        },
+        {
+            "id": 0,
+            "name": "Social Sciences",
+            "avgProfessorRating": "3.73",
+            "avgCourseRating": "4.61",
+            "rating": "2.99",
+            "topProfessor": "John J. Johnson",
+            "topCourse": "1p01"
+        }
+    ]
+}

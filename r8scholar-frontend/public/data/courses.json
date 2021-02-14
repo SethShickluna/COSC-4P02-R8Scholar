@@ -1,0 +1,592 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Goodman School of Business",
+            "rating": "4.06"
+        },
+        {
+            "id": 2,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Goodman School of Business",
+            "rating": "3.28"
+        },
+        {
+            "id": 3,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Goodman School of Business",
+            "rating": "0.79"
+        },
+        {
+            "id": 4,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Goodman School of Business",
+            "rating": "1.00"
+        },
+        {
+            "id": 5,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Goodman School of Business",
+            "rating": "1.40"
+        },
+        {
+            "id": 6,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Goodman School of Business",
+            "rating": "2.60"
+        },
+        {
+            "id": 7,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Goodman School of Business",
+            "rating": "2.85"
+        },
+        {
+            "id": 8,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Goodman School of Business",
+            "rating": "0.79"
+        },
+        {
+            "id": 9,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Goodman School of Business",
+            "rating": "4.02"
+        },
+        {
+            "id": 10,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Goodman School of Business",
+            "rating": "2.10"
+        },
+        {
+            "id": 11,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Goodman School of Business",
+            "rating": "2.02"
+        },
+        {
+            "id": 12,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Goodman School of Business",
+            "rating": "2.98"
+        },
+        {
+            "id": 13,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Education",
+            "rating": "1.97"
+        },
+        {
+            "id": 14,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Education",
+            "rating": "3.68"
+        },
+        {
+            "id": 15,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Education",
+            "rating": "0.30"
+        },
+        {
+            "id": 16,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Education",
+            "rating": "2.27"
+        },
+        {
+            "id": 17,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Education",
+            "rating": "0.45"
+        },
+        {
+            "id": 18,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Education",
+            "rating": "4.32"
+        },
+        {
+            "id": 19,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Education",
+            "rating": "0.46"
+        },
+        {
+            "id": 20,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Education",
+            "rating": "3.74"
+        },
+        {
+            "id": 21,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Education",
+            "rating": "1.59"
+        },
+        {
+            "id": 22,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Education",
+            "rating": "3.20"
+        },
+        {
+            "id": 23,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Education",
+            "rating": "4.23"
+        },
+        {
+            "id": 24,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Education",
+            "rating": "1.00"
+        },
+        {
+            "id": 25,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Humanities",
+            "rating": "0.24"
+        },
+        {
+            "id": 26,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Humanities",
+            "rating": "0.82"
+        },
+        {
+            "id": 27,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Humanities",
+            "rating": "0.18"
+        },
+        {
+            "id": 28,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Humanities",
+            "rating": "3.38"
+        },
+        {
+            "id": 29,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Humanities",
+            "rating": "1.25"
+        },
+        {
+            "id": 30,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Humanities",
+            "rating": "0.60"
+        },
+        {
+            "id": 31,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Humanities",
+            "rating": "2.09"
+        },
+        {
+            "id": 32,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Humanities",
+            "rating": "2.91"
+        },
+        {
+            "id": 33,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Humanities",
+            "rating": "2.67"
+        },
+        {
+            "id": 34,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Humanities",
+            "rating": "1.73"
+        },
+        {
+            "id": 35,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Humanities",
+            "rating": "3.92"
+        },
+        {
+            "id": 36,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Humanities",
+            "rating": "1.65"
+        },
+        {
+            "id": 37,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Applied Health Sciences",
+            "rating": "3.94"
+        },
+        {
+            "id": 38,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Applied Health Sciences",
+            "rating": "4.64"
+        },
+        {
+            "id": 39,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Applied Health Sciences",
+            "rating": "4.29"
+        },
+        {
+            "id": 40,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Applied Health Sciences",
+            "rating": "4.35"
+        },
+        {
+            "id": 41,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Applied Health Sciences",
+            "rating": "0.53"
+        },
+        {
+            "id": 42,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Applied Health Sciences",
+            "rating": "2.19"
+        },
+        {
+            "id": 43,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Applied Health Sciences",
+            "rating": "1.48"
+        },
+        {
+            "id": 44,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Applied Health Sciences",
+            "rating": "3.71"
+        },
+        {
+            "id": 45,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Applied Health Sciences",
+            "rating": "0.06"
+        },
+        {
+            "id": 46,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Applied Health Sciences",
+            "rating": "1.13"
+        },
+        {
+            "id": 47,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Applied Health Sciences",
+            "rating": "4.21"
+        },
+        {
+            "id": 48,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Applied Health Sciences",
+            "rating": "3.00"
+        },
+        {
+            "id": 49,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Math and Computer Science",
+            "rating": "4.50"
+        },
+        {
+            "id": 50,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Math and Computer Science",
+            "rating": "3.27"
+        },
+        {
+            "id": 51,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Math and Computer Science",
+            "rating": "0.45"
+        },
+        {
+            "id": 52,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Math and Computer Science",
+            "rating": "3.05"
+        },
+        {
+            "id": 53,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Math and Computer Science",
+            "rating": "4.37"
+        },
+        {
+            "id": 54,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Math and Computer Science",
+            "rating": "0.83"
+        },
+        {
+            "id": 55,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Math and Computer Science",
+            "rating": "1.58"
+        },
+        {
+            "id": 56,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Math and Computer Science",
+            "rating": "3.81"
+        },
+        {
+            "id": 57,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Math and Computer Science",
+            "rating": "3.72"
+        },
+        {
+            "id": 58,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Math and Computer Science",
+            "rating": "0.80"
+        },
+        {
+            "id": 59,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Math and Computer Science",
+            "rating": "4.87"
+        },
+        {
+            "id": 60,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Math and Computer Science",
+            "rating": "3.78"
+        },
+        {
+            "id": 61,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Visual and Performance Arts",
+            "rating": "2.63"
+        },
+        {
+            "id": 62,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Visual and Performance Arts",
+            "rating": "3.32"
+        },
+        {
+            "id": 63,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Visual and Performance Arts",
+            "rating": "2.12"
+        },
+        {
+            "id": 64,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Visual and Performance Arts",
+            "rating": "0.47"
+        },
+        {
+            "id": 65,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Visual and Performance Arts",
+            "rating": "4.38"
+        },
+        {
+            "id": 66,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Visual and Performance Arts",
+            "rating": "2.38"
+        },
+        {
+            "id": 67,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Visual and Performance Arts",
+            "rating": "0.20"
+        },
+        {
+            "id": 68,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Visual and Performance Arts",
+            "rating": "3.52"
+        },
+        {
+            "id": 69,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Visual and Performance Arts",
+            "rating": "3.96"
+        },
+        {
+            "id": 70,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Visual and Performance Arts",
+            "rating": "3.93"
+        },
+        {
+            "id": 71,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Visual and Performance Arts",
+            "rating": "2.38"
+        },
+        {
+            "id": 72,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Visual and Performance Arts",
+            "rating": "3.93"
+        },
+        {
+            "id": 73,
+            "name": "coursename coursename coursename",
+            "code": "1p02",
+            "department": "Social Sciences",
+            "rating": "3.37"
+        },
+        {
+            "id": 74,
+            "name": "coursename coursename coursename",
+            "code": "1p03",
+            "department": "Social Sciences",
+            "rating": "1.28"
+        },
+        {
+            "id": 75,
+            "name": "coursename coursename coursename",
+            "code": "1p04",
+            "department": "Social Sciences",
+            "rating": "3.01"
+        },
+        {
+            "id": 76,
+            "name": "coursename coursename coursename",
+            "code": "2p02",
+            "department": "Social Sciences",
+            "rating": "0.87"
+        },
+        {
+            "id": 77,
+            "name": "coursename coursename coursename",
+            "code": "2p03",
+            "department": "Social Sciences",
+            "rating": "1.01"
+        },
+        {
+            "id": 78,
+            "name": "coursename coursename coursename",
+            "code": "2p04",
+            "department": "Social Sciences",
+            "rating": "0.68"
+        },
+        {
+            "id": 79,
+            "name": "coursename coursename coursename",
+            "code": "3p02",
+            "department": "Social Sciences",
+            "rating": "4.43"
+        },
+        {
+            "id": 80,
+            "name": "coursename coursename coursename",
+            "code": "3p03",
+            "department": "Social Sciences",
+            "rating": "3.87"
+        },
+        {
+            "id": 81,
+            "name": "coursename coursename coursename",
+            "code": "3p04",
+            "department": "Social Sciences",
+            "rating": "3.33"
+        },
+        {
+            "id": 82,
+            "name": "coursename coursename coursename",
+            "code": "4p02",
+            "department": "Social Sciences",
+            "rating": "3.27"
+        },
+        {
+            "id": 83,
+            "name": "coursename coursename coursename",
+            "code": "4p03",
+            "department": "Social Sciences",
+            "rating": "2.59"
+        },
+        {
+            "id": 84,
+            "name": "coursename coursename coursename",
+            "code": "4p04",
+            "department": "Social Sciences",
+            "rating": "2.65"
+        }
+    ]
+}

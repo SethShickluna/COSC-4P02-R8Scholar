@@ -1,0 +1,823 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap");
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    background-color: #ecf0f1;
+    padding-bottom: 600px;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #cc0000;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~LOADING~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.loading {
+    animation-name: rotate-loading;
+    animation-duration: 0.6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(8, start);
+    margin-top: 10%;
+    text-align: center;
+    color: #989898;
+}
+
+@keyframes rotate-loading {
+    frp {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~NAVBAR~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.navbar-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 10fr;
+    gap: 0px 0px;
+    grid-template-areas: "Logo Search Login Professors Courses Departments About Signup";
+    width: auto;
+    height: 50px;
+}
+
+.Logo {
+    grid-area: Logo;
+    height: 50px;
+    background: #cc0000;
+}
+
+.Logo:hover {
+    cursor: pointer;
+}
+
+.Logo .label {
+    height: auto;
+    padding: 0px 10px 0px 10px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    color: #e5e5e5;
+}
+.Search {
+    grid-area: Search;
+    height: 50px;
+    background: #989898;
+    stroke: none;
+}
+
+.Search .Field {
+    height: 35px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 7.5px;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 58px;
+    text-align: left;
+    color: #000000;
+    background-color: #d1d1d1;
+    border: 0;
+    margin-left: 1%; ;
+    padding-left: 20px;
+}
+
+.nav-button {
+    background-color: #989898;
+
+    padding: 10px;
+    font-style: normal;
+    font-size: 20px;
+    text-align: center;
+    color: #fdfdfd;
+}
+
+.nav-button:hover {
+    background-color: #888686;
+    color: #fdfdfd;
+    cursor: pointer;
+}
+
+.Login {
+    grid-area: Login;
+    height: 50px;
+    background: #989898;
+}
+.Professors {
+    grid-area: Professors;
+    height: 50px;
+    background: #989898;
+}
+.Courses {
+    grid-area: Courses;
+    height: 50px;
+    background: #989898;
+}
+.Departments {
+    grid-area: Departments;
+    height: 50px;
+    background: #989898;
+}
+.About {
+    grid-area: About;
+    height: 50px;
+    background: #989898;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~HOME PAGE~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 10fr 1fr 1fr 1fr;
+    gap: 0px 10px;
+    grid-template-areas:
+        "List1 List2 List3"
+        "Rating1 Rating1 Rating1"
+        "Rating2 Rating2 Rating2"
+        "Rating3 Rating3 Rating3";
+    width: auto;
+}
+
+.home-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin: 100px 0px 20px 0px;
+}
+
+.home-container h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.home-container ul {
+    padding-inline-start: 0px;
+}
+
+.home-container li {
+    background-color: #d1d1d1;
+    text-align: center;
+    list-style-type: none;
+    margin: 15px;
+}
+
+.home-container li:hover {
+    background-color: #cc0000;
+    cursor: pointer;
+}
+
+.home-container .list-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px 0px;
+    grid-template-areas:
+        "Label"
+        "Entry"
+        "Entry"
+        "Entry"
+        "Entry"
+        "Entry"
+        "ViewAll";
+    width: 100%;
+    height: 250px;
+    justify-content: center;
+    justify-items: center;
+}
+
+.home-container .listEntry {
+    height: 25px;
+    min-width: 350px;
+    width: 100%;
+    background-color: #d1d1d1;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "Name" "Rating";
+}
+
+.home-container .name {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.home-container .rating {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.list-button {
+    grid-area: ViewAll;
+    background-color: #989898;
+    width: 65%;
+    max-width: 175px;
+    margin-top: 35px;
+    padding: 5px;
+    font-style: normal;
+    text-align: center;
+    color: #000000;
+}
+
+.list-button:hover {
+    background-color: #888686;
+    color: #e5e5e5;
+}
+
+.listEntry:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
+}
+
+.average-professors {
+    grid-area: Rating1;
+}
+
+.average-courses {
+    grid-area: Rating2;
+}
+
+.average-departments {
+    grid-area: Rating3;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~COURSES PAGE~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.courses-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Filters"
+        "Buttons"
+        "List"
+        "Navigation";
+    width: auto;
+    justify-self: center;
+    justify-content: center;
+}
+
+.courses-container i {
+    pointer-events: none;
+    padding: 0px 5px;
+}
+
+.courses-container .navigation-container {
+    grid-area: Navigation;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    justify-self: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.courses-container .navigation-container .label {
+    width: 40px;
+    text-align: center;
+}
+
+.courses-container .navigation-container .navigate-button {
+    cursor: pointer;
+}
+
+.courses-container .filter-container {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 20px;
+    margin: 50px 0px;
+}
+
+.courses-container .filter-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 50px;
+    height: 0px;
+}
+
+.courses-container .filter-label {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.courses-container .filter-buttons .button {
+    background-color: #d1d1d1;
+    width: 240px;
+    text-align: center;
+}
+
+.courses-container ul {
+    padding-inline-start: 0px;
+}
+
+.courses-container .dropdown {
+    width: 240px;
+    z-index: 2;
+    background: #fdfdfd;
+    box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
+    padding: 0px 0px;
+}
+
+.courses-container .dropdown .dropdown-option {
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    list-style-type: none;
+    padding: 5px 0px;
+}
+
+.courses-container .dropdown .dropdown-option:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
+}
+
+.sort-buttons {
+    grid-area: Buttons;
+    height: 30px;
+    display: grid;
+    width: auto;
+    grid-auto-flow: column;
+    gap: 100px;
+}
+
+.Search {
+    grid-area: Search;
+    height: 50px;
+    background: #989898;
+    stroke: none;
+}
+
+.sort-button {
+    width: 150px;
+    margin-top: 0px;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    color: #000000;
+}
+
+.sort-button:hover {
+    cursor: pointer;
+}
+
+.courses-container .list-container {
+    grid-area: List;
+    width: 900px;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.courses-container .listEntry {
+    height: 25px;
+    min-width: 350px;
+    width: 100%;
+
+    background-color: #d1d1d1;
+    display: grid;
+    grid-template-columns: 1.5fr 4fr 1fr 3.5fr;
+    gap: 0px 0px;
+    grid-template-areas: "Code Name Rating Department";
+    margin-top: 15px;
+}
+
+.courses-container .listEntry .code {
+    grid-area: Code;
+    text-align: left;
+    padding-left: 50px;
+}
+
+.courses-container .listEntry .department {
+    grid-area: Department;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.courses-container .listEntry .rating {
+    grid-area: Rating;
+    padding-left: 70%;
+}
+
+.courses-container .listEntry .name {
+    grid-area: Name;
+    text-align: center;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~PROFESSORS PAGE~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.professors-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Filters"
+        "Buttons"
+        "List"
+        "Navigation";
+    width: auto;
+    justify-self: center;
+    justify-content: center;
+}
+
+.professors-container i {
+    pointer-events: none;
+    padding: 0px 5px;
+}
+
+.professors-container .navigation-container {
+    grid-area: Navigation;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.professors-container .navigation-container .label {
+    width: 40px;
+    text-align: center;
+}
+
+.professors-container .navigation-container .navigate-button {
+    cursor: pointer;
+}
+
+.professors-container .filter-container {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 20px;
+    margin: 50px 0px;
+}
+
+.professors-container .filter-buttons {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 50px;
+    height: 0px;
+}
+
+.professors-container .filter-label {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.professors-container .filter-buttons .button {
+    background-color: #d1d1d1;
+    width: 240px;
+    text-align: center;
+    border: 0;
+    margin-left: 1%;
+}
+
+.Field::selection {
+    background-color: #fff;
+    color: #000;
+}
+
+.professors-container ul {
+    padding-inline-start: 0px;
+}
+
+.professors-container .dropdown {
+    width: 240px;
+    z-index: 2;
+    background: #fdfdfd;
+    box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
+    padding: 0px 0px;
+}
+
+.professors-container .dropdown .dropdown-option {
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    list-style-type: none;
+    padding: 5px 0px;
+}
+
+.professors-container .dropdown .dropdown-option:hover {
+    background-color: #989898;
+    color: #e5e5e5;
+    cursor: pointer;
+}
+
+.professors-container .sort-buttons {
+    grid-area: Buttons;
+    height: 30px;
+    display: grid;
+    width: auto;
+    grid-auto-flow: column;
+    gap: 100px;
+}
+
+.professors-container .sort-button {
+    width: 150px;
+    margin-top: 0px;
+    padding: 5px;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    color: #000000;
+}
+
+.professors-container .sort-button:hover {
+    color: #818181;
+}
+
+.NavButton:hover {
+    background-color: #000;
+    color: #fdfdfd;
+
+    cursor: pointer;
+}
+
+.professors-container .list-container {
+    grid-area: List;
+    width: 900px;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.professors-container .listEntry {
+    height: 25px;
+    min-width: 350px;
+    width: 100%;
+    background-color: #d1d1d1;
+    display: grid;
+    grid-template-columns: 3.5fr 1.5fr 3.5fr 1.5fr;
+    gap: 0px 0px;
+    grid-template-areas: "Name Rating Department Courses";
+    margin-top: 15px;
+}
+
+.Signup {
+    grid-area: Signup;
+    height: 50px;
+    background: #989898;
+}
+.Professors {
+    grid-area: Professors;
+    height: 50px;
+    background: #989898;
+}
+
+.professors-container .listEntry .name {
+    grid-area: Name;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.professors-container .listEntry .rating {
+    grid-area: Rating;
+}
+
+.professors-container .listEntry .department {
+    grid-area: Department;
+    padding-left: 20%;
+}
+
+.professors-container .listEntry .courses {
+    grid-area: Courses;
+    text-align: right;
+    padding-right: 80px;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~DEPARTMENTS PAGE~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.departments-container {
+    padding-top: 80px;
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+}
+
+.departments-container .department-container {
+    position: relative;
+    text-align: left;
+    width: 700px;
+}
+
+.departments-container .label {
+    grid-area: label;
+    font-size: 250%;
+    font-weight: 500;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.departments-container .rating {
+    justify-self: right;
+}
+
+.departments-container .department-info {
+    grid-area: info;
+    display: grid;
+    grid-template-areas:
+        "avgProf topProf buttonProfessors"
+        "avgCourse topCourse buttonCourses";
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 15px 0px;
+    font-size: 110%;
+    width: 100%;
+}
+
+.departments-container .professors-button {
+    grid-area: buttonProfessors;
+    background-color: #d1d1d1;
+    justify-self: right;
+    max-width: fit-content;
+    padding: 0px 10px;
+}
+
+.departments-container .professors-button:hover {
+    background-color: #888686;
+}
+
+.departments-container .courses-button {
+    grid-area: buttonCourses;
+    background-color: #d1d1d1;
+    justify-self: right;
+    max-width: fit-content;
+    padding: 0px 10px;
+}
+
+.departments-container .courses-button:hover {
+    background-color: #888686;
+}
+
+.departments-container .topProfessor {
+    grid-area: topProf;
+    text-align: center;
+}
+
+.departments-container .topProfessor:hover {
+    background-color: #d1d1d1;
+}
+
+.departments-container .avgCourse {
+    grid-area: avgCourse;
+}
+
+.departments-container .topCourse {
+    grid-area: topCourse;
+    text-align: center;
+}
+
+.departments-container .topCourse:hover {
+    background-color: #d1d1d1;
+}
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~ABOUT PAGE~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.about-container {
+    padding-top: 80px;
+    display: grid;
+    grid-auto-flow: row;
+    justify-items: center;
+}
+
+.about-container .label {
+    position: relative;
+    font-weight: bolder;
+    font-size: xx-large;
+    text-align: left;
+    width: 60%;
+}
+
+.about-container .text {
+    position: relative;
+    width: 60%;
+    padding-top: 10px;
+    padding-bottom: 90px;
+}
+
+.loginContainer {
+    align-items: center;
+    justify-content: center;
+}
+
+.content-line {
+    border-bottom: 2px #888686;
+    display: inline;
+}
+
+.footer {
+    color: white;
+    background: #cc0000;
+    /*border-radius: 10px;*/
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+}
+.about-container {
+    justify-content: center;
+    text-align: left;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.footer-link {
+    color: white;
+    background-color: white;
+}
+.footer-link:hover {
+    color: white;
+}
+.copyright-text {
+    text-align: right;
+    margin-right: 1%;
+}
+.post-editor {
+    margin: 0 25%;
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 1024px) {
+    .post-editor {
+        margin: 1em;
+    }
+}
+.post-editor-button {
+    float: right;
+    margin-top: 1em;
+    background-color: red;
+}
+
+.panel-body {
+    margin: 1em 15%;
+}
+
+.post-body {
+    margin: 1em 20%;
+}
