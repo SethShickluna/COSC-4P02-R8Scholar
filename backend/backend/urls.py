@@ -19,8 +19,14 @@ from rest_framework import routers                    # add this
 from r8scholar import views                            # add this
 
 router = routers.DefaultRouter()                      # add this
-router.register(r'User', views.UserView, 'User')     # add this
+router.register(r'User', views.UserView, 'User')     
 router.register(r'Review', views.ReviewView, 'Review') 
+router.register(r'Comment', views.CommentView, 'Comment') 
+router.register(r'Course', views.CourseView, 'Course') 
+router.register(r'Department', views.DepartmentView, 'Department')     
+router.register(r'Instructor', views.InstructorView, 'Instructor') 
+router.register(r'Forum', views.ForumView, 'Forum') 
+router.register(r'Ticket', views.TicketView, 'Ticket') 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
