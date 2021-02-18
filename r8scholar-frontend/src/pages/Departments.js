@@ -1,6 +1,87 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import Button from "../components/Button";
 import Loading from "../components/Loading";
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                            STYLES
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+const DepartmentsContainer = styled.div`
+    padding-top: 80px;
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+`;
+
+const DepartmentContainer = styled.div`
+    position: relative;
+    text-align: left;
+    width: 700px;
+
+    .label {
+        grid-area: label;
+        font-size: 250%;
+        font-weight: 500;
+        display: grid;
+        grid-auto-flow: column;
+    }
+
+    .rating {
+        justify-self: right;
+    }
+`;
+
+const DepartmentInfoContainer = styled.div`
+    grid-area: info;
+    display: grid;
+    grid-template-areas:
+        "avgProf topProf buttonProfessors"
+        "avgCourse topCourse buttonCourses";
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 15px 0px;
+    font-size: 110%;
+    width: 100%;
+
+    .professors-button {
+        grid-area: buttonProfessors;
+        background-color: #d1d1d1;
+        justify-self: right;
+        max-width: fit-content;
+        padding: 0px 10px;
+    }
+
+    .courses-button {
+        grid-area: buttonCourses;
+        background-color: #d1d1d1;
+        justify-self: right;
+        max-width: fit-content;
+        padding: 0px 10px;
+    }
+
+    .topProfessor {
+        grid-area: topProf;
+        text-align: center;
+    }
+
+    .avgCourse {
+        grid-area: avgCourse;
+    }
+
+    .topCourse {
+        grid-area: topCourse;
+        text-align: center;
+    }
+
+    .topProfessor:hover,
+    .topCourse:hover,
+    .courses-button:hover,
+    .professors-button:hover {
+        background-color: #989898;
+        color: #d1d1d1;
+    }
+`;
 
 export default class Departments extends Component {
     constructor(props) {
@@ -31,15 +112,15 @@ export default class Departments extends Component {
         return !this.state.data.length ? (
             <Loading size="75" />
         ) : (
-            <div className="departments-container">
+            <DepartmentsContainer>
                 {this.state.data.map((e) => {
                     return (
-                        <div className="department-container">
+                        <DepartmentContainer>
                             <div className="label">
                                 <div className="name">{e.name}</div>
                                 <div className="rating">{e.rating}</div>
                             </div>
-                            <div className="department-info">
+                            <DepartmentInfoContainer>
                                 <div className="avgProfessor">
                                     {"Average professor rating " +
                                         e.avgProfessorRating}
@@ -78,11 +159,11 @@ export default class Departments extends Component {
                                         id: e,
                                     }}
                                 />
-                            </div>
-                        </div>
+                            </DepartmentInfoContainer>
+                        </DepartmentContainer>
                     );
                 })}
-            </div>
+            </DepartmentsContainer>
         );
     }
 }

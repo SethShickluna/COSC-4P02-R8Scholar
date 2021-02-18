@@ -18,12 +18,7 @@ export default function Button(props) {
         );
     } else {
         return (
-            <Link
-                id={props.id}
-                className={props.className}
-                to={props.link}
-                onClick={props.onClick}
-            >
+            <Link id={props.id} className={props.className} to={props.link}>
                 {props.text}
             </Link>
         );

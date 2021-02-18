@@ -1,14 +1,167 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import List from "../components/List";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
-import { Icon } from "react-icons-kit";
 import { chevronDown } from "react-icons-kit/fa/chevronDown";
 import { chevronUp } from "react-icons-kit/fa/chevronUp";
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
 import { chevronRight } from "react-icons-kit/fa/chevronRight";
 import { minus } from "react-icons-kit/fa/minus";
 import Loading from "../components/Loading";
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                            STYLES
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+var ProfessorsContainer = styled.div`
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Filters"
+        "Buttons"
+        "List"
+        "Navigation";
+    width: auto;
+    justify-self: center;
+    justify-content: center;
+`;
+
+const FilterContainer = styled.div`
+    display: grid;
+    grid-auto-flow: row;
+    gap: 20px;
+    margin: 50px 0px;
+
+    .filter-buttons {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: center;
+        gap: 50px;
+        height: 0px;
+    }
+
+    .filter-label {
+        font-weight: bolder;
+        font-size: larger;
+    }
+
+    .filter-buttons .button {
+        background-color: #d1d1d1;
+        width: 240px;
+        text-align: center;
+    }
+
+    .dropdown {
+        width: 240px;
+        z-index: 2;
+        background: #fdfdfd;
+        box-shadow: 0 16px 24px 10px rgba(0, 0, 0, 0.14);
+        padding: 0px 0px;
+    }
+
+    .filter-button:hover {
+        cursor: pointer;
+    }
+
+    .dropdown .dropdown-option {
+        font-size: small;
+        font-weight: bold;
+        text-align: center;
+        list-style-type: none;
+        padding: 5px 0px;
+    }
+
+    .dropdown .dropdown-option:hover {
+        background-color: #989898;
+        color: #e5e5e5;
+        cursor: pointer;
+    }
+`;
+
+const SortContainer = styled.div`
+    grid-area: Buttons;
+    display: grid;
+    grid-auto-flow: column;
+    margin-top: 30px;
+    justify-content: space-between;
+
+    .sort-button {
+        width: 150px;
+        margin-top: 0px;
+        padding: 5px;
+        font-weight: bolder;
+        font-size: larger;
+        text-align: center;
+        color: #000000;
+    }
+
+    .sort-button:hover {
+        cursor: pointer;
+    }
+`;
+
+const ListContainer = styled.div`
+    min-height: 450px;
+    grid-area: List;
+    width: 900px;
+
+    .listEntry {
+        height: 25px;
+        min-width: 350px;
+        width: 100%;
+        background-color: #d1d1d1;
+        display: grid;
+        grid-template-columns: 3.4fr 1.6fr 3.5fr 1.5fr;
+        gap: 0px 0px;
+        grid-template-areas: "Name Rating Department Courses";
+        margin-top: 15px;
+    }
+
+    .listEntry:hover {
+        background-color: #989898;
+        color: #d1d1d1;
+    }
+
+    .listEntry .name {
+        grid-area: Name;
+        text-align: left;
+        padding-left: 30px;
+    }
+
+    .listEntry .rating {
+        grid-area: Rating;
+    }
+
+    .listEntry .department {
+        grid-area: Department;
+        padding-left: 20%;
+    }
+
+    .listEntry .courses {
+        grid-area: Courses;
+        text-align: right;
+        padding-right: 80px;
+    }
+`;
+
+const NavigationContainer = styled.div`
+    grid-area: Navigation;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    justify-self: center;
+    gap: 5px;
+
+    .label {
+        width: 40px;
+        text-align: center;
+    }
+
+    .navigate-button {
+        cursor: pointer;
+    }
+`;
 
 export default class Courses extends Component {
     constructor(props) {
@@ -183,10 +336,10 @@ export default class Courses extends Component {
             <Loading size="75" />
         ) : (
             //Body
-            <div className="professors-container">
+            <ProfessorsContainer>
                 {
                     //Filter Buttons
-                    <div className="filter-container">
+                    <FilterContainer>
                         <div className="filter-label">Filters</div>
                         <div className="filter-buttons">
                             {this.state.filters.map((e) => {
@@ -204,11 +357,11 @@ export default class Courses extends Component {
                                 );
                             })}
                         </div>
-                    </div>
+                    </FilterContainer>
                 }
                 {
                     //Sort Buttons
-                    <div className="sort-buttons">
+                    <SortContainer>
                         {this.state.sortButtons.map((e) => {
                             var arrow = minus;
                             if (this.state.sortIndex === e.toLowerCase()) {
@@ -227,11 +380,11 @@ export default class Courses extends Component {
                                 />
                             );
                         })}
-                    </div>
+                    </SortContainer>
                 }
                 {
                     //List
-                    <div className="list-container">
+                    <ListContainer>
                         <List
                             data={this.getCurrentPage()}
                             columns={[
@@ -242,12 +395,12 @@ export default class Courses extends Component {
                             ]}
                             link={"/course/"}
                         />
-                    </div>
+                    </ListContainer>
                 }
                 {
                     //Navigation Buttons
                     this.state.perPage < this.state.data.length && (
-                        <div className="navigation-container">
+                        <NavigationContainer>
                             <Button
                                 id="navigate-back"
                                 className="navigate-button"
@@ -269,10 +422,10 @@ export default class Courses extends Component {
                                 icon={chevronRight}
                                 iconSize="12"
                             />
-                        </div>
+                        </NavigationContainer>
                     )
                 }
-            </div>
+            </ProfessorsContainer>
         );
     }
 }
