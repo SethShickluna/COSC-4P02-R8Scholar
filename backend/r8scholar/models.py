@@ -29,7 +29,7 @@ class Comment(models.Model):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    nickname = models.CharField(max_length=20, default='Anonymous', unique=True)
+    nickname = models.CharField(max_length=20, default='Anonymous')
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
