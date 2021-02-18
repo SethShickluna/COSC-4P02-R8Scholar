@@ -13,6 +13,12 @@ const pageStyles={
     width: '90%', 
 }; 
 
+const subRatingStyle = { 
+    marginRight: "15px", 
+    marginLeft: "15px", 
+    border: '2px #7f8c8d', 
+}
+
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles 
     marginBottom: '2%', 
@@ -46,8 +52,7 @@ export default class Course extends Component {
                     rating: 3.9, 
                     user: "seth", 
                     comments: null, 
-                }, 
-            
+                },             
             ],  
             instructors: [
                 "Dave Bockus", 
@@ -98,13 +103,14 @@ export default class Course extends Component {
                                         rating={this.state.avgRating}
                                         starDimension="40px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#f1c40f"
                                         numberOfStars={5}
                                         name='avgRating'
                                     />
                                 </div>
                             </div>
 
+                            <div name="sub-rating-box" style={subRatingStyle}>
                             <div name="lecture-rating-container" style={{marginTop: '25px'}}>
                                 <div name="lecture-rating-title">
                                     <h4 style={{textAlign: 'center'}}>Lecture Rating</h4>
@@ -115,7 +121,7 @@ export default class Course extends Component {
                                         rating={this.state.lectureRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='lectureRating'
                                     />
@@ -132,7 +138,7 @@ export default class Course extends Component {
                                         rating={this.state.homeworkRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='homeworkRating'
                                     />
@@ -149,7 +155,7 @@ export default class Course extends Component {
                                         rating={this.state.instructorRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='instructorRating'
                                     />
@@ -166,6 +172,7 @@ export default class Course extends Component {
                                     {this.state.instructors.map((item) => 
                                     (<p><Link to={"/professor/" + item}>{item}</Link></p>))}
                                 </div>
+                            </div>
                             </div>
 
                             <div style={pageBreak}/> {/* underline */}

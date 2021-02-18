@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.http import HttpRequest
 
 # Create your views here.
 from django.shortcuts import render
@@ -10,7 +12,6 @@ from .models import CustomUser, Review, Comment, Course, Department, Instructor,
 class ReviewView(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
-
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer

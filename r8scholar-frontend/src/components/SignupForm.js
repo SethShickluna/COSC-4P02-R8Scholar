@@ -27,7 +27,6 @@ export default class SignupForm extends Component {
         this.updatePasswordInput = this.updatePasswordInput.bind(this);
         this.updateUsernameInput = this.updateUsernameInput.bind(this);
         this.updateVerifyPasswordInput = this.updateVerifyPasswordInput.bind(this); 
-        this.checkboxUpdate = this.checkboxUpdate.bind(this); 
 
         this.submitForm = this.submitForm.bind(this);
         this.checkPassword = this.checkPassword.bind(this); 
@@ -63,13 +62,6 @@ export default class SignupForm extends Component {
         });
     }
 
-    checkboxUpdate(obj) {
-        this.setState({
-            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
-            termsAgreed: this.target.value,
-        })
-        
-    }
 
     checkEmail = () => {
         //first check @brocku.ca
@@ -78,8 +70,7 @@ export default class SignupForm extends Component {
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
                 //check backend to make sure that email hasnt been used
                 let emailInUse = false; 
-                //do the api call & set emailInUse to the response 
-                
+                //do the api call & set emailInUse to the response    
                 return !emailInUse; // if the email is in use return false cause that email failed the test and vice versa 
             }
         }
@@ -98,12 +89,7 @@ export default class SignupForm extends Component {
     }
 
     submitForm = () => {
-        //good to go?
-        if(this.checkEmail() && this.checkPassword() && this.checkUsername()){ // passwords match, email stuff all worked out 
-            //send info to the back end and create the account 
-            //route to confirmation page 
-            alert("Success! Confirmation email sent to " + this.state.email + "."); 
-        }
+        
     }
 
     render() { 
@@ -129,11 +115,7 @@ export default class SignupForm extends Component {
                                 <Form.Label>Re-enter Password</Form.Label>
                                 <Form.Control type="password" onChange={this.updateVerifyPasswordInput} placeholder="Password" />
                             </Form.Group>
-                            <Form.Group>
-                                <input type="checkbox" id="agree" onChange={this.checkboxUpdate} />
-                                <label htmlFor="agree">   I agree to <b>terms and conditions</b></label>
-                            </Form.Group>
-                            <Button disabled={!this.state.formComplete}onClick={this.submitForm} variant="danger">
+                            <Button onClick={this.submitForm} variant="primary">
                                 Register 
                             </Button>
                         </Form>

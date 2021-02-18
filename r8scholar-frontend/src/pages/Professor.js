@@ -102,7 +102,7 @@ export default class Course extends Component {6
                                         rating={this.state.avgRating}
                                         starDimension="40px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#f1c40f"
                                         numberOfStars={5}
                                         name='avgRating'
                                     />
@@ -119,7 +119,7 @@ export default class Course extends Component {6
                                         rating={this.state.lectureRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='lectureRating'
                                     />
@@ -136,7 +136,7 @@ export default class Course extends Component {6
                                         rating={this.state.homeworkRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='homeworkRating'
                                     />
@@ -153,7 +153,7 @@ export default class Course extends Component {6
                                         rating={this.state.courseRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='courseRating'
                                     />

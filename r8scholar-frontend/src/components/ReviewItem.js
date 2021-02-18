@@ -36,7 +36,7 @@ export default class ReviewItem extends Component {
                                         rating={this.props.reviewItem.rating}
                                         starDimension="25px"
                                         starSpacing="5px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='avgRating'
                                     />
@@ -44,7 +44,7 @@ export default class ReviewItem extends Component {
                                 <Card.Text>
                                     {this.props.reviewItem.content}
                                 </Card.Text>
-                                <Accordion.Toggle as={Button} variant="danger" eventKey="0">
+                                <Accordion.Toggle as={Button} variant="primary" eventKey="0">
                                     Show Comments
                                 </Accordion.Toggle>
                             </Card.Body>
