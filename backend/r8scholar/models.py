@@ -29,12 +29,13 @@ class Comment(models.Model):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    nickname = models.CharField(max_length=20, default='Anonymous', unique=True)
+    nickname = models.CharField(max_length=20, default='Anonymous')
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
+    is_active = models.BooleanField('is_active',default=False) #Not sure if this is inherritted from AbstractUser
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'email address'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()

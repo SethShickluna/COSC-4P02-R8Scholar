@@ -31,4 +31,6 @@ router.register(r'Ticket', views.TicketView, 'Ticket')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)), 
-] 
+    path('accounts/', include('django.contrib.auth.urls'))
+]
+
