@@ -240,7 +240,7 @@ export default class Courses extends Component {
                                 "department",
                                 "rating",
                             ]}
-                            link={"/course/"}
+                            link={"/professor/"}
                         />
                     </div>
                 }

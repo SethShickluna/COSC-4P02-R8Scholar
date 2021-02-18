@@ -78,7 +78,7 @@ a:active {
 .Logo {
     grid-area: Logo;
     height: 50px;
-    background: #cc0000;
+    background: #2980b9;
 }
 
 .Logo:hover {
@@ -761,7 +761,7 @@ a:active {
 
 .footer {
     color: white;
-    background: #cc0000;
+    background: #2980b9;
     /*border-radius: 10px;*/
     position: absolute;
     left: 0;

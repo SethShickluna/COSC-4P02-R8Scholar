@@ -45,21 +45,15 @@ class LoginForm extends Component {
 
     submitForm = () => {
         //send info to backend 
-            //this.state.email 
-            //this.state.password
+            
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
-            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){; 
-                cookie.save('isLoggedIn', "true", {path: '/'}); 
-                
-                //redirect home
-                this.props.history.push('/');
+            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
                 
             }
         }else{ 
             alert("Invalid Email. Please try again.");
         }
-        
     }
 
     render() { 
@@ -77,11 +71,11 @@ class LoginForm extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Password" />
                             </Form.Group>
-                            <Button style={buttonStyle}variant="danger" onClick={this.submitForm}>
+                            <Button style={buttonStyle}variant="primary" onClick={this.submitForm}>
                                 Sign In
                             </Button>
                             
-                            <Button style={buttonStyle} variant="danger" as={Link} to='/Signup'>
+                            <Button style={buttonStyle} variant="primary" as={Link} to='/Signup'>
                                 Register
                             </Button>
                         </Form>

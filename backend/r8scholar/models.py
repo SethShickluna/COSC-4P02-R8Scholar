@@ -49,6 +49,9 @@ class CustomUser(AbstractUser):
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+     
+
+
 class Subject(models.Model):
     #subject_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=202)

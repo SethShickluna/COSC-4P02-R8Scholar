@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import List from "../components/List";
 import Button from "../components/Button";
 import Dropdown from "../components/Dropdown";
-import { Icon } from "react-icons-kit";
+//import { Icon } from "react-icons-kit";
 import { chevronDown } from "react-icons-kit/fa/chevronDown";
 import { chevronUp } from "react-icons-kit/fa/chevronUp";
 import { chevronLeft } from "react-icons-kit/fa/chevronLeft";

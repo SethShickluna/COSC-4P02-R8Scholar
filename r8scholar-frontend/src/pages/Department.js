@@ -13,13 +13,6 @@ const pageStyles={
     width: '90%', 
 }; 
 
-const buttonStyle={
-    //height: '100vh',  
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles 
     marginBottom: '2%', 
@@ -101,7 +94,7 @@ export default class Course extends Component {6
                                         rating={this.state.avgRating}
                                         starDimension="40px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#f1c40f"
                                         numberOfStars={5}
                                         name='avgRating'
                                     />
@@ -118,7 +111,7 @@ export default class Course extends Component {6
                                         rating={this.state.courseRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='courseRating'
                                     />
@@ -135,7 +128,7 @@ export default class Course extends Component {6
                                         rating={this.state.instructorRating}
                                         starDimension="30px"
                                         starSpacing="10px"
-                                        starRatedColor="red"
+                                        starRatedColor="#3498db"
                                         numberOfStars={5}
                                         name='instructorRating'
                                     />
