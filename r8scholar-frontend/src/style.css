@@ -808,6 +808,14 @@ a:active {
         margin: 1em;
     }
 }
+
+
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~FORUM PAGE~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
 .post-editor-button {
     float: right;
     margin-top: 1em;
@@ -820,4 +828,95 @@ a:active {
 
 .post-body {
     margin: 1em 20%;
+}
+
+.paginationArrow{ 
+    color:grey;
+    padding-left: 5px;
+    padding-right: 5px; 
+}
+
+.forumModule{ 
+    background-color: white;
+    color: black;
+}
+.categoryModule{
+    background-color: white;
+    color: black;
+}
+
+.forumPad { 
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.forumTable{ 
+    width: 100% ;
+    height: auto;
+    margin:10px
+}
+
+.forumTable th{
+    padding: 5px; 
+    border: 1px solid #808080; 
+
+}
+.forumTable tr{
+    padding: 5px; 
+    border: 1px solid #f2f2f2; 
+}
+
+
+.forumTable td{ 
+    padding: 5px; 
+}
+
+.forumTable a:hover { 
+ font-weight: normal;
+}
+
+.paginationBar{ 
+    padding: 15px;
+}
+
+.hidden-module{
+    display: none;
+}
+
+.customH1{ 
+    font-size: 1.5em;
+    color: black;
+}
+.customH2{ 
+    font-size: 1.0em;
+}
+.customH3{ 
+    font-size: 0.75em;
+}
+.customH4{ 
+    font-size:0.5em ;
+}
+.themeButton{ 
+    background-color: purple;
+}
+.columnPad { 
+    margin: 15px; 
+}
+.pull-left{ 
+    float: left; 
+    display: inline-block;
+     
+}
+.pull-right{ 
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+}
+.pull-middle{ 
+    position: relative; 
+    vertical-align: middle;
+
 }
