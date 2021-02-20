@@ -919,4 +919,23 @@ a:active {
     position: relative; 
     vertical-align: middle;
 
+} 
+
+/* Beginning of the profile specific css*/
+.upload-button {
+    padding: 4px;
+   /* border: 1px solid black; */
+   /* border-radius: 5px; */
+    display: block;
+    float: left;
+}
+
+.profile-pic {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.file-upload {
+    display: none;
 }
