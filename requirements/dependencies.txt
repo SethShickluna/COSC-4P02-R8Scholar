@@ -1,2 +1,0 @@
-react bootstrap: npm install --save 'react-bootstrap' 
-npm install --save react-star-ratings
