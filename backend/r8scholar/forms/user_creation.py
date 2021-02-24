@@ -1,5 +1,5 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from django.contrib.auth.forms import UserCreationForm
+from backend.r8scholar.models import CustomUser
 from django.core.exceptions import ValidationError
 
 class CustomUserCreationForm(UserCreationForm):
@@ -13,8 +13,5 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = UserCreationForm.Meta.fields + ('nickname')
 
-class CustomUserChangeForm(UserChangeForm):
-
-    class Meta(UserChangeForm.Meta):
-        model = CustomUser
-        fields = UserCreationForm.Meta.fields + ('nickname')
+f = CustomUserCreationForm()
+print(f)
