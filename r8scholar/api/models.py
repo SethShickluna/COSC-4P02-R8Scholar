@@ -31,7 +31,7 @@ class Comment(models.Model):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email'), unique=True)
-    nickname = models.CharField(max_length=20, default='Anonymous')
+    nickname = models.CharField(max_length=20)
     password = models.CharField(max_length=32)
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)

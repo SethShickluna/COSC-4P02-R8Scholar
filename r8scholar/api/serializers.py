@@ -48,7 +48,13 @@ class CreateUserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ('email', 'nickname', 'password')
 
+class loginLogoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('email','password')
+
 class CreateReviewSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Review
         fields = ('reviewer', 'subject','title', 'content', 'rating', )
+
