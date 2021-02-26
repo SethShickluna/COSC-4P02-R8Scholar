@@ -1,4 +1,6 @@
+#Django#
 from django.urls import path, include
+#Project Files#
 from . import views
 
 urlpatterns = [

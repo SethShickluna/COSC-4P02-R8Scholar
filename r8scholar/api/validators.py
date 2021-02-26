@@ -1,4 +1,6 @@
+#Django#
 from django.core.exceptions import ValidationError 
+
 #Email validators
 def validate_brock_mail(value): 
     if "@brocku.ca" in value: 

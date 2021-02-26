@@ -1,4 +1,6 @@
+#REST#
 from rest_framework import serializers
+#Project Files#
 from .models import Comment, Course, CustomUser, Department, Forum, Instructor, Review, Ticket
 
 class UserSerializer(serializers.ModelSerializer):

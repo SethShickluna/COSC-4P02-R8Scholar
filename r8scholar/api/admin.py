@@ -6,14 +6,12 @@ from .models import Comment, Course, CustomUser, Department, Forum, Instructor, 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('email', 'username')
 
-
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('reviewer', 'review_id')
 
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
 
-    
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('code', 'name', 'department', 'rating', 'reviews', 'instructor')
 

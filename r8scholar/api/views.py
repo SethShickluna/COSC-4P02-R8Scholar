@@ -1,4 +1,4 @@
-#Django imports 
+#Django#
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.password_validation import *
@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-#Project files # 
+#Project files# 
 from .serializers import *
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
 
