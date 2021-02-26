@@ -90,24 +90,18 @@ class CreateUserView(APIView):
             self.request.session.create()
 
         serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=False):
             email = serializer.data.get('email')
             nickname = serializer.data.get('nickname')
             password = serializer.data.get('password')
-            # try:
-            #     validate_password(password, password_validators=(MinimumLengthValidator, CommonPasswordValidator,NumericPasswordValidator))
-            # except ValidationError:
-            #     return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)#Placeholder response to bad password
-            queryset = CustomUser.objects.filter(email=email)
-            if queryset.exists():
-                return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)#Placeholder response to account already exists
             user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-
+#logs user in
 class login(APIView):
-    serializer_class = loginLogoutSerializer
+    serializer_class = loginLogoutSerializer()
 
     def my_view(self,request,format=None):
         serializer = self.serializer_class(data=request.data)
@@ -125,6 +119,7 @@ class login(APIView):
                 return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
                 # Return an 'invalid login' error message.
 
+#logs user out
 class logout(APIView):
     def logout_view(self,request):
         logout(request)

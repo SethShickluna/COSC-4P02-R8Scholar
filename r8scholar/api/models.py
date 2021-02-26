@@ -8,9 +8,8 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 import uuid
 from django.utils.timezone import datetime, now
-
 from .managers import CustomUserManager
-
+from .validators import *
 # Create your models here.
 
 
@@ -28,16 +27,18 @@ class Comment(models.Model):
             models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
         ]
 
+
+
 class CustomUser(AbstractUser):
     username = None
-    email = models.EmailField(_('email'), unique=True)
-    nickname = models.CharField(max_length=20)
-    password = models.CharField(max_length=32)
+    email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
+    nickname = models.CharField(max_length=20,unique=True)
+    password = models.CharField(max_length=32,validators=[password_validator])
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=False) #Not sure if this is inherritted from AbstractUser
-
+    min_length = models.IntegerField('min_length',default=4)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
