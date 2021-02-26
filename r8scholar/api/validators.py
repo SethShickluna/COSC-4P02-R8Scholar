@@ -4,10 +4,10 @@ def validate_brock_mail(value):
     if "@brocku.ca" in value: 
         return value 
     else: 
-        raise ValidationError("This field accepts mail id of brocku only") 
+        raise ValidationError("Must use brock email address.") 
 
 #Password validators
-min_pass_len = 10
+min_pass_len = 10 #Minimum password length
 #Ensures password has at least one number
 def password_validator(value):
     rules = [lambda value: any(i.isupper() for i in value), # must have at least one uppercase character
@@ -17,4 +17,4 @@ def password_validator(value):
     if all (rule(value) for rule in rules):
         return value 
     else: 
-        raise ValidationError("Password must be at least 10 characters long, and contain at least a single digit, uppercase character, and lowercase character.")
+        raise ValidationError("Password must be at least "+str(min_pass_len)+" characters long, and contain at least a single digit, uppercase character, and lowercase character.")
