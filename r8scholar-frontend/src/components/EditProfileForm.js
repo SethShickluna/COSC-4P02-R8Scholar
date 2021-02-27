@@ -114,11 +114,11 @@ export default class EditProfileForm extends Component {
                     <Card.Body>
                         <Form>
                             <Form.Group controlId="formGroupEmail">
-                                <Form.Label>Email address</Form.Label>
+                                <Form.Label>Change Email address</Form.Label>
                                 <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter email" />
                             </Form.Group>
                             <Form.Group controlId="formGroupUsername">
-                                <Form.Label>Username</Form.Label>
+                                <Form.Label>New Username(Nickname)</Form.Label>
                                 <Form.Control type="username" onChange={this.updateUsernameInput} placeholder="Username" />
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">

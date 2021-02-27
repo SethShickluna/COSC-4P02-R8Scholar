@@ -46,6 +46,9 @@ const imgStyle = {
     height: '200px',
 } 
 
+var newImage;
+
+
 //code for submitting a profile image
 $(document).ready(function () {
     var readURL = function (input) {
@@ -54,6 +57,8 @@ $(document).ready(function () {
 
             reader.onload = function (e) {
                 $('.profile-pic').attr('src', e.target.result);
+                newImage = e.target.result; //set new image to result 
+                //this.setState({profile_picture : e.target.result}) //change the state object
             }
 
             reader.readAsDataURL(input.files[0]);
@@ -100,6 +105,8 @@ export default class Profile extends Component {
 
         }
 
+        this.imageMaker=this.imageMaker.bind(this) //bund imagemaker
+
 
         //this.componentDidMount(); 
     }
@@ -122,8 +129,12 @@ export default class Profile extends Component {
             });
     }
 
+    imageMaker(){ 
+        //change state object 
+        this.setState({profile_picture : newImage })
+    }
 
-
+//TODO : add a method to change profile picture in the state
 
     render() {
         return (
@@ -150,11 +161,12 @@ export default class Profile extends Component {
 
                             <div name="lecture-rating-container" style={{ marginTop: '25px' }}> {/*This container is for profile picture */}
                                 <div name="lecture-rating-title">
-                                    <h4 style={{ textAlign: 'center' }}> {Date()} </h4>
+                                    {/*<h4 style={{ textAlign: 'center' }}> {Date()} </h4>*/}
                                 </div>
                                 <div style={{ textAlign: 'center' }} name="lecture-rating">
 
-                                    <img className="profile-pic" src={imageOne} />
+                                    <img className="profile-pic" src = {imageOne} onChange = {this.imageMaker} />
+                                    
 
                                 </div>
                             </div>
@@ -172,6 +184,7 @@ export default class Profile extends Component {
                                     <input className ="file-upload" type="file" accept="image/*" /> </button>)
                                     : (<div style={{ marginLeft: "20px" }}>Please log in or signup to edit your profile</div>)
                                 }
+
 
                             </div>
 

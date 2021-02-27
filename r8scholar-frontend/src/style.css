@@ -819,7 +819,7 @@ a:active {
 .post-editor-button {
     float: right;
     margin-top: 1em;
-    background-color: red;
+    background-color: #cc0000;
 }
 
 .panel-body {
@@ -844,6 +844,10 @@ a:active {
     background-color: white;
     color: black;
 }
+.settingsModule{
+    background-color:  #cc0000;
+    color: white;
+}
 
 .forumPad { 
     padding-top: 15px;
@@ -859,9 +863,24 @@ a:active {
     margin:10px
 }
 
+.settings{ 
+    width: 100% ;
+    height: auto;
+    margin:10px
+}
+
 .forumTable th{
     padding: 5px; 
     border: 1px solid #808080; 
+
+}
+
+.settings th{
+    padding: 5px; 
+    border: 2px solid black ;
+    background-color: #cc0000 ; 
+    color: white;
+    
 
 }
 .forumTable tr{
@@ -869,9 +888,20 @@ a:active {
     border: 1px solid #f2f2f2; 
 }
 
+.settings tr{
+    padding: 10px; 
+    border: 1px solid grey; 
+}
 
-.forumTable td{ 
+
+.forumTable td { 
     padding: 5px; 
+}
+
+.settings td{ 
+    padding: 10px; 
+    background: whitesmoke;
+    border: solid white; 
 }
 
 .forumTable a:hover { 
@@ -887,8 +917,8 @@ a:active {
 }
 
 .customH1{ 
-    font-size: 1.5em;
-    color: black;
+    font-size: 2.0em;
+    color: white;
 }
 .customH2{ 
     font-size: 1.0em;
