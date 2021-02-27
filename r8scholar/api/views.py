@@ -101,9 +101,9 @@ class CreateUserView(APIView):
 
 #logs user in
 class login(APIView):
-    serializer_class = loginLogoutSerializer()
+    serializer_class = loginLogoutSerializer
 
-    def my_view(self,request,format=None):
+    def post(self,request,format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             email = serializer.data.get('email')
@@ -121,7 +121,7 @@ class login(APIView):
 
 #logs user out
 class logout(APIView):
-    def logout_view(self,request):
+    def post(self,request):
         logout(request)
         redirect = reverse_lazy('users',request=request)
         data = {'redirect-url':redirect}

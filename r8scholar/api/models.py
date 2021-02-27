@@ -15,6 +15,20 @@ from .validators import validate_brock_mail, password_validator, rating_validato
 # Create your models here.
 
 
+class Comment(models.Model):
+    comment_id = models.IntegerField()
+    review_id = models.IntegerField()
+    name = models.CharField(max_length=20)
+    content = models.TextField(default=None)
+    child = models.ForeignKey('Comment',default=None, null=True, on_delete=CASCADE)
+    date = models.DateTimeField(default=None)
+    numb_reports = models.IntegerField(default=None)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
+        ]
+
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
@@ -38,8 +52,6 @@ class CustomUser(AbstractUser):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-     
 
 
 class Subject(models.Model):
@@ -91,20 +103,6 @@ class Forum(models.Model):
     nickname_id = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
     title = models.CharField(max_length=40)
     comment = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
-
-class Comment(models.Model):
-    comment_id = models.IntegerField()
-    review_id = models.IntegerField()
-    name = models.CharField(max_length=20)
-    content = models.TextField(default=None)
-    child = models.ForeignKey('Comment',default=None, null=True, on_delete=CASCADE)
-    date = models.DateTimeField(default=None)
-    numb_reports = models.IntegerField(default=None)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
-        ]
 
 class Ticket(models.Model):
     user = models.ForeignKey(CustomUser, default=None, on_delete = models.CASCADE)
