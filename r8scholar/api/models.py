@@ -11,24 +11,8 @@ import uuid
 from django.utils.timezone import datetime, now
 #Project Files#
 from .managers import CustomUserManager
-from .validators import *
+from .validators import validate_brock_mail, password_validator, rating_validator
 # Create your models here.
-
-
-class Comment(models.Model):
-    comment_id = models.IntegerField()
-    review_id = models.IntegerField()
-    name = models.CharField(max_length=20)
-    content = models.TextField(default=None)
-    child = models.ForeignKey('Comment',default=None, null=True, on_delete=CASCADE)
-    date = models.DateTimeField(default=None)
-    numb_reports = models.IntegerField(default=None)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
-        ]
-
 
 
 class CustomUser(AbstractUser):
@@ -93,12 +77,11 @@ class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     reviewer = models.CharField(max_length=32)
     subject = models.CharField(max_length=32)
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=32)
     content = models.TextField(default=None, null=True)
-    rating = models.FloatField(default=None,null=True)
+    rating = models.FloatField(default=None, validators=[rating_validator])
     numb_reports = models.IntegerField(default=0)
     date_created = models.DateField(auto_now=True)
-
 
     def _str_(self):
         return self.reviewer
@@ -108,6 +91,20 @@ class Forum(models.Model):
     nickname_id = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
     title = models.CharField(max_length=40)
     comment = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
+
+class Comment(models.Model):
+    comment_id = models.IntegerField()
+    review_id = models.IntegerField()
+    name = models.CharField(max_length=20)
+    content = models.TextField(default=None)
+    child = models.ForeignKey('Comment',default=None, null=True, on_delete=CASCADE)
+    date = models.DateTimeField(default=None)
+    numb_reports = models.IntegerField(default=None)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
+        ]
 
 class Ticket(models.Model):
     user = models.ForeignKey(CustomUser, default=None, on_delete = models.CASCADE)

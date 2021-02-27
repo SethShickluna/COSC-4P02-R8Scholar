@@ -10,7 +10,7 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project files# 
-from .serializers import *
+from .serializers import UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DeparmentSerializer, InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, loginLogoutSerializer
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
 
 #instance list views 
