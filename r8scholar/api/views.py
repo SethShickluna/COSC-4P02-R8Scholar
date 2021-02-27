@@ -95,6 +95,8 @@ class CreateUserView(APIView):
             nickname = serializer.data.get('nickname')
             password = serializer.data.get('password')
             user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
+            user.nickname = nickname
+            user.save()
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         else:
             return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
