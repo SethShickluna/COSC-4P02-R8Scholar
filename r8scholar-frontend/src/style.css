@@ -969,3 +969,7 @@ a:active {
 .file-upload {
     display: none;
 }
+
+.hidden{
+    display: none;
+}
