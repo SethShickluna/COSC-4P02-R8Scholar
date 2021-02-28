@@ -13,5 +13,7 @@ urlpatterns = [
     path('courses/', views.index), 
     path('professors/', views.index), 
     path('departments/', views.index), 
+    path('account/', views.index),
+    path('forum/', views.index),
     path('*', views.index),
 ]

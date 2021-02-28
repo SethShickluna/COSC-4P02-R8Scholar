@@ -202,7 +202,7 @@ a:active {
 }
 
 .home-container li:hover {
-    background-color: #cc0000;
+    background-color: #2980b9;
     cursor: pointer;
 }
 
@@ -808,10 +808,16 @@ a:active {
         margin: 1em;
     }
 }
+/* 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~FORUM PAGE~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
 .post-editor-button {
     float: right;
     margin-top: 1em;
-    background-color: red;
+    background-color: #2980b9;
 }
 
 .panel-body {
@@ -820,4 +826,145 @@ a:active {
 
 .post-body {
     margin: 1em 20%;
+}
+
+.paginationArrow{ 
+    color:grey;
+    padding-left: 5px;
+    padding-right: 5px; 
+}
+
+.forumModule{ 
+    background-color: white;
+    color: black;
+}
+.categoryModule{
+    background-color: white;
+    color: black;
+}
+.settingsModule{
+    background-color:  #2980b9;
+    color: white;
+}
+
+.forumPad { 
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.forumTable{ 
+    width: 100% ;
+    height: auto;
+    margin:10px
+}
+
+.settings{ 
+    width: 100% ;
+    height: auto;
+    margin:10px
+}
+
+.forumTable th{
+    padding: 5px; 
+    border: 1px solid #808080; 
+
+}
+
+.settings th{
+    padding: 5px; 
+    border: 2px solid black ;
+    background-color: #2980b9 ; 
+    color: white;
+    
+
+}
+.forumTable tr{
+    padding: 5px; 
+    border: 1px solid #f2f2f2; 
+}
+
+.settings tr{
+    padding: 10px; 
+    border: 1px solid grey; 
+}
+
+
+.forumTable td { 
+    padding: 5px; 
+}
+
+.settings td{ 
+    padding: 10px; 
+    background: whitesmoke;
+    border: solid white; 
+}
+
+.forumTable a:hover { 
+ font-weight: normal;
+}
+
+.paginationBar{ 
+    padding: 15px;
+}
+
+.hidden-module{
+    display: none;
+}
+
+.customH1{ 
+    font-size: 2.0em;
+    color: white;
+}
+.customH2{ 
+    font-size: 1.0em;
+}
+.customH3{ 
+    font-size: 0.75em;
+}
+.customH4{ 
+    font-size:0.5em ;
+}
+.themeButton{ 
+    background-color: purple;
+}
+.columnPad { 
+    margin: 15px; 
+}
+.pull-left{ 
+    float: left; 
+    display: inline-block;
+     
+}
+.pull-right{ 
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+}
+.pull-middle{ 
+    position: relative; 
+    vertical-align: middle;
+
+} 
+
+/* Beginning of the profile specific css*/
+.upload-button {
+    padding: 4px;
+   /* border: 1px solid black; */
+   /* border-radius: 5px; */
+    display: block;
+    float: center;
+}
+
+.profile-pic {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.file-upload {
+    display: none;
+    background-color: #2980b9;
 }

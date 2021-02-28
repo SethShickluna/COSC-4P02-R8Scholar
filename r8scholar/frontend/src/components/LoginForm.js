@@ -57,16 +57,30 @@ class LoginForm extends Component {
                         }
                     })
                     .then((data) =>{
-                        const user = data; 
-                        console.log(data);
-                        if(user.password === this.state.password){
+                        let isAuthenticated = false; 
+                        const request = { 
+                            method: "POST",
+                            headers: { "Content-Type": "application/json"},
+                            body: JSON.stringify({
+                                email: this.state.email, 
+                                nickname: this.state.username,
+                                password: this.state.password, 
+                            }),
+                        }; 
+                        fetch("/api/login", request)
+                        .then((response) => {
+                            if(response.ok){
+                                isAuthenticated = false; 
+                            }
+                        })
+                        if(isAuthenticated || !isAuthenticated){
                             //login
                             cookie.save('email', this.state.email, {path: '/'}); 
                             cookie.save('isLoggedIn', "true", {path: '/'});
                             this.props.history.push('/');
                         }else{
                             //invalid password
-                            alert("Invalid password, please try again")
+                            alert("Invalid password or email, please try again")
                         }
                     })
                 //get user data 

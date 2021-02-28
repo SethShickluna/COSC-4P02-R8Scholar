@@ -23,6 +23,8 @@ import Courses from "./pages/Courses";
 import Signup from "./pages/Signup";
 import Forum from "./pages/Forum";
 import PageNotFound from "./pages/PageNotFound";
+import Profile from "./pages/Profile"; 
+import Settings from "./pages/Settings"; 
 
 
 /*EXPLAINING HOW SPECIFYING COURSE, DEPARTMENTS, AND PROF NAMES WORK 
@@ -49,6 +51,8 @@ export default class App extends Component {
                     <Route exact path="/about" component={About} />
                     <Route exact path="/courses" component={Courses} />
                     <Route exact path="/forum" component={Forum} />
+                    <Route exact path="/account" component={Profile} />
+                    <Route exact path="/settings" component={Settings} />   
                     <Route exact path="/signout" component={Signout} />
                     <Route exact path="/departments" component={Departments} />
                     <Route path="/course/:courseName" component={Course} />
