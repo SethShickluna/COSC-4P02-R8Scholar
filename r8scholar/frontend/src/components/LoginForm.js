@@ -42,16 +42,35 @@ class LoginForm extends Component {
         });
     }
 
-
     submitForm = () => {
         //send info to backend 
             
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
-                cookie.save('email', this.state.email, {path: '/'}); 
-                cookie.save('isLoggedIn', "true", {path: '/'});
-                this.props.history.push('/');
+                fetch('/api/get-user' + '?email=' + this.state.email)
+                    .then((response) => {
+                        if(response.ok){
+                            return response.json(); 
+                        }else{
+                            alert("User not found, please check your username and password and try again.")
+                        }
+                    })
+                    .then((data) =>{
+                        const user = data; 
+                        console.log(data);
+                        if(user.password === this.state.password){
+                            //login
+                            cookie.save('email', this.state.email, {path: '/'}); 
+                            cookie.save('isLoggedIn', "true", {path: '/'});
+                            this.props.history.push('/');
+                        }else{
+                            //invalid password
+                            alert("Invalid password, please try again")
+                        }
+                    })
+                //get user data 
+                
             }
         }else{ 
             alert("Invalid Email. Please try again.");
@@ -73,7 +92,7 @@ class LoginForm extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Password" />
                             </Form.Group>
-                            <Button style={buttonStyle}variant="primary" onClick={this.submitForm} type="submit">
+                            <Button style={buttonStyle}variant="primary" onClick={this.submitForm}>
                                 Sign In
                             </Button>
                             

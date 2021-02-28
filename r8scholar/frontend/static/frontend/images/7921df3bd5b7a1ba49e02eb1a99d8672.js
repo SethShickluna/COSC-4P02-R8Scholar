@@ -1,1 +1,0 @@
-require("./src/App"),console.log("Hello World!");

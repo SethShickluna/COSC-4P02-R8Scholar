@@ -23,8 +23,8 @@ export default class Home extends Component {
     }
 
     // TODO: GET top 5 profs, courses and departs
-    getEntries = async (type) => {
-        await fetch("http://localhost:3000/data/" + type + ".json").then(
+    getEntries = (type) => {
+        fetch("http://localhost:3000/data/" + type + ".json").then(
             (res) => {
                 res.json().then((data) => {
                     data.data.sort((a, b) => {

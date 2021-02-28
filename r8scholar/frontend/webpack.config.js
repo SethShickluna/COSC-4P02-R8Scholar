@@ -1,41 +1,40 @@
-const path = require("path");
-const webpack = require("webpack");
+// Import Webpack npm module
+const webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
-  entry: "./index.js",
+  // Which file is the entry point to the application
+  entry: './src/index.js',
+  // Which file types are in our project, and where they are located
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js', '.jsx']
   },
+  // Where to output the final bundled code to
   output: {
     path: path.resolve(__dirname, "./static/frontend"),
-    filename: "main.js",
+    filename: "build.js",
   },
+  devtool: 'eval', 
   module: {
+    // How to process project files with loaders
     rules: [
+      // Process any .js or .jsx file with Babel
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,
-        use: 'style-loader!css-loader'
+        use: ['style-loader','css-loader'], 
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        use: 'url-loader',
+        loader: 'url-loader',
+        options: {
+          limit: "10000",
+        }
       }
-    ],
-  },
-  optimization: {
-    minimize: true,
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        // This has effect on the react lib size
-        NODE_ENV: JSON.stringify("production"),
-      },
-    }),
-  ],
-};
+    ]
+  }
+}

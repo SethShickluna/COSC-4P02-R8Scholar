@@ -57,13 +57,19 @@ export default class Course extends Component {6
     getAllReviews(myName) {
         //this is just to have but will need to be slightly refactored 
         //once we talk to the back end people about how their stuff is named such as 'get-course'
-        fetch('http://localhost:8000/api/get-reviews' + '?subject=' + myName)
+        return fetch('/api/get-reviews' + '?subject=' + myName)
         .then((response) => {
+            if(response.ok){
+                return response.json(); 
+            }
+        })
+        .then((data) => {
+            const newReviews = JSON.parse(data) ;
             this.setState({
-                reviews: response.json(),
-            });
-        })   
-        console.log(this.state.reviews);
+                reviews: newReviews, 
+            })
+
+        });
     }
 
     render() {

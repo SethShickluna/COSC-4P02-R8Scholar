@@ -1,11 +1,10 @@
-//npde_modules
-import { useHistory } from "react-router";
+//node_modules
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, {Component} from "react";
 import {render} from 'react-dom'; 
 
 //css
-import "bootstrap/dist/css/bootstrap.css"; 
+import "./style.css"; 
 //components
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -36,7 +35,6 @@ export default class App extends Component {
     constructor(props){
         super(props); 
         
-        const history = useHistory(); //inherited by components for redirecting
     }
 
     render(){
@@ -64,5 +62,4 @@ export default class App extends Component {
     }
 }
 
-const div = document.getElementById("app"); 
-render(<App/>, div); 
+render(<App/>, document.getElementById("root")); 

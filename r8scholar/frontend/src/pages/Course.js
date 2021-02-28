@@ -45,40 +45,30 @@ export default class Course extends Component {
             lectureRating: 2.5, 
             instructorRating: 4.8, 
             homeworkRating: 3.2, 
-            reviews:[ 
-                {//reviews would be an object 
-                    title: "Difficult but Important course!",
-                    content: "COSC 2P03 is one of the most foundational courses in the program. It opens the door to the rest of the computer science department and tests your knowledge. Beware, it can be quite tricky.",
-                    rating: 3.9, 
-                    user: "seth", 
-                    comments: null, 
-                },             
-            ],  
+            reviews: null,
             instructors: [
                 "Dave Bockus", 
                 "Earl Foxwell", 
             ], //another object 
             aliases: "", 
         }
-        //this.componentDidMount(); 
+        this.getAllReviews(this.state.name);
     }
 
-    //TODO: GET req goes here that fetches data based on uid
-    componentDidMount() {
+    getAllReviews(myName) {
         //this is just to have but will need to be slightly refactored 
-        //once we talk to the back end people about how their stuff is named such as 'get-couse'
-        fetch('/api/get-course' + '?code=' + this.name)
-        .then((response) => response.json())
+        //once we talk to the back end people about how their stuff is named such as 'get-course'
+        return fetch('/api/get-reviews' + '?subject=' + myName)
+        .then((response) => {
+            return response.json(); 
+        })
         .then((data) => {
-            this.setState({ // the data.<variable> is just an example and will need to be changed to reflect what the backend returns 
-                department: data.department, 
-                code: data.code, 
-                avgRating: data.avg_rating, 
-                reviews: data.reviews, 
-                instructors: data.instructors, 
-                aliases: data.aliases, 
-            });
-        }); 
+            const newReviews = JSON.parse(data) ;
+            this.setState({
+                reviews: newReviews, 
+            })
+
+        })
     }
 
     render() {
@@ -169,8 +159,8 @@ export default class Course extends Component {
                                     <h4 style={{textAlign: 'center'}}>Frequent Professors</h4>
                                 </div>   
                                 <div name="freq-prof-name" style={{textAlign: 'center'}}>
-                                    {this.state.instructors.map((item) => 
-                                    (<p><Link to={"/professor/" + item}>{item}</Link></p>))}
+                                    {this.state.instructors.map((item, index) => 
+                                    (<p><Link key={index} to={"/professor/" + item}>{item}</Link></p>))}
                                 </div>
                             </div>
                             </div>
@@ -181,9 +171,11 @@ export default class Course extends Component {
                         <Col sm={7}>
                             <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
                                 <Tab eventKey="reviews" title="Reviews">
-                                {this.state.reviews.map((item, index) => 
-                                            (<ReviewItem id={index} key={"course-review"+index}reviewItem={item}/>)
-                                        ) /* generate all the reviews for this page */} 
+                                {this.state.reviews !== null ? 
+                                this.state.reviews.map((item, index) => 
+                                (<ReviewItem id={index} key={"course-review"+index}reviewItem={item}/>)) 
+                                : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
+                                /* generate all the reviews for this page */} 
                                 </Tab>
                                 <Tab eventKey="forums" title="Forums">
                                     <h6>Nothing to show yet; come back soon!</h6>

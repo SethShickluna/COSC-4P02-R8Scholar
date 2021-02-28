@@ -1,5 +1,5 @@
 //form that is presented to user when they create a review 
-import {React, Component} from 'react'; 
+import React, {Component} from 'react'; 
 import Form from 'react-bootstrap/Form'; 
 import {Button} from 'react-bootstrap'; 
 import cookie from 'react-cookies'; 
@@ -92,7 +92,7 @@ export default class ReviewForm extends Component {
         
         const request = { 
             method: "POST",
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "http://localhost:3000"},
+            headers: { "Content-Type": "application/json"},
             body: JSON.stringify({
                 reviewer: cookie.load('email'), 
                 subject: this.state.subject,
@@ -101,10 +101,9 @@ export default class ReviewForm extends Component {
                 rating: overallRating, 
             }),
         }; 
-        fetch("http://localhost:8000/api/create-review", request)
+        fetch("/api/create-review", request)
         .then((response) => {
             console.log(response.status); 
-            
         });
         
         
@@ -137,7 +136,7 @@ export default class ReviewForm extends Component {
                         <Form.Control onChange={this.updateContentInput} as="textarea" rows={5} />
                     </Form.Group>
                     <div style={buttonStyle}>
-                        <Button onClick={this.submitReview} variant="danger" size="lg">
+                        <Button onClick={this.submitReview} variant="primary" size="lg">
                             Submit Review
                         </Button>
                     </div>

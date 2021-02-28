@@ -1,8 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="./isaak-brock-head.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -18,16 +18,12 @@
     <link rel="manifest" href="./manifest.json" />
     <title>BrockU R8Scholar</title>
     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "frontend/main.css" %}"/>
   </head>
-  <body>
-    <div id="gradient">
-      <div id="main">
-        <div id="app"></div>
-      </div>
-    </div>
-    <script src="{% static "frontend/main.js" %}"></script>
-
-   
+  <body style="background-color: #ecf0f1">
+    <div id="root"></div>
+    <script src="{% static "frontend/build.js" %}"></script>
+    
 
     <!--BOOTSTRAP JAVASCRIPT SCRIPTS-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 

@@ -40,8 +40,8 @@ export default class Courses extends Component {
     }
 
     // TODO: GET courses
-    getEntries = async (callback) => {
-        await fetch("http://localhost:3000/data/courses.json").then((res) => {
+    getEntries = (callback) => {
+        fetch("http://localhost:3000/data/courses.json").then((res) => {
             res.json().then((data) => {
                 this.setState(
                     { data: data.data, unfilteredData: data.data },

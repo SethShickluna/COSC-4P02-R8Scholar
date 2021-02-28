@@ -70,13 +70,21 @@ export default class SignupForm extends Component {
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
                 //check backend to make sure that email hasnt been used
                 let emailInUse = false; 
-                //do the api call & set emailInUse to the response    
+                fetch('/api/get-user' + '?email=' + this.state.email)
+                    .then((response) => {
+                        if(response.ok){
+                            alert("This email is already in use. Did you forget your password?")
+                        }else{
+                            emailInUse = false; 
+                        }
+                    }); 
                 return !emailInUse; // if the email is in use return false cause that email failed the test and vice versa 
             }
         }
         //email no good 
         return false;
     }
+    
 
     //password boxes match and are at least 8 characters 
     checkPassword = () => {
@@ -89,7 +97,28 @@ export default class SignupForm extends Component {
     }
 
     submitForm = () => {
+        this.checkEmail(); 
         
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                email: this.state.email, 
+                nickname: this.state.username,
+                password: this.state.password, 
+            }),
+        }; 
+        fetch("/api/create-user", request)
+        .then((response) => {
+            switch(response.status){
+                case 201: 
+                    alert("Account created successfully!"); 
+                    this.props.history.push('/');
+                    break; 
+                default:
+                    alert("Something went wrong :/ " + response.statusText); 
+            }
+        });
     }
 
     render() { 
