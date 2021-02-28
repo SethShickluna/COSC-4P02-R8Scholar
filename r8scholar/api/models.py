@@ -32,7 +32,7 @@ class Comment(models.Model):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
-    nickname = models.CharField(max_length=20,unique=True)
+    nickname = models.CharField(max_length=20,unique=True,default=uuid.uuid4)
     password = models.CharField(max_length=32,validators=[password_validator])
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
