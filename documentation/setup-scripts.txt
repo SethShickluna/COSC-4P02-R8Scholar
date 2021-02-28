@@ -25,3 +25,18 @@ then
 npm i react-icons react-icons-kit react-star-rating react-cookies
 
 
+to run the program cd into /r8scholar (the directory with manage.py) 
+
+!!!!!FIRST TIME RUNNING THE SERVER!!!!!!
+-Migrate the database 
+python3 manage.py makemigrations 
+python3 manage.py migrate 
+
+and type: python3 manage.py runserver 
+
+to bundle the javascript open a new terminal window cd into /r8scholar/frontend and type:
+npm run build
+
+this puts webpack into watch mode, it will bundle the javascript then continue to 'watch' for updated files to give a live update
+
+

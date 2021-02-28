@@ -12,6 +12,7 @@ from django.utils.timezone import datetime, now
 #Project Files#
 from .managers import CustomUserManager
 from .validators import validate_brock_mail, password_validator, rating_validator
+from .generators import generate_validation_code
 # Create your models here.
 
 
@@ -39,6 +40,8 @@ class CustomUser(AbstractUser):
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=False) #Not sure if this is inherritted from AbstractUser
     min_length = models.IntegerField('min_length',default=4)
+    verification_code = models.CharField(max_length=10, default=generate_validation_code())
+    is_verified = models.BooleanField('is_verified', default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

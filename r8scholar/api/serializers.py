@@ -6,7 +6,7 @@ from .models import Comment, Course, CustomUser, Department, Forum, Instructor, 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('email', 'nickname', 'password' ,'reviews', 'comments', 'forum_posts')
+        fields = ('email', 'nickname', 'password', 'is_verified', 'verification_code','reviews', 'comments', 'forum_posts')
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,3 +61,8 @@ class loginLogoutSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ('email','password',)
 
+#verification serializers 
+class VerificationSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = CustomUser
+        fields = ('verification_code',)
