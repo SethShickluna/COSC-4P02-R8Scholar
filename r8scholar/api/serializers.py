@@ -1,4 +1,6 @@
+#REST#
 from rest_framework import serializers
+#Project Files#
 from .models import Comment, Course, CustomUser, Department, Forum, Instructor, Review, Ticket
 
 class UserSerializer(serializers.ModelSerializer):
@@ -42,13 +44,20 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = ('user', 'content', 'date')
 
-#create serializers 
+#Creation serializers 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('email', 'nickname', 'password')
+        fields = ('email', 'nickname', 'password',)
 
 class CreateReviewSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Review
         fields = ('reviewer', 'subject','title', 'content', 'rating', )
+
+#Authentication serializers
+class loginLogoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('email','password',)
+

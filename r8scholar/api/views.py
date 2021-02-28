@@ -1,17 +1,16 @@
-#Django imports 
+#Django#
 from django.shortcuts import render
 from django.http import JsonResponse
-
+from django.contrib.auth.password_validation import *
+from django.contrib.auth import authenticate, login, logout
+from django.core.exceptions import ValidationError
+from django.urls import reverse_lazy
 #REST#
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
-# project files # 
-from .serializers import ReviewSerializer, UserSerializer, CommentSerializer, \
-    CourseSerializer, DeparmentSerializer, InstructorSerializer, \
-    ForumSerializer, TicketSerializer , CreateUserSerializer, CreateReviewSerializer
-
+#Project files# 
+from .serializers import UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DeparmentSerializer, InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, loginLogoutSerializer
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
 
 #instance list views 
@@ -76,7 +75,6 @@ class GetReviewsView(APIView):
                 data = []
                 for review in reviews: 
                     data.append(ReviewSerializer(review).data)
-                
                 return Response(data, status=status.HTTP_200_OK)
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -92,24 +90,45 @@ class CreateUserView(APIView):
             self.request.session.create()
 
         serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=False):
             email = serializer.data.get('email')
             nickname = serializer.data.get('nickname')
             password = serializer.data.get('password')
-            queryset = CustomUser.objects.filter(email=email)
-            if queryset.exists(): #refactor later 
-                user = queryset[0]
-                user.email = email
-                user.nickname = nickname
-                session_key = self.request.session.session_key
-                user.save(update_fields=['email', 'nickname', 'password'])
-                return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
-            else:
-                user = CustomUser(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
-                user.save()
-                return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+            user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
+            user.nickname = nickname
+            user.save()
+            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+#logs user in
+class login(APIView):
+    serializer_class = loginLogoutSerializer
+
+    def post(self,request,format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            email = serializer.data.get('email')
+            password = serializer.data.get('password')
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                redirect = reverse_lazy('users',request=request)
+                data = {'redirect-url':redirect}
+                return Response(data, status=status.HTTP_200_OK)
+                # Redirect to a success page.
+            else:
+                return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+                # Return an 'invalid login' error message.
+
+#logs user out
+class logout(APIView):
+    def post(self,request):
+        logout(request)
+        redirect = reverse_lazy('users',request=request)
+        data = {'redirect-url':redirect}
+        return Response(data, status=status.HTTP_200_OK)
+        # Redirect to a success page.
 
 
 class CreateReviewView(APIView):

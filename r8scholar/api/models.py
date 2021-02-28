@@ -1,3 +1,4 @@
+#Django#
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -8,9 +9,9 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 import uuid
 from django.utils.timezone import datetime, now
-
+#Project Files#
 from .managers import CustomUserManager
-
+from .validators import validate_brock_mail, password_validator, rating_validator
 # Create your models here.
 
 
@@ -30,14 +31,14 @@ class Comment(models.Model):
 
 class CustomUser(AbstractUser):
     username = None
-    email = models.EmailField(_('email'), unique=True)
-    nickname = models.CharField(max_length=20, default='Anonymous')
-    password = models.CharField(max_length=32)
+    email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
+    nickname = models.CharField(max_length=20,unique=True,default=uuid.uuid4)
+    password = models.CharField(max_length=32,validators=[password_validator])
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=False) #Not sure if this is inherritted from AbstractUser
-
+    min_length = models.IntegerField('min_length',default=4)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -51,8 +52,6 @@ class CustomUser(AbstractUser):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-     
 
 
 class Subject(models.Model):
@@ -90,12 +89,11 @@ class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     reviewer = models.CharField(max_length=32)
     subject = models.CharField(max_length=32)
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=32)
     content = models.TextField(default=None, null=True)
-    rating = models.FloatField(default=None,null=True)
+    rating = models.FloatField(default=None, validators=[rating_validator])
     numb_reports = models.IntegerField(default=0)
     date_created = models.DateField(auto_now=True)
-
 
     def _str_(self):
         return self.reviewer

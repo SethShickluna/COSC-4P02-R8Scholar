@@ -1,8 +1,10 @@
+#Django#
 from django.urls import path, include
+#Project Files#
 from . import views
 
 urlpatterns = [
-    #main views 
+    #list views 
     path('users', views.UserView.as_view()),
     path('reviews', views.ReviewView.as_view()),
     path('comment', views.CommentView.as_view()), 
@@ -17,4 +19,7 @@ urlpatterns = [
     #create views 
     path('create-user', views.CreateUserView.as_view()), 
     path('create-review', views.CreateReviewView.as_view()), 
+    #authentication views
+    path('login',views.login.as_view()),
+    path('logout',views.logout.as_view())
 ]
