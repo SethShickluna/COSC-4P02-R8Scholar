@@ -71,16 +71,16 @@ class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('reviewer', 'review_id')
+    list_display = ('nickname', 'review_id', 'department_name', 'instructor_name', 'code')
 
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
+    list_display = ('department_name', 'courses_rating', 'instructors_rating', 'overall_rating')
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('code', 'name', 'department', 'rating', 'reviews', 'instructor')
+    list_display = ('code', 'course_name', 'department_name', 'rating', 'instructor_name')
 
 class InstructorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'department', 'rating', 'reviews')
+    list_display = ('instructor_name', 'department_name', 'instructor_rating')
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('comment_id', 'review_id', 'name', 'content', 'child', 'date', 'numb_reports')
@@ -89,7 +89,7 @@ class ForumAdmin(admin.ModelAdmin):
     list_display = ('nickname_id', 'title', 'comment')
 
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('user', 'content', 'date')
+    list_display = ('email', 'content', 'date')
 
 
 admin.site.register(CustomUser, UserAdmin)
