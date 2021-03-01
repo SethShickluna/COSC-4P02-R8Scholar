@@ -21,8 +21,8 @@ urlpatterns = [
     path('create-review', views.CreateReviewView.as_view()), 
     #authentication views
     path('login/',views.login.as_view(),name='login'),
-    #LoginView
     path('logout',views.logout.as_view()),
+    path('change-password',views.change_password.as_view(),name='change-password'),
     #functionality views 
     path('verify-user', views.VerifyUserView.as_view())
 ]

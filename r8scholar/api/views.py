@@ -19,6 +19,7 @@ from .serializers import (UserSerializer, ReviewSerializer, CommentSerializer, C
 InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, 
 loginLogoutSerializer, VerificationSerializer)
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
+from .validators import password_validator
 
 #instance list views 
 class ReviewView(generics.ListAPIView):
@@ -130,18 +131,25 @@ class logout(APIView):
         data = {'redirect-url':redirect}
         return Response(data, status=status.HTTP_200_OK)
 
-#logs user in
-class login(APIView):
+#allows user to change their password
+class change_password(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         email = data['email']
-        password = data['password']
-        user = authenticate(request, username=email, password=password)
-        if user is not None:
-            login(request= request, user=user)
-            return Response({'Ok': 'user logged in...'}, status=status.HTTP_200_OK)
+        old_password = data['old_password']
+        new_password = data['new_password']
+        user = CustomUser.objects.get(email=email)
+
+        if user.check_password(old_password):
+            try:
+                validate_password(new_password)
+            except ValidationError as e:
+                return Response({'Bad Request': 'New password must be at least ...'+e.message}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(new_password)
+            user.save()
+            return Response({'Ok': 'Password Changed...'}, status=status.HTTP_200_OK)
         else:
-            return Response({'Bad Request': 'Invalid username or password...'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request': 'Invalid email or password...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateReviewView(APIView):
     serializer_class = CreateReviewSerializer
