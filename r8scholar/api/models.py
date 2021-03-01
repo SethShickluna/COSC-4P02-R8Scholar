@@ -1,7 +1,7 @@
 #Django#
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
 from django.core.mail import send_mail
 from django.db.models import constraints
 from django.db.models.deletion import CASCADE
@@ -13,7 +13,6 @@ from django.utils.timezone import datetime, now
 from .managers import CustomUserManager
 from .validators import validate_brock_mail, password_validator, rating_validator
 from .generators import generate_validation_code
-# Create your models here.
 
 
 class Comment(models.Model):
@@ -30,7 +29,7 @@ class Comment(models.Model):
             models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
         ]
 
-class CustomUser(AbstractUser):
+class CustomUser(AbstractBaseUser):
     username = None
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
     nickname = models.CharField(max_length=20,unique=True,default=uuid.uuid4)
@@ -38,12 +37,13 @@ class CustomUser(AbstractUser):
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
-    is_active = models.BooleanField('is_active',default=False) #Not sure if this is inherritted from AbstractUser
+    is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
+    is_admin = models.BooleanField(default=False)
     min_length = models.IntegerField('min_length',default=4)
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['nickname']
 
     objects = CustomUserManager()
 
@@ -55,6 +55,22 @@ class CustomUser(AbstractUser):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        # Simplest possible answer: All admins are staff
+        return self.is_admin
 
 
 class Subject(models.Model):
