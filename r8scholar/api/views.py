@@ -108,34 +108,23 @@ class CreateUserView(APIView):
 
 #logs user in
 class login(APIView):
-
-
-    def post(self,request,format=None):
+    def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         email = data['email']
         password = data['password']
-        user = CustomUser.objects.filter(email=email)
-
-        if len(user) > 0:
-            condition = user[0].check_password(password)
-            print(condition)
-            if(condition):
-                #yay
-                return Response({'OK': 'User Authenticated'}, status=status.HTTP_200_OK)
-            #nay
-                return Response({'Unauthorized': 'Invalid Password...'}, status=status.HTTP_401_UNAUTHORIZED)
-            
-        return Response({'Bad Request': 'User Not Found'}, status=status.HTTP_400_BAD_REQUEST)
-                # Return an 'invalid login' error message.
-
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request= request, user=user)
+            return Response({'Ok': 'user logged in...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid username or password...'}, status=status.HTTP_400_BAD_REQUEST)
 #logs user out
 class logout(APIView):
     def post(self,request):
-        logout(request)
-        redirect = reverse_lazy('users',request=request)
+        logout(request=request)
+        redirect = reverse_lazy('users')
         data = {'redirect-url':redirect}
         return Response(data, status=status.HTTP_200_OK)
-        # Redirect to a success page.
 
 #allows user to change their password
 class change_password(APIView):
