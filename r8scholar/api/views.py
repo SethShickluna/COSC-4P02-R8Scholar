@@ -4,7 +4,12 @@ from django.http import JsonResponse
 from django.contrib.auth.password_validation import *
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.views.generic.edit import FormView
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
+#Python
+import json
 #REST#
 from rest_framework import generics, status
 from rest_framework.views import APIView
@@ -13,7 +18,6 @@ from rest_framework.response import Response
 from .serializers import (UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DeparmentSerializer, 
 InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, 
 loginLogoutSerializer, VerificationSerializer)
-
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
 
 #instance list views 
@@ -99,6 +103,7 @@ class CreateUserView(APIView):
             password = serializer.data.get('password')
             user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
             user.nickname = nickname
+            user.is_active = True
             user.save()
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         else:
@@ -106,33 +111,37 @@ class CreateUserView(APIView):
 
 #logs user in
 class login(APIView):
-    serializer_class = loginLogoutSerializer
-
-    def post(self,request,format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            email = serializer.data.get('email')
-            password = serializer.data.get('password')
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                login(request, user)
-                redirect = reverse_lazy('users',request=request)
-                data = {'redirect-url':redirect}
-                return Response(data, status=status.HTTP_200_OK)
-                # Redirect to a success page.
-            else:
-                return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-                # Return an 'invalid login' error message.
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request= request, user=user)
+            return Response({'Ok': 'user logged in...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid username or password...'}, status=status.HTTP_400_BAD_REQUEST)
 
 #logs user out
 class logout(APIView):
     def post(self,request):
-        logout(request)
-        redirect = reverse_lazy('users',request=request)
+        logout(request=request)
+        redirect = reverse_lazy('users')
         data = {'redirect-url':redirect}
         return Response(data, status=status.HTTP_200_OK)
-        # Redirect to a success page.
 
+#logs user in
+class login(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request= request, user=user)
+            return Response({'Ok': 'user logged in...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid username or password...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateReviewView(APIView):
     serializer_class = CreateReviewSerializer
@@ -176,7 +185,6 @@ class VerifyUserView(APIView):
             #code from user 
             user = CustomUser.objects.get(email=email)
             local_code = user.verification_code
-            print(local_code, " | ", verification_code)
             if local_code == verification_code: 
                 #yay
                 user.is_verified = True
@@ -186,7 +194,3 @@ class VerifyUserView(APIView):
             return Response({"Incorrect Verification Code" : "Account not has been Verified"}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({"User Not Found" : "Could not Vertify"}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-        

@@ -132,3 +132,4 @@ CORS_ORIGIN_WHITELIST = [
 
 
 AUTH_USER_MODEL = 'api.CustomUser'
+AUTHENTICATION_BACKENDS = ['api.backends.SettingsBackend','django.contrib.auth.backends.ModelBackend']
