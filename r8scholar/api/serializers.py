@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('review_id', 'nickname', 'subject','title', 'content', 'rating', 'numb_reports', 'date_created', 'department_name', 'instructor_name')
+        fields = ('review_id', 'reviewer', 'subject','title', 'content', 'rating', 'numb_reports', 'date_created', )
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,17 +22,17 @@ class CommentSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('code', 'course_name', 'department', 'rating', 'reviews', 'instructor_name')
+        fields = ('code', 'name', 'department', 'rating', 'reviews', 'instructor')
 
 class DeparmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('department_name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
+        fields = ('name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ('instructor_name', 'department_name', 'instructor_rating', 'reviews')
+        fields = ('name', 'department', 'rating', 'reviews')
 
 class ForumSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,7 +42,7 @@ class ForumSerializer(serializers.ModelSerializer):
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ('email', 'content', 'date')
+        fields = ('user', 'content', 'date')
 
 #Creation serializers 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -53,7 +53,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class CreateReviewSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Review
-        fields = ('nickname','title', 'content', 'rating', )
+        fields = ('reviewer', 'subject','title', 'content', 'rating', )
 
 #Authentication serializers
 class loginLogoutSerializer(serializers.ModelSerializer):
