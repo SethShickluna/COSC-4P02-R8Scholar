@@ -1,6 +1,6 @@
 #Django#
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.password_validation import *
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
@@ -124,7 +124,7 @@ class logout(APIView):
         logout(request=request)
         redirect = reverse_lazy('users')
         data = {'redirect-url':redirect}
-        return Response(data, status=status.HTTP_200_OK)
+        return HttpResponseRedirect(redirect)
 
 #allows user to change their password
 class change_password(APIView):
