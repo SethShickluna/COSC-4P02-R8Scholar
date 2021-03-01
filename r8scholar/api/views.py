@@ -16,6 +16,8 @@ loginLogoutSerializer, VerificationSerializer)
 
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
 
+import json 
+
 #instance list views 
 class ReviewView(generics.ListAPIView):
     serializer_class = ReviewSerializer
@@ -97,7 +99,7 @@ class CreateUserView(APIView):
             email = serializer.data.get('email')
             nickname = serializer.data.get('nickname')
             password = serializer.data.get('password')
-            user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
+            user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password)
             user.nickname = nickname
             user.save()
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
@@ -109,13 +111,15 @@ class login(APIView):
 
 
     def post(self,request,format=None):
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        print(email, password)
-        user = CustomUser.objects.get(email=email)
-        print(user)
-        if user is not None:
-            if(user[0].check_password()):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        user = CustomUser.objects.filter(email=email)
+
+        if len(user) > 0:
+            condition = user[0].check_password(password)
+            print(condition)
+            if(condition):
                 #yay
                 return Response({'OK': 'User Authenticated'}, status=status.HTTP_200_OK)
             #nay
