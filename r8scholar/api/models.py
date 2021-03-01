@@ -36,7 +36,7 @@ class CustomUser(AbstractBaseUser):
     password = models.CharField(max_length=32,validators=[password_validator])
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
-    # forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
+    forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
     is_admin = models.BooleanField(default=False)
     min_length = models.IntegerField('min_length',default=4)

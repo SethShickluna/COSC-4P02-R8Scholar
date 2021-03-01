@@ -1,2 +1,2 @@
-{"email":"efoxwell@brocku.ca", "password":"Homologicus420"}
+{"email":"efoxwell@brocku.ca", "password":"Homologicus123"}
 {"email":"efoxwell@brocku.ca", "old_password":"Homologicus123","new_password":"Homologicus420"}
