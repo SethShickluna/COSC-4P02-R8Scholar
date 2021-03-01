@@ -106,22 +106,22 @@ class CreateUserView(APIView):
 
 #logs user in
 class login(APIView):
-    serializer_class = loginLogoutSerializer
+
 
     def post(self,request,format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            email = serializer.data.get('email')
-            password = serializer.data.get('password')
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                login(request, user)
-                redirect = reverse_lazy('users',request=request)
-                data = {'redirect-url':redirect}
-                return Response(data, status=status.HTTP_200_OK)
-                # Redirect to a success page.
-            else:
-                return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        print(email, password)
+        user = CustomUser.objects.get(email=email)
+        print(user)
+        if user is not None:
+            if(user[0].check_password()):
+                #yay
+                return Response({'OK': 'User Authenticated'}, status=status.HTTP_200_OK)
+            #nay
+                return Response({'Unauthorized': 'Invalid Password...'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        return Response({'Bad Request': 'User Not Found'}, status=status.HTTP_400_BAD_REQUEST)
                 # Return an 'invalid login' error message.
 
 #logs user out
