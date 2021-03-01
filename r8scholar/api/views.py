@@ -137,6 +137,26 @@ class logout(APIView):
         return Response(data, status=status.HTTP_200_OK)
         # Redirect to a success page.
 
+#allows user to change their password
+class change_password(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        old_password = data['old_password']
+        new_password = data['new_password']
+        user = CustomUser.objects.get(email=email)
+
+        if user.check_password(old_password):
+            try:
+                validate_password(new_password)
+            except ValidationError as e:
+                return Response({'Bad Request': 'New password must be at least ...'+e.message}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(new_password)
+            user.save()
+            return Response({'Ok': 'Password Changed...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid email or password...'}, status=status.HTTP_400_BAD_REQUEST)
+
 
 class CreateReviewView(APIView):
     serializer_class = CreateReviewSerializer
