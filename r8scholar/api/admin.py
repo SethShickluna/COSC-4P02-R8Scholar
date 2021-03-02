@@ -71,13 +71,13 @@ class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('nickname', 'review_id', 'department_name', 'instructor_name', 'code','instructor_rating','course_rating' )
+    list_display = ('nickname', 'review_id', 'department_name', 'instructor_name', 'code')
 
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('department_name', 'courses_rating', 'instructors_rating', 'overall_rating')
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('code', 'course_name', 'department_name', 'course_rating', 'instructor_name')
+    list_display = ('code', 'course_name', 'department_name', 'rating', 'instructor_name')
 
 class InstructorAdmin(admin.ModelAdmin):
     list_display = ('instructor_name', 'department_name', 'instructor_rating')
