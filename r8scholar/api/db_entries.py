@@ -1,60 +1,50 @@
 #python file to populate the database with each department, professor, course, etc
-#from models import Instructor, Course, Department
 
-class CourseGenerator:
+#-----running this script -----# 
+# 1. cd into /r8scholar (directory with manage.py)
+# 2. run the command --> python3 manage.py shell (this runs a python shell in our django environment)
+# 3. run this command the execute the script exec(open("./api/db_entries.py").read()) 
+from api.models import Instructor, Course, Department
+
+
+class ModelGenerator:
     
-    def __init__(self, data):
+    def __init__(self, filepath, my_type):
         super().__init__()
-        self.data_type = data 
-        print(self.data_type)
-        self.get_data()
+        self.type = my_type
+        print(my_type)
+        self.get_data(filepath)
+        
 
     def generate(self, data):
+        model = None
+        if self.type == "Course":
+            model = Course(code=data[0], department_name=data[1], course_name=data[2], instructor_name="Instructor")
+        elif self.type == "Instructor":
+            model = Instructor(instructor_name=data[0], instructor_rating=0, department_name=data[1])
+        elif self.type == "Department": 
+            model = Department(department_name=data[0], courses_rating=0, instructors_rating=0, overall_rating=0)
         pass 
+        print("Creating", model)
+        model.save()
     
-    def get_data(self): 
-        f = open('r8scholar/api/data/courses.txt')
+    def get_data(self, filepath): 
+        f = open(filepath)
 
         while True: 
-            course = f.readline().split(',')
-            course[len(course) - 1] = course[len(course) -1].replace('\n', '')
-            print(course)
-            if len(course) <= 1: break
-           
+            model = f.readline().split(',')
+            model[len(model) - 1] = model[len(model) -1].replace('\n', '')
+            
+            if model[0] == '': break
+            self.generate(data=model)
         
         f.close()
 
-class DeptGenerator:
-    
-    def __init__(self, data):
-        super().__init__()
-        self.data_type = data 
-        print(self.data_type)
-
-    def generate(self):
-        pass 
-    
-    def get_data(self): 
-        pass
-
-class InstructorGenerator:
-    
-    def __init__(self, data):
-        super().__init__()
-        self.data_type = data 
-        print(self.data_type)
-
-    def generate(self):
-        pass 
-    
-    def get_data(self): 
-        pass
 
 
 
-
-if __name__ == "__main__": 
-    my_instructors = InstructorGenerator("Instructor")
-    my_courses = CourseGenerator("Course")
-    my_departments = DeptGenerator("Department")
+if __name__ == "builtins": 
+    ModelGenerator('./api/data/departments.txt', "Department")
+    ModelGenerator('./api/data/instructors.txt', "Instructor")
+    ModelGenerator('./api/data/courses.txt', "Course")
 

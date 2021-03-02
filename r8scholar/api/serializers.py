@@ -22,17 +22,17 @@ class CommentSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('code', 'course_name', 'department', 'rating', 'reviews', 'instructor_name')
+        fields = ('code', 'course_name', 'department_name', 'rating', 'instructor_name')
 
 class DeparmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('department_name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
+        fields = ('department_name', 'courses_rating', 'instructors_rating', 'overall_rating')
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ('instructor_name', 'department_name', 'instructor_rating', 'reviews')
+        fields = ('instructor_name', 'department_name', 'instructor_rating')
 
 class ForumSerializer(serializers.ModelSerializer):
     class Meta:
