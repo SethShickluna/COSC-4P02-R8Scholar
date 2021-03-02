@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('review_id', 'nickname', 'subject','title', 'content', 'instructor_rating', \
+        fields = ('review_id','email', 'nickname', 'subject','title', 'content', 'instructor_rating', \
             'course_rating', 'numb_reports', 'date_created', 'department_name', 'instructor_name')
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class CreateReviewSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Review
-        fields = ('nickname','title', 'content', 'instructor_rating','course_rating','code', 'instructor_name', )
+        fields = ('email','nickname','title', 'content', 'instructor_rating','course_rating','code', 'instructor_name', )
 
 #Authentication serializers
 class loginLogoutSerializer(serializers.ModelSerializer):

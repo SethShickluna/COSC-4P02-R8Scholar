@@ -97,7 +97,8 @@ class Department(models.Model):
 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    nickname = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    email = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    nickname = models.CharField(max_length=30, default=None)
     subject = models.CharField(max_length=32)
     title = models.CharField(max_length=32)
     content = models.TextField(default=None, null=True)
