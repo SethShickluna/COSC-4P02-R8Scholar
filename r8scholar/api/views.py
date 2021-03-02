@@ -1,6 +1,6 @@
 #Django#
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.password_validation import *
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
@@ -15,6 +15,8 @@ InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, C
 loginLogoutSerializer, VerificationSerializer)
 
 from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
+
+import json 
 
 #instance list views 
 class ReviewView(generics.ListAPIView):
@@ -97,7 +99,7 @@ class CreateUserView(APIView):
             email = serializer.data.get('email')
             nickname = serializer.data.get('nickname')
             password = serializer.data.get('password')
-            user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password, reviews=None, comments=None, forum_posts=None)
+            user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password)
             user.nickname = nickname
             user.save()
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
@@ -106,32 +108,43 @@ class CreateUserView(APIView):
 
 #logs user in
 class login(APIView):
-
-
-    def post(self,request,format=None):
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        print(email, password)
-        user = CustomUser.objects.get(email=email)
-        print(user)
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        user = authenticate(request, username=email, password=password)
         if user is not None:
-            if(user[0].check_password()):
-                #yay
-                return Response({'OK': 'User Authenticated'}, status=status.HTTP_200_OK)
-            #nay
-                return Response({'Unauthorized': 'Invalid Password...'}, status=status.HTTP_401_UNAUTHORIZED)
-            
-        return Response({'Bad Request': 'User Not Found'}, status=status.HTTP_400_BAD_REQUEST)
-                # Return an 'invalid login' error message.
-
+            login(request= request, user=user)
+            return Response({'Ok': 'user logged in...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid username or password...'}, status=status.HTTP_400_BAD_REQUEST)
 #logs user out
 class logout(APIView):
     def post(self,request):
-        logout(request)
-        redirect = reverse_lazy('users',request=request)
+        logout(request=request)
+        redirect = reverse_lazy('users')
         data = {'redirect-url':redirect}
-        return Response(data, status=status.HTTP_200_OK)
-        # Redirect to a success page.
+        return HttpResponseRedirect(redirect)
+
+#allows user to change their password
+class change_password(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        old_password = data['old_password']
+        new_password = data['new_password']
+        user = CustomUser.objects.get(email=email)
+
+        if user.check_password(old_password):
+            try:
+                validate_password(new_password)
+            except ValidationError as e:
+                return Response({'Bad Request': 'New password must be at least ...'+e.message}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(new_password)
+            user.save()
+            return Response({'Ok': 'Password Changed...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid email or password...'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CreateReviewView(APIView):

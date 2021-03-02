@@ -1,0 +1,3 @@
+COSC 2P03, Computer Science, Advanced Data Structures
+COSC 1P03, Computer Science, Data Structures
+COSC 2P12, Computer Science, Computer Architecture

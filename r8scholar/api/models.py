@@ -36,7 +36,7 @@ class CustomUser(AbstractBaseUser):
     password = models.CharField(max_length=32,validators=[password_validator])
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
-    # forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
+    forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
     is_admin = models.BooleanField(default=False)
     min_length = models.IntegerField('min_length',default=4)
@@ -82,17 +82,16 @@ class Instructor(models.Model):
 class Course(models.Model):
     code = models.CharField(max_length=10, unique=True,primary_key=True)
     department_name = models.CharField(max_length=20)
-    rating = models.FloatField(default=None)
+    rating = models.FloatField(default=0)
     course_name  = models.CharField(max_length=30,default=None)
-    # instructor_name = models.CharField(max_length=30)
-    instructor_name = models.ForeignKey(Instructor, on_delete = models.DO_NOTHING)
+    instructor_name = models.CharField(max_length=20)
 
     
 class Department(models.Model):
     department_name = models.CharField(max_length=20,default=None,primary_key=True)
-    courses_rating = models.FloatField(default=None)
-    instructors_rating = models.FloatField(default=None)
-    overall_rating = models.FloatField(default=None)
+    courses_rating = models.FloatField(default=0)
+    instructors_rating = models.FloatField(default=0)
+    overall_rating = models.FloatField(default=0)
 
 
 class Review(models.Model):
