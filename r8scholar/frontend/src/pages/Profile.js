@@ -105,7 +105,7 @@ export default class Profile extends Component {
 
         }
 
-        this.imageMaker=this.imageMaker.bind(this) //bund imagemaker
+        this.imageMaker=this.imageMaker.bind(this) //bInd imagemaker
 
 
         //this.componentDidMount(); 
