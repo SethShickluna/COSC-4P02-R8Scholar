@@ -42,6 +42,7 @@ class CustomUser(AbstractBaseUser):
     min_length = models.IntegerField('min_length',default=4)
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
 
@@ -92,22 +93,16 @@ class Course(models.Model):
 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    email = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
     nickname = models.CharField(max_length=30, default=None)
     subject = models.CharField(max_length=32)
     title = models.CharField(max_length=32)
     content = models.TextField(default=None, null=True)
-    instructor_rating = models.FloatField(default=None, validators=[rating_validator])
-    course_rating = models.FloatField(default=None, validators=[rating_validator])
-    department_rating = models.FloatField(default=None, validators=[rating_validator])
+    rating = models.FloatField(default=None, validators=[rating_validator])
     numb_reports = models.IntegerField(default=0)
     date_created = models.DateField(auto_now=True)
-    # department_name = models.CharField(default=None, max_length=30)
-    # instructor_name = models.CharField(default=None, max_length=30)
-    # code = models.CharField(max_length=20, default=None)
-    department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
-    instructor_name = models.ForeignKey(Instructor, null=True,on_delete = models.DO_NOTHING)
-    code = models.ForeignKey(Course, null=True, on_delete = models.DO_NOTHING)
+    department = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
+    review_type = models.CharField(max_length=10)
 
     def _str_(self):
         return self.reviewer

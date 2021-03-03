@@ -156,14 +156,27 @@ class CreateReviewView(APIView):
     
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
-
+        print(serializer)
         if serializer.is_valid():
-            reviewer = serializer.data.get('reviewer')
-            subject = serializer.data.get('subject')
-            title = serializer.data.get('title')
-            content = serializer.data.get('content')
-            rating = serializer.data.get('rating')
-            review = Review(reviewer=reviewer, subject=subject, title=title, content=content, rating=rating)
+            nickname = serializer.data['nickname']
+            subject = serializer.data['subject']
+            title = serializer.data['title']
+            content = serializer.data['content']
+            rating = serializer.data['rating']
+            review_type = serializer.data['review_type']
+            #get user who left review and other objects 
+            user = CustomUser.objects.get(nickname=nickname)
+            my_department = None
+            if review_type == 'Course':
+                my_department = Course.objects.get(name=subject).department
+            elif review_type == 'Instructor':
+                my_department = Instructor.objects.get(name=subject).department
+            else: #review is on a department
+                my_department = Department.obects.get(name=subject)
+
+            
+            review = Review(reviewer=user, nickname=nickname, subject=subject, title=title, 
+            content=content, rating=rating, department=my_department)
             review.save()
             return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
 

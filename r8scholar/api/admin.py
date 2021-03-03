@@ -71,7 +71,9 @@ class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('nickname', 'review_id', 'department_name', 'instructor_name', 'code','instructor_rating','course_rating' )
+    list_display = ('review_id', 'reviewer', 'nickname', 
+    'subject', 'title','content','rating', 'numb_reports',
+    'date_created', 'department')
 
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ('name', 'courses_rating', 'instructors_rating', 'rating')
