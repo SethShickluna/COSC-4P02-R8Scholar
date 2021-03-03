@@ -10,7 +10,7 @@ export default class Settings extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {} // add the entities we want to do functions on and have the forms check if they exist in the database
+        this.state = {} // TODO add the entities we want to do functions on and have the forms check if they exist in the database
     }
 
 
