@@ -76,7 +76,7 @@ class Department(models.Model):
     name = models.CharField(max_length=20,default=None,primary_key=True)
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
-    overall_rating = models.FloatField(default=0)
+    rating = models.FloatField(default=0)
 
 class Instructor(models.Model):
     name  = models.CharField(max_length=30,primary_key=True)
@@ -85,10 +85,10 @@ class Instructor(models.Model):
 
 
 class Course(models.Model):
-    code = models.CharField(max_length=10, unique=True,primary_key=True)
+    name = models.CharField(max_length=10, unique=True,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
-    course_rating = models.FloatField(default=0)
-    course_name  = models.CharField(max_length=30,default=None)
+    rating = models.FloatField(default=0)
+    course_full_name  = models.CharField(max_length=30,default=None)
 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

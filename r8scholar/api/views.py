@@ -102,6 +102,10 @@ class CreateUserView(APIView):
             user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password)
             user.nickname = nickname
             user.save()
+            user.email_user(subject="Please Verify your R8Scholar Account!", 
+            message=f"Please enter the following code into the prompt: {user.verification_code}", 
+            from_email="ss16wn@brocku.ca")
+            #https://stackoverflow.com/questions/5802189/django-errno-111-connection-refused
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         else:
             return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)

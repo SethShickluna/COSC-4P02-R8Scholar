@@ -18,7 +18,7 @@ export default class Departments extends Component {
 
     // TODO: GET departs
     getEntries = () => {
-        fetch("http://localhost:3000/data/departments.json").then(
+        fetch("/api/departments").then( //same here use JSON.parse() on data 
             (res) => {
                 res.json().then((data) => {
                     this.setState({ data: data.data });

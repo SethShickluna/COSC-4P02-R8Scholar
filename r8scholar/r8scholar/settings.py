@@ -132,3 +132,6 @@ CORS_ORIGIN_WHITELIST = [
 
 
 AUTH_USER_MODEL = 'api.CustomUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+

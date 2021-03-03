@@ -66,7 +66,6 @@ export default class Course extends Component {6
         })
         .then((data) => {
             const newReviews = JSON.parse(data);
-            console.log(newReviews);
             this.setState({
                 reviews: newReviews, 
             })

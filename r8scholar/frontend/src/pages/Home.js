@@ -9,28 +9,29 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: ["professors", "courses", "departments"],
-            professors: [],
+            list: ["instructors", "courses", "departments"],
+            instructors: [],
             courses: [],
             departments: [],
         };
     }
 
-    componentDidMount() {
+    componentDidMount(){
         this.state.list.map((e) => {
             this.getEntries(e);
         });
     }
 
     // TODO: GET top 5 profs, courses and departs
-    getEntries = (type) => {
-        fetch("http://localhost:3000/data/" + type + ".json").then(
+    getEntries = async(type) => {//this fetches the courses, implement the same for instructors and departments 
+        await fetch("/api/"+type).then(
             (res) => {
                 res.json().then((data) => {
-                    data.data.sort((a, b) => {
-                        return b.rating - a.rating;
-                    });
-                    this.setState({ [type]: data.data.slice(0, 5) });
+                    const newEntry = []
+                    data.map((item) =>{
+                        newEntry.push(item);
+                    })
+                    this.setState({ [type]: newEntry});
                 });
             }
         );
@@ -44,7 +45,7 @@ export default class Home extends Component {
                 </div>
                 {!this.state.courses.length &&
                 !this.state.departments.length &&
-                !this.state.professors.length ? (
+                !this.state.instructors.length ? (
                     <Loading size="75" />
                 ) : (
                     <div className="home-container">
@@ -55,7 +56,7 @@ export default class Home extends Component {
                                     <List
                                         data={this.state[e]}
                                         columns={["name", "rating"]}
-                                        key={index}
+                                        key={index+e}
                                         link={"/" + e.slice(0, e.length - 1) + "/"}
                                     />
                                     <Button
@@ -77,7 +78,7 @@ export default class Home extends Component {
                                     }
                                     className={"average-" + e}
                                     id={e}
-                                    key={index}
+                                    key={index+e}
                                 />
                             );
                         })}

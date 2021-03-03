@@ -48,46 +48,28 @@ class LoginForm extends Component {
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
-                fetch('/api/get-user' + '?email=' + this.state.email)
-                    .then((response) => {
-                        if(response.ok){
-                            return response.json(); 
-                        }else{
-                            alert("User not found, please check your username and password and try again.")
-                        }
-                    })
-                    .then((data) =>{
-                        let isAuthenticated = false; 
-                        const request = { 
-                            method: "POST",
-                            headers: { "Content-Type": "application/json"},
-                            body: JSON.stringify({
-                                email: this.state.email, 
-                                nickname: this.state.username,
-                                password: this.state.password, 
-                            }),
-                        }; 
-                        fetch("/api/login", request)
-                        .then((response) => {
-                            if(response.ok){
-                                isAuthenticated = false; 
-                            }
-                        })
-                        if(isAuthenticated || !isAuthenticated){
-                            //login
-                            cookie.save('email', this.state.email, {path: '/'}); 
-                            cookie.save('isLoggedIn', "true", {path: '/'});
-                            this.props.history.push('/');
-                        }else{
-                            //invalid password
-                            alert("Invalid password or email, please try again")
-                        }
-                    })
-                //get user data 
-                
+                const request = { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        email: this.state.email, 
+                        password: this.state.password, 
+                    }),
+                }; 
+                fetch("/api/login/", request)
+                .then((response) => {
+                    if(response.ok){ //yay
+                        cookie.save("isLoggedIn", "true", {path:"/"}); 
+                        cookie.save("email", this.state.email, {path: "/"}); 
+                        this.props.history.push('/');
+                    }else{//nay 
+                        alert("Invalid username or password please enter your information again.")
+                    }
+                });
+               
             }
         }else{ 
-            alert("Invalid Email. Please try again.");
+            alert("Make sure to use a brock email!");
         }
     }
 

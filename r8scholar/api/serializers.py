@@ -23,12 +23,12 @@ class CommentSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('code', 'course_name', 'department', 'course_rating')
+        fields = ('name', 'course_full_name', 'department', 'rating')
 
 class DeparmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('name', 'courses_rating', 'instructors_rating', 'overall_rating')
+        fields = ('name', 'courses_rating', 'instructors_rating', 'rating')
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:

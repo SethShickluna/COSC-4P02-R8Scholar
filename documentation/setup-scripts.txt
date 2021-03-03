@@ -14,7 +14,7 @@ npm init -y this will install the node_modules folder and initialize a node proj
 then run 
 
 npm install --save-dev babel-core babel-loader babel-plugin-transform-class-properties babel-preset-es2015 babel-preset-react css-loader style-loader url-loader file-loader webpacknpm install --save-dev @babel/core
-npm install --save-dev @babel/core @babel/env @babel/preset-env @babel/preset-react
+npm install --save-dev @babel/core @babel/env @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime
 
 then 
 

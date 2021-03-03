@@ -41,7 +41,7 @@ export default class Courses extends Component {
 
     // TODO: GET profs
     getEntries = (callback) => {
-        fetch("http://localhost:3000/data/professors.json").then(
+        fetch("/api/instructors").then(
             (res) => {
                 res.json().then((data) => {
                     this.setState(

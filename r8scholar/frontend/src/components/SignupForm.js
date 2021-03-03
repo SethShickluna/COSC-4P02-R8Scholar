@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import {Form, Button, Card} from 'react-bootstrap'; 
+import {withRouter} from 'react-router-dom'; 
 
 
 const formStyle = {
@@ -9,7 +10,7 @@ const formStyle = {
 }
 
 
-export default class SignupForm extends Component {
+class SignupForm extends Component {
 
     constructor(props){
         super(props); 
@@ -154,3 +155,5 @@ export default class SignupForm extends Component {
         ); 
     }
 }
+
+export default withRouter(SignupForm); 

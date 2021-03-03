@@ -35,16 +35,7 @@ export default class Course extends Component {6
             avgRating: 1.7,
             instructorRating: 2.5, 
             courseRating: 1.3,
-            reviews:[ 
-                {//reviews would be an object 
-                    title: "Worst Department on Earth!",
-                    content: "This place is depression incarnate",
-                    rating: 2.5, 
-                    user: "seth", 
-                    comments: null, 
-                },
-               
-            ],  
+            reviews:[],  
             instructors: [
                 "Dave Bockus", 
                 "Earl Foxwell", 

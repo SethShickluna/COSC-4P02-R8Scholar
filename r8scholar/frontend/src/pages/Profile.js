@@ -118,7 +118,6 @@ export default class Profile extends Component {
         fetch('/api/get-user' + '?email=' + cookie.load('email'))
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 this.setState({ // the data.<variable> is just an example and will need to be changed to reflect what the backend returns 
                     department: data.department,
                     name: data.nickname, 

@@ -74,10 +74,10 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ('nickname', 'review_id', 'department_name', 'instructor_name', 'code','instructor_rating','course_rating' )
 
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'courses_rating', 'instructors_rating', 'overall_rating')
+    list_display = ('name', 'courses_rating', 'instructors_rating', 'rating')
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('code', 'course_name', 'department', 'course_rating',)
+    list_display = ('name', 'course_full_name', 'department', 'rating',)
 
 class InstructorAdmin(admin.ModelAdmin):
     list_display = ('name', 'department', 'department', 'rating')

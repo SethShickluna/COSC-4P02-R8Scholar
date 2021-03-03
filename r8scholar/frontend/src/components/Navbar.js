@@ -11,20 +11,13 @@ class Navbar extends Component {
         super(props);
 
         this.buttons = [
-            "Professors",
+            "Instructors",
             "Courses",
             "Departments",
             "About",
         ];
-
-        this.handleInput = this.handleInput.bind(this); 
     }
 
-
-    handleInput = () => { 
-        console.log("is this working"); 
-        
-    }
 
     render() {
         return (
@@ -46,7 +39,7 @@ class Navbar extends Component {
                             className="nav-button"
                             text={e}
                             key={index+1}
-                            link={"/" + e}
+                            link={"/" + (e.toLowerCase())}
                         />
                     );
                 })}

@@ -20,13 +20,13 @@ class ModelGenerator:
     def generate(self, data):
         model = None
         if self.type == "Department": 
-            model = Department(name=data[0], courses_rating=0, instructors_rating=0, overall_rating=0)
+            model = Department(name=data[0], courses_rating=0, instructors_rating=0, rating=0)
         elif self.type == "Instructor":
             my_department = Department.objects.get(name=data[1])
             model = Instructor(name=data[0], department=my_department, rating=0)
         elif self.type == "Course":
             my_department = Department.objects.get(name=data[1])
-            model = Course(code=data[0], department=my_department, course_rating=0, course_name=data[2])
+            model = Course(name=data[0], department=my_department, rating=0, course_full_name=data[2])
         
         print("Creating", model)
         model.save()
