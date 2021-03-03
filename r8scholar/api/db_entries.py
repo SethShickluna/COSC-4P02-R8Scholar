@@ -1,4 +1,5 @@
 #python file to populate the database with each department, professor, course, etc
+#also  make sure that there are no spaces, the spaces are unwanted characters that mess up the queries 
 
 #-----running this script -----# 
 # 1. cd into /r8scholar (directory with manage.py)
@@ -18,13 +19,15 @@ class ModelGenerator:
 
     def generate(self, data):
         model = None
-        if self.type == "Course":
-            model = Course(code=data[0], department_name=data[1], course_name=data[2], instructor_name="Instructor")
+        if self.type == "Department": 
+            model = Department(name=data[0], courses_rating=0, instructors_rating=0, overall_rating=0)
         elif self.type == "Instructor":
-            model = Instructor(instructor_name=data[0], instructor_rating=0, department_name=data[1])
-        elif self.type == "Department": 
-            model = Department(department_name=data[0], courses_rating=0, instructors_rating=0, overall_rating=0)
-        pass 
+            my_department = Department.objects.get(name=data[1])
+            model = Instructor(name=data[0], department=my_department, rating=0)
+        elif self.type == "Course":
+            my_department = Department.objects.get(name=data[1])
+            model = Course(code=data[0], department=my_department, course_rating=0, course_name=data[2])
+        
         print("Creating", model)
         model.save()
     
@@ -44,7 +47,7 @@ class ModelGenerator:
 
 
 if __name__ == "builtins": 
-    ModelGenerator('./api/data/departments.txt', "Department")
-    ModelGenerator('./api/data/instructors.txt', "Instructor")
-    ModelGenerator('./api/data/courses.txt', "Course")
+    ModelGenerator('./api/data/departments.txt', "Department") #make departments first cause dependencies
+    ModelGenerator('./api/data/instructors.txt', "Instructor") #make instructor next 
+    ModelGenerator('./api/data/courses.txt', "Course") #courses need departments and instructors 
 
