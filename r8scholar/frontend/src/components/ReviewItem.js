@@ -31,7 +31,7 @@ export default class ReviewItem extends Component {
                         <Accordion>
                             <Card.Body>
                                 <Card.Title>{this.props.reviewItem.title}<p style={{float: "right"}}>{new Date().getFullYear()}</p></Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.reviewer + " "} 
+                                <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.nickname + " "} 
                                     <StarRatings
                                         rating={this.props.reviewItem.rating}
                                         starDimension="25px"

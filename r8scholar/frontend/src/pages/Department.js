@@ -44,26 +44,25 @@ export default class Course extends Component {6
         }
        
 
-        //this.componentDidMount(); 
+        this.getAllReviews(this.state.name);
     }
 
-    //TODO: GET req goes here that fetches data based on uid
-    componentDidMount() {
-        //this is just to have but will need to be slightly refactored 
-        //once we talk to the back end people about how their stuff is named such as 'get-couse'
-        fetch('/api/get-course' + '?code=' + this.name)
-        .then((response) => response.json())
+    getAllReviews(myName) {
+        return fetch('/api/get-reviews' + '?subject=' + myName)
+        .then((response) => {
+            if(response.ok){
+                return response.json(); 
+            }else{ 
+                return null
+            }   
+        })
         .then((data) => {
-            this.setState({ // the data.<variable> is just an example and will need to be changed to reflect what the backend returns 
-                department: data.department, 
-                code: data.code, 
-                avgRating: data.avg_rating, 
-                reviews: data.reviews, 
-                instructors: data.instructors, 
-                aliases: data.aliases, 
-            });
-        }); 
+            this.setState({
+                reviews: data, 
+            })
+        });
     }
+
     render() {
         return (
             <div style={pageStyles}>
@@ -156,16 +155,18 @@ export default class Course extends Component {6
                         <Col sm={7}>
                             <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
                                 <Tab eventKey="reviews" title="Reviews">
-                                {this.state.reviews.map((item, index) => 
-                                            (<ReviewItem id={index} key={"department-review"+index} reviewItem={item}/>)
-                                        ) /* generate all the reviews for this page */} 
+                                {this.state.reviews !== null ? 
+                                this.state.reviews.map((item, index) => 
+                                (<ReviewItem id={index} key={"department-review"+index} reviewItem={item}/>)) 
+                                : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
+                                /* generate all the reviews for this page */} 
                                 </Tab>
                                 <Tab eventKey="forums" title="Forums">
                                     <h6>Nothing to show yet; come back soon!</h6>
                                 </Tab>
                                 <Tab eventKey="create-review" title="Create Review">
                                 {cookie.load('isLoggedIn') === "true" ? 
-                                        (<ReviewForm review="department"/>)
+                                        (<ReviewForm name={this.state.name} review="department"/>)
                                         : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
                                     }
                                 </Tab>

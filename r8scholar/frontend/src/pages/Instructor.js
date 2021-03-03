@@ -59,17 +59,14 @@ export default class Course extends Component {6
         //once we talk to the back end people about how their stuff is named such as 'get-course'
         return fetch('/api/get-reviews' + '?subject=' + myName)
         .then((response) => {
-            console.log(response); 
-            if(response.ok){
-                return response.json(); 
-            }
+            return response.json(); 
         })
         .then((data) => {
-            const newReviews = JSON.parse(data);
+            const newReviews = data ;
             this.setState({
                 reviews: newReviews, 
             })
-            
+
         });
     }
 
@@ -180,7 +177,7 @@ export default class Course extends Component {6
                                 </Tab>
                                 <Tab eventKey="create-review" title="Create Review">
                                     {cookie.load('isLoggedIn') === "true" ? 
-                                        (<ReviewForm review="instructor"/>)
+                                        (<ReviewForm name={this.state.name} review="instructor"/>)
                                         : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
                                     }
                                     

@@ -18,7 +18,8 @@ const questions = {
     ], 
     "department": [
         "On a scale of 1 - 5, what is the quality of courses from this department?", 
-        "On a scale of 1 - 5, what " 
+        "On a scale of 1 - 5, what is the quality of instructors from this department", 
+        "On a scale of 1 - 5, what is the overall quality of this department", 
     ],  
 }
 
@@ -37,8 +38,7 @@ export default class ReviewForm extends Component {
     constructor(props){
         super(props); 
         this.state = { 
-            reviewType: props.review, 
-            subject: props.name, 
+            reviewer : null,
             title: "", 
             content: "", 
             rating1: 1, 
@@ -53,6 +53,16 @@ export default class ReviewForm extends Component {
         this.updateRating3 = this.updateRating3.bind(this); 
         
         this.submitReview = this.submitReview.bind(this); 
+    }
+
+    componentDidMount(){
+        fetch('/api/get-user' + '?email=' + cookie.load('email'))//get the info on the reviewer 
+        .then((response) => {
+            return response.json(); 
+        })
+        .then((data) => {
+            this.setState({reviewer: data})
+        });
     }
 
     updateTitleInput(obj){
@@ -87,18 +97,19 @@ export default class ReviewForm extends Component {
 
     //TODO make this require fields 
     submitReview = () =>{
-
+        
         let overallRating = (this.state.rating1 + this.state.rating2 + this.state.rating3) / 3; 
         
         const request = { 
             method: "POST",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({
-                reviewer: cookie.load('email'), 
-                subject: this.state.subject,
+                nickname: this.state.reviewer.nickname, 
+                subject: this.props.name,
                 title: this.state.title, 
                 content: this.state.content, 
                 rating: overallRating, 
+                review_type: this.props.review, 
             }),
         }; 
         fetch("/api/create-review", request)
@@ -119,7 +130,7 @@ export default class ReviewForm extends Component {
                         <Form.Control isInvalid={this.state.title === null} placeholder="Title..." onChange={this.updateTitleInput}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
-                        {questions[this.state.reviewType].map((question, index) => 
+                        {questions[this.props.review].map((question, index) => 
                         (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                         <Form.Label>{question}</Form.Label>
                             <Form.Control onChange={index === 1 ?this.updateRating1 : index === 2 ? this.updateRating2 : this.updateRating3} as="select">
@@ -132,7 +143,7 @@ export default class ReviewForm extends Component {
                         ))}
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>What did you think of this {this.state.reviewType}? </Form.Label>
+                        <Form.Label>What did you think of this {this.props.review}? </Form.Label>
                         <Form.Control onChange={this.updateContentInput} as="textarea" rows={5} />
                     </Form.Group>
                     <div style={buttonStyle}>
