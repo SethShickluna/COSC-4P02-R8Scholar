@@ -122,23 +122,45 @@ class login(APIView):
             return Response({'Ok': 'user logged in...'}, status=status.HTTP_200_OK)
         else:
             return Response({'Bad Request': 'Invalid username or password...'}, status=status.HTTP_400_BAD_REQUEST)
+
 #logs user out
 class logout(APIView):
     def post(self,request):
         logout(request=request)
         redirect = reverse_lazy('users')
         data = {'redirect-url':redirect}
-        return HttpResponseRedirect(redirect)
+        return Response(data, status=status.HTTP_200_OK)
+#Allows user to change their nickname
+class change_nickname(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        nickname = data['nickname']
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist as e:
+            return Response({'Bad Request': 'Invalid email...'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
 
-#allows user to change their password
+        if user.check_password(password):
+            user.nickname = nickname
+            user.save()
+            return Response({'Ok': 'nickname changed to: '+str(nickname)}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid password...'}, status=status.HTTP_400_BAD_REQUEST)
+
+#Allows user to change their password
 class change_password(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         email = data['email']
         old_password = data['old_password']
         new_password = data['new_password']
-        user = CustomUser.objects.get(email=email)
-
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist as e:
+            return Response({'Bad Request': 'Invalid email...'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
+        
         if user.check_password(old_password):
             try:
                 validate_password(new_password)
@@ -148,7 +170,7 @@ class change_password(APIView):
             user.save()
             return Response({'Ok': 'Password Changed...'}, status=status.HTTP_200_OK)
         else:
-            return Response({'Bad Request': 'Invalid email or password...'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request': 'Invalid password...'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CreateReviewView(APIView):
