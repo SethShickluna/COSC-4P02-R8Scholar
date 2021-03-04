@@ -1,3 +1,5 @@
 Dave Bockus,Computer Science
 Earl Foxwell,Computer Science
 Basil Nanayakkara,Mathematics and Statistics
+Robson De Grande,Computer Science
+Brian Ross,Computer Science

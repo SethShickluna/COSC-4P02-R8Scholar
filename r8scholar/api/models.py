@@ -78,11 +78,26 @@ class Department(models.Model):
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
+    
+    def update_rating(self): # NEEDS TESTING #
+        count, my_sum = 0
+        #get reviews that we are a subject of 
+        for review in Review.objects: #O(n) 
+            if review.subject == self.name: #this might be sus 
+                my_sum += review.rating
+                count +=1 
+        #store their ratings and sum 
+        #set rating to new average 
+        self.rating = (my_sum / count)
+        
 
 class Instructor(models.Model):
     name  = models.CharField(max_length=30,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
+    
+    def update_rating(self): 
+        pass
 
 
 class Course(models.Model):
@@ -90,6 +105,10 @@ class Course(models.Model):
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
     course_full_name  = models.CharField(max_length=30,default=None)
+
+    def update_rating(self): 
+        pass
+
 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -101,7 +120,9 @@ class Review(models.Model):
     rating = models.FloatField(default=None, validators=[rating_validator])
     numb_reports = models.IntegerField(default=0)
     date_created = models.DateField(auto_now=True)
-    department = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
+    department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
+    instructor_name = models.ForeignKey(Instructor, null=True, on_delete=models.DO_NOTHING)
+    course_name = models.ForeignKey(Course, null=True, on_delete=models.DO_NOTHING)
     review_type = models.CharField(max_length=10)
 
     def _str_(self):

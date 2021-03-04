@@ -167,18 +167,30 @@ class CreateReviewView(APIView):
             #get user who left review and other objects 
             user = CustomUser.objects.get(nickname=nickname)
             my_department = None
+            my_instructor = None
+            my_course = None
             if review_type == 'course':
-                my_department = Course.objects.get(name=subject).department
+                my_course = Course.objects.get(name=subject)
+                my_department = my_course.department
             elif review_type == 'instructor':
-                my_department = Instructor.objects.get(name=subject).department
+                my_instructor = Instructor.objects.get(name=subject)
+                my_department = my_instructor.department
             else: #review is on a department
                 my_department = Department.objects.get(name=subject)
-
-            #update rating of the review subject 
+                #my_department.update_rating()
             
-            review = Review(reviewer=user, nickname=nickname, subject=subject, title=title, 
-            content=content, rating=rating, department=my_department)
+            review = Review(reviewer=user, nickname=nickname, subject=subject, 
+            title=title, content=content, rating=rating, department_name=my_department,
+            instructor_name=my_instructor, course_name=my_course, review_type=review_type)
             review.save()
+            #update rating of the review subject 
+            #if review_type == 'course':
+                #my_course.update_rating()
+            #elif review_type == 'instructor':
+                #my_instructor.update_rating()
+            #else: #review is on a department
+                #my_department.update_rating()
+
             return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)

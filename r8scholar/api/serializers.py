@@ -12,7 +12,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('review_id', 'reviewer', 'nickname', 'subject', 'title','content',
-        'rating', 'numb_reports','date_created', 'department')
+        'rating', 'numb_reports','date_created', 'department_name', 'instructor_name', 
+        'course_name', 'review_type')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
