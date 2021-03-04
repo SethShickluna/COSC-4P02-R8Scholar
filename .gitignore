@@ -118,8 +118,8 @@ GitHub.sublime-settings
 
 # React 
 node_modules/
-/.pnp
-.pnp.js
+/.build
+/r8scholar/frontend/static/
 
 # testing
 /coverage

@@ -167,13 +167,14 @@ class CreateReviewView(APIView):
             #get user who left review and other objects 
             user = CustomUser.objects.get(nickname=nickname)
             my_department = None
-            if review_type == 'Course':
+            if review_type == 'course':
                 my_department = Course.objects.get(name=subject).department
-            elif review_type == 'Instructor':
+            elif review_type == 'instructor':
                 my_department = Instructor.objects.get(name=subject).department
             else: #review is on a department
-                my_department = Department.obects.get(name=subject)
+                my_department = Department.objects.get(name=subject)
 
+            #update rating of the review subject 
             
             review = Review(reviewer=user, nickname=nickname, subject=subject, title=title, 
             content=content, rating=rating, department=my_department)

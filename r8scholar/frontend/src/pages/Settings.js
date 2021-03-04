@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import AdminForm from '../components/AdminForm';
-import EditItemForm from '../components/EditItemForm';
-import RemoveItemForm from '../components/RemoveItemForm';
-import BanUserForm from '../components/BanUserForm';
+import AdminForm from '../components/assets/AdminForm';
+import EditItemForm from '../components/assets/EditItemForm';
+import RemoveItemForm from '../components/assets/RemoveItemForm';
+import BanUserForm from '../components/assets/BanUserForm';
 
 
 
