@@ -63,7 +63,8 @@ class GetUser(APIView):
             if len(user) > 0:
                 data = UserSerializer(user[0]).data
                 return Response(data, status=status.HTTP_200_OK)
-            return Response({'User Not Found': 'Invalid User Email.'}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response({'User Not Found': 'Invalid User Email.'}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({'Bad Request': 'Email not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -81,8 +82,23 @@ class GetReviewsView(APIView):
                 for review in reviews: 
                     data.append(ReviewSerializer(review).data)
                 return Response(data, status=status.HTTP_200_OK)
-            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetCourseView(APIView): 
+    serializer_class = CourseSerializer
+    lookup_url_kwarg = 'name'
+
+    def get(self, request, format=None):
+        name = request.GET.get(self.lookup_url_kwarg)
+        if name != None:
+            course = Course.objects.filter(name=name)
+            if len(course) > 0:
+                data = self.serializer_class(course).data
+                return Response(data, status=status.HTTP_200_OK)
+            else:
+                return Response({'Course Not Found': 'Invalid Course Name.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
 #create views 
