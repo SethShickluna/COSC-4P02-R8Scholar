@@ -1,88 +1,103 @@
 import React, { Component } from "react";
-import Button from "../components/Button";
-import Loading from "../components/Loading";
+import StarRatings from 'react-star-ratings'; 
+import {Spinner, Table, Container, Row, Col} from 'reactstrap';
+import SecondaryNav from "../components/SecondaryNav";
+
+const linkStyle = {
+    color: 'black',
+}
+
+
+
+
 
 export default class Departments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+           entries: [],
         };
+
+        
     }
 
     componentDidMount() {
         setTimeout(() => {
             this.getEntries();
-        }, 1000);
+        }, 200);
     }
 
     // TODO: GET departs
-    getEntries = () => {
-        fetch("/api/departments").then( //same here use JSON.parse() on data 
+    getEntries = async() => {//this fetches the courses, implement the same for instructors and departments 
+        await fetch("/api/departments").then(
             (res) => {
                 res.json().then((data) => {
-                    this.setState({ data: data.data });
+                    const newEntry = []
+                    data.map((item) =>{
+                        newEntry.push(item);
+                    })
+                    this.setState({ entries: newEntry});
                 });
             }
         );
     };
 
     render() {
-        return !this.state.data.length ? (
-            <Loading size="75" />
-        ) : (
-            <div className="departments-container">
-                {this.state.data.map((e) => {
-                    return (
-                        <div className="department-container">
-                            <div className="label">
-                                <div className="name">{e.name}</div>
-                                <div className="rating">{e.rating}</div>
+        return(
+            <div className="departments-page">
+                <SecondaryNav/>
+                <Container fluid>
+                    <Row style={{marginTop:'2%'}} align="center">
+                        <Col>
+                            <div className="title">
+                                <h1>Departments</h1>
                             </div>
-                            <div className="department-info">
-                                <div className="avgProfessor">
-                                    {"Average professor rating " +
-                                        e.avgProfessorRating}
-                                </div>
-                                <Button
-                                    id={e.topProfessor}
-                                    className="topProfessor"
-                                    text={"Top professor " + e.topProfessor}
-                                    link={"/Professor/" + e.topProfessor}
-                                />
-                                <Button
-                                    id={e}
-                                    className={"professors-button"}
-                                    text="View All"
-                                    link={{
-                                        pathname: "/Professors/",
-                                        id: e,
-                                    }}
-                                />
-                                <div className="avgCourse">
-                                    {"Average course rating " +
-                                        e.avgCourseRating}
-                                </div>
-                                <Button
-                                    id={e.topCourse}
-                                    className="topCourse"
-                                    text={"Top course " + e.topCourse}
-                                    link={"/Course/" + e.topCourse}
-                                />
-                                <Button
-                                    id={e}
-                                    className={"courses-button"}
-                                    text="View All"
-                                    link={{
-                                        pathname: "/Courses",
-                                        id: e,
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    );
-                })}
+                        </Col>
+                    </Row>
+                    <Row align="center"> {/**Filters */}
+                        <Col>
+                           <h5>Filter Options</h5>
+                        </Col>
+                    </Row>
+                   
+                    <Row style={{marginTop:'2%'}} align="center">
+                        <Col className="col-md-2"/>
+                        <Col className="col-md-8">
+                           <Table striped>
+                               <thead>
+                                    <th>Name</th>
+                                    <th>Rating</th>
+                                    <th>Top Course</th>
+                                    <th>Top Instructor</th>
+                               </thead>
+                               <tbody>
+                                   {!this.state.entries.length ? 
+                                   <Spinner color="dark"/>
+                                :this.state.entries.map((item, index) =>{ {/**5 courses */}
+                                    return(
+                                    <tr key={index}>  
+                                        <th><a style={linkStyle} href={"/department/"+item.name}>{item.name}</a></th>
+                                        <th><StarRatings
+                                            rating={item.rating}
+                                            starDimension="25px"
+                                            starSpacing="5px"
+                                            starRatedColor="#3498db"
+                                            numberOfStars={5}
+                                            name='avgRating'/>
+                                        </th>
+                                        <th>Top Course</th>
+                                        <th>Top Prof</th>
+                                    </tr>)
+                                })}
+                               </tbody>
+                           </Table>
+                        </Col>
+                        <Col className="col-md-2"/>
+                    </Row>
+                    
+                </Container>
+                    
             </div>
-        );
+        )
     }
 }

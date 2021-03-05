@@ -6,6 +6,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
 import cookie from 'react-cookies'; 
+import SecondaryNav from "../components/SecondaryNav";
 
 const pageStyles={
     margin: '0 auto', 
@@ -65,6 +66,8 @@ export default class Course extends Component {6
 
     render() {
         return (
+            <div>
+                <SecondaryNav/>
             <div style={pageStyles}>
                 <Container fluid="md">
                     <Row> {/* title row, includes course name and reviews*/}
@@ -175,6 +178,7 @@ export default class Course extends Component {6
                         </Col>
                     </Row>
                 </Container>
+            </div>
             </div>
         );
     }

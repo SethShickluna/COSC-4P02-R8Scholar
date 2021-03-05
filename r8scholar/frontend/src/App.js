@@ -4,15 +4,16 @@ import React, {Component} from "react";
 import {render} from 'react-dom'; 
 
 //css
-import "./style.css"; 
+import "./assets/styles/bootstrap.min.css";
+import "./assets/styles/paper-kit.css";
+import "./assets/styles/demo.css";
+
 //components
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Signout from "./components/assets/Signout";
 
 //pages
 import Login from "./pages/Login";
-import About from "./pages/About";
 import Departments from "./pages/Departments";
 import Department from "./pages/Department";
 import Home from "./pages/Home";
@@ -42,14 +43,13 @@ export default class App extends Component {
     render(){
         return (
             <Router>
-                <Navbar />
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/login" component={Login} history={history} />
                     <Route exact path="/signup" component={Signup} />
                     <Route path="/instructors" component={Instructors} />
-                    <Route exact path="/about" component={About} />
                     <Route exact path="/courses" component={Courses} />
+                    <Route exact path="/profile" component={Profile} />
                     <Route exact path="/forum" component={Forum} />
                     <Route exact path="/account" component={Profile} />
                     <Route exact path="/settings" component={Settings} />   

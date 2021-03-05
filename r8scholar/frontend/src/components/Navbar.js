@@ -1,58 +1,159 @@
-import React, { Component } from "react";
-import Button from "./Button";
-import Search from "./Search";
-import Logo from "./Logo";
-import { Link, withRouter } from "react-router-dom";
-import cookie from 'react-cookies'; 
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+// nodejs library that concatenates strings
+import classnames from "classnames";
+// reactstrap components
+import {
+  Form,
+  FormGroup, 
+  Input,
+  Button,
+  Collapse,
+  NavbarBrand,
+  Navbar,
+  NavItem,
+  NavLink,
+  Nav,
+  Container,
+} from "reactstrap";
 
-class Navbar extends Component {
-    constructor(props) {
-        super(props);
+import cookie from 'react-cookies';
 
-        this.buttons = [
-            "Instructors",
-            "Courses",
-            "Departments",
-            "About",
-        ];
-    }
+function HomeNavbar() {
+  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
+  const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
+  const toggleNavbarCollapse = () => {
+    setNavbarCollapse(!navbarCollapse);
+    document.documentElement.classList.toggle("nav-open");
+  };
 
-    render() {
-        return (
-            <div className="navbar-container">
-                <Link className="navbar-home" to="/">
-                    <Logo className="Logo" />
-                </Link>
-                <Search className="Search" />
-                <Button id={cookie.load('isLoggedIn') === "true" ? "account" : "login"} 
-                    className="nav-button"
-                    text={cookie.load('isLoggedIn') === "true"? "Account" : "Login"}
-                    key={cookie.load('isLoggedIn') === "true"? 98 : 97} 
-                    link={cookie.load('isLoggedIn') === "true"? "/account" : "/login"}
-                />
-                {this.buttons.map((e, index) => {
-                    return (
-                        <Button
-                            id={e}
-                            className="nav-button"
-                            text={e}
-                            key={index+1}
-                            link={"/" + (e.toLowerCase())}
-                        />
-                    );
-                })}
-                <Button id={cookie.load('isLoggedIn') === "true" ? "signout" : "signup"} 
-                    className="nav-button"
-                    text={cookie.load('isLoggedIn') === "true" ? "Sign Out" : "Create Account"}
-                    key={cookie.load('isLoggedIn') === "true" ? 99 : 100} 
-                    link={cookie.load('isLoggedIn') === "true" ? "/signout" : "/signup"}
-                   
-                ><button function={this.handleInput}/></Button>
-            </div>
-        );
-    }
+  React.useEffect(() => {
+    const updateNavbarColor = () => {
+      if (
+        document.documentElement.scrollTop > 299 ||
+        document.body.scrollTop > 299
+      ) {
+        setNavbarColor("");
+      } else if (
+        document.documentElement.scrollTop < 300 ||
+        document.body.scrollTop < 300
+      ) {
+        setNavbarColor("navbar-transparent");
+      }
+    };
+
+    window.addEventListener("scroll", updateNavbarColor);
+
+    return function cleanup() {
+      window.removeEventListener("scroll", updateNavbarColor);
+    };
+  });
+  return (
+    <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
+      <Container>
+        <div className="navbar-translate">
+          <NavbarBrand
+            data-placement="bottom"
+            href="/"
+            target="_blank"
+            title="Landing Page">
+            R8Scholar
+          </NavbarBrand>
+          <button
+            aria-expanded={navbarCollapse}
+            className={classnames("navbar-toggler navbar-toggler", {
+              toggled: navbarCollapse,
+            })}
+            onClick={toggleNavbarCollapse}
+          >
+            <span className="navbar-toggler-bar bar1" />
+            <span className="navbar-toggler-bar bar2" />
+            <span className="navbar-toggler-bar bar3" />
+          </button>
+        </div>
+        <Form className="form-inline ml-auto">
+              <FormGroup className="has-white">
+                <Input placeholder="Search" type="text" />
+              </FormGroup>
+         </Form>
+        <Collapse
+          className="justify-content-end"
+          navbar
+          isOpen={navbarCollapse}>
+          <Nav navbar>
+            {/** pages */}
+            <NavItem>
+              <NavLink href="/courses">
+                Courses
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/instructors">
+                Instructors
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/departments">
+                Departments
+              </NavLink>
+            </NavItem>
+            {cookie.load('isLoggedIn') === "true"? 
+                <NavItem>
+                <NavLink
+                  href="/profile">
+                  Profile
+                </NavLink>
+              </NavItem>
+            : null
+            }
+        
+            <NavItem> {/**youtube icon/link */}
+              <NavLink
+                data-placement="bottom"
+                href="https://twitter.com/CreativeTim?ref=creativetim"
+                target="_blank"
+                title="Behind the Scenes"
+              >
+                <i className="fa fa-youtube" />
+                <p className="d-lg-none">Youtube</p>
+              </NavLink>
+            </NavItem>
+            <NavItem> {/**github icon/link */}
+              <NavLink
+                data-placement="bottom"
+                href="https://github.com/SethShickluna/COSC-4P02-R8Scholar"
+                target="_blank"
+                title="Check out our GitHub"
+              >
+                <i className="fa fa-github" />
+                <p className="d-lg-none">GitHub</p>
+              </NavLink>
+            </NavItem>
+            <NavItem> {/**signup button */}
+            {cookie.load('isLoggedIn') === "true"? 
+                <Button className="btn-round lg" color="primary" href="/signout">
+                
+                    Sign Out
+                </Button>
+
+            : <Button className="btn-round lg" href="/signup" color="primary">
+            <i className="nc-icon nc-spaceship before"></i>
+                Sign up Today
+            </Button>}
+            {cookie.load('isLoggedIn') === "true"? 
+                null
+
+            : <Button href="/login" className="btn-round lg" color="primary">
+                Login
+            </Button>}
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Container>
+    </Navbar>
+  );
 }
 
-export default withRouter(Navbar); 
+export default HomeNavbar;

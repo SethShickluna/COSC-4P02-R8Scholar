@@ -17,5 +17,6 @@ urlpatterns = [
     path('forum/', views.index),
     path('signout/', views.index),
     path('settings/', views.index), 
+    path('profile/', views.index),
     path('*', views.index),
 ]

@@ -114,7 +114,7 @@ class SignupForm extends Component {
             switch(response.status){
                 case 201: 
                     alert("Account created successfully!"); 
-                    this.props.history.push('/');
+                    this.props.history.push('/login');
                     break; 
                 default:
                     alert("Something went wrong :/ " + response.statusText); 

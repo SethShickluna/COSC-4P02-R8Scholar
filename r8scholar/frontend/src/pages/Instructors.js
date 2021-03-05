@@ -1,20 +1,18 @@
 import React, { Component } from "react";
-import List from "../components/List";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
-import { Icon } from "react-icons-kit";
-import { chevronDown } from "react-icons-kit/fa/chevronDown";
-import { chevronUp } from "react-icons-kit/fa/chevronUp";
-import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
-import { chevronRight } from "react-icons-kit/fa/chevronRight";
-import { minus } from "react-icons-kit/fa/minus";
-import Loading from "../components/Loading";
+import StarRatings from 'react-star-ratings'; 
+import {Spinner, Table, Container, Row, Col} from 'reactstrap';
+import SecondaryNav from "../components/SecondaryNav";
+
+const linkStyle = {
+    color: 'black',
+}
+
 
 export default class Courses extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+            entries: [],
             unfilteredData: [],
             filters: ["Rating", "Department", "Show per page"],
             options: { Rating: [], Department: [], "Show per page": [] },
@@ -40,25 +38,18 @@ export default class Courses extends Component {
     }
 
     // TODO: GET profs
-    getEntries = (callback) => {
-        fetch("/api/instructors").then(
-            (res) => {
-                res.json().then((data) => {
-                    this.setState(
-                        { data: data.data, unfilteredData: data.data },
-                        () => {
-                            var length = Math.ceil(
-                                this.state.data.length / this.state.perPage
-                            );
-                            this.setState({ maxPage: length });
-                            callback();
-                        }
-                    );
+    getEntries = async() => {//this fetches the courses, implement the same for instructors and departments 
+        await fetch("/api/instructors").then((response) => {
+                response.json().then((data) => {
+                    const newEntry = []
+                    data.map((item) =>{
+                        newEntry.push(item);
+                    })
+                    this.setState({ entries: newEntry});
                 });
             }
         );
     };
-
     getOptions = () => {
         var options = {
             Rating: [
@@ -179,100 +170,69 @@ export default class Courses extends Component {
     };
 
     render() {
-        return !this.state.data.length ? (
-            <Loading size="75" />
-        ) : (
-            //Body
-            <div className="professors-container">
-                {
-                    //Filter Buttons
-                    <div className="filter-container">
-                        <div className="filter-label">Filters</div>
-                        <div className="filter-buttons">
-                            {this.state.filters.map((e) => {
-                                return (
-                                    <Dropdown
-                                        id={e}
-                                        className="filter-button"
-                                        text={e}
-                                        options={this.state.options[e]}
-                                        icon={chevronDown}
-                                        iconSize="12"
-                                        handleSelect={this.handleFilter}
-                                        selected={this.state[e]}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </div>
-                }
-                {
-                    //Sort Buttons
-                    <div className="sort-buttons">
-                        {this.state.sortButtons.map((e) => {
-                            var arrow = minus;
-                            if (this.state.sortIndex === e.toLowerCase()) {
-                                arrow = this.state.accending
-                                    ? (arrow = chevronDown)
-                                    : (arrow = chevronUp);
-                            }
-                            return (
-                                <Button
-                                    id={e}
-                                    className="sort-button"
-                                    text={e}
-                                    onClick={this.handleSort}
-                                    icon={arrow}
-                                    iconSize="10"
-                                />
-                            );
-                        })}
-                    </div>
-                }
-                {
-                    //List
-                    <div className="list-container">
-                        <List
-                            data={this.getCurrentPage()}
-                            columns={[
-                                "name",
-                                "courses",
-                                "department",
-                                "rating",
-                            ]}
-                            link={"/professor/"}
-                        />
-                    </div>
-                }
-                {
-                    //Navigation Buttons
-                    this.state.perPage < this.state.data.length && (
-                        <div className="navigation-container">
-                            <Button
-                                id="navigate-back"
-                                className="navigate-button"
-                                text=""
-                                onClick={this.handleNavigate}
-                                icon={chevronLeft}
-                                iconSize="12"
-                            />
-                            <div className="label">
-                                {this.state.currentPage +
-                                    "/" +
-                                    this.state.maxPage}
+        return(
+        <div className="departments-page">
+                <SecondaryNav/>
+                <Container fluid>
+                    <Row style={{marginTop:'2%'}} align="center">
+                        <Col>
+                            <div className="title">
+                                <h1>Instructors</h1>
                             </div>
-                            <Button
-                                id="navigate-forward"
-                                className="navigate-button"
-                                text=""
-                                onClick={this.handleNavigate}
-                                icon={chevronRight}
-                                iconSize="12"
-                            />
-                        </div>
-                    )
-                }
+                        </Col>
+                    </Row>
+                    <Row align="center"> {/**Filters */}
+                        <Col>
+                           <h5>Filter Options</h5>
+                        </Col>
+                    </Row>
+                   
+                    <Row style={{marginTop:'2%'}} align="center">
+                        <Col className="col-md-2"/>
+                        <Col className="col-md-8">
+                           <Table striped>
+                               <thead>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Rating</th>
+                                    <th>Department</th>
+                                    <th>Department Rating</th>
+                               </thead>
+                               <tbody>
+                                   {!this.state.entries.length ? 
+                                   <Spinner color="dark"/>
+                                :this.state.entries.map((item, index) =>{ {/**5 courses */}
+                                    return(
+                                    <tr key={index}>  
+                                        <th>{index + 1}</th>
+                                        <th><a style={linkStyle} href={"/instructor/"+item.name}>{item.name}</a></th>
+                                        <th><StarRatings
+                                            rating={item.rating}
+                                            starDimension="25px"
+                                            starSpacing="5px"
+                                            starRatedColor="#3498db"
+                                            numberOfStars={5}
+                                            name='avgRating'/>
+                                        </th>
+                                        <th><a style={linkStyle} href={"/department/"+item.name}>{item.department}</a></th>
+                                        <th><StarRatings
+                                            rating={Math.random() * 6}
+                                            starDimension="25px"
+                                            starSpacing="5px"
+                                            starRatedColor="#3498db"
+                                            numberOfStars={5}
+                                            name='avgRating'/>
+                                        </th>
+                                    </tr>)
+                                })}
+                               </tbody>
+                           </Table>
+                        </Col>
+                        <Col className="col-md-2"/>
+                    </Row>
+                    
+                </Container>
+                    
             </div>
-        );
-    }
+        )}
 }

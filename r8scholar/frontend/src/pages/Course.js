@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Container, Row, Col, Tab, Button} from 'react-bootstrap'; 
 import {Link} from 'react-router-dom'; 
 import ReviewItem from '../components/ReviewItem'; 
+import SecondaryNav from "../components/SecondaryNav";
 import Tabs from 'react-bootstrap/Tabs'
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
@@ -29,8 +30,7 @@ const pageBreak = {
 }
 
 const tabStyle = { 
-    paddingTop: '2.5%', 
-    backgroundColor: '#ecf0f1', 
+    paddingTop: '2.5%',  
 }
 
 export default class Course extends Component {
@@ -74,9 +74,11 @@ export default class Course extends Component {
     }
 
     render() {
-        console.log(this.id);
         return (
+        <div>
+        <SecondaryNav/>
             <div style={pageStyles}>
+                
                 <Container fluid="md">
                     <Row> {/* title row, includes course name and reviews*/}
                         <Col sm={4}>
@@ -162,7 +164,7 @@ export default class Course extends Component {
                                 </div>   
                                 <div name="freq-prof-name" style={{textAlign: 'center'}}>
                                     {this.state.instructors.map((item, index) => 
-                                    (<p><Link key={index} to={"/instructor/" + item}>{item}</Link></p>))}
+                                    (<p><Link key={index} to={"/professor/" + item}>{item}</Link></p>))}
                                 </div>
                             </div>
                             </div>
@@ -192,6 +194,7 @@ export default class Course extends Component {
                         </Col>
                     </Row>
                 </Container>
+            </div>
             </div>
         );
     }

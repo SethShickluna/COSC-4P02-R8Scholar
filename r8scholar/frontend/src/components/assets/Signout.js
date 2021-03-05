@@ -19,12 +19,12 @@ class Signout extends Component{
                 email: cookie.load("email"), 
             }),
         }; 
-        cookie.remove("email"); 
-        cookie.remove("isLoggedIn");
         fetch("/api/logout", request)
         .then((Response) => {
             if(Response.ok){//clear cookies and logout 
-                this.props.history.push('/login'); 
+                cookie.save('isLoggedIn', 'false',{path:'/'});
+                cookie.save('email', '',{path:'/'});
+                this.props.history.push('/'); 
             }else{
                 //idk why this would ever go off
             }
