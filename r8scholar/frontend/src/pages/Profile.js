@@ -122,10 +122,7 @@ export default class Profile extends Component {
                     department: data.department,
                     name: data.nickname, 
                     code: data.code,
-                    avgRating: data.avg_rating,
-                    //reviews: data.reviews,
-                    //courses: data.courses,
-                    //aliases: data.aliases, /*change the fields to match the state */
+                    avgRating: data.avg_rating,         
                 });
             });
     }

@@ -162,7 +162,7 @@ export default class Course extends Component {
                                 </div>   
                                 <div name="freq-prof-name" style={{textAlign: 'center'}}>
                                     {this.state.instructors.map((item, index) => 
-                                    (<p><Link key={index} to={"/professor/" + item}>{item}</Link></p>))}
+                                    (<p><Link key={index} to={"/instructor/" + item}>{item}</Link></p>))}
                                 </div>
                             </div>
                             </div>

@@ -133,7 +133,7 @@ export default class Course extends Component {6
                                 </div>   
                                 <div name="pop-prof-name" style={{textAlign: 'center'}}>
                                     {this.state.instructors.map((item) => 
-                                    (<p><Link to={"/professor/" + item}>{item}</Link></p>))}
+                                    (<p><Link to={"/instructor/" + item}>{item}</Link></p>))}
                                 </div>
                             </div>
 
@@ -156,7 +156,7 @@ export default class Course extends Component {6
                             <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
                                 <Tab eventKey="reviews" title="Reviews">
                                 {this.state.reviews !== null ? 
-                                this.state.reviews.map((item, index) => 
+                                this.state.reviews.reverse().map((item, index) => 
                                 (<ReviewItem id={index} key={"department-review"+index} reviewItem={item}/>)) 
                                 : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
                                 /* generate all the reviews for this page */} 

@@ -114,7 +114,12 @@ export default class ReviewForm extends Component {
         }; 
         fetch("/api/create-review", request)
         .then((response) => {
-            console.log(response.status); 
+            if(response.ok){
+                //reload page 
+                window.location.reload();
+            }else{
+                alert("Unable to post response course " + this.props.name + " not found"); 
+            }
         });
         
         

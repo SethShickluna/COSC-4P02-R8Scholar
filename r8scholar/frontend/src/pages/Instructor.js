@@ -55,18 +55,18 @@ export default class Course extends Component {6
 
     //TODO: GET req goes here that fetches data based on uid
     getAllReviews(myName) {
-        //this is just to have but will need to be slightly refactored 
-        //once we talk to the back end people about how their stuff is named such as 'get-course'
         return fetch('/api/get-reviews' + '?subject=' + myName)
         .then((response) => {
-            return response.json(); 
+            if(response.ok){
+                return response.json(); 
+            }else{ 
+                return null
+            }   
         })
         .then((data) => {
-            const newReviews = data ;
             this.setState({
-                reviews: newReviews, 
+                reviews: data, 
             })
-
         });
     }
 
