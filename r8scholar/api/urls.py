@@ -16,6 +16,7 @@ urlpatterns = [
     #get views 
     path('get-user', views.GetUser.as_view()), 
     path('get-reviews', views.GetReviewsView.as_view()), 
+    path('get-course',views.GetCourseView.as_view(),name='get-course'),
     #create views 
     path('create-user', views.CreateUserView.as_view()), 
     path('create-review', views.CreateReviewView.as_view()), 
