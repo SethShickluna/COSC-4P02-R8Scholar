@@ -17,6 +17,8 @@ urlpatterns = [
     path('get-user', views.GetUser.as_view()), 
     path('get-reviews', views.GetReviewsView.as_view()), 
     path('get-course',views.GetCourseView.as_view(),name='get-course'),
+    path('get-department',views.GetDepartmentView.as_view(),name='get-department'),
+    path('get-instructor',views.GetInstructorView.as_view(),name='get-instructor'),
     #create views 
     path('create-user', views.CreateUserView.as_view()), 
     path('create-review', views.CreateReviewView.as_view()), 
