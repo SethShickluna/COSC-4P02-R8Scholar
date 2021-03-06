@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Tab, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Tab, Button} from 'reactstrap';
 import ReviewItem from '../components/ReviewItem';
+import SecondaryNav from '../components/SecondaryNav';
 import Tabs from 'react-bootstrap/Tabs';
-import StarRatings from 'react-star-ratings';
-import ReviewForm from '../components/ReviewForm';
 import cookie from 'react-cookies';
 import imageOne from '../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg';
 import EditProfileForm from '../components/EditProfileForm';
@@ -38,7 +36,6 @@ const pageBreak = {
 
 const tabStyle = {
     paddingTop: '2.5%',
-    backgroundColor: '#ecf0f1',
 }
 
 const imgStyle = {
@@ -81,48 +78,20 @@ export default class Profile extends Component {
         super(props);
         //use state because react forces an update when it is modifed in some way 
         this.state = { //all the content that is gonna be retrieved from the api stored here locally
-            name: "Username",
-            email: "nash@brocku.ca",
-            profile_picture: '',
-            password: "myPassword",
-            reviews: [
-                {
-                    title: "What a time to be alive !",
-                    content: "If you put the work in and show that you actually want to be there, Bockus will do everything in his power to help you succeed. Otherwise you're SOL",
-                    rating: 2.5,
-                    user: "UserName",
-                    comments: null,
-                }
-                ,
-                {
-                    title: "A second review from this same User !",
-                    content: "Oh my goodness, This is a beautifil way to live.",
-                    rating: 3.5,
-                    user: "SAME USER",
-                    comments: null,
-                }
-            ]
-
+            user: null,
+            reviews: []
         }
 
         this.imageMaker=this.imageMaker.bind(this) //bInd imagemaker
-
-
-        //this.componentDidMount(); 
+        this.verifyUser=this.verifyUser.bind(this);
     }
 
-    //TODO: GET req goes here that fetches data based on uid
     componentDidMount() {
-        //this is just to have but will need to be slightly refactored 
-        //once we talk to the back end people about how their stuff is named such as 'get-couse'
         fetch('/api/get-user' + '?email=' + cookie.load('email'))
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ // the data.<variable> is just an example and will need to be changed to reflect what the backend returns 
-                    department: data.department,
-                    name: data.nickname, 
-                    code: data.code,
-                    avgRating: data.avg_rating,         
+                    user: data,  
                 });
             });
     }
@@ -132,18 +101,54 @@ export default class Profile extends Component {
         this.setState({profile_picture : newImage })
     }
 
-//TODO : add a method to change profile picture in the state
-
+    verifyUser(){
+        var code = prompt("Enter the 6 digit code emailed to " + this.state.user.email);
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                verification_code: code,
+            }),
+        }; 
+        fetch("/api/verify-user?email="+this.state.user.email, request)
+        .then((response) => {
+            if(response.ok){
+                //reload page 
+                alert("Success");
+                window.location.reload();
+            }else{
+                alert("Invalid Code!");
+            };
+        });
+    }
+    
     render() {
         return (
+            <div>
+
+            <SecondaryNav/>
+            {this.state.user? 
             <div style={pageStyles}>
                 <Container fluid="md">
-                    <Row>
+                    <Row align="center">
+                        <Col>
+                            {!this.state.user.is_verified?
+                            <div>
+                                <h2>Your account is not verfied!</h2>
+                                <Button onClick={this.verifyUser} color="info" size="lg">
+                                    Verify Now
+                                </Button>
+                            </div>
+                            :
+                            null}
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop: "3%"}}>
                         <Col sm={4}>
                             <div name="title">
 
                                 {/*insert image edit, accept image and input it */}
-                                <h1 style={{ textAlign: 'center' }}>{this.state.name}</h1>
+                                <h1 style={{ textAlign: 'center' }}>{this.state.user.nickname}</h1>
                             </div>
                             <div style={pageBreak} /> {/* underline */}
 
@@ -215,6 +220,8 @@ export default class Profile extends Component {
                         </Col>
                     </Row>
                 </Container>
+            </div>
+            : null } 
             </div>
         );
     }

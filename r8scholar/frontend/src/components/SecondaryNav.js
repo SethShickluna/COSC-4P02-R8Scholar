@@ -85,7 +85,7 @@ function SecondaryNav() {
             <Nav navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 
-                <Button className="btn-round lg" color="primary" href="/signout">
+                <Button className="btn-round lg outline" color="info" href="/signout">
                 
                     Sign Out
                 </Button>

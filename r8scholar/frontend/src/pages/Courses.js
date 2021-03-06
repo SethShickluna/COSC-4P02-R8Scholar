@@ -25,16 +25,16 @@ export default class Courses extends Component {
             perPage: 10,
             currentPage: 1,
             maxPage: 0,
+            departmentRatings:{}
         };
+        console.log(this.state); 
     }
 
     componentDidMount() {
         this.getOptions();
-        this.getEntries(() => {
-            if (this.props.location.id) {
-                this.handleFilter("Department", this.props.location.id.name);
-            }
-        });
+        this.getEntries().then(() => {
+            this.getDepartmentRatings(); 
+        }); 
     }
 
     // TODO: GET profs
@@ -44,12 +44,37 @@ export default class Courses extends Component {
                     const newEntry = []
                     data.map((item) =>{
                         newEntry.push(item);
+                        this.getDepartmentRatings(item.department);
                     })
                     this.setState({ entries: newEntry});
                 });
             }
         );
     };
+
+    getDepartmentRatings = async(name) => { 
+        await fetch("/api/get-department?name="+name).then((response) => {
+            if(response.ok){ //yay
+                return response.json(); 
+            }else{//nay 
+                return null
+            }
+        })
+        .then((data) =>{
+            console.log(data);
+            const deptRatings = this.state.departmentRatings;
+            if(data !== null){
+                deptRatings[name]=data.rating;
+            }else{
+                deptRatings[name]=0;
+            }
+            this.setState({
+                departmentRatings: deptRatings,
+            });
+        }
+    );
+    }
+
     getOptions = () => {
         var options = {
             Rating: [
@@ -216,7 +241,7 @@ export default class Courses extends Component {
                                         </th>
                                         <th><a style={linkStyle} href={"/department/"+item.name}>{item.department}</a></th>
                                         <th><StarRatings
-                                            rating={Math.random() * 6}
+                                            rating={this.state.departmentRatings[item.department]}
                                             starDimension="25px"
                                             starSpacing="5px"
                                             starRatedColor="#3498db"

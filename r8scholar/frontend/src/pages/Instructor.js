@@ -219,7 +219,7 @@ export default class Course extends Component {6
                                     </Tab>
                                     <Tab eventKey="create-review" title="Create Review">
                                     {cookie.load('isLoggedIn') === "true" ? 
-                                            (<ReviewForm name ={this.state.name} review="course"/>)
+                                            (<ReviewForm name ={this.state.name} review="instructor"/>)
                                             : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
                                         }
                                     </Tab>

@@ -98,30 +98,33 @@ export default class ReviewForm extends Component {
     //TODO make this require fields 
     submitReview = () =>{
         
-        let overallRating = (this.state.rating1 + this.state.rating2 + this.state.rating3) / 3; 
-        
-        const request = { 
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({
-                nickname: this.state.reviewer.nickname, 
-                subject: this.props.name,
-                title: this.state.title, 
-                content: this.state.content, 
-                rating: overallRating, 
-                review_type: this.props.review, 
-            }),
-        }; 
-        fetch("/api/create-review", request)
-        .then((response) => {
-            if(response.ok){
-                //reload page 
-                window.location.reload();
-            }else{
-                alert("Unable to post response course " + this.props.name + " not found"); 
-            }
-        });
-        
+        if(this.state.reviewer.is_verified){//yay
+            let overallRating = (this.state.rating1 + this.state.rating2 + this.state.rating3) / 3; 
+            
+            const request = { 
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({
+                    nickname: this.state.reviewer.nickname, 
+                    subject: this.props.name,
+                    title: this.state.title, 
+                    content: this.state.content, 
+                    rating: overallRating, 
+                    review_type: this.props.review, 
+                }),
+            }; 
+            fetch("/api/create-review", request)
+            .then((response) => {
+                if(response.ok){
+                    //reload page 
+                    window.location.reload();
+                }else{
+                    alert("Unable to post response make sure both the title and content fields are filled in"); 
+                }
+            });
+        }else{ //nay 
+            alert("Please verify your account before leaving reviews"); 
+        }
         
       
     }
