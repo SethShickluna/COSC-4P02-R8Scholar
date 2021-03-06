@@ -9,16 +9,16 @@ const linkStyle = {
 
 
 
-
-
 export default class Departments extends Component {
     constructor(props) {
         super(props);
         this.state = {
            entries: [],
+           instructors: {}, 
+           courses: {},
         };
 
-        
+        console.log(this.state);
     }
 
     componentDidMount() {
@@ -26,6 +26,67 @@ export default class Departments extends Component {
             this.getEntries();
         }, 200);
     }
+
+    getTopCourse = async(name) => {
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                department: name, 
+                amount: 1, 
+            }),
+        }; 
+
+        await fetch("/api/get-top-courses", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                const courses = this.state.courses
+                if(data !== null){
+                    courses[name]=data[0].name;
+                }else{
+                    courses[name]="No Data";
+                }
+                this.setState({
+                    courses: courses,
+                });
+            });
+    }
+
+    getTopInstructor = async(name) => { 
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                department: name, 
+                amount: 1, 
+            }),
+        }; 
+        await fetch("/api/get-top-instructors", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                const instructors = this.state.instructors
+                if(data !== null){
+                    instructors[name]=data[0].name;
+                }else{
+                    instructors[name]="no data";
+                }
+                this.setState({
+                    instructors: instructors,
+                });
+            });
+    }   
 
     // TODO: GET departs
     getEntries = async() => {//this fetches the courses, implement the same for instructors and departments 
@@ -35,6 +96,8 @@ export default class Departments extends Component {
                     const newEntry = []
                     data.map((item) =>{
                         newEntry.push(item);
+                        this.getTopCourse(item.name);
+                        this.getTopInstructor(item.name);
                     })
                     this.setState({ entries: newEntry});
                 });
@@ -85,8 +148,10 @@ export default class Departments extends Component {
                                             numberOfStars={5}
                                             name='avgRating'/>
                                         </th>
-                                        <th>Top Course</th>
-                                        <th>Top Prof</th>
+                                        <th><a style={linkStyle} href={"/course/"+this.state.courses[item.name]}>
+                                            {this.state.courses[item.name] !== null?
+                                            this.state.courses[item.name]:<Spinner color="dark"/>}</a></th>
+                                        <th><a style={linkStyle} href={"/instructor/"+this.state.instructors[item.name]}>{this.state.instructors[item.name]}</a></th>
                                     </tr>)
                                 })}
                                </tbody>

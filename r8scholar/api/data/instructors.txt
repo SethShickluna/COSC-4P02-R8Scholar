@@ -3,3 +3,6 @@ Earl Foxwell,Computer Science
 Basil Nanayakkara,Mathematics and Statistics
 Robson De Grande,Computer Science
 Brian Ross,Computer Science
+Sheridan Houghten,Computer Science
+Michael Winter,Computer Science
+Naser Ezzati-Jivan,Computer Science

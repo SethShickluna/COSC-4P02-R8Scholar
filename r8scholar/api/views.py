@@ -131,6 +131,106 @@ class GetInstructorView(APIView):
                 return Response({'Instructor Not Found': 'Invalid instructor name.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
+class getTopCourses(APIView): #im only going to comment this one because instructors is the exact same 
+    
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8")) #info is given by a post request
+        department = data['department']#since we need both a departmant and an amount 
+        amt = int(data['amount'])
+        my_department = None
+        if department != 'any':
+            my_department = Department.objects.get(name=department) #find the department
+
+        if my_department is not None or department=="any":#if not goto else and return that we dont have that department 
+            top_courses = [None]*amt
+            courses = None#find the courses the belong to the department 
+            if department=="any":
+                courses = Course.objects.all()
+            else:
+                courses = Course.objects.filter(department=my_department)#find the courses the belong to the department 
+
+            if len(courses) >= amt: #cannot request more courses than we have 
+                for course in courses: #now we just go through the courses and choose the best ones 
+                    for i in range(amt): #loop through the top because we are constantly comparing (need indexes)
+                        if top_courses[i] is None:#if a slot needs to be filled in top courses 
+                            if course not in top_courses: #and the current query is not in the list already 
+                                top_courses[i] = course
+                        elif top_courses[i].rating < course.rating:#same deal but now filtering the lower rating 
+                            if course not in top_courses: 
+                                top_courses[i] = course
+                
+                #serialize the final choices 
+                for c in range(amt): #cannot do this before because we need to compared the ratings constantly 
+                    top_courses[c] = CourseSerializer(top_courses[c]).data
+                return Response(top_courses, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
+
+class getTopInstructors(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        department = data['department']
+        amt = int(data['amount'])
+        my_department = None
+        if department != 'any':
+            my_department = Department.objects.get(name=department) #find the department
+        
+        if my_department is not None or department=="any":
+            top_instructors = [None]*amt
+            instructors = None
+            if department == "any":
+                instructors = Instructor.objects.all()
+            else:
+                instructors = Instructor.objects.filter(department=my_department)
+            if len(instructors) >= amt:
+                for instructor in instructors:
+                    for i in range(amt):
+                        if top_instructors[i] is None:
+                            if instructor not in top_instructors:
+                                top_instructors[i] = instructor
+                        elif top_instructors[i].rating < instructor.rating:
+                            if instructor not in top_instructors:
+                                top_instructors[i] = instructor
+                
+                #serialize the final choices 
+                for i in range(amt):
+                    top_instructors[i] = InstructorSerializer(top_instructors[i]).data
+                return Response(top_instructors, status=status.HTTP_200_OK)
+            else:
+                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+
+class getTopDepartments(APIView):
+    serializer_class = DeparmentSerializer
+    lookup_url_kwarg = 'amount'
+
+    def get(self, request, format=None):
+        amt = int(request.GET.get(self.lookup_url_kwarg))
+        top_departments=[None]*amt
+        departments = Department.objects.all()
+        if len(departments) >= amt:
+            for i in range(amt):
+                for department in departments:
+                    if top_departments[i] is None:
+                        if department not in top_departments:
+                            top_departments[i] = department
+                    elif top_departments[i].rating < department.rating:
+                        if department not in top_departments:
+                            top_departments[i] = department
+            
+            for i in range(amt):
+                top_departments[i] = self.serializer_class(top_departments[i]).data
+            return Response(top_departments, status=status.HTTP_200_OK)
+        else:
+            return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+                    
+
 #create views 
 class CreateUserView(APIView): 
     serializer_class = CreateUserSerializer
@@ -177,6 +277,7 @@ class logout(APIView):
         redirect = reverse_lazy('users')
         data = {'redirect-url':redirect}
         return Response(data, status=status.HTTP_200_OK)
+
 #Allows user to change their nickname
 class change_nickname(APIView):
     def post(self,request):
@@ -225,7 +326,6 @@ class CreateReviewView(APIView):
     
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
-        print(serializer)
         if serializer.is_valid():
             nickname = serializer.data['nickname']
             subject = serializer.data['subject']
@@ -246,19 +346,20 @@ class CreateReviewView(APIView):
                 my_department = my_instructor.department
             else: #review is on a department
                 my_department = Department.objects.get(name=subject)
-                #my_department.update_rating()
             
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
             title=title, content=content, rating=rating, department_name=my_department,
             instructor_name=my_instructor, course_name=my_course, review_type=review_type)
             review.save()
             #update rating of the review subject 
-            #if review_type == 'course':
-                #my_course.update_rating()
-            #elif review_type == 'instructor':
-                #my_instructor.update_rating()
-            #else: #review is on a department
-                #my_department.update_rating()
+            if review_type == 'course':
+                my_course.update_rating()
+                my_department.update_course_rating()
+            elif review_type == 'instructor':
+                my_instructor.update_rating()
+                my_department.update_instructor_rating()
+            else: #review is on a department
+                my_department.update_rating()
 
             return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
 

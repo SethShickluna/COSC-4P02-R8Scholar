@@ -19,7 +19,7 @@ css-loader style-loader url-loader file-loader webpacknpm install @babel/core @b
 
 then 
 
-npm install --save react react-dom bootstrap react-bootstrap
+npm install --save react react-dom react-bootstrap reactstrap
 
 then 
 

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Accordion, Button, ListGroup, ListGroupItem} from 'react-bootstrap'; 
+import { Card, CardHeader, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 
 
-const noCommentMessage = "No comments yet!";
 
 
 export default class ReviewItem extends Component {
@@ -20,6 +19,11 @@ export default class ReviewItem extends Component {
         -User
         -Comments (object)
         */
+       console.log(this.props.reviewItem)
+    }
+
+    openFullReview(){
+
     }
 
     //the JSX that is rendered when this file is imported as a component 
@@ -27,39 +31,20 @@ export default class ReviewItem extends Component {
         return (
             <div className="App">
                 {/* container (card )which includes a title section + rating and a content section + button to see comments */}
-                    <Card style={{marginTop: '4%'}}>
-                        <Accordion>
-                            <Card.Body>
-                                <Card.Title>{this.props.reviewItem.title}<p style={{float: "right"}}>{new Date().getFullYear()}</p></Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.nickname + " "} 
-                                    <StarRatings
-                                        rating={this.props.reviewItem.rating}
+                <Card style={{marginTop:"3%"}}>
+                    <CardHeader><h3>{this.props.reviewItem.title}</h3></CardHeader>
+                    <CardBody>
+                        <CardTitle>{this.props.reviewItem.nickname}</CardTitle>
+                        <CardTitle><StarRatings rating={this.props.reviewItem.rating}
                                         starDimension="25px"
                                         starSpacing="5px"
                                         starRatedColor="#3498db"
                                         numberOfStars={5}
-                                        name='avgRating'
-                                    />
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    {this.props.reviewItem.content}
-                                </Card.Text>
-                                <Accordion.Toggle as={Button} variant="primary" eventKey="0">
-                                    Show Comments
-                                </Accordion.Toggle>
-                            </Card.Body>
-                            <Accordion.Collapse eventKey="0">
-                                <ListGroup >
-                                    {this.props.reviewItem.comments != null ?
-                                        this.props.reviewItem.comments.map((item, index) => 
-                                            <ListGroupItem key={index}>
-                                                {item.content}
-                                            </ListGroupItem> )
-                                        : "No comments yet!"} 
-                                </ListGroup>
-                            </Accordion.Collapse>
-                        </Accordion>    
-                    </Card>
+                                        name='avgRating'/></CardTitle>
+                        <CardText><h5>{this.props.reviewItem.content}</h5></CardText>
+                        <Button onclick={this.openFullReview} color="success">View Full Review</Button>
+                    </CardBody>
+                </Card>
             </div>
         );
     }

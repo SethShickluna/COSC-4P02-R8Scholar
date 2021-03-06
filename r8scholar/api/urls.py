@@ -19,6 +19,9 @@ urlpatterns = [
     path('get-course',views.GetCourseView.as_view(),name='get-course'),
     path('get-department',views.GetDepartmentView.as_view(),name='get-department'),
     path('get-instructor',views.GetInstructorView.as_view(),name='get-instructor'),
+    path('get-top-courses', views.getTopCourses.as_view()), 
+    path('get-top-instructors', views.getTopInstructors.as_view()), 
+    path('get-top-departments', views.getTopDepartments.as_view()), 
     #create views 
     path('create-user', views.CreateUserView.as_view()), 
     path('create-review', views.CreateReviewView.as_view()), 

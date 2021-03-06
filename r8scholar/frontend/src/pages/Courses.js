@@ -205,7 +205,7 @@ export default class Courses extends Component {
                                     return(
                                     <tr key={index}>  
                                         <th>{index + 1}</th>
-                                        <th><a style={linkStyle} href={"/instructor/"+item.name}>{item.name}</a></th>
+                                        <th><a style={linkStyle} href={"/course/"+item.name}>{item.name}</a></th>
                                         <th><StarRatings
                                             rating={item.rating}
                                             starDimension="25px"

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import {Container, Row, Col, Tab, Button} from 'react-bootstrap'; 
-import {Link} from 'react-router-dom'; 
+import {Container, Row, Col, Tab, Spinner} from 'reactstrap'; 
 import ReviewItem from '../components/ReviewItem'; 
 import Tabs from 'react-bootstrap/Tabs'; 
 import StarRatings from 'react-star-ratings';
@@ -14,25 +13,24 @@ const pageStyles={
     width: '90%', 
 }; 
 
-
-const buttonStyle={
-    //height: '100vh',  
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+const subRatingStyle = { 
+    marginRight: "15px", 
+    marginLeft: "15px", 
+    marginTop:'2%',
+    border: '2px #7f8c8d', 
 }
 
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles 
     marginBottom: '2%', 
-    marginTop: '2%',
+    marginTop: '2%', 
     height: '1px',
     backgroundColor: '#dedede',
     border: 'none',
 }
 
 const tabStyle = { 
-    paddingTop: '2.5%', 
+    paddingTop: '2.5%',  
 }
 
 export default class Course extends Component {6
@@ -41,21 +39,83 @@ export default class Course extends Component {6
         //use state because react forces an update when it is modifed in some way 
         this.state = { //all the content that is gonna be retrieved from the api stored here locally
             name: this.props.match.params.profName,
-            courses: [
-                "COSC 2P12", 
-                "COSC 3P94",
-            ],
-            avgRating: 2.7, 
-            lectureRating: 2, 
-            homeworkRating: 3.8, 
-            courseRating: 3.2, 
-            reviews: null
+            department: null, 
+            rating: 0, 
+            reviews: null,
+            instructors: [],
+            courses: [],
+            valid: false,
+            loaded: false,  
         } 
-        this.getAllReviews(this.state.name); 
+
     }
 
-    //TODO: GET req goes here that fetches data based on uid
+    componentDidMount(){
+        this.verifyInstructor(this.state.name); 
+        this.getAllReviews(this.state.name);
+
+        setTimeout(() => {
+            this.getPopularChoices(); 
+        }, 200);
+    }
+
+    verifyInstructor = async (myName) => {
+        await fetch('/api/get-instructor' + '?name=' + myName)
+        .then((response) => {
+            if(response.ok){
+                return response.json(); 
+            }else{ 
+                return null
+            }   
+        })
+        .then((data) => {
+            if(data != null){
+                this.setState({
+                    valid: true, 
+                    name: data.name, 
+                    rating: data.rating,
+                    department: data.department,
+                });
+            }
+        });
+    }
+
+    getPopularChoices = async() => { 
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                department: this.state.department, 
+                amount: 2, 
+            }),
+        }; 
+        await fetch("/api/get-top-courses", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                this.setState({courses:data});
+            });
+        await fetch("/api/get-top-instructors", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                this.setState({instructors:data});
+            });
+    }   
+
     getAllReviews(myName) {
+        //this is just to have but will need to be slightly refactored 
+        //once we talk to the back end people about how their stuff is named such as 'get-course'
         return fetch('/api/get-reviews' + '?subject=' + myName)
         .then((response) => {
             if(response.ok){
@@ -67,130 +127,116 @@ export default class Course extends Component {6
         .then((data) => {
             this.setState({
                 reviews: data, 
+                loaded: true, 
             })
         });
     }
-
     render() {
         return (
             <div>
             <SecondaryNav/>
-            <div style={pageStyles}>
-                <Container fluid="md">
-                    <Row> {/* title row, includes course name and reviews*/}
-                        <Col sm={4}>
-                            <div name="title">
-                                <h1 style={{textAlign: 'center'}}>{this.state.name}</h1>
-                            </div>  
-                            <div style={pageBreak}/> {/* underline */}
-
-                            <div name="avg-rating-container">
+                <div style={pageStyles}>
+                {this.state.loaded?
+                    <Container fluid="md">
+                    {this.state.valid?
+                        <Row> {/* title row, includes course name and reviews*/}
+                            <Col align="center" sm={4}>
+                                <div name="title">
+                                    <b><h1>{this.state.name}</h1></b>
+                                    <h5>Department of {this.state.department}</h5>
+                                </div>  
+                                <div style={pageBreak}/> {/* underline */}
+    
+                                <div name="avg-rating-container">
                                 <div name="avg-rating-title">
-                                    <h4 style={{textAlign: 'center'}}>Overall Rating</h4>
-                                </div>  
-                                <div style={{textAlign: 'center'}} name="avg-rating">
-                                    {/* this displays average # of stars*/}
-                                    <StarRatings
-                                        rating={this.state.avgRating}
-                                        starDimension="40px"
-                                        starSpacing="10px"
-                                        starRatedColor="#f1c40f"
-                                        numberOfStars={5}
-                                        name='avgRating'
-                                    />
+                                        <h4 style={{textAlign: 'center'}}>Overall Rating</h4>
+                                    </div>  
+                                    <div style={{textAlign: 'center'}} name="avg-rating">
+                                        {/* this displays average # of stars*/}
+                                        <StarRatings
+                                            rating={this.state.rating}
+                                            starDimension="40px"
+                                            starSpacing="10px"
+                                            starRatedColor="#f1c40f"
+                                            numberOfStars={5}
+                                            name='avgRating'
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div name="lecture-rating-container" style={{marginTop: '25px'}}>
-                                <div name="lecture-rating-title">
-                                    <h4 style={{textAlign: 'center'}}>Lecture Rating</h4>
-                                </div>  
-                                <div style={{textAlign: 'center'}} name="lecture-rating">
-                                    {/* this displays average # of stars*/}
-                                    <StarRatings
-                                        rating={this.state.lectureRating}
-                                        starDimension="30px"
-                                        starSpacing="10px"
-                                        starRatedColor="#3498db"
-                                        numberOfStars={5}
-                                        name='lectureRating'
-                                    />
+    
+                                <div name="sub-rating-box" style={subRatingStyle}>
+                                
+                                <div style={pageBreak}/> {/* underline */}
+    
+                                <div style={{marginTop: '25px'}} name="pop-prof-container">
+                                    <div name="pop-professor-title">
+                                    <h3 style={{textAlign: 'center'}}>Popular Instructors</h3>
+                                    </div>   
+                                    <div name="pop-prof-name" style={{textAlign: 'center'}}>
+                                        {this.state.instructors.map((item) => 
+                                        (<h4><a href={"/instructor/" + item.name}>{item.name}</a></h4>))}
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div name="homework-rating-container" style={{marginTop: '25px'}}>
-                                <div name="homework-rating-title">
-                                    <h4 style={{textAlign: 'center'}}>Homework Rating</h4>
-                                </div>  
-                                <div style={{textAlign: 'center'}} name="homework-rating">
-                                    {/* this displays average # of stars*/}
-                                    <StarRatings
-                                        rating={this.state.homeworkRating}
-                                        starDimension="30px"
-                                        starSpacing="10px"
-                                        starRatedColor="#3498db"
-                                        numberOfStars={5}
-                                        name='homeworkRating'
-                                    />
+    
+                                <div style={pageBreak}/> {/* underline */}
+    
+                                <div style={{marginTop: '25px'}} name="pop-course-container">
+                                    <div name="pop-course-title">
+                                        <h3 style={{textAlign: 'center'}}>Popular Courses</h3>
+                                    </div>   
+                                    <div name="pop-course-name" style={{textAlign: 'center'}}>
+                                        {this.state.courses.map((item) => 
+                                        (<h4><a href={"/course/" + item.name}>{item.name}</a></h4>))}
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div name="course-rating-container" style={{marginTop: '25px'}}>
-                                <div name="course-rating-title">
-                                    <h4 style={{textAlign: 'center'}}>Course Rating</h4>
-                                </div>  
-                                <div style={{textAlign: 'center'}} name="course-rating">
-                                    {/* this displays average # of stars*/}
-                                    <StarRatings
-                                        rating={this.state.courseRating}
-                                        starDimension="30px"
-                                        starSpacing="10px"
-                                        starRatedColor="#3498db"
-                                        numberOfStars={5}
-                                        name='courseRating'
-                                    />
+    
+                                <div style={pageBreak}/> {/* underline */}
+    
+                                <div style={{marginTop: '25px'}} name="pop-course-container">
+                                    <div name="pop-course-title">
+                                        <h3 style={{textAlign: 'center'}}>Department of <a href={"/department/"+this.state.department}>{this.state.department}</a></h3>
+                                    </div>   
                                 </div>
-                            </div>
-
-                            <div style={pageBreak}/> {/* underline */}
-
-                            <div style={{marginTop: '25px'}} name="freq-course-container">
-                                <div name="freq-course-title">
-                                    <h4 style={{textAlign: 'center'}}>Frequent Courses</h4>
-                                </div>   
-                                <div name="freq-course-name" style={{textAlign: 'center'}}>
-                                    {this.state.courses.map((item) => 
-                                    (<p><Link to={"/course/" + item}>{item}</Link></p>))}
+    
                                 </div>
-                            </div>
-
-                            <div style={pageBreak}/> {/* underline */}
-                            
-                        </Col>
-                        <Col sm={7}>
-                            <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
-                                <Tab eventKey="reviews" title="Reviews">
-                                {this.state.reviews !== null ? this.state.reviews.map((item, index) => 
-                                            (<ReviewItem id={index} key={"professor-review"+index} reviewItem={item}/>)
-                                        ) /* generate all the reviews for this page */ : 
-                                        <div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one.</div>} 
-                                </Tab>
-                                <Tab eventKey="forums" title="Forums">
-                                    <h6>Nothing to show yet; come back soon!</h6>
-                                </Tab>
-                                <Tab eventKey="create-review" title="Create Review">
+    
+                                <div style={pageBreak}/> {/* underline */}
+                                
+                                
+                                
+                            </Col>
+                            <Col sm={7}>
+                                <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
+                                    <Tab eventKey="reviews" title="Reviews">
+                                    {this.state.reviews !== null ? 
+                                    this.state.reviews.reverse().map((item, index) => 
+                                    (<ReviewItem id={index} key={"course-review"+index}reviewItem={item}/>)) 
+                                    : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
+                                    /* generate all the reviews for this page */} 
+                                    </Tab>
+                                    <Tab eventKey="forums" title="Forums">
+                                        <h6>Nothing to show yet; come back soon!</h6>
+                                    </Tab>
+                                    <Tab eventKey="create-review" title="Create Review">
                                     {cookie.load('isLoggedIn') === "true" ? 
-                                        (<ReviewForm name={this.state.name} review="instructor"/>)
-                                        : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
-                                    }
-                                    
-                                </Tab>
-                            </Tabs>
+                                            (<ReviewForm name ={this.state.name} review="course"/>)
+                                            : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
+                                        }
+                                    </Tab>
+                                </Tabs>
+                            </Col>
+                        </Row>
+                        :<Row align='center'> {/**show message that course isnt found */}
+                        <Col>
+                            <h1>The instructor "{this.state.name + " "}" was not found.</h1>
+    
+                            <h5 style={{marginTop:'15%'}}><a href="/courses">Return to Instructors</a></h5>
                         </Col>
-                    </Row>
-                </Container>
-            </div>
-            </div>
-        );
+                    </Row>}
+                    </Container>
+                    :<Spinner color="dark"/>}
+                </div>
+                </div>
+            );
     }
 }

@@ -78,27 +78,62 @@ class Department(models.Model):
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
-    
+        
     def update_rating(self): # NEEDS TESTING #
-        count, my_sum = 0
+        count = 0
+        my_sum = 0
         #get reviews that we are a subject of 
-        for review in Review.objects: #O(n) 
-            if review.subject == self.name: #this might be sus 
-                my_sum += review.rating
-                count +=1 
+        for review in Review.objects.filter(department_name=self.name): #O(n) 
+            my_sum += review.rating
+            count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
-        
+        self.save()
+    
+    def update_instructor_rating(self):
+        count = 0
+        my_sum = 0
+        #for each instructor in the department 
+        for instructor in Instructor.objects.filter(department=self.name):
+            for review in Review.objects.filter(instructor_name=instructor):
+                my_sum += review.rating
+                count +=1
+        self.instructors_rating = my_sum / count
+        self.save()
+            
+
+
+    def update_course_rating(self):
+        count = 0
+        my_sum = 0
+        #for each instructor in the department 
+        for course in Course.objects.filter(department=self.name):
+            print(course)
+            for review in Review.objects.filter(course_name=course):
+                print(review)
+                my_sum += review.rating
+                count +=1
+        self.courses_rating = my_sum / count
+        self.save()
+
 
 class Instructor(models.Model):
     name  = models.CharField(max_length=30,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
     
-    def update_rating(self): 
-        pass
-
+    def update_rating(self): # NEEDS TESTING #
+        count = 0
+        my_sum = 0
+        #get reviews that we are a subject of 
+        for review in Review.objects.filter(instructor_name=self.name): #O(n) 
+            my_sum += review.rating
+            count +=1 
+        #store their ratings and sum 
+        #set rating to new average 
+        self.rating = (my_sum / count)
+        self.save()
 
 class Course(models.Model):
     name = models.CharField(max_length=10, unique=True,primary_key=True)
@@ -106,8 +141,17 @@ class Course(models.Model):
     rating = models.FloatField(default=0)
     course_full_name  = models.CharField(max_length=30,default=None)
 
-    def update_rating(self): 
-        pass
+    def update_rating(self): # NEEDS TESTING #
+        count = 0
+        my_sum = 0
+        #get reviews that we are a subject of 
+        for review in Review.objects.filter(course_name=self.name): #O(n) 
+            my_sum += review.rating
+            count +=1 
+        #store their ratings and sum 
+        #set rating to new average 
+        self.rating = (my_sum / count)
+        self.save()
 
 
 class Review(models.Model):

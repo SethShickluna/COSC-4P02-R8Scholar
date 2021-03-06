@@ -3,3 +3,5 @@ COSC 1P03,Computer Science,Data Structures
 COSC 2P12,Computer Science,Computer Architecture
 COSC 1P02,Computer Science,Object-Oriented Programming
 COSC 2P05,Computer Science,Programming Languages
+COSC 4P01,Computer Science,Software Engineering I
+COSC 4P02,Computer Science,Software Engineering II

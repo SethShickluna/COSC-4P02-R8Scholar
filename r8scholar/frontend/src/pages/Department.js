@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import {Container, Row, Col, Tab, Button} from 'react-bootstrap'; 
-import {Link} from 'react-router-dom'; 
+import {Container, Row, Col, Tab, Spinner} from 'reactstrap'; 
 import ReviewItem from '../components/ReviewItem'; 
 import Tabs from 'react-bootstrap/Tabs'
 import StarRatings from 'react-star-ratings';
@@ -24,7 +23,6 @@ const pageBreak = {
 
 const tabStyle = { 
     paddingTop: '2.5%', 
-    backgroundColor: '#ecf0f1', 
 }
 
 export default class Course extends Component {6
@@ -33,23 +31,80 @@ export default class Course extends Component {6
         //use state because react forces an update when it is modifed in some way 
         this.state = { //all the content that is gonna be retrieved from the api stored here locally
             name: this.props.match.params.deptName,
-            avgRating: 1.7,
-            instructorRating: 2.5, 
-            courseRating: 1.3,
+            rating: 0,
+            instructorRating: 0, 
+            courseRating: 0,
             reviews:[],  
-            instructors: [
-                "Dave Bockus", 
-                "Earl Foxwell", 
-            ], //another object 
-            courses:["COSC 2P03", "COSC 2P89"], 
+            instructors:[],
+            courses:[], 
+            valid: false,
+            loaded: false, 
         }
-       
+    }
 
+    componentDidMount(){
+        this.verifyDepartment(this.state.name); 
+        this.getPopularChoices(this.state.name); 
         this.getAllReviews(this.state.name);
     }
 
-    getAllReviews(myName) {
-        return fetch('/api/get-reviews' + '?subject=' + myName)
+    verifyDepartment = async (myName) => {
+        await fetch('/api/get-department' + '?name=' + myName)
+        .then((response) => {
+            if(response.ok){
+                return response.json(); 
+            }else{ 
+                return null
+            }   
+        })
+        .then((data) => {
+            if(data != null){
+                this.setState({
+                    valid: true, 
+                    name: data.name, 
+                    courseRating: data.courses_rating, 
+                    rating: data.rating, 
+                    instructorRating: data.instructors_rating,
+                });
+            }
+        });
+    }
+
+    getPopularChoices = async(myName) => { 
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                department: myName, 
+                amount: 2, 
+            }),
+        }; 
+        await fetch("/api/get-top-courses", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                this.setState({courses:data});
+            });
+        await fetch("/api/get-top-instructors", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                this.setState({instructors:data});
+            });
+    }   
+
+    getAllReviews = async (myName) => {
+        await fetch('/api/get-reviews' + '?subject=' + myName)
         .then((response) => {
             if(response.ok){
                 return response.json(); 
@@ -60,6 +115,7 @@ export default class Course extends Component {6
         .then((data) => {
             this.setState({
                 reviews: data, 
+                loaded: true, 
             })
         });
     }
@@ -69,11 +125,14 @@ export default class Course extends Component {6
             <div>
                 <SecondaryNav/>
             <div style={pageStyles}>
+                {this.state.loaded?
                 <Container fluid="md">
+                {this.state.valid? 
                     <Row> {/* title row, includes course name and reviews*/}
-                        <Col sm={4}>
+                        <Col align="center"sm={4}>
                             <div name="title">
-                                <h1 style={{textAlign: 'center'}}>{this.state.name}</h1>
+                                <h4>Department of</h4>
+                                <h1>{this.state.name}</h1>
                             </div>  
                             <div style={pageBreak}/> {/* underline */}
 
@@ -84,7 +143,7 @@ export default class Course extends Component {6
                                 <div style={{textAlign: 'center'}} name="avg-rating">
                                     {/* this displays average # of stars*/}
                                     <StarRatings
-                                        rating={this.state.avgRating}
+                                        rating={this.state.rating}
                                         starDimension="40px"
                                         starSpacing="10px"
                                         starRatedColor="#f1c40f"
@@ -132,11 +191,11 @@ export default class Course extends Component {6
 
                             <div style={{marginTop: '25px'}} name="pop-prof-container">
                                 <div name="pop-professor-title">
-                                    <h4 style={{textAlign: 'center'}}>Popular Instructors</h4>
+                                <h3 style={{textAlign: 'center'}}>Popular Instructors</h3>
                                 </div>   
                                 <div name="pop-prof-name" style={{textAlign: 'center'}}>
                                     {this.state.instructors.map((item) => 
-                                    (<p><Link to={"/instructor/" + item}>{item}</Link></p>))}
+                                    (<h4><a href={"/instructor/" + item.name}>{item.name}</a></h4>))}
                                 </div>
                             </div>
 
@@ -144,11 +203,11 @@ export default class Course extends Component {6
 
                             <div style={{marginTop: '25px'}} name="pop-course-container">
                                 <div name="pop-course-title">
-                                    <h4 style={{textAlign: 'center'}}>Popular Courses</h4>
+                                    <h3 style={{textAlign: 'center'}}>Popular Courses</h3>
                                 </div>   
                                 <div name="pop-course-name" style={{textAlign: 'center'}}>
                                     {this.state.courses.map((item) => 
-                                    (<p><Link to={"/course/" + item}>{item}</Link></p>))}
+                                    (<h4><a href={"/course/" + item.name}>{item.name}</a></h4>))}
                                 </div>
                             </div>
 
@@ -177,7 +236,15 @@ export default class Course extends Component {6
                             
                         </Col>
                     </Row>
+                :<Row align='center'> {/**show message that course isnt found */}
+                    <Col>
+                        <h1>The department "{this.state.name + " "}" was not found.</h1>
+
+                        <h5 style={{marginTop:'15%'}}><a href="/departments">Return to Departments</a></h5>
+                    </Col>
+                </Row>}
                 </Container>
+            :<Spinner color="dark"/>}
             </div>
             </div>
         );

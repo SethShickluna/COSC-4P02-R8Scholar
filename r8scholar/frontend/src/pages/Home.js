@@ -5,16 +5,12 @@ import {Container, Button, Row, Col,  Table, Spinner} from 'reactstrap';
 
 const linkStyle = {
     color: 'black',
-    "&:hover": {
-        background: "#efefef"
-    }
 }
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: ["instructors", "courses", "departments"],
             instructors: [],
             courses: [],
             departments: [],
@@ -22,25 +18,78 @@ export default class Home extends Component {
     }
 
     componentDidMount(){
-        this.state.list.map((e) => {
-            this.getEntries(e)           
+        setTimeout(() => {
+            this.getTopCourses(); 
+            this.getTopDepartments(); 
+            this.getTopInstructors();
+        }, 200);
+    }
+
+    
+    getTopInstructors = async() => { 
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                department: "any", 
+                amount: 5, 
+            }),
+        }; 
+        await fetch("/api/get-top-instructors", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                this.setState({
+                    instructors: data,
+                })
+            });
+    }   
+
+    getTopCourses = async() => { 
+        const request = { 
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                department: "any", 
+                amount: 5, 
+            }),
+        }; 
+        await fetch("/api/get-top-courses", request)
+            .then((response) => {
+                if(response.ok){ //yay
+                    return response.json(); 
+                }else{//nay 
+                    return null
+                }
+            })
+            .then((data) =>{
+                this.setState({
+                    courses: data,
+                })
+            });
+    }   
+
+    getTopDepartments = async() => {
+        await fetch("/api/get-top-departments?amount=5")
+        .then((response) => {
+            if(response.ok){ //yay
+                return response.json(); 
+            }else{//nay 
+                return null
+            }
+        })
+        .then((data) =>{
+            this.setState({
+                departments: data
+            })
         });
     }
 
-    // TODO: GET top 5 profs, courses and departs
-    getEntries = async(type) => {//this fetches the courses, implement the same for instructors and departments 
-        await fetch("/api/"+type).then(
-            (res) => {
-                res.json().then((data) => {
-                    const newEntry = []
-                    data.map((item) =>{
-                        newEntry.push(item);
-                    })
-                    this.setState({ [type]: newEntry});
-                });
-            }
-        );
-    };
 
     render() {
         return (
