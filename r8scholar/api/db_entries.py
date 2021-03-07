@@ -35,7 +35,7 @@ class ModelGenerator:
         f = open(filepath)
 
         while True: 
-            model = f.readline().split(',')
+            model = f.readline().split('|')
             model[len(model) - 1] = model[len(model) -1].replace('\n', '')
             
             if model[0] == '': break
