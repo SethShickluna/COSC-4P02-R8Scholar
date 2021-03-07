@@ -173,8 +173,9 @@ export default class Course extends Component {6
                                     <h3 style={{textAlign: 'center'}}>Popular Instructors</h3>
                                     </div>   
                                     <div name="pop-prof-name" style={{textAlign: 'center'}}>
-                                        {this.state.instructors.map((item) => 
-                                        (<h4><a href={"/instructor/" + item.name}>{item.name}</a></h4>))}
+                                        {this.state.instructors !== null ?this.state.instructors.map((item) => 
+                                        (<h4><a href={"/instructor/" + item.name}>{item.name}</a></h4>))
+                                    :null}
                                     </div>
                                 </div>
     
@@ -185,8 +186,10 @@ export default class Course extends Component {6
                                         <h3 style={{textAlign: 'center'}}>Popular Courses</h3>
                                     </div>   
                                     <div name="pop-course-name" style={{textAlign: 'center'}}>
-                                        {this.state.courses.map((item) => 
-                                        (<h4><a href={"/course/" + item.name}>{item.name}</a></h4>))}
+                                        {this.state.courses !== null ? 
+                                         this.state.courses.map((item) => 
+                                        (<h4><a href={"/course/" + item.name}>{item.name}</a></h4>)):
+                                        null}
                                     </div>
                                 </div>
     
