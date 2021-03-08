@@ -44,7 +44,7 @@ export default class Courses extends Component {
                     const newEntry = []
                     data.map((item) =>{
                         newEntry.push(item);
-                        this.getDepartmentRatings(item.department);
+                        //this.getDepartmentRatings(item.department);
                     })
                     this.setState({ entries: newEntry});
                 });
@@ -221,7 +221,6 @@ export default class Courses extends Component {
                                     <th>Name</th>
                                     <th>Rating</th>
                                     <th>Department</th>
-                                    <th>Department Rating</th>
                                </thead>
                                <tbody>
                                    {!this.state.entries.length ? 
@@ -240,14 +239,6 @@ export default class Courses extends Component {
                                             name='avgRating'/>
                                         </th>
                                         <th><a style={linkStyle} href={"/department/"+item.name}>{item.department}</a></th>
-                                        <th><StarRatings
-                                            rating={this.state.departmentRatings[item.department]}
-                                            starDimension="25px"
-                                            starSpacing="5px"
-                                            starRatedColor="#3498db"
-                                            numberOfStars={5}
-                                            name='avgRating'/>
-                                        </th>
                                     </tr>)
                                 })}
                                </tbody>

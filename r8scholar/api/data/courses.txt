@@ -1351,7 +1351,14 @@ ENGL 4P99|English|Senior Tutorial or Research Paper
 ENGL 4V00-4V09|English|Topics in English Literature Before 1800
 ENGL 4V30-4V39|English|Topics in 19th-Century Literature
 ENGL 4V40-4V49|English|Topics in Contemporary Literature
-ENGL 4V60-4V69|Enscriptring Science|Shaping the Future: Energy Frontiers
+ENGL 4V60-4V69|English|Topics in Contemporary Canadian Writing
+ENGL 4V70-4V79|English|Text and Context
+ENGL 4V90-4V99|English|English Area Studies
+ENGS 1P01|Engineering Science|The Humanist Engineer
+ENGS 2P02|Engineering Science|Invitational Education Theory for Engineers
+ENGS 3P12|Engineering Science|Feeding the World: Restorative Engineering
+ENGS 3P21|Engineering Science|Shaping the Future: New Automation
+ENGS 3P22|Engineering Science|Shaping the Future: Energy Frontiers
 ENGS 3P41|Engineering Science|Creating Healthy Communities: Human Mechanics
 ENGS 3P42|Engineering Science|Creating Healthy Communities: Inclusive Cities
 ENSU 2P01|Environmental Sustainability|Introduction to Environmental Sustainability
@@ -1495,7 +1502,12 @@ FILM 4P58|Film|Ecocinema: History, Theory and Practice
 FILM 4P59|Film|Writing Cultural Criticism for the Media
 FILM 4P61|Film|Conventions of Screen Realism
 FILM 4P80|Film|Directed Reading
-FILM 4V50-4V59|Fiscript exec(open("./api/db_entries.py").read())|Introduction to Finance
+FILM 4V50-4V59|Film|Special Topics in Film Studies
+FILM 4V57|Film|2021-2022: Visual Culture
+FILM 4V60-4V69|Film|Issues in Film History
+FILM 4V70-4V79|Film|Issues in International Cinema
+FNCE 2P50|Finance|Introduction to Personal Financial Planning
+FNCE 2P51|Finance|Introduction to Finance
 FNCE 2P91|Finance|Corporate Finance I
 FNCE 3P93|Finance|Corporate Finance II
 FNCE 3P95|Finance|Personal Financial Planning
@@ -1535,6 +1547,10 @@ FREN 3P65|French|Culture and Civilization of France from 1800 to the Present
 FREN 3P75|French|Canadian Literature in French up to the Révolution tranquille
 FREN 3P90|French|Sociolinguistics of Francophone World
 FREN 3P94|French|Caribbean Literature in French
+FREN 3P95|French|French Literature and Culture in Film
+FREN 3P96|French|Critical Theory and Methodology
+FREN 3P99|French|Contemporary Canadian Theatre in French
+FREN 3Q90|French|Postcolonial (North) African Literature in French
 FREN 3Q91|French|Medieval French Literature
 FREN 4P03|French|Linguistic Approach to Textual Analysis
 FREN 4P04|French|Translation II: Applications
@@ -1758,93 +1774,93 @@ HLSC 4P98|Health Sciences|Biomarkers and Disease Processes
 HLSC 4P99|Health Sciences|Clinical Epidemiology
 HLSC 4Q90|Health Sciences|Foundations of Collaboration and Teamwork
 HLSC 4V50-4V99|Health Sciences|Advanced Special Topics in Health Sciences
-IASC 1F01|Ineractive Arts and Science|Foundations of Interactive Arts and Science
-IASC 1F02|Ineractive Arts and Science|Being Human in a Digital World
-IASC 1P00|Ineractive Arts and Science|Introduction to Media Computation
-IASC 1P01|Ineractive Arts and Science|Fluency With Technology
-IASC 1P02|Ineractive Arts and Science|Web Media Production
-IASC 1P03|Ineractive Arts and Science|Makerspace Foundations
-IASC 1P04|Ineractive Arts and Science|New Media and Games
-IASC 1P05|Ineractive Arts and Science|Games, Genres and Aesthetics
-IASC 1P06|Ineractive Arts and Science|History and Future of Storytelling
-IASC 1P10|Ineractive Arts and Science|Introduction to Media Tools
-IASC 1P30|Ineractive Arts and Science|Programming for Interactive Media
-IASC 1P50|Ineractive Arts and Science|Integrity and Literacy in the Information Age
-IASC 1P93|Ineractive Arts and Science|Applied Programming
-IASC 1P95|Ineractive Arts and Science|Digital Foundation
-IASC 1P96|Ineractive Arts and Science|Studio Foundation
-IASC 1P99|Ineractive Arts and Science|The Culture of Noise
-IASC 1Q98|Ineractive Arts and Science|Introduction to Visual Culture
-IASC 1Q99|Ineractive Arts and Science|Contemporary Issues in The History of Western Art
-IASC 2F27|Ineractive Arts and Science|Historical Geographic Information Systems
-IASC 2P01|Ineractive Arts and Science|Foundations of Project Management
-IASC 2P02|Ineractive Arts and Science|Solving Problems through Interactive Arts and Science
-IASC 2P03|Ineractive Arts and Science|Interaction and Interface Design
-IASC 2P04|Ineractive Arts and Science|Ludology
-IASC 2P05|Ineractive Arts and Science|Game Design Paradigms
-IASC 2P06|Ineractive Arts and Science|3D Objects, Environments and Visualization
-IASC 2P07|Ineractive Arts and Science|Introduction to Geospatial Technologies
-IASC 2P08|Ineractive Arts and Science|Competencies in Interactive Arts and Science
-IASC 2P11|Ineractive Arts and Science|Personal Computers and Networks
-IASC 2P15|Ineractive Arts and Science|Speculative Fiction
-IASC 2P25|Ineractive Arts and Science|Revolutions in Communication
-IASC 2P28|Ineractive Arts and Science|Persuasive Discourse: Theoretical Foundations
-IASC 2P50|Ineractive Arts and Science|Great Myths in Literature and Art
-IASC 2P70|Ineractive Arts and Science|Introduction to Literary Theory
-IASC 2P89|Ineractive Arts and Science|Internet Technologies
-IASC 2P90|Ineractive Arts and Science|Networks, Digital Identities and Interactions
-IASC 2P91|Ineractive Arts and Science|Social Media
-IASC 2P93|Ineractive Arts and Science|Critical Practice in the Fine and Performing Arts
-IASC 2P94|Ineractive Arts and Science|Embodied Text: Art Beyond the Artifact
-IASC 2P97|Ineractive Arts and Science|Digital Video in Contemporary Art
-IASC 2P98|Ineractive Arts and Science|Intermedia
-IASC 2P99|Ineractive Arts and Science|Introduction to Sound Design in Contemporary Art
-IASC 2Q90|Ineractive Arts and Science|Digital Archives: Construction, Scholarship and Functionality
-IASC 2Q95|Ineractive Arts and Science|Introduction to Interactive Media
-IASC 3F01|Ineractive Arts and Science|Digital Document Production
-IASC 3F02|Ineractive Arts and Science|Interactive Media Practices, Prototyping and Production
-IASC 3F91|Ineractive Arts and Science|Innovations in Advanced Digital Media
-IASC 3F92|Ineractive Arts and Science|Best Practices in Instructional Design
-IASC 3F93|Ineractive Arts and Science|Project Collaborations Across Diverse Programs
-IASC 3F95|Ineractive Arts and Science|Advanced Internship in Interactive Media
-IASC 3F96|Ineractive Arts and Science|Advanced Internship in Game Design
-IASC 3P01|Ineractive Arts and Science|Media Transformations in the Creative Arts
-IASC 3P02|Ineractive Arts and Science|Publishing for New Literacies
-IASC 3P03|Ineractive Arts and Science|Prototyping with Micro Controllers and Mobile Technologies
-IASC 3P04|Ineractive Arts and Science|Immersion and Simulation
-IASC 3P05|Ineractive Arts and Science|Geographic Information Systems
-IASC 3P06|Ineractive Arts and Science|Game Criticism
-IASC 3P10|Ineractive Arts and Science|Advanced Video Art
-IASC 3P11|Ineractive Arts and Science|Motion Capture Studio
-IASC 3P14|Ineractive Arts and Science|Dramatic Creation for Contemporary Cultural Practice
-IASC 3P15|Ineractive Arts and Science|Writing for New Media
-IASC 3P26|Ineractive Arts and Science|Social and Cultural Aspects of Digital Gaming
-IASC 3P28|Ineractive Arts and Science|Rhetorical Analysis
-IASC 3P36|Ineractive Arts and Science|Digital Innovations: History and Computing I
-IASC 3P37|Ineractive Arts and Science|Digital Innovations: History and Computing II
-IASC 3P39|Ineractive Arts and Science|Contemporary Literature in English
-IASC 3P73|Ineractive Arts and Science|Creative Writing for Digital Media
-IASC 3P90|Ineractive Arts and Science|Advanced Topics in Digital Culture
-IASC 3P92|Ineractive Arts and Science|Technology and Culture
-IASC 3P93|Ineractive Arts and Science|Heritage Interpretation in the Digital Age
-IASC 3P94|Ineractive Arts and Science|Introduction to Human Computer Interaction
-IASC 3P95|Ineractive Arts and Science|Internship in Interactive Media
-IASC 3P96|Ineractive Arts and Science|Level Design for Games and Immersive Media
-IASC 3P97|Ineractive Arts and Science|Interactive Media Portfolio
-IASC 3P98|Ineractive Arts and Science|Directed Studies
-IASC 3P99|Ineractive Arts and Science|Directed Project
-IASC 3Q90|Ineractive Arts and Science|Competencies in Game Design
-IASC 3Q92|Ineractive Arts and Science|Advanced Internship in Interactive Media Project
-IASC 3Q98|Ineractive Arts and Science|The Psychology of Screens (Television and Beyond)
-IASC 3Q99|Ineractive Arts and Science|Advanced Sound Design
-IASC 4F01|Ineractive Arts and Science|Honour’s Thesis
-IASC 4F03|Ineractive Arts and Science|Team-based Practicum in Game Design and Production
-IASC 4L00|Ineractive Arts and Science|Collaborative Practicum in Interactive Media Design and Production
-IASC 4P01|Ineractive Arts and Science|Creating Social Value from Material Culture
-IASC 4P02|Ineractive Arts and Science|Video Game Research and Development
-IASC 4P62|Ineractive Arts and Science|Video Games in the Classroom
-IASC 4P72|Ineractive Arts and Science|High and Low Art: Intersections, Exchanges and Flows
-IASC 4V70-4V79|Ineractive Arts and Science|Advanced Studies in Interactive Arts and Science
+IASC 1F01|Interactive Arts and Science|Foundations of Interactive Arts and Science
+IASC 1F02|Interactive Arts and Science|Being Human in a Digital World
+IASC 1P00|Interactive Arts and Science|Introduction to Media Computation
+IASC 1P01|Interactive Arts and Science|Fluency With Technology
+IASC 1P02|Interactive Arts and Science|Web Media Production
+IASC 1P03|Interactive Arts and Science|Makerspace Foundations
+IASC 1P04|Interactive Arts and Science|New Media and Games
+IASC 1P05|Interactive Arts and Science|Games, Genres and Aesthetics
+IASC 1P06|Interactive Arts and Science|History and Future of Storytelling
+IASC 1P10|Interactive Arts and Science|Introduction to Media Tools
+IASC 1P30|Interactive Arts and Science|Programming for Interactive Media
+IASC 1P50|Interactive Arts and Science|Integrity and Literacy in the Information Age
+IASC 1P93|Interactive Arts and Science|Applied Programming
+IASC 1P95|Interactive Arts and Science|Digital Foundation
+IASC 1P96|Interactive Arts and Science|Studio Foundation
+IASC 1P99|Interactive Arts and Science|The Culture of Noise
+IASC 1Q98|Interactive Arts and Science|Introduction to Visual Culture
+IASC 1Q99|Interactive Arts and Science|Contemporary Issues in The History of Western Art
+IASC 2F27|Interactive Arts and Science|Historical Geographic Information Systems
+IASC 2P01|Interactive Arts and Science|Foundations of Project Management
+IASC 2P02|Interactive Arts and Science|Solving Problems through Interactive Arts and Science
+IASC 2P03|Interactive Arts and Science|Interaction and Interface Design
+IASC 2P04|Interactive Arts and Science|Ludology
+IASC 2P05|Interactive Arts and Science|Game Design Paradigms
+IASC 2P06|Interactive Arts and Science|3D Objects, Environments and Visualization
+IASC 2P07|Interactive Arts and Science|Introduction to Geospatial Technologies
+IASC 2P08|Interactive Arts and Science|Competencies in Interactive Arts and Science
+IASC 2P11|Interactive Arts and Science|Personal Computers and Networks
+IASC 2P15|Interactive Arts and Science|Speculative Fiction
+IASC 2P25|Interactive Arts and Science|Revolutions in Communication
+IASC 2P28|Interactive Arts and Science|Persuasive Discourse: Theoretical Foundations
+IASC 2P50|Interactive Arts and Science|Great Myths in Literature and Art
+IASC 2P70|Interactive Arts and Science|Introduction to Literary Theory
+IASC 2P89|Interactive Arts and Science|Internet Technologies
+IASC 2P90|Interactive Arts and Science|Networks, Digital Identities and Interactions
+IASC 2P91|Interactive Arts and Science|Social Media
+IASC 2P93|Interactive Arts and Science|Critical Practice in the Fine and Performing Arts
+IASC 2P94|Interactive Arts and Science|Embodied Text: Art Beyond the Artifact
+IASC 2P97|Interactive Arts and Science|Digital Video in Contemporary Art
+IASC 2P98|Interactive Arts and Science|Intermedia
+IASC 2P99|Interactive Arts and Science|Introduction to Sound Design in Contemporary Art
+IASC 2Q90|Interactive Arts and Science|Digital Archives: Construction, Scholarship and Functionality
+IASC 2Q95|Interactive Arts and Science|Introduction to Interactive Media
+IASC 3F01|Interactive Arts and Science|Digital Document Production
+IASC 3F02|Interactive Arts and Science|Interactive Media Practices, Prototyping and Production
+IASC 3F91|Interactive Arts and Science|Innovations in Advanced Digital Media
+IASC 3F92|Interactive Arts and Science|Best Practices in Instructional Design
+IASC 3F93|Interactive Arts and Science|Project Collaborations Across Diverse Programs
+IASC 3F95|Interactive Arts and Science|Advanced Internship in Interactive Media
+IASC 3F96|Interactive Arts and Science|Advanced Internship in Game Design
+IASC 3P01|Interactive Arts and Science|Media Transformations in the Creative Arts
+IASC 3P02|Interactive Arts and Science|Publishing for New Literacies
+IASC 3P03|Interactive Arts and Science|Prototyping with Micro Controllers and Mobile Technologies
+IASC 3P04|Interactive Arts and Science|Immersion and Simulation
+IASC 3P05|Interactive Arts and Science|Geographic Information Systems
+IASC 3P06|Interactive Arts and Science|Game Criticism
+IASC 3P10|Interactive Arts and Science|Advanced Video Art
+IASC 3P11|Interactive Arts and Science|Motion Capture Studio
+IASC 3P14|Interactive Arts and Science|Dramatic Creation for Contemporary Cultural Practice
+IASC 3P15|Interactive Arts and Science|Writing for New Media
+IASC 3P26|Interactive Arts and Science|Social and Cultural Aspects of Digital Gaming
+IASC 3P28|Interactive Arts and Science|Rhetorical Analysis
+IASC 3P36|Interactive Arts and Science|Digital Innovations: History and Computing I
+IASC 3P37|Interactive Arts and Science|Digital Innovations: History and Computing II
+IASC 3P39|Interactive Arts and Science|Contemporary Literature in English
+IASC 3P73|Interactive Arts and Science|Creative Writing for Digital Media
+IASC 3P90|Interactive Arts and Science|Advanced Topics in Digital Culture
+IASC 3P92|Interactive Arts and Science|Technology and Culture
+IASC 3P93|Interactive Arts and Science|Heritage Interpretation in the Digital Age
+IASC 3P94|Interactive Arts and Science|Introduction to Human Computer Interaction
+IASC 3P95|Interactive Arts and Science|Internship in Interactive Media
+IASC 3P96|Interactive Arts and Science|Level Design for Games and Immersive Media
+IASC 3P97|Interactive Arts and Science|Interactive Media Portfolio
+IASC 3P98|Interactive Arts and Science|Directed Studies
+IASC 3P99|Interactive Arts and Science|Directed Project
+IASC 3Q90|Interactive Arts and Science|Competencies in Game Design
+IASC 3Q92|Interactive Arts and Science|Advanced Internship in Interactive Media Project
+IASC 3Q98|Interactive Arts and Science|The Psychology of Screens (Television and Beyond)
+IASC 3Q99|Interactive Arts and Science|Advanced Sound Design
+IASC 4F01|Interactive Arts and Science|Honour’s Thesis
+IASC 4F03|Interactive Arts and Science|Team-based Practicum in Game Design and Production
+IASC 4L00|Interactive Arts and Science|Collaborative Practicum in Interactive Media Design and Production
+IASC 4P01|Interactive Arts and Science|Creating Social Value from Material Culture
+IASC 4P02|Interactive Arts and Science|Video Game Research and Development
+IASC 4P62|Interactive Arts and Science|Video Games in the Classroom
+IASC 4P72|Interactive Arts and Science|High and Low Art: Intersections, Exchanges and Flows
+IASC 4V70-4V79|Interactive Arts and Science|Advanced Studies in Interactive Arts and Science
 INDG 1F01|Indigenous Studies|Introduction to Mohawk
 INDG 1F03|Indigenous Studies|Introduction to Cayuga
 INDG 1F20|Indigenous Studies|Introduction to Nishnawbe Languages
@@ -2624,68 +2640,68 @@ PCUL 4V50-4V59|Popular Culture|Contemporary Issues in Popular Culture Studies
 PCUL 4V57|Popular Culture|2021-2022: Visual Culture
 PCUL 4V60-4V69|Popular Culture|Historical Perspectives in Popular Culture
 PCUL 4V70-4V79|Popular Culture|Issues in International Popular Culture
-PHIL 1F90|Philosphy|Introduction to Philosophy: Philosophical Classics and Contemporary Life
-PHIL 1F91|Philosphy|Introduction to Philosophy: Human Nature
-PHIL 1F93|Philosphy|Introduction to Philosophy: The Foundations of the Present
-PHIL 1F94|Philosphy|Introduction to Philosophy: Problems
-PHIL 1F95|Philosphy|Introduction to Philosophy: The Meaning of Life
-PHIL 1F96|Philosphy|Introduction to Philosophy: Narratives of Reason
-PHIL 1F97|Philosphy|Introduction to Philosophy: Why Philosophize?
-PHIL 2P00|Philosphy|Pre-Socratics to Plato
-PHIL 2P01|Philosphy|Growth of Greek Philosophy: Aristotle and Beyond
-PHIL 2P02|Philosphy|Early Modern Philosophy: The Rationalists
-PHIL 2P03|Philosphy|Early Modern Philosophy: The Empiricists
-PHIL 2P05|Philosphy|Reason and Experience
-PHIL 2P09|Philosphy|Ethics: Major Ethical Theories and Philosophies of Life
-PHIL 2P12|Philosphy|Indian Philosophy: An Introduction to Hindu Thought
-PHIL 2P13|Philosphy|Indian Philosophy: An Introduction to Buddhist Thought
-PHIL 2P14|Philosphy|The Beginnings of Existential Thinking
-PHIL 2P15|Philosphy|The Growth of Existential Thinking
-PHIL 2P16|Philosphy|Existentialism
-PHIL 2P17|Philosphy|Introduction to Chinese Philosophy
-PHIL 2P18|Philosphy|Postmodernism
-PHIL 2P20|Philosphy|Abrahamic Religious Thought
-PHIL 2P25|Philosphy|Introduction to Logic
-PHIL 2P50|Philosphy|Creatures, Cyborgs and Carnality
-PHIL 2P91|Philosphy|Philosophical Psychology
-PHIL 2P95|Philosphy|Bioethics
-PHIL 2P97|Philosphy|Philosophy of Religion
-PHIL 2P98|Philosphy|Philosophy in Literature
-PHIL 2P99|Philosphy|Gender Ethics and Sexuality
-PHIL 2Q91|Philosphy|Indigenous Ways of Knowing
-PHIL 2Q98|Philosphy|The Philosophy of Art
-PHIL 3M50-3M59|Philosphy|Selected Topics in Philosophy
-PHIL 3P01|Philosphy|Theory of Knowledge
-PHIL 3P02|Philosphy|Metaphysics
-PHIL 3P18|Philosphy|The Technological Dimension
-PHIL 3P19|Philosphy|The Rise of Christian Philosophy
-PHIL 3P63|Philosphy|Contemporary Feminist Philosophy
-PHIL 3P80|Philosphy|Environmental Philosophy
-PHIL 3P90|Philosphy|Critical Study of a Classical Philosophy: Plato
-PHIL 3P91|Philosphy|Critical Study of a Classical Philosophy: Aristotle
-PHIL 3P92|Philosphy|Hermeneutics
-PHIL 3P93|Philosphy|Phenomenology
-PHIL 3P94|Philosphy|Gandhi and Non-Violence
-PHIL 3P95|Philosphy|Issues in 17th-Century Philosophy
-PHIL 3P96|Philosphy|Studies in 19th- and 20th-Century Continental Philosophy I
-PHIL 3P97|Philosphy|Studies in 19th- and 20th-Century Continental Philosophy II
-PHIL 3P99|Philosphy|Issues in 18th-Century Philosophy
-PHIL 3Q98|Philosphy|Transhumanism
-PHIL 3V90-3V94|Philosphy|Comparative Studies in Philosophy
-PHIL 3V95-3V99|Philosphy|Issues in 17th- and 18th-Century Philosophy
-PHIL 4P02|Philosphy|Sartre
-PHIL 4P05|Philosphy|Nietzsche
-PHIL 4P15|Philosphy|Heidegger
-PHIL 4P20|Philosphy|Kant and the 18th Century
-PHIL 4P21|Philosphy|Hegel and the 19th Century
-PHIL 4P22|Philosphy|Nineteenth-Century Philosophy
-PHIL 4P97|Philosphy|Honours Tutorial I
-PHIL 4P98|Philosphy|Honours Tutorial II
-PHIL 4V06-4V14|Philosphy|Contemporary Studies in European Philosophy
-PHIL 4V15-4V29|Philosphy|Modern Philosophical Studies
-PHIL 4V24|Philosphy|2021-2022: Philosophical Methodologies
-PHIL 4V30-4V45|Philosphy|Advanced Studies in Eastern Philosophy
-PHIL 4V46-4V60|Philosphy|Advanced Studies in Comparative Philosophy
+PHIL 1F90|Philosophy|Introduction to Philosophy: Philosophical Classics and Contemporary Life
+PHIL 1F91|Philosophy|Introduction to Philosophy: Human Nature
+PHIL 1F93|Philosophy|Introduction to Philosophy: The Foundations of the Present
+PHIL 1F94|Philosophy|Introduction to Philosophy: Problems
+PHIL 1F95|Philosophy|Introduction to Philosophy: The Meaning of Life
+PHIL 1F96|Philosophy|Introduction to Philosophy: Narratives of Reason
+PHIL 1F97|Philosophy|Introduction to Philosophy: Why Philosophize?
+PHIL 2P00|Philosophy|Pre-Socratics to Plato
+PHIL 2P01|Philosophy|Growth of Greek Philosophy: Aristotle and Beyond
+PHIL 2P02|Philosophy|Early Modern Philosophy: The Rationalists
+PHIL 2P03|Philosophy|Early Modern Philosophy: The Empiricists
+PHIL 2P05|Philosophy|Reason and Experience
+PHIL 2P09|Philosophy|Ethics: Major Ethical Theories and Philosophies of Life
+PHIL 2P12|Philosophy|Indian Philosophy: An Introduction to Hindu Thought
+PHIL 2P13|Philosophy|Indian Philosophy: An Introduction to Buddhist Thought
+PHIL 2P14|Philosophy|The Beginnings of Existential Thinking
+PHIL 2P15|Philosophy|The Growth of Existential Thinking
+PHIL 2P16|Philosophy|Existentialism
+PHIL 2P17|Philosophy|Introduction to Chinese Philosophy
+PHIL 2P18|Philosophy|Postmodernism
+PHIL 2P20|Philosophy|Abrahamic Religious Thought
+PHIL 2P25|Philosophy|Introduction to Logic
+PHIL 2P50|Philosophy|Creatures, Cyborgs and Carnality
+PHIL 2P91|Philosophy|Philosophical Psychology
+PHIL 2P95|Philosophy|Bioethics
+PHIL 2P97|Philosophy|Philosophy of Religion
+PHIL 2P98|Philosophy|Philosophy in Literature
+PHIL 2P99|Philosophy|Gender Ethics and Sexuality
+PHIL 2Q91|Philosophy|Indigenous Ways of Knowing
+PHIL 2Q98|Philosophy|The Philosophy of Art
+PHIL 3M50-3M59|Philosophy|Selected Topics in Philosophy
+PHIL 3P01|Philosophy|Theory of Knowledge
+PHIL 3P02|Philosophy|Metaphysics
+PHIL 3P18|Philosophy|The Technological Dimension
+PHIL 3P19|Philosophy|The Rise of Christian Philosophy
+PHIL 3P63|Philosophy|Contemporary Feminist Philosophy
+PHIL 3P80|Philosophy|Environmental Philosophy
+PHIL 3P90|Philosophy|Critical Study of a Classical Philosophy: Plato
+PHIL 3P91|Philosophy|Critical Study of a Classical Philosophy: Aristotle
+PHIL 3P92|Philosophy|Hermeneutics
+PHIL 3P93|Philosophy|Phenomenology
+PHIL 3P94|Philosophy|Gandhi and Non-Violence
+PHIL 3P95|Philosophy|Issues in 17th-Century Philosophy
+PHIL 3P96|Philosophy|Studies in 19th- and 20th-Century Continental Philosophy I
+PHIL 3P97|Philosophy|Studies in 19th- and 20th-Century Continental Philosophy II
+PHIL 3P99|Philosophy|Issues in 18th-Century Philosophy
+PHIL 3Q98|Philosophy|Transhumanism
+PHIL 3V90-3V94|Philosophy|Comparative Studies in Philosophy
+PHIL 3V95-3V99|Philosophy|Issues in 17th- and 18th-Century Philosophy
+PHIL 4P02|Philosophy|Sartre
+PHIL 4P05|Philosophy|Nietzsche
+PHIL 4P15|Philosophy|Heidegger
+PHIL 4P20|Philosophy|Kant and the 18th Century
+PHIL 4P21|Philosophy|Hegel and the 19th Century
+PHIL 4P22|Philosophy|Nineteenth-Century Philosophy
+PHIL 4P97|Philosophy|Honours Tutorial I
+PHIL 4P98|Philosophy|Honours Tutorial II
+PHIL 4V06-4V14|Philosophy|Contemporary Studies in European Philosophy
+PHIL 4V15-4V29|Philosophy|Modern Philosophical Studies
+PHIL 4V24|Philosophy|2021-2022: Philosophical Methodologies
+PHIL 4V30-4V45|Philosophy|Advanced Studies in Eastern Philosophy
+PHIL 4V46-4V60|Philosophy|Advanced Studies in Comparative Philosophy
 PMPB 6F20|Professional Masters Preparation Business|Preparing for Business Graduate Studies in Canada
 PMPB 6F21|Professional Masters Preparation Business|Writing for Business Purposes
 PMPB 6F22|Professional Masters Preparation Business|Listening and Speaking for Business Purposes
@@ -2776,37 +2792,9 @@ POLI 4P54|Political Science|Business-Government Relations
 POLI 4P67|Political Science|Comparative Public Policy
 POLI 4P68|Political Science|Social Movements and Globalization
 POLI 4P70|Political Science|Tutorial in Political Theory
-POLI 4P71|PolitComputer Science
-Applied Computing 
-Biophysics
-Chemistry
-Earth Sciences
-Engineering Science 
-Biomedical Sciences
-Computing and Business
-Canadian Studies
-Classics 
-Dramatic Arts 
-German Studies 
-Game Design 
-History 
-Music 
-General Humanities
-English Studies
-Visual Arts
-Italian Studies 
-French Studies 
-Philosophy
-Physics
-Mathematics and Statistics
-Accounting
-Business Administration 
-Health Sciences
-Kinesiology
-Nursing
-Recreation and Leisure Studies
-Sport Management
-Concurrent Education ical Science|Tutorial in Comparative Politics
+POLI 4P71|Political Science|Tutorial in Canadian Politics
+POLI 4P72|Political Science|Tutorial in International Relations
+POLI 4P73|Political Science|Tutorial in Comparative Politics
 POLI 4P74|Political Science|Tutorial in Public Administration
 POLI 4P75|Political Science|Tutorial in Public Policy
 POLI 4P76|Political Science|Tutorial in Political Science
@@ -3373,32 +3361,32 @@ WGST 4P91|Women's and Gender Studies|Feminist Research: Negotiating Evidence and
 WGST 4P95|Women's and Gender Studies|Gender and Sport
 WGST 4Q41|Women's and Gender Studies|Social Policy
 WGST 4V50-4V69|Women's and Gender Studies|Special Topics in Women's Studies
-WRDS 1F90|Writing, Retoric and Discourse Studies|Writing, Rhetoric and Discourse Studies: An Introduction
-WRDS 1P06|Writing, Retoric and Discourse Studies|History and Future of Storytelling
-WRDS 2P12|Writing, Retoric and Discourse Studies|Technical Communication and Documents
-WRDS 2P14|Writing, Retoric and Discourse Studies|Technical Writing
-WRDS 2P16|Writing, Retoric and Discourse Studies|Communication for Organizations
-WRDS 2P18|Writing, Retoric and Discourse Studies|Reporting and News Writing for Mass Media
-WRDS 2P20|Writing, Retoric and Discourse Studies|Identity, Identification and Public Address
-WRDS 2P28|Writing, Retoric and Discourse Studies|Persuasive Discourse: Theoretical Foundations
-WRDS 2P63|Writing, Retoric and Discourse Studies|Communication Design
-WRDS 2P72|Writing, Retoric and Discourse Studies|The Creative Writer
-WRDS 3P15|Writing, Retoric and Discourse Studies|Writing for New Media
-WRDS 3P16|Writing, Retoric and Discourse Studies|Organizational Discourses
-WRDS 3P18|Writing, Retoric and Discourse Studies|True Stories: The Art and Craft of Literary Journalism
-WRDS 3P28|Writing, Retoric and Discourse Studies|Rhetorical Analysis
-WRDS 3P63|Writing, Retoric and Discourse Studies|Digital Design and Communication
-WRDS 3P72|Writing, Retoric and Discourse Studies|The Creative Writer and the Community
-WRDS 3P73|Writing, Retoric and Discourse Studies|Creative Writing for Digital Media
-WRDS 3P90|Writing, Retoric and Discourse Studies|Life Writing
-WRDS 3P98|Writing, Retoric and Discourse Studies|Reporting Arts and Culture
-WRDS 3P99|Writing, Retoric and Discourse Studies|Interpretive and Critical Writing in the Arts
-WRDS 3V90-3V99|Writing, Retoric and Discourse Studies|Topics in Writing and Culture
-WRDS 4F99|Writing, Retoric and Discourse Studies|Independent Studies in Writing, Rhetoric and Discourse
-WRDS 4P01|Writing, Retoric and Discourse Studies|e-portfolio for Rhetoric, Writing and Discourse Studies
-WRDS 4P10|Writing, Retoric and Discourse Studies|Language and Discourse: Theory and Practice
-WRDS 4P15|Writing, Retoric and Discourse Studies|Words on Words: Narratives of Language
-WRDS 4P20|Writing, Retoric and Discourse Studies|Studies in Cultural Rhetoric
-WRDS 4P98|Writing, Retoric and Discourse Studies|Independent Studies in Writing
-WRDS 4P99|Writing, Retoric and Discourse Studies|Independent Studies in Writing
-WRDS 4V90-4V99|Writing, Retoric and Discourse Studies|Writing Area Studies
+WRDS 1F90|Writing, Rhetoric and Discourse Studies|Writing, Rhetoric and Discourse Studies: An Introduction
+WRDS 1P06|Writing, Rhetoric and Discourse Studies|History and Future of Storytelling
+WRDS 2P12|Writing, Rhetoric and Discourse Studies|Technical Communication and Documents
+WRDS 2P14|Writing, Rhetoric and Discourse Studies|Technical Writing
+WRDS 2P16|Writing, Rhetoric and Discourse Studies|Communication for Organizations
+WRDS 2P18|Writing, Rhetoric and Discourse Studies|Reporting and News Writing for Mass Media
+WRDS 2P20|Writing, Rhetoric and Discourse Studies|Identity, Identification and Public Address
+WRDS 2P28|Writing, Rhetoric and Discourse Studies|Persuasive Discourse: Theoretical Foundations
+WRDS 2P63|Writing, Rhetoric and Discourse Studies|Communication Design
+WRDS 2P72|Writing, Rhetoric and Discourse Studies|The Creative Writer
+WRDS 3P15|Writing, Rhetoric and Discourse Studies|Writing for New Media
+WRDS 3P16|Writing, Rhetoric and Discourse Studies|Organizational Discourses
+WRDS 3P18|Writing, Rhetoric and Discourse Studies|True Stories: The Art and Craft of Literary Journalism
+WRDS 3P28|Writing, Rhetoric and Discourse Studies|Rhetorical Analysis
+WRDS 3P63|Writing, Rhetoric and Discourse Studies|Digital Design and Communication
+WRDS 3P72|Writing, Rhetoric and Discourse Studies|The Creative Writer and the Community
+WRDS 3P73|Writing, Rhetoric and Discourse Studies|Creative Writing for Digital Media
+WRDS 3P90|Writing, Rhetoric and Discourse Studies|Life Writing
+WRDS 3P98|Writing, Rhetoric and Discourse Studies|Reporting Arts and Culture
+WRDS 3P99|Writing, Rhetoric and Discourse Studies|Interpretive and Critical Writing in the Arts
+WRDS 3V90-3V99|Writing, Rhetoric and Discourse Studies|Topics in Writing and Culture
+WRDS 4F99|Writing, Rhetoric and Discourse Studies|Independent Studies in Writing, Rhetoric and Discourse
+WRDS 4P01|Writing, Rhetoric and Discourse Studies|e-portfolio for Rhetoric, Writing and Discourse Studies
+WRDS 4P10|Writing, Rhetoric and Discourse Studies|Language and Discourse: Theory and Practice
+WRDS 4P15|Writing, Rhetoric and Discourse Studies|Words on Words: Narratives of Language
+WRDS 4P20|Writing, Rhetoric and Discourse Studies|Studies in Cultural Rhetoric
+WRDS 4P98|Writing, Rhetoric and Discourse Studies|Independent Studies in Writing
+WRDS 4P99|Writing, Rhetoric and Discourse Studies|Independent Studies in Writing
+WRDS 4V90-4V99|Writing, Rhetoric and Discourse Studies|Writing Area Studies
