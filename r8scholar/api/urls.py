@@ -17,6 +17,7 @@ urlpatterns = [
     path('search-instructors/', views.SearchInstructorView.as_view()),
     path('search-courses/', views.SearchCourseView.as_view()),
     path('search-department/', views.SearchDeptView.as_view()),
+    path('search/', views.SearchView.as_view()),
     #get views 
     path('get-user', views.GetUser.as_view()), 
     path('get-reviews', views.GetReviewsView.as_view()), 
