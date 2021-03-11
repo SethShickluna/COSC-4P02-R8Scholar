@@ -7,19 +7,19 @@ import cookie from 'react-cookies';
 
 const questions = { 
     "course": [
-        "On a scale of 1 to 5, how did you find the lectures for this course? ", 
-        "On a scale of 1 - 5, was the homework for this course?", 
-        "On a scale of 1 - 5, how was the instructor for this course?"
+        "the lectures for this course?", 
+        "the homework for this course?", 
+        "the midterm/exam,or other evaluations, for this course?"
     ], 
     "instructor" : [
-        "On a scale of 1 to 5, how were the lecturing abilities of this instructor? ", 
-        "On a scale of 1 - 5, how was the homework this instructor assigned?", 
-        "On a scale of 1 - 5, how was the course this instructor taught?"
+        "the lecturing abilities of the instructor?", 
+        "the fairness of the instructor?", 
+        "the preparedness of the instructor?"
     ], 
     "department": [
-        "On a scale of 1 - 5, what is the quality of courses from this department?", 
-        "On a scale of 1 - 5, what is the quality of instructors from this department", 
-        "On a scale of 1 - 5, what is the overall quality of this department", 
+        "the quality of courses in this program?", 
+        "the quality of instructors from this department?", 
+        "the overall quality of the department?", 
     ],  
 }
 
