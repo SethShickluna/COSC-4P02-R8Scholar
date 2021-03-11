@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy
 #REST#
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project files# 
@@ -50,6 +50,25 @@ class ForumView(generics.ListAPIView):
 class TicketView(generics.ListAPIView):
     serializer_class = TicketSerializer
     queryset = Ticket.objects.all()
+
+#search view
+class SearchInstructorView(generics.ListCreateAPIView):
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Instructor.objects.all()
+    serializer_class = InstructorSerializer
+
+class SearchCourseView(generics.ListCreateAPIView):
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+class SearchDeptView(generics.ListCreateAPIView):
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Department.objects.all()
+    serializer_class = DeparmentSerializer
 
 #get views 
 class GetUser(APIView):
@@ -227,6 +246,7 @@ class getTopDepartments(APIView):
             return Response(top_departments, status=status.HTTP_200_OK)
         else:
             return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
                     
