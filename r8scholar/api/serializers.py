@@ -46,6 +46,12 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = ('email', 'content', 'date')
 
+class SearchSerializer(serializers.Serializer):
+    instructor = InstructorSerializer(required=False)
+    course = CourseSerializer(required=False)
+    department = DeparmentSerializer(required=False)
+
+
 #Creation serializers 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
