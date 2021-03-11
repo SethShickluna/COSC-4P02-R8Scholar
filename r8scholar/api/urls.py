@@ -22,6 +22,10 @@ urlpatterns = [
     path('get-top-courses', views.getTopCourses.as_view()), 
     path('get-top-instructors', views.getTopInstructors.as_view()), 
     path('get-top-departments', views.getTopDepartments.as_view()), 
+    #Filter views
+    path('filter-courselist',views.filterCourseListBy.as_view(),name='filter-courselist'),
+    path('filter-departmentlist',views.filterDepartmentListBy.as_view(),name='filter-courselist'),
+    path('filter-instructorlist',views.filterInstructorListBy.as_view(),name='filter-instructorlist'),
     #create views 
     path('create-user', views.CreateUserView.as_view()), 
     path('create-review', views.CreateReviewView.as_view()), 
