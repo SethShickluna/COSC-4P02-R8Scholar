@@ -9,34 +9,42 @@ const formStyle = {
 }
 
 
-export default class EditProfileForm extends Component {
-//make this a password form 
+export default class EditPasswordForm extends Component {
+    //make this a password form 
     constructor(props) {
         super(props);
         this.state = {
+            oldPassword: "",
             password: "",
             verifPassword: "",
             formComplete: false,
         }
 
         //allows us to this "this" inside the methods 
-        this.updatePasswordInput = this.updatePasswordInput.bind(this);
+        this.updateNewPasswordInput = this.updateNewPasswordInput.bind(this);
+        this.updateOldPasswordInput = this.updateOldPasswordInput.bind(this);
         this.updateVerifyPasswordInput = this.updateVerifyPasswordInput.bind(this);
-        
+
 
         this.submitForm = this.submitForm.bind(this);
         this.checkPassword = this.checkPassword.bind(this);
-        
     }
 
-
-    updatePasswordInput(obj) {
+    //OLD PASSWORD
+    updateNewPasswordInput(obj) {
         this.setState({
             password: obj.target.value,
             formComplete: (this.checkPassword()),
         });
     }
-
+    //NEW PASSWORD
+    updateOldPasswordInput(obj) {
+        this.setState({
+            oldPassword: obj.target.value,
+            formComplete: (this.checkPassword()),
+        });
+    }
+    //VERIFY PASSWORD
     updateVerifyPasswordInput(obj) {
         this.setState({
             verifPassword: obj.target.value,
@@ -44,7 +52,7 @@ export default class EditProfileForm extends Component {
         });
     }
 
-    
+
 
 
     //password boxes match and are at least 8 characters 
@@ -56,9 +64,28 @@ export default class EditProfileForm extends Component {
     submitForm = () => {
         //good to go?
         if (this.checkPassword()) { // passwords match
-            //send info to the back end and change password 
-            //route to confirmation page 
-            alert("Success!");
+            //send info to the back end and change password  
+            const request = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    old_password: this.state.oldPassword,
+                    new_password: this.state.password,
+                }),
+            };
+            //fetch 
+            fetch("/api/change-password", request)
+                .then((response) => {
+                    if (response.ok) { //yay
+                        //good response 
+                        alert("Success, password changed!");
+                        this.props.history.push('/');
+                    } else {//nay 
+                        alert("Invalid password...");
+                    }
+                });
+        } else {
+            alert("Passwords did not meet requirements!");
         }
     }
 
@@ -69,9 +96,13 @@ export default class EditProfileForm extends Component {
                     <Card.Header as='h4'>Change Password</Card.Header>
                     <Card.Body>
                         <Form>
-                            <Form.Group controlId="formGroupPassword">
+                            <Form.Group controlId="formGroupOldPassword">
+                                <Form.Label>Enter Old Password</Form.Label>
+                                <Form.Control type="password" onChange={this.updateOldPasswordInput} placeholder="Enter old password..." />
+                            </Form.Group>
+                            <Form.Group controlId="formGroupNewPassword">
                                 <Form.Label>Enter New Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Enter password..." />
+                                <Form.Control type="password" onChange={this.updateNewPasswordInput} placeholder="Enter new password..." />
                             </Form.Group>
 
                             <Form.Group controlId="formGroupVerifyPassword">
@@ -80,9 +111,9 @@ export default class EditProfileForm extends Component {
                             </Form.Group>
 
                             <Button disabled={!this.state.formComplete} onClick={this.submitForm} variant="primary">
-                               Update Password
+                                Update Password
                             </Button>
-                            
+
                         </Form>
                     </Card.Body>
                 </Card>

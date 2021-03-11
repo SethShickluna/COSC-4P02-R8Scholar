@@ -5,9 +5,9 @@ import SecondaryNav from '../components/SecondaryNav';
 import Tabs from 'react-bootstrap/Tabs';
 import cookie from 'react-cookies';
 import imageOne from '../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg';
-import EditProfileForm from '../components/EditProfileForm';
 import $ from "jquery";
 import EditNicknameForm from "../components/EditNicknameForm";
+import EditPasswordForm from "../components/EditPasswordForm";
 
 
 
@@ -210,18 +210,22 @@ export default class Profile extends Component {
 
 
                                         <Tab eventKey="edit-profile" title="Change Password"> {/*Edit password form */}
+
                                             {cookie.load('isLoggedIn') === "true" ?
-                                                (<EditProfileForm> </EditProfileForm>) //change to a custom edit profile form.
+                                                (<EditPasswordForm> </EditPasswordForm>) //custom password change form
                                                 : (<div style={{ marginLeft: "20px" }}>Please log in or signup to edit your profile</div>)
                                             }
                                         </Tab>
 
 
                                         <Tab eventKey="edit-nickname" title="Change Nickname"> {/*Edit nickname form */}
+
                                             {cookie.load('isLoggedIn') === "true" ?
-                                                (<EditNicknameForm></EditNicknameForm>) //change to a custom edit profile form.
+                                                (<EditNicknameForm></EditNicknameForm>) //custom password change form
                                                 : (<div style={{ marginLeft: "20px" }}>Please log in or signup to edit your profile</div>)
                                             }
+
+
                                         </Tab>
 
                                     </Tabs>
