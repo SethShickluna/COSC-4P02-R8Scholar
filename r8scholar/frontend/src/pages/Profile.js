@@ -44,8 +44,6 @@ const imgStyle = {
     height: '200px',
 }
 
-var newImage;
-
 
 //code for submitting a profile image
 $(document).ready(function () {
@@ -80,11 +78,13 @@ export default class Profile extends Component {
         //use state because react forces an update when it is modifed in some way 
         this.state = { //all the content that is gonna be retrieved from the api stored here locally
             user: null,
-            reviews: []
+            reviews: null,
         }
 
-        this.imageMaker = this.imageMaker.bind(this) //bInd imagemaker
         this.verifyUser = this.verifyUser.bind(this);
+        this.getAllReviews = this.getAllReviews.bind(this);
+        this.changeConstant = this.changeConstant.bind(this);
+        this.constantName = null;
     }
 
     componentDidMount() {
@@ -97,9 +97,28 @@ export default class Profile extends Component {
             });
     }
 
-    imageMaker() {
-        //change state object 
-        this.setState({ profile_picture: newImage })
+    changeConstant() {//change the nickname and get reviews from modified views.py
+        this.constantName = this.state.user.nickname;
+        this.getAllReviews(this.constantName);
+    }
+
+    getAllReviews(name) {
+        //this is just to have but will need to be slightly refactored 
+        //make changes to the views to allow this functionality.
+        return fetch('/api/get-reviews' + '?nickname=' + this.constantName)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return null
+                }
+            })
+            .then((data) => {
+                this.setState({
+                    reviews: data,
+                    //loaded: true, 
+                })
+            });
     }
 
     verifyUser() {
@@ -123,10 +142,11 @@ export default class Profile extends Component {
             });
     }
 
+
     render() {
         return (
-            <div>
 
+            <div>
                 <SecondaryNav />
                 {this.state.user ?
                     <div style={pageStyles}>
@@ -169,7 +189,7 @@ export default class Profile extends Component {
                                         </div>
                                         <div style={{ textAlign: 'center' }} name="lecture-rating">
 
-                                            <img className="profile-pic" src={imageOne} style={imgStyle} onChange={this.imageMaker} />
+                                            <img className="profile-pic" src={imageOne} style={imgStyle} />
 
 
                                         </div>
@@ -178,33 +198,19 @@ export default class Profile extends Component {
 
                                     <div style={pageBreak} /> {/* underline */}
 
-                                    <div style={{ marginTop: '25px' }} name="freq-course-container"> {/* change profile pic*/}
-                                        <div name="freq-course-title">
-                                            <h4 style={{ textAlign: 'left' }}>Change Profile Picture</h4>
-                                        </div>
-
-                                        {cookie.load('isLoggedIn') === "true" ?
-                                            (<button style={buttonStyle} align='center'> <div className="upload-button">Upload Image</div>
-                                                <input className="file-upload" type="file" accept="image/*" /> </button>)
-                                            : (<div style={{ marginLeft: "20px" }}>Please log in or signup to edit your profile</div>)
-                                        }
-
-
-                                    </div>
-
-                                    <div style={pageBreak} /> {/* underline */}
 
                                 </Col>
 
                                 <Col sm={7}> {/*change this section to one with 2 tabs , change the state form.*/}
                                     <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
 
-                                        <Tab eventKey="reviews" title="Reviews">
+                                        <Tab eventKey="reviews" title="Reviews" >
+                                            {/*<Button onClick ={this.changeConstant} >Reload</Button>*/}
                                             {this.state.reviews !== null ?
                                                 this.state.reviews.map((item, index) =>
                                                     (<ReviewItem id={index} key={"course-review" + index} reviewItem={item} />))
                                                 : (<div style={{ marginLeft: "20px" }}>No reviews yet! Be the first to leave one?</div>)
-                                /* generate all the reviews for this page */}
+                                            }
                                         </Tab>
 
 
