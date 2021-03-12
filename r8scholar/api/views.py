@@ -261,10 +261,7 @@ class getTopDepartments(APIView):
             return Response(top_departments, status=status.HTTP_200_OK)
         else:
             return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-                    
+            
 
 #create views 
 class CreateUserView(APIView): 

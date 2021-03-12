@@ -1,13 +1,11 @@
 import React from "react";
 import cookie from 'react-cookies';
+import SearchBar from './SearchBar'; 
 
 // reactstrap components
 import {
   UncontrolledCollapse,
   Button,
-  FormGroup,
-  Form,
-  Input,
   NavbarBrand,
   Navbar,
   NavItem,
@@ -77,11 +75,7 @@ function SecondaryNav() {
             : null
             }
             </Nav>
-            <Form className="form-inline ml-auto">
-              <FormGroup className="has-white">
-                <Input placeholder="Search" type="text" />
-              </FormGroup>
-            </Form>
+            <SearchBar color="primary"/>
             <Nav navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 

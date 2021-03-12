@@ -10,6 +10,7 @@ urlpatterns = [
     path('course/<str:courseName>', views.index),
     path('department/<str:deptName>', views.index),
     path('instructor/<str:profName>', views.index),
+    path('verify', views.index), 
     path('courses/', views.index), 
     path('instructors/', views.index), 
     path('departments/', views.index), 

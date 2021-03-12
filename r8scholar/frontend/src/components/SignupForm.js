@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import {Form, Button, Card} from 'react-bootstrap'; 
 import {withRouter} from 'react-router-dom'; 
+import cookie from 'react-cookies'; 
 
 
 const formStyle = {
@@ -114,7 +115,8 @@ class SignupForm extends Component {
             switch(response.status){
                 case 201: 
                     alert("Account created successfully!"); 
-                    this.props.history.push('/login');
+                    cookie.save("email", this.state.email, {path: "/"}); 
+                    this.props.history.push('/verify');
                     break; 
                 default:
                     alert("Something went wrong :/ " + response.statusText); 

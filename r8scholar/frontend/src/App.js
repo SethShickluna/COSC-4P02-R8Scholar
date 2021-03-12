@@ -26,6 +26,7 @@ import Forum from "./pages/Forum";
 import PageNotFound from "./pages/PageNotFound";
 import Profile from "./pages/Profile"; 
 import Settings from "./pages/Settings"; 
+import Verification from "./pages/Verify";
 
 
 /*EXPLAINING HOW SPECIFYING COURSE, DEPARTMENTS, AND PROF NAMES WORK 
@@ -48,6 +49,7 @@ export default class App extends Component {
                     <Route path="/login" component={Login} history={history} />
                     <Route exact path="/signup" component={Signup} />
                     <Route path="/instructors" component={Instructors} />
+                    <Route path="/verify" component={Verification} />
                     <Route exact path="/courses" component={Courses} />
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/forum" component={Forum} />

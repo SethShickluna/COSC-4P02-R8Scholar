@@ -4,6 +4,7 @@ Accounting
 Adult Education
 Administration
 Applied Disability Studies
+Applied Linguistics
 Academic English as a Subsequent Language
 Applied Computing
 Arabic
@@ -11,6 +12,7 @@ Astronomy
 Biochemistry
 Biology
 Biomedical Sciences
+Biological Sciences
 Biophysics
 Biotechnology
 Game
@@ -22,9 +24,10 @@ Communication Studies
 Computer Science
 Communication, Popular Culture and Film
 Criminology
+Digital Humanities
 Dramatic Arts
 Economics
-Education- Teacher Education
+Education: Teacher Education
 Education
 Creative Writing
 English

@@ -1,11 +1,9 @@
 import React from "react";
-// nodejs library that concatenates strings
+import SearchBar from './SearchBar'; 
 import classnames from "classnames";
-// reactstrap components
+
 import {
-  Form,
-  FormGroup, 
-  Input,
+
   Button,
   Collapse,
   NavbarBrand,
@@ -71,11 +69,7 @@ function HomeNavbar() {
             <span className="navbar-toggler-bar bar3" />
           </button>
         </div>
-        <Form className="form-inline ml-auto">
-              <FormGroup className="has-white">
-                <Input placeholder="Search" type="text" />
-              </FormGroup>
-         </Form>
+        <SearchBar color="transparent"/>
         <Collapse
           className="justify-content-end"
           navbar

@@ -1,9 +1,14 @@
 import React from "react";
 import { Row, Container } from "reactstrap";
 
+const bottom = { 
+  position: 'relative', 
+  minHeight: '100%', 
+}
+
 function Footer() {
   return (
-    <footer className="footer footer-black footer-white">
+    <footer style={bottom} className="footer footer-black footer-white fixed-bottom">
       <Container>
         <Row>
           <nav className="footer-nav">
