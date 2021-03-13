@@ -271,7 +271,6 @@ class filterCourseListBy(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
-        amount = int(data["amount"])
         #offset = int(data['offset'])
 
         course_list = [None]*amount
@@ -279,6 +278,7 @@ class filterCourseListBy(APIView):
         #Filter by name
         if (str(filter_by)=="name"):
             courses = Course.objects.all()
+            amount = courses.count()
             if len(courses) >= amount: 
                 for i in range(amount):
                     for course in courses:
@@ -341,6 +341,7 @@ class filterInstructorListBy(APIView):
         #Filter by name
         if (str(filter_by).equals('name')):
             instructors = Instructor.objects.all()
+            amount = instructors.count()
             if len(instructors) >= amount: 
                 for i in range(amount):
                     for instructor in instructors:
@@ -404,6 +405,7 @@ class filterDepartmentListBy(APIView):
         #Filter by name
         if (str(filter_by).equals('name')):
             departments = Department.objects.all()
+            amount = departments.count()
             if len(departments) >= amount: 
                 for i in range(amount):
                     for department in departments:
