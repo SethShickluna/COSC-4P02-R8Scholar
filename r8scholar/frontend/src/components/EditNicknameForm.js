@@ -94,9 +94,9 @@ export default class EditNicknameForm extends Component {
                     <Card.Body>
                         <Form>
 
-                        <Form.Group controlId="formGroupOldPassword">
-                                <Form.Label>Enter Old Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updateOldPasswordInput} placeholder="Enter password..." />
+                        <Form.Group controlId="formGroupPassword">
+                                <Form.Label>Enter Password</Form.Label>
+                                <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Enter password..." />
                             </Form.Group>
 
                             <Form.Group controlId="formGroupNickname">

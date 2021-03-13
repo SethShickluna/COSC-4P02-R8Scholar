@@ -3,6 +3,7 @@ import AdminForm from '../components/assets/AdminForm';
 import EditItemForm from '../components/assets/EditItemForm';
 import RemoveItemForm from '../components/assets/RemoveItemForm';
 import BanUserForm from '../components/assets/BanUserForm';
+import SecondaryNav from "../components/SecondaryNav";
 
 
 
@@ -25,10 +26,10 @@ export default class Settings extends Component {
             //script
 
             <div className="container ">
-
+                <SecondaryNav/>
                 <div className="row">
                     <div className="col-lg-12 paginationBar forumModule forumPad ">
-                        <a href="Settings"> Settings </a> <i className="fa fa-chevron-circle-right paginationArrow"> </i>
+                        <a href="/settings"> Settings </a> <i className="fa fa-chevron-circle-right paginationArrow"> </i>
                     </div>
                 </div>
 
@@ -50,7 +51,7 @@ export default class Settings extends Component {
                             </th>
                         </thead>
 
-                        <tr classnName="forumModule">
+                        <tr className="forumModule">
                             <td>
                                 <button onClick={function myFunction() {
                                     var x = document.getElementById("myDIV");
@@ -66,7 +67,7 @@ export default class Settings extends Component {
 
                             </td>
                         </tr>
-                        <tr classnName="forumModule">
+                        <tr className="forumModule">
                             <td>
                                 <button onClick={function myFunction() {
                                     var x = document.getElementById("myDIV2");
@@ -82,7 +83,7 @@ export default class Settings extends Component {
                                 </div>
                             </td>
                         </tr>
-                        <tr classnName="forumModule">
+                        <tr className="forumModule">
                             <td>
                             <button onClick={function myFunction() {
                                     var x = document.getElementById("myDIV3");
@@ -98,7 +99,7 @@ export default class Settings extends Component {
                                 </div>
                             </td>
                         </tr>
-                        <tr classnName="forumModule">
+                        <tr className="forumModule">
                             <td>
                             <button onClick={function myFunction() {
                                     var x = document.getElementById("myDIV4");
