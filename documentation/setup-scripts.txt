@@ -6,6 +6,7 @@ install python/django dependencies:
 cd into r8scholar/ 
 run the following line 
 pip install Django==3.1.5 djangorestframework==3.12.2 django-cors-headers==3.7.0
+pip install django-rest-multiple-models
 
 install NodeJS if you dont have it 
 https://nodejs.org/en/
@@ -14,15 +15,15 @@ npm init -y this will install the node_modules folder and initialize a node proj
 then run 
 
 npm install --save-dev babel-core babel-loader babel-plugin-transform-class-properties babel-preset-es2015 babel-preset-react 
-NPM install --save css-loader style-loader url-loader file-loader webpacknpm @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime
+npm install --save css-loader style-loader url-loader file-loader webpack @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime
 
 then 
 
-npm install --save react react-dom react-bootstrap reactstrap
+npm install --save react react-dom react-router-dom reactstrap react-bootstrap 
 
 then 
 
-npm i react-icons react-icons-kit react-star-ratings react-cookies
+npm i react-icons react-icons-kit react-star-ratings react-cookies jquery 
 
 
 to run the program cd into /r8scholar (the directory with manage.py) 
