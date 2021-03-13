@@ -55,7 +55,7 @@ class Verification extends Component {
                     //reload page 
                     alert("Success");
                     cookie.save("isLoggedIn", "true", {path:"/"}); 
-                    cookie.save("email", this.state.email, {path: "/"}); 
+                    cookie.save("email", this.state.user.email, {path: "/"}); 
                     this.props.history.push('/');
                 }else{
                     alert("Invalid Code!");

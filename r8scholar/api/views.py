@@ -184,8 +184,9 @@ class getTopCourses(APIView): #im only going to comment this one because instruc
                 courses = Course.objects.filter(department=my_department)#find the courses the belong to the department 
 
             if len(courses) >= amt: #cannot request more courses than we have 
-                for course in courses: #now we just go through the courses and choose the best ones 
-                    for i in range(amt): #loop through the top because we are constantly comparing (need indexes)
+                for i in range(amt):
+                    for course in courses: #now we just go through the courses and choose the best ones 
+                     #loop through the top because we are constantly comparing (need indexes)
                         if top_courses[i] is None:#if a slot needs to be filled in top courses 
                             if course not in top_courses: #and the current query is not in the list already 
                                 top_courses[i] = course
@@ -219,8 +220,8 @@ class getTopInstructors(APIView):
             else:
                 instructors = Instructor.objects.filter(department=my_department)
             if len(instructors) >= amt:
-                for instructor in instructors:
-                    for i in range(amt):
+                for i in range(amt):
+                    for instructor in instructors:
                         if top_instructors[i] is None:
                             if instructor not in top_instructors:
                                 top_instructors[i] = instructor
@@ -236,7 +237,6 @@ class getTopInstructors(APIView):
                 return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
         
         return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
-    
 
 class getTopDepartments(APIView):
     serializer_class = DeparmentSerializer
@@ -262,6 +262,198 @@ class getTopDepartments(APIView):
         else:
             return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
             
+#Returns a list of courses filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
+# amount will specifiy how many courses should be in the returned list
+# filter_by will specify which filter to use one the course list
+# sample data:
+# {"filter_by":"rating_high_low","amount":"10"}
+class filterCourseListBy(APIView):
+
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        filter_by = data["filter_by"]
+        #offset = int(data['offset'])
+
+        course_list = [None]*amount
+        courses = None
+        #Filter by name
+        if (str(filter_by)=="name"):
+            courses = Course.objects.all()
+            amount = courses.count()
+            if len(courses) >= amount: 
+                for i in range(amount):
+                    for course in courses:
+                        course_list[i] = course
+
+                for c in range(amount):
+                        course_list[c] = CourseSerializer(course_list[c]).data
+                return Response(course_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+        #Filter by rating from highest to lowest
+        if (str(filter_by)=="rating_high_low"):
+            courses = Course.objects.all()
+            if len(courses) >= amount: #cannot request more courses than we have 
+                for i in range(amount):
+                    for course in courses: #now we just go through the courses and choose the best ones 
+                        if course_list[i] is None:#if a slot needs to be filled in top courses 
+                            if course not in course_list: #and the current query is not in the list already 
+                                course_list[i] = course
+                        elif course_list[i].rating < course.rating:#same deal but now filtering the lower rating 
+                            if course not in course_list: 
+                                course_list[i] = course
+                #serialize the final choices 
+                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                    course_list[c] = CourseSerializer(course_list[c]).data
+                return Response(course_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+        #Filter by rating from lowest to highest
+        if (str(filter_by)=="rating_low_high"):
+            courses = Course.objects.all()
+            if len(courses) >= amount: #cannot request more courses than we have 
+                for i in range(amount):
+                    for course in courses: #loop through the top because we are constantly comparing (need indexes)
+                        if course_list[i] is None:#if a slot needs to be filled in top courses 
+                            if course not in course_list: #and the current query is not in the list already 
+                                course_list[i] = course
+                        elif course_list[i].rating > course.rating:#same deal but now filtering the higher rating 
+                            if course not in course_list: 
+                                course_list[i] = course
+                #serialize the final choices 
+                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                    course_list[c] = CourseSerializer(course_list[c]).data
+                return Response(course_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+#Returns a list of instructors filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
+# amount will specifiy how many instructors should be in the returned list
+# filter_by will specify which filter to use one the instructor list
+class filterInstructorListBy(APIView):
+
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        filter_by = data['filter_by']
+        amount = int(data['amount'])
+        #offset = int(data['offset'])
+
+        instructor_list = [None]*amount
+        instructors = None
+        #Filter by name
+        if (str(filter_by).equals('name')):
+            instructors = Instructor.objects.all()
+            amount = instructors.count()
+            if len(instructors) >= amount: 
+                for i in range(amount):
+                    for instructor in instructors:
+                        instructor_list[i] = instructor
+
+                for c in range(amount):
+                        instructor_list[c] = instructorserializer(instructor_list[c]).data
+                return Response(instructor_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+        #Filter by rating from highest to lowest
+        if (str(filter_by).equals('rating_high_low')):
+            instructors = Instructor.objects.all()
+            if len(instructors) >= amount: #cannot request more instructors than we have 
+                for i in range(amount): #loop through the top because we are constantly comparing (need indexes)
+                    for instructor in instructors: #now we just go through the instructors and choose the best ones 
+                        if instructor_list[i] is None:#if a slot needs to be filled in top instructors 
+                            if instructor not in instructor_list: #and the current query is not in the list already 
+                                instructor_list[i] = instructor
+                        elif instructor_list[i].rating < instructor.rating:#same deal but now filtering the lower rating 
+                            if instructor not in instructor_list: 
+                                instructor_list[i] = instructor
+                #serialize the final choices 
+                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                    instructor_list[c] = instructorserializer(instructor_list[c]).data
+                return Response(instructor_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+        #Filter by rating from lowest to highest
+        if (str(filter_by).equals('rating_low_high')):
+            instructors = Instructor.objects.all()
+            if len(instructors) >= amount: #cannot request more instructors than we have 
+                for i in range(amount): #loop through the top because we are constantly comparing (need indexes)
+                    for instructor in instructors: 
+                        if instructor_list[i] is None:#if a slot needs to be filled in top instructors 
+                            if instructor not in instructor_list: #and the current query is not in the list already 
+                                instructor_list[i] = instructor
+                        elif instructor_list[i].rating > instructor.rating:#same deal but now filtering the higher rating 
+                            if instructor not in instructor_list: 
+                                instructor_list[i] = instructor
+                #serialize the final choices 
+                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                    instructor_list[c] = instructorserializer(instructor_list[c]).data
+                return Response(instructor_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+
+#Returns a list of departments filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
+# amount will specifiy how many departments should be in the returned list
+# filter_by will specify which filter to use one the department list
+class filterDepartmentListBy(APIView):
+
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        filter_by = data['filter_by']
+        amount = int(data['amount'])
+        #offset = int(data['offset'])
+
+        department_list = [None]*amount
+        departments = None
+        #Filter by name
+        if (str(filter_by).equals('name')):
+            departments = Department.objects.all()
+            amount = departments.count()
+            if len(departments) >= amount: 
+                for i in range(amount):
+                    for department in departments:
+                        department_list[i] = department
+
+                for c in range(amount):
+                        department_list[c] = departmentserializer(department_list[c]).data
+                return Response(department_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+        #Filter by rating from highest to lowest
+        if (str(filter_by).equals('rating_high_low')):
+            departments = Department.objects.all()
+            if len(departments) >= amount: #cannot request more departments than we have 
+                for i in range(amount):
+                    for department in departments:
+                        if department_list[i] is None:#if a slot needs to be filled in top departments 
+                            if department not in department_list: #and the current query is not in the list already 
+                                department_list[i] = department
+                        elif department_list[i].rating < department.rating:#same deal but now filtering the lower rating 
+                            if department not in department_list: 
+                                department_list[i] = department
+                #serialize the final choices 
+                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                    department_list[c] = departmentserializer(department_list[c]).data
+                return Response(department_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+        #Filter by rating from lowest to highest
+        if (str(filter_by).equals('rating_low_high')):
+            departments = Department.objects.all()
+            if len(departments) >= amount: #cannot request more departments than we have 
+                for i in range(amount):
+                    for department in departments:
+                        if department_list[i] is None:#if a slot needs to be filled in top departments 
+                            if department not in department_list: #and the current query is not in the list already 
+                                department_list[i] = department
+                        elif department_list[i].rating > department.rating:#same deal but now filtering the higher rating 
+                            if department not in department_list: 
+                                department_list[i] = department
+                #serialize the final choices 
+                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                    department_list[c] = departmentserializer(department_list[c]).data
+                return Response(department_list, status=status.HTTP_200_OK) 
+            else:
+                return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+                
 
 #create views 
 class CreateUserView(APIView): 
