@@ -14,6 +14,7 @@ export default class EditPasswordForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: "",
             oldPassword: "",
             password: "",
             verifPassword: "",
@@ -24,6 +25,7 @@ export default class EditPasswordForm extends Component {
         this.updateNewPasswordInput = this.updateNewPasswordInput.bind(this);
         this.updateOldPasswordInput = this.updateOldPasswordInput.bind(this);
         this.updateVerifyPasswordInput = this.updateVerifyPasswordInput.bind(this);
+        this.updateEmailInput = this.updateEmailInput.bind(this);
 
 
         this.submitForm = this.submitForm.bind(this);
@@ -51,6 +53,12 @@ export default class EditPasswordForm extends Component {
             formComplete: (true),
         });
     }
+//email input 
+    updateEmailInput(obj){
+        this.setState({
+            email: obj.target.value, 
+        });
+    }
 
 
 
@@ -69,6 +77,7 @@ export default class EditPasswordForm extends Component {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    email: this.state.email,
                     old_password: this.state.oldPassword,
                     new_password: this.state.password,
                 }),
@@ -95,6 +104,10 @@ export default class EditPasswordForm extends Component {
                 <Card style={formStyle}>
                     <Card.Header as='h4'>Change Password</Card.Header>
                     <Card.Body>
+                    <Form.Group controlId="formGroupPasswordEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter your email" />
+                            </Form.Group>
                         <Form>
                             <Form.Group controlId="formGroupOldPassword">
                                 <Form.Label>Enter Old Password</Form.Label>

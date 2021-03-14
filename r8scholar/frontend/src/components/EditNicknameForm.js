@@ -14,6 +14,7 @@ export default class EditNicknameForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: "",
             password: "",
             nickname: "",
             formComplete: false
@@ -22,6 +23,7 @@ export default class EditNicknameForm extends Component {
         //allows us to this "this" inside the methods 
         this.updateNicknameInput = this.updateNicknameInput.bind(this);
         this.updatePasswordInput = this.updatePasswordInput.bind(this);
+        this.updateEmailInput = this.updateEmailInput.bind(this);
 
         this.submitForm = this.submitForm.bind(this);
         this.checkNickname = this.checkNickname.bind(this);
@@ -41,6 +43,12 @@ export default class EditNicknameForm extends Component {
         this.setState({
             password: obj.target.value,
             formComplete: (this.checkPassword()),
+        });
+    }
+    
+    updateEmailInput(obj){
+        this.setState({
+            email: obj.target.value, 
         });
     }
 
@@ -63,6 +71,7 @@ export default class EditNicknameForm extends Component {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    email: this.state.email, 
                     password: this.state.password,
                     nickname: this.state.nickname,
                 }),
@@ -93,10 +102,13 @@ export default class EditNicknameForm extends Component {
                     <Card.Header as='h4'>Change Nickname</Card.Header>
                     <Card.Body>
                         <Form>
-
+                        <Form.Group controlId="formGroupNicknameEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter your email" />
+                            </Form.Group>
                         <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Enter Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Enter password..." />
+                                <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Enter your password..." />
                             </Form.Group>
 
                             <Form.Group controlId="formGroupNickname">

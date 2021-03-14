@@ -176,7 +176,7 @@ export default class Profile extends Component {
                                     <div name="avg-rating-container">
                                         <div name="avg-rating-title">
 
-                                            <h4 style={{ textAlign: 'center' }}>Profile Picture</h4>
+                                            <h4 style={{ textAlign: 'center' }}>Profile</h4>
                                         </div>
                                         <div style={{ textAlign: 'center' }} name="avg-rating">
 
