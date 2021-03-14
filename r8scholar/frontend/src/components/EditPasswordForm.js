@@ -88,7 +88,7 @@ export default class EditPasswordForm extends Component {
                     if (response.ok) { //yay
                         //good response 
                         alert("Success, password changed!");
-                        this.props.history.push('/');
+                        this.props.history.push('/profile');
                     } else {//nay 
                         alert("Invalid password...");
                     }

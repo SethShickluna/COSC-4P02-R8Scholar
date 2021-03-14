@@ -82,7 +82,7 @@ export default class EditNicknameForm extends Component {
                     if (response.ok) { //yay
                         //good response 
                         alert("Success, nickname changed!");
-                        this.props.history.push('/');
+                        this.props.history.push('/profile');
                     } else {//nay 
                         alert("Invalid password...");
                     }
