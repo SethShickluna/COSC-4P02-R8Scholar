@@ -37,6 +37,7 @@ urlpatterns = [
     #authentication views
     path('login/',views.login.as_view(),name = 'login'),
     path('logout',views.logout.as_view(),name = 'logout'),
+    path('change-nickname',views.change_nickname.as_view(),name='change-nickname'),
     path('change-password',views.change_password.as_view(),name = 'change-password'),
     #functionality views 
     path('verify-user', views.VerifyUserView.as_view())
