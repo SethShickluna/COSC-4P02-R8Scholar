@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 import LoginForm from '../components/LoginForm'
 
 const formStyle = {
@@ -21,8 +22,8 @@ export default class Login extends Component {
                         <div className="title-brand">
                             <LoginForm/>
                         </div>
-                            <div style={{paddingTop: '25%'}}>
-                                <h2 className="presentation-subtitle text-center"><a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold" }}href="/">Return Home</a></h2>
+                            <div style={{paddingTop: '25%', textAlign: "center"}}>
+                              <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
                             </div>
                         </div>
                     </div>
