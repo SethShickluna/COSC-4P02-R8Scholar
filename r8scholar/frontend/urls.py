@@ -11,6 +11,7 @@ urlpatterns = [
     path('department/<str:deptName>', views.index),
     path('instructor/<str:profName>', views.index),
     path('verify', views.index), 
+    path('search/<str:query>', views.index), 
     path('courses/', views.index), 
     path('instructors/', views.index), 
     path('departments/', views.index), 

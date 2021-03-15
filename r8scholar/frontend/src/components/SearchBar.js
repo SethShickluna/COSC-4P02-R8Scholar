@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import {withRouter} from 'react-router-dom'; 
-import {Input, Dropdown, DropdownItem, DropdownToggle, DropdownMenu} from 'reactstrap'; 
+import {Input, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Form} from 'reactstrap'; 
 
 
 const linkStyle = { 
     color: 'black',
     fontSize: "18", 
 }
+
+
 
 class SearchBar extends Component { 
     constructor(props){
@@ -61,9 +63,9 @@ class SearchBar extends Component {
     render(){
         return(
             <div>
-                <Dropdown toggle={false} isOpen={this.state.dropdownOpen}>
+                <Dropdown color={this.props.color}toggle={false} isOpen={this.state.dropdownOpen}>
                     <DropdownToggle color={this.props.color}>
-                        <Input onChange={this.updateSearch}placeholder="Search" type="text" />
+                        <Input color={this.props.color}as={Form}onChange={this.updateSearch}placeholder="Search" type="text" />
                     </DropdownToggle>
                     <DropdownMenu container="body" >
                         <DropdownItem>Query for {this.state.query} returned: </DropdownItem>
@@ -75,7 +77,9 @@ class SearchBar extends Component {
                                     <DropdownItem key={index}><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></DropdownItem>
                                 </div>)
                             })}
+                        <DropdownItem><a style={linkStyle}href={"/search/"+this.state.query}><b>View All Results</b></a> </DropdownItem>
                     </DropdownMenu>
+                    
                 </Dropdown>
                 
             </div>

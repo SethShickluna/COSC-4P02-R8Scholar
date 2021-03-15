@@ -14,6 +14,20 @@ import {
   Container
 } from "reactstrap";
 
+const navLinkStyles = { 
+  fontSize: '16px',
+}
+
+const separate = { 
+  paddingRight: "2%", 
+  paddingLeft: "2%",
+}
+
+const title={
+  paddingLeft:"10%",
+  paddingRight: "3%",
+  fontSize: '22px',
+}
 
 function SecondaryNav() {
   const [bodyClick, setBodyClick] = React.useState(false);
@@ -29,7 +43,7 @@ function SecondaryNav() {
         />
       ) : null}
       <Navbar color="primary" expand="lg">
-        <Container>
+        <Container fluid >
           <button
             className="navbar-toggler"
             id="navbarTogglerDemo01"
@@ -44,22 +58,22 @@ function SecondaryNav() {
             <span className="navbar-toggler-bar bar3" />
           </button>
           <UncontrolledCollapse navbar toggler="#navbarTogglerDemo01">
-            <NavbarBrand href="/">
+            <NavbarBrand  style={title} href="/">
               R8Scholar Home
             </NavbarBrand>
             <Nav className="mr-auto mt-2 mt-lg-0" navbar>
-              <NavItem className="active">
-                <NavLink href="/courses">
+              <NavItem style={separate}className="active">
+                <NavLink href="/courses"style={navLinkStyles}>
                   Courses 
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/instructors">
+                <NavLink style={separate}href="/instructors"style={navLinkStyles}>
                   Instructors
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink
+                <NavLink style={separate}style={navLinkStyles}
                   href="/departments"
                 >
                   Departments
@@ -67,7 +81,7 @@ function SecondaryNav() {
               </NavItem>
               {cookie.load('isLoggedIn') === "true"? 
                 <NavItem>
-                <NavLink
+                <NavLink style={separate} style={navLinkStyles}
                   href="/profile">
                   Profile
                 </NavLink>
@@ -76,7 +90,7 @@ function SecondaryNav() {
             }
             </Nav>
             <SearchBar color="primary"/>
-            <Nav navbar>
+            <Nav style={{paddingRight:"10%"}}navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 
                 <Button className="btn-round lg outline" color="info" href="/signout">
