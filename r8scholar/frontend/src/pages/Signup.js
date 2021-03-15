@@ -13,7 +13,7 @@ export default class Signup extends Component {
                         <div className="title-brand">
                             <SignupForm/>
                         </div>
-                            <h2 className="presentation-subtitle text-center"><a style={{marginTop: '20px',color:"white", borderColor:"black", border:'1px'}}href="/">Return Home</a></h2>
+                           <b> <h2 className="presentation-subtitle text-center"><a style={{marginTop: '20px',color:"white", borderColor:"black", border:'10px', fontWeight: "bold" }}href="/">Return Home</a></h2></b>
                         </div>
                     </div>
             </div>

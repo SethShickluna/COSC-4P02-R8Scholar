@@ -103,7 +103,7 @@ export default class Home extends Component {
                         <div className="title-brand">
                             <h1 className="presentation-title">Brock University R8Scholar</h1>
                         </div>
-                            <h2 style={{marginTop: '20px'}}className="presentation-subtitle text-center">Review and share opinions on scholarly aspects of Brock University</h2>
+                            <b><h2 style={{marginTop: '20px', fontWeight: "bold", borderColor: "black", borderWidth:"2px"}}className="presentation-subtitle text-center">Review and share opinions on scholarly aspects of Brock University</h2></b>
                         </div>
                     </div>
                 </div>
