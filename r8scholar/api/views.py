@@ -181,22 +181,32 @@ class getTopCourses(APIView): #im only going to comment this one because instruc
             courses = None#find the courses the belong to the department 
             if department=="any":
                 courses = Course.objects.all()
+                if len(courses) >= amt: #cannot request more courses than we have 
+                    #Get list of instructors sorted by rating
+                    courses_sorted_rating = Course.objects.order_by('-rating')
+                    for i in range(amt):
+                        top_courses[i] = courses_sorted_rating[i]
+                    #serialize the final choices 
+                    for c in range(amt): #cannot do this before because we need to compared the ratings constantly 
+                        top_courses[c] = CourseSerializer(top_courses[c]).data
+                    return Response(top_courses, status=status.HTTP_200_OK) 
+                else:
+                    return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
             else:
-                courses = Course.objects.filter(department=my_department)#find the courses the belong to the department 
-
-            if len(courses) >= amt: #cannot request more courses than we have 
-                #Get list of instructors sorted by rating
-                courses_sorted_rating = Course.objects.order_by('-rating')
-                for i in range(amt):
-                    top_courses[i] = courses_sorted_rating[i]
-                #serialize the final choices 
-                for c in range(amt): #cannot do this before because we need to compared the ratings constantly 
-                    top_courses[c] = CourseSerializer(top_courses[c]).data
-                return Response(top_courses, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
+                courses = Course.objects.all()
+                if len(courses) >= amt: #cannot request more courses than we have 
+                    #Get list of instructors sorted by rating
+                    courses_sorted_rating = Course.objects.filter(department=my_department).order_by('-rating')
+                    for i in range(amt):
+                        top_courses[i] = courses_sorted_rating[i]
+                    #serialize the final choices 
+                    for c in range(amt): #cannot do this before because we need to compared the ratings constantly 
+                        top_courses[c] = CourseSerializer(top_courses[c]).data
+                    return Response(top_courses, status=status.HTTP_200_OK)
+                else:
+                    return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class getTopInstructors(APIView):
     def post(self,request):
@@ -212,21 +222,32 @@ class getTopInstructors(APIView):
             instructors = None
             if department == "any":
                 instructors = Instructor.objects.all()
+                if len(instructors) >= amt:
+                    #Get list of instructors sorted by rating
+                    instructors_sorted_rating = Instructor.objects.order_by('-rating')#minus sign orders by descending
+                    for i in range(amt):
+                        top_instructors[i] = instructors_sorted_rating[i]
+                    #serialize the final choices 
+                    for i in range(amt):
+                        top_instructors[i] = InstructorSerializer(top_instructors[i]).data
+                    return Response(top_instructors, status=status.HTTP_200_OK)
+                else:
+                    return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 instructors = Instructor.objects.filter(department=my_department)
-            if len(instructors) >= amt:
-                #Get list of instructors sorted by rating
-                instructors_sorted_rating = Instructor.objects.order_by('-rating')
-                for i in range(amt):
-                    top_instructors[i] = instructors_sorted_rating[i]
-                #serialize the final choices 
-                for i in range(amt):
-                    top_instructors[i] = InstructorSerializer(top_instructors[i]).data
-                return Response(top_instructors, status=status.HTTP_200_OK)
-            else:
-                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
+                if len(instructors) >= amt:
+                    #Get list of instructors sorted by rating
+                    instructors_sorted_rating = Instructor.objects.filter(department=my_department).order_by('-rating')#minus sign orders by descending
+                    for i in range(amt):
+                        top_instructors[i] = instructors_sorted_rating[i]
+                    #serialize the final choices 
+                    for i in range(amt):
+                        top_instructors[i] = InstructorSerializer(top_instructors[i]).data
+                    return Response(top_instructors, status=status.HTTP_200_OK)
+                else:
+                    return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class getTopDepartments(APIView):
     serializer_class = DeparmentSerializer
@@ -237,7 +258,7 @@ class getTopDepartments(APIView):
         top_departments=[None]*amt
         departments = Department.objects.all()
         if len(departments) >= amt:
-            departments_sorted_rating = Department.objects.order_by('-rating')
+            departments_sorted_rating = Department.objects.order_by('-rating')#minus sign orders by descending
             for i in range(amt):
                 top_departments[i] = departments_sorted_rating[i]
             #serialize final list
@@ -278,7 +299,7 @@ class filterCourseListBy(APIView):
             amount = courses.count()
             course_list = [None]*amount
             #Get list of courses sorted by rating
-            courses_sorted_rating = Instructor.objects.order_by('rating')
+            courses_sorted_rating = Instructor.objects.order_by('-rating')#minus sign orders by descending
             for course in courses_sorted_rating:
                 course_list.append(course)
             #serialize the final choices 
@@ -315,8 +336,20 @@ class filterInstructorListBy(APIView):
             amount = instructors.count()
             instructor_list = [None]*amount
             #Get list of instructors sorted by rating
-            instructors_sorted_rating = Instructor.objects.order_by('rating')
+            instructors_sorted_rating = Instructor.objects.order_by('-rating')#minus sign orders by descending
             for instructor in instructors_sorted_rating:
+                instructor_list.append(instructor)
+            for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                instructor_list[c] = InstructorSerializer(instructor_list[c]).data
+            return Response(instructor_list, status=status.HTTP_200_OK) 
+        
+        if(str(filter_by)=='department'):
+            instructors = Instructor.objects.all()
+            amount = instructors.count()
+            instructor_list = [None]*amount
+            #Get list of instructors sorted by rating
+            instructors_sorted_department = Instructor.objects.order_by('department')
+            for instructor in instructors_sorted_department:
                 instructor_list.append(instructor)
             for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
                 instructor_list[c] = InstructorSerializer(instructor_list[c]).data
@@ -353,7 +386,7 @@ class filterDepartmentListBy(APIView):
             amount = departments.count()
             department_list = [None]*amount
             #Get list of departments sorted by rating
-            departments_sorted_rating = Department.objects.order_by('rating')
+            departments_sorted_rating = Department.objects.order_by('-rating') #minus sign orders by descending
             for department in departments_sorted_rating:
                 department_list.append(department)
             #serialize the final list 
