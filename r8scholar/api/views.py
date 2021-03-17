@@ -185,16 +185,10 @@ class getTopCourses(APIView): #im only going to comment this one because instruc
                 courses = Course.objects.filter(department=my_department)#find the courses the belong to the department 
 
             if len(courses) >= amt: #cannot request more courses than we have 
+                #Get list of instructors sorted by rating
+                courses_sorted_rating = Course.objects.order_by('-rating')
                 for i in range(amt):
-                    for course in courses: #now we just go through the courses and choose the best ones 
-                     #loop through the top because we are constantly comparing (need indexes)
-                        if top_courses[i] is None:#if a slot needs to be filled in top courses 
-                            if course not in top_courses: #and the current query is not in the list already 
-                                top_courses[i] = course
-                        elif top_courses[i].rating < course.rating:#same deal but now filtering the lower rating 
-                            if course not in top_courses: 
-                                top_courses[i] = course
-                
+                    top_courses[i] = courses_sorted_rating[i]
                 #serialize the final choices 
                 for c in range(amt): #cannot do this before because we need to compared the ratings constantly 
                     top_courses[c] = CourseSerializer(top_courses[c]).data
@@ -221,15 +215,10 @@ class getTopInstructors(APIView):
             else:
                 instructors = Instructor.objects.filter(department=my_department)
             if len(instructors) >= amt:
+                #Get list of instructors sorted by rating
+                instructors_sorted_rating = Instructor.objects.order_by('-rating')
                 for i in range(amt):
-                    for instructor in instructors:
-                        if top_instructors[i] is None:
-                            if instructor not in top_instructors:
-                                top_instructors[i] = instructor
-                        elif top_instructors[i].rating < instructor.rating:
-                            if instructor not in top_instructors:
-                                top_instructors[i] = instructor
-                
+                    top_instructors[i] = instructors_sorted_rating[i]
                 #serialize the final choices 
                 for i in range(amt):
                     top_instructors[i] = InstructorSerializer(top_instructors[i]).data
@@ -248,15 +237,10 @@ class getTopDepartments(APIView):
         top_departments=[None]*amt
         departments = Department.objects.all()
         if len(departments) >= amt:
+            departments_sorted_rating = Department.objects.order_by('-rating')
             for i in range(amt):
-                for department in departments:
-                    if top_departments[i] is None:
-                        if department not in top_departments:
-                            top_departments[i] = department
-                    elif top_departments[i].rating < department.rating:
-                        if department not in top_departments:
-                            top_departments[i] = department
-            
+                top_departments[i] = departments_sorted_rating[i]
+            #serialize final list
             for i in range(amt):
                 top_departments[i] = self.serializer_class(top_departments[i]).data
             return Response(top_departments, status=status.HTTP_200_OK)
@@ -273,62 +257,34 @@ class filterCourseListBy(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
-        #offset = int(data['offset'])
 
-        course_list = [None]*amount
         courses = None
         #Filter by name
         if (str(filter_by)=="name"):
             courses = Course.objects.all()
             amount = courses.count()
-            if len(courses) >= amount: 
-                for i in range(amount):
-                    for course in courses:
-                        course_list[i] = course
-
-                for c in range(amount):
-                        course_list[c] = CourseSerializer(course_list[c]).data
-                return Response(course_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+            course_list = [None]*amount
+            #Get list of courses sorted by rating
+            courses_sorted_name = Instructor.objects.order_by('name')
+            for course in courses_sorted_name:
+                course_list.append(course)
+            #Serialize final list
+            for c in range(amount):
+                course_list[c] = CourseSerializer(course_list[c]).data
+            return Response(course_list, status=status.HTTP_200_OK) 
         #Filter by rating from highest to lowest
         if (str(filter_by)=="rating_high_low"):
             courses = Course.objects.all()
             amount = courses.count()
-            if len(courses) >= amount: #cannot request more courses than we have 
-                for i in range(amount):
-                    for course in courses: #now we just go through the courses and choose the best ones 
-                        if course_list[i] is None:#if a slot needs to be filled in top courses 
-                            if course not in course_list: #and the current query is not in the list already 
-                                course_list[i] = course
-                        elif course_list[i].rating < course.rating:#same deal but now filtering the lower rating 
-                            if course not in course_list: 
-                                course_list[i] = course
-                #serialize the final choices 
-                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                    course_list[c] = CourseSerializer(course_list[c]).data
-                return Response(course_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
-        #Filter by rating from lowest to highest
-        if (str(filter_by)=="rating_low_high"):
-            courses = Course.objects.all()
-            amount = courses.count()
-            if len(courses) >= amount: #cannot request more courses than we have 
-                for i in range(amount):
-                    for course in courses: #loop through the top because we are constantly comparing (need indexes)
-                        if course_list[i] is None:#if a slot needs to be filled in top courses 
-                            if course not in course_list: #and the current query is not in the list already 
-                                course_list[i] = course
-                        elif course_list[i].rating > course.rating:#same deal but now filtering the higher rating 
-                            if course not in course_list: 
-                                course_list[i] = course
-                #serialize the final choices 
-                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                    course_list[c] = CourseSerializer(course_list[c]).data
-                return Response(course_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many courses requested"}, status=status.HTTP_400_BAD_REQUEST)
+            course_list = [None]*amount
+            #Get list of courses sorted by rating
+            courses_sorted_rating = Instructor.objects.order_by('rating')
+            for course in courses_sorted_rating:
+                course_list.append(course)
+            #serialize the final choices 
+            for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                course_list[c] = CourseSerializer(course_list[c]).data
+            return Response(course_list, status=status.HTTP_200_OK) 
 #Returns a list of instructors filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
 # amount will specifiy how many instructors should be in the returned list
 # filter_by will specify which filter to use one the instructor list
@@ -337,63 +293,35 @@ class filterInstructorListBy(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data['filter_by']
-        amount = int(data['amount'])
-        #offset = int(data['offset'])
-
-        instructor_list = [None]*amount
+        
         instructors = None
         #Filter by name
-        if (str(filter_by).equals('name')):
+        if (str(filter_by)=='name'):
             instructors = Instructor.objects.all()
             amount = instructors.count()
-            if len(instructors) >= amount: 
-                for i in range(amount):
-                    for instructor in instructors:
-                        instructor_list[i] = instructor
-
-                for c in range(amount):
-                        instructor_list[c] = instructorserializer(instructor_list[c]).data
-                return Response(instructor_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+            instructor_list = [None]*amount
+            #Get list of instructors sorted by name
+            instructors_sorted_name = Instructor.objects.order_by('name')
+            for instructor in instructors_sorted_name:
+                instructor_list.append(instructor)
+            #Serialize final list
+            for c in range(amount):
+                instructor_list[c] = InstructorSerializer(instructor_list[c]).data
+            return Response(instructor_list, status=status.HTTP_200_OK) 
+            
         #Filter by rating from highest to lowest
-        if (str(filter_by).equals('rating_high_low')):
+        if (str(filter_by)=='rating_high_low'):
             instructors = Instructor.objects.all()
             amount = instructors.count()
-            if len(instructors) >= amount: #cannot request more instructors than we have 
-                for i in range(amount): #loop through the top because we are constantly comparing (need indexes)
-                    for instructor in instructors: #now we just go through the instructors and choose the best ones 
-                        if instructor_list[i] is None:#if a slot needs to be filled in top instructors 
-                            if instructor not in instructor_list: #and the current query is not in the list already 
-                                instructor_list[i] = instructor
-                        elif instructor_list[i].rating < instructor.rating:#same deal but now filtering the lower rating 
-                            if instructor not in instructor_list: 
-                                instructor_list[i] = instructor
-                #serialize the final choices 
-                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                    instructor_list[c] = instructorserializer(instructor_list[c]).data
-                return Response(instructor_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
-        #Filter by rating from lowest to highest
-        if (str(filter_by).equals('rating_low_high')):
-            instructors = Instructor.objects.all()
-            amount = instructors.count()
-            if len(instructors) >= amount: #cannot request more instructors than we have 
-                for i in range(amount): #loop through the top because we are constantly comparing (need indexes)
-                    for instructor in instructors: 
-                        if instructor_list[i] is None:#if a slot needs to be filled in top instructors 
-                            if instructor not in instructor_list: #and the current query is not in the list already 
-                                instructor_list[i] = instructor
-                        elif instructor_list[i].rating > instructor.rating:#same deal but now filtering the higher rating 
-                            if instructor not in instructor_list: 
-                                instructor_list[i] = instructor
-                #serialize the final choices 
-                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                    instructor_list[c] = instructorserializer(instructor_list[c]).data
-                return Response(instructor_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many instructors requested"}, status=status.HTTP_400_BAD_REQUEST)
+            instructor_list = [None]*amount
+            #Get list of instructors sorted by rating
+            instructors_sorted_rating = Instructor.objects.order_by('rating')
+            for instructor in instructors_sorted_rating:
+                instructor_list.append(instructor)
+            for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
+                instructor_list[c] = InstructorSerializer(instructor_list[c]).data
+            return Response(instructor_list, status=status.HTTP_200_OK) 
+            
 
 #Returns a list of departments filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
 # amount will specifiy how many departments should be in the returned list
@@ -403,64 +331,36 @@ class filterDepartmentListBy(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data['filter_by']
-        amount = int(data['amount'])
-        #offset = int(data['offset'])
 
-        department_list = [None]*amount
         departments = None
         #Filter by name
-        if (str(filter_by).equals('name')):
+        if (str(filter_by)=='name'):
             departments = Department.objects.all()
             amount = departments.count()
-            if len(departments) >= amount: 
-                for i in range(amount):
-                    for department in departments:
-                        department_list[i] = department
-
-                for c in range(amount):
-                        department_list[c] = departmentserializer(department_list[c]).data
-                return Response(department_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+            department_list = [None]*amount
+            #Get list of departments sorted by name
+            departments_sorted_name = Department.objects.order_by('name')
+            for department in departments_sorted_name:
+                department_list.append(department)
+            #serialize the final list
+            for c in range(amount):
+                department_list[c] = DeparmentSerializer(department_list[c]).data
+            return Response(department_list, status=status.HTTP_200_OK) 
+            
         #Filter by rating from highest to lowest
-        if (str(filter_by).equals('rating_high_low')):
+        if (str(filter_by)=='rating_high_low'):
             departments = Department.objects.all()
             amount = departments.count()
-            if len(departments) >= amount: #cannot request more departments than we have 
-                for i in range(amount):
-                    for department in departments:
-                        if department_list[i] is None:#if a slot needs to be filled in top departments 
-                            if department not in department_list: #and the current query is not in the list already 
-                                department_list[i] = department
-                        elif department_list[i].rating < department.rating:#same deal but now filtering the lower rating 
-                            if department not in department_list: 
-                                department_list[i] = department
-                #serialize the final choices 
-                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                    department_list[c] = departmentserializer(department_list[c]).data
-                return Response(department_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
-        #Filter by rating from lowest to highest
-        if (str(filter_by).equals('rating_low_high')):
-            departments = Department.objects.all()
-            amount = departments.count()
-            if len(departments) >= amount: #cannot request more departments than we have 
-                for i in range(amount):
-                    for department in departments:
-                        if department_list[i] is None:#if a slot needs to be filled in top departments 
-                            if department not in department_list: #and the current query is not in the list already 
-                                department_list[i] = department
-                        elif department_list[i].rating > department.rating:#same deal but now filtering the higher rating 
-                            if department not in department_list: 
-                                department_list[i] = department
-                #serialize the final choices 
-                for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                    department_list[c] = departmentserializer(department_list[c]).data
-                return Response(department_list, status=status.HTTP_200_OK) 
-            else:
-                return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
-                
+            department_list = [None]*amount
+            #Get list of departments sorted by rating
+            departments_sorted_rating = Department.objects.order_by('rating')
+            for department in departments_sorted_rating:
+                department_list.append(department)
+            #serialize the final list 
+            for c in range(amount):
+                department_list[c] = DeparmentSerializer(department_list[c]).data
+            return Response(department_list, status=status.HTTP_200_OK) 
+
 
 #create views 
 class CreateUserView(APIView): 
