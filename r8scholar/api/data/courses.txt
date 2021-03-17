@@ -2696,41 +2696,41 @@ OBHR 4P95|Organizational Behaviour, Human Resource Management, Entrepreneurship 
 OBHR 4P96|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Labour Arbitration
 OBHR 4V90-4V99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Topics in Organizational Behaviour and Human Resources
 OBHR 4V98|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|2020-2021: HR Analytics
-OEVI 0N01|Oenology and Viticulture|Wine Appreciation - Exploring Varietals
-OEVI 0N02|Oenology and Viticulture|Introduction to the Wines of Ontario
-OEVI 0N03|Oenology and Viticulture|Wine Appreciation - Wine Regions of the World
-OEVI 0N04|Oenology and Viticulture|Wine Sales and Service
-OEVI 0N05|Oenology and Viticulture|WSET Award in Wine­ Level 1
-OEVI 0N06|Oenology and Viticulture|WSET Award in Wine ­Level 2
-OEVI 0N07|Oenology and Viticulture|WSET Award in Wine Level 3
-OEVI 0N09|Oenology and Viticulture|WSET Award in Spirits­ Level 1
-OEVI 0N10|Oenology and Viticulture|WSET Award in Spirits­ Level 2
-OEVI 0N11|Oenology and Viticulture|Certification in Ontario Wine (Online)
-OEVI 0N31|Oenology and Viticulture|Co-op Work Term
-OEVI 0N32|Oenology and Viticulture|Co-Op Work Term II
-OEVI 0N33|Oenology and Viticulture|Co-op Work Term III
-OEVI 0N34|Oenology and Viticulture|Co-op Work Term IV
-OEVI 0N35|Oenology and Viticulture|Co-op Work Term V
-OEVI 0N41|Oenology and Viticulture|Grape and Wine Technology Internship
-OEVI 1P20|Oenology and Viticulture|Introduction to Wines
-OEVI 2C01|Oenology and Viticulture|Co-op Reflective Learning and Integration I
-OEVI 2C02|Oenology and Viticulture|Co-op Reflective Learning and Integration II
-OEVI 2C03|Oenology and Viticulture|Co-op Reflective Learning and Integration III
-OEVI 2C04|Oenology and Viticulture|Co-op Reflective Learning and Integration IV
-OEVI 2C05|Oenology and Viticulture|Co-op Reflective Learning and Integration V
-OEVI 2P45|Oenology and Viticulture|Cultural Practices
-OEVI 2P99|Oenology and Viticulture|Grapevine Biology
-OEVI 3P14|Oenology and Viticulture|Introduction to Soil Science
-OEVI 3P21|Oenology and Viticulture|Wine Processing and Equipment
-OEVI 3P25|Oenology and Viticulture|Wine Chemistry
-OEVI 3P98|Oenology and Viticulture|Wine Microbiology
-OEVI 4F90|Oenology and Viticulture|Research Project
-OEVI 4F91|Oenology and Viticulture|Thesis
-OEVI 4F92|Oenology and Viticulture|Library Research Essays
-OEVI 4P20|Oenology and Viticulture|Sensory Evaluation of Wine
-OEVI 4P30|Oenology and Viticulture|Grape Pest Management
-OEVI 4P92|Oenology and Viticulture|Wine Marketing
-OEVI 4V90-4V99|Oenology and Viticulture|Special Topics in Oenology and Viticulture
+OEVI 0N01|Biology|Wine Appreciation - Exploring Varietals
+OEVI 0N02|Biology|Introduction to the Wines of Ontario
+OEVI 0N03|Biology|Wine Appreciation - Wine Regions of the World
+OEVI 0N04|Biology|Wine Sales and Service
+OEVI 0N05|Biology|WSET Award in Wine­ Level 1
+OEVI 0N06|Biology|WSET Award in Wine ­Level 2
+OEVI 0N07|Biology|WSET Award in Wine Level 3
+OEVI 0N09|Biology|WSET Award in Spirits­ Level 1
+OEVI 0N10|Biology|WSET Award in Spirits­ Level 2
+OEVI 0N11|Biology|Certification in Ontario Wine (Online)
+OEVI 0N31|Biology|Co-op Work Term
+OEVI 0N32|Biology|Co-Op Work Term II
+OEVI 0N33|Biology|Co-op Work Term III
+OEVI 0N34|Biology|Co-op Work Term IV
+OEVI 0N35|Biology|Co-op Work Term V
+OEVI 0N41|Biology|Grape and Wine Technology Internship
+OEVI 1P20|Biology|Introduction to Wines
+OEVI 2C01|Biology|Co-op Reflective Learning and Integration I
+OEVI 2C02|Biology|Co-op Reflective Learning and Integration II
+OEVI 2C03|Biology|Co-op Reflective Learning and Integration III
+OEVI 2C04|Biology|Co-op Reflective Learning and Integration IV
+OEVI 2C05|Biology|Co-op Reflective Learning and Integration V
+OEVI 2P45|Biology|Cultural Practices
+OEVI 2P99|Biology|Grapevine Biology
+OEVI 3P14|Biology|Introduction to Soil Science
+OEVI 3P21|Biology|Wine Processing and Equipment
+OEVI 3P25|Biology|Wine Chemistry
+OEVI 3P98|Biology|Wine Microbiology
+OEVI 4F90|Biology|Research Project
+OEVI 4F91|Biology|Thesis
+OEVI 4F92|Biology|Library Research Essays
+OEVI 4P20|Biology|Sensory Evaluation of Wine
+OEVI 4P30|Biology|Grape Pest Management
+OEVI 4P92|Biology|Wine Marketing
+OEVI 4V90-4V99|Biology|Special Topics in Oenology and Viticulture
 OPER 2P51|Operations Management|General Operations Management
 OPER 2P91|Operations Management|Operations Management
 OPER 3P91|Operations Management|Advanced Operations Management
