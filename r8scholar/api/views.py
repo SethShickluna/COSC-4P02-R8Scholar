@@ -262,6 +262,7 @@ class getTopDepartments(APIView):
             return Response(top_departments, status=status.HTTP_200_OK)
         else:
             return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
+            
 #Returns a list of courses filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
 # amount will specifiy how many courses should be in the returned list
 # filter_by will specify which filter to use one the course list
@@ -459,9 +460,7 @@ class filterDepartmentListBy(APIView):
                 return Response(department_list, status=status.HTTP_200_OK) 
             else:
                 return Response({"Invalid Request":"Too many departments requested"}, status=status.HTTP_400_BAD_REQUEST)
-
-
-                    
+                
 
 #create views 
 class CreateUserView(APIView): 

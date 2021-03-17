@@ -804,9 +804,9 @@
     background-color: transparent; }
   .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn:not(:disabled):not(.disabled):active:focus, .btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active, .btn:not(:disabled):not(.disabled).active:focus,
   .show > .btn.dropdown-toggle {
-    background-color: #403D39;
+    /*background-color: #403D39;*/
     color: #FFFFFF;
-    border-color: #403D39;
+    /**border-color: #403D39;*/
     box-shadow: none; }
   .btn .caret {
     border-top-color: #FFFFFF; }

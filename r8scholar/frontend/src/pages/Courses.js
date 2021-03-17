@@ -1,198 +1,140 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
+import cookie from "react-cookies";
 import StarRatings from 'react-star-ratings'; 
-import {Spinner, Table, Container, Row, Col} from 'reactstrap';
+import {Spinner, Table, Container, Row, Col, Pagination, 
+    PaginationItem, PaginationLink,
+    Dropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap';
 import SecondaryNav from "../components/SecondaryNav";
 
-const linkStyle = {
+const linkStyle = { 
     color: 'black',
+    fontSize: "18", 
 }
 
 
+
 export default class Courses extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
-            entries: [],
-            unfilteredData: [],
-            filters: ["Rating", "Department", "Show per page"],
-            options: { Rating: [], Department: [], "Show per page": [] },
-            Rating: null,
-            Department: null,
-            "Show per page": null,
-            sortButtons: ["Name", "Rating", "Department", "Courses"],
-            sortIndex: "",
-            accending: true,
-            perPage: 10,
+            displayedCourses: null, 
+            perPage: 20,
             currentPage: 1,
             maxPage: 0,
-            departmentRatings:{}
+            departmentRatings:{}, 
+            sortOption: "Alphabetical A-Z",
+            droppedDown: false,
         };
-        console.log(this.state); 
+
+        this.changePages = this.changePages.bind(this); 
+        this.activateMenu = this.activateMenu.bind(this);
+        this.setFilter = this.setFilter.bind(this);
     }
 
     componentDidMount() {
-        this.getOptions();
-        this.getEntries().then(() => {
-            this.getDepartmentRatings(); 
-        }); 
+        this.getEntries(this.state.currentPage); 
     }
 
-    // TODO: GET profs
-    getEntries = async() => {//this fetches the courses, implement the same for instructors and departments 
-        await fetch("/api/courses").then((response) => {
-                response.json().then((data) => {
-                    const newEntry = []
-                    data.map((item) =>{
-                        newEntry.push(item);
-                        //this.getDepartmentRatings(item.department);
-                    })
-                    this.setState({ entries: newEntry});
+        // TODO: GET profs
+    getEntries = async(page) => {//this fetches the courses based on the filter 
+        const displayEntries = [];
+        switch(this.state.sortOption){
+            case "Rating: High to Low":
+                const requestHigh = { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        "filter_by":"rating_high_low",
+                        "amount": this.state.perPage,
+                    }),
+                }; 
+                await fetch("/api/filter-courselist", requestHigh).then((response) => {
+                    response.json().then((data) => { //guys im gonna be honest i have no idea what this means just dont touch it 
+                        var newMax = parseInt(Math.floor(data.length / this.state.perPage)); 
+                        this.setState({ 
+                            displayedCourses: data,
+                            maxPage: newMax,
+                        });
+                    });
                 });
-            }
-        );
-    };
-
-    getDepartmentRatings = async(name) => { 
-        await fetch("/api/get-department?name="+name).then((response) => {
-            if(response.ok){ //yay
-                return response.json(); 
-            }else{//nay 
-                return null
-            }
-        })
-        .then((data) =>{
-            console.log(data);
-            const deptRatings = this.state.departmentRatings;
-            if(data !== null){
-                deptRatings[name]=data.rating;
-            }else{
-                deptRatings[name]=0;
-            }
-            this.setState({
-                departmentRatings: deptRatings,
-            });
-        }
-    );
-    }
-
-    getOptions = () => {
-        var options = {
-            Rating: [
-                "4.0 and higher",
-                "3.0 and higher",
-                "2.0 and higher",
-                "1.0 and higher",
-                "All Ratings",
-            ],
-            Department: [
-                "Humanities",
-                "Math and Computer Science",
-                "Social Sciences",
-                "Visual and Performance Arts",
-                "Goodman School of Business",
-                "Applied Health Sciences",
-                "Education",
-                "All Departments",
-            ],
-            "Show per page": ["10", "20", "50", "100", "All"],
-        };
-        this.setState({ options: options });
-    };
-
-    getCurrentPage = () => {
-        if (this.state.perPage === "All") {
-            return this.state.data;
-        } else {
-            var minIndex = (this.state.currentPage - 1) * this.state.perPage;
-            var maxIndex = this.state.currentPage * this.state.perPage;
-            return this.state.data.slice(minIndex, maxIndex);
-        }
-    };
-
-    handleNavigate = (e) => {
-        if (e.target.id === "navigate-back" && this.state.currentPage > 1) {
-            this.setState((old) => {
-                return { currentPage: old.currentPage - 1 };
-            });
-        }
-        if (
-            e.target.id === "navigate-forward" &&
-            this.state.currentPage < this.state.maxPage
-        ) {
-            this.setState((old) => {
-                return { currentPage: old.currentPage + 1 };
-            });
-        }
-    };
-
-    handleSort = (e) => {
-        const newSortIndex = e.target.id.toLowerCase();
-        if (newSortIndex === this.state.sortIndex) {
-            const accending = !this.state.accending;
-            this.setState({ accending: accending }, () =>
-                this.sortData(newSortIndex)
-            );
-        } else {
-            this.setState({ sortIndex: newSortIndex }, () =>
-                this.sortData(newSortIndex)
-            );
-        }
-    };
-
-    handleFilter = (field, value) => {
-        if (field === "Show per page") {
-            this.setState({ perPage: value });
-        }
-        console.log(this.state.data, this.state.unfilteredData);
-        this.setState({ [field]: value }, () => {
-            this.setState({ data: this.state.unfilteredData }, () => {
-                console.log(this.state.data, this.state.unfilteredData);
-                var filteredData = [];
-                this.state.data.forEach((e) => {
-                    if (
-                        (e.department === this.state.Department) |
-                            ((this.state.Department === "All Departments") |
-                                !this.state.Department) &&
-                        (e.rating >= parseFloat(this.state.Rating)) |
-                            ((this.state.Rating === "All Ratings") |
-                                !this.state.Rating)
-                    ) {
-                        filteredData.push(e);
-                    }
+                break; 
+            case "Rating: High to Low": 
+                const requestLow = { 
+                    method: "POST",
+                    headers: { "Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        "filter_by":"rating_low_high",
+                        "amount": this.state.perPage,
+                    }),
+                }; 
+                await fetch("/api/filter-courselist", requestLow).then((response) => {
+                    response.json().then((data) => { //guys im gonna be honest i have no idea what this means just dont touch it 
+                        var newMax = parseInt(Math.floor(data.length / this.state.perPage)); 
+                        this.setState({ 
+                            displayedCourses: data,
+                            maxPage: newMax,
+                        });
+                    });
                 });
-                var newMaxPage = Math.ceil(
-                    filteredData.length / this.state.perPage
-                );
-                this.setState(
-                    { data: filteredData, maxPage: newMaxPage },
-                    () => {
-                        this.sortData(this.state.sortIndex);
-                    }
-                );
-            });
-        });
-    };
-
-    sortData = (sortIndex) => {
-        this.setState({
-            entries: this.state.entries.sort((a, b) => {
-                if ((sortIndex === "name") | (sortIndex === "department")) {
-                    if (this.state.accending) {
-                        return a[sortIndex].localeCompare(b[sortIndex]);
-                    } else {
-                        return b[sortIndex].localeCompare(a[sortIndex]);
-                    }
-                } else {
-                    if (this.state.accending) {
-                        return a[sortIndex] - b[sortIndex];
-                    } else {
-                        return b[sortIndex] - a[sortIndex];
-                    }
+                break; 
+            default:
+                await fetch("/api/courses").then((response) => {
+                    response.json().then((data) => { //guys im gonna be honest i have no idea what this means just dont touch it 
+                        if(this.state.sortOption === "Alphabetical: Z-A"){
+                            data = data.reverse(); 
+                        }
+                        data.slice((page - 1)*this.state.perPage, 
+                        (page*this.state.perPage))
+                        .map((item) =>{
+                            displayEntries.push(item);
+                        }); 
+                        var newMax = parseInt(Math.floor(data.length / this.state.perPage)); 
+                        this.setState({ 
+                            displayedCourses: displayEntries,
+                            maxPage: newMax,
+                        });
+                    });
                 }
-            }),
-            currentPage: 1,
-        });
+            );
+                
+        }
     };
+
+    changePages(button){
+        this.setState({displayedCourses: null, }); 
+        var newPage = button.target.innerHTML; 
+        switch(newPage){
+            case 'First':
+                newPage = 1; 
+                break;
+            case 'Last':
+                newPage = this.state.maxPage - 1; 
+                break; 
+        }
+        this.setState({
+            currentPage:Number(newPage),
+        }); 
+       this.getEntries(this.state.currentPage);
+       
+    }
+
+    activateMenu(){
+        console.log(this.state.droppedDown);
+        this.setState({
+            droppedDown: !this.state.droppedDown,
+        })
+    }
+
+    setFilter(filter){
+        this.setState({
+            sortOption: filter.target.innerText,
+            displayedCourses: null,
+        });
+        
+        this.getEntries(this.state.currentPage); 
+    }   
 
     render() {
         return(
@@ -201,35 +143,84 @@ export default class Courses extends Component {
                 <Container fluid>
                     <Row style={{marginTop:'2%'}} align="center">
                         <Col>
-                            <div className="title">
-                                <h1>Courses</h1>
+                            <div >
+                                <h1 className="title lg">Courses</h1>
                             </div>
                         </Col>
                     </Row>
                     <Row align="center"> {/**Filters */}
-                        <Col>
-                           <h5>Filter Options</h5>
+                        <Col align="center">
+                            <div>
+                                <h4>Filter Options</h4>
+                            </div>  
+                            <div>
+                            <Dropdown color="primary"isOpen={this.state.droppedDown}>
+                                <DropdownToggle onClick={this.activateMenu} caret>
+                                        {this.state.sortOption}
+                                </DropdownToggle>
+                                <DropdownMenu container="body">      
+                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: Z-A</a></DropdownItem>
+                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: A-Z</a></DropdownItem>
+                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: High to Low</a></DropdownItem>
+                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: Low to High</a></DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </div>
+                            <div style={{marginTop:"3%"}}/>
+                            <div>
+                                <nav aria-label="Page navigation example">
+                                    <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                                        <PaginationItem color="primary">
+                                            <PaginationLink onClick={this.changePages} href='#'>
+                                                First
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem active>
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage + 1}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                            <PaginationLink onClick={this.changePages} onClick="" href="#">
+                                                {this.state.currentPage + 2}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                            <PaginationLink onClick={this.changePages} href='#'>
+                                                Last
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    </Pagination>
+                                </nav>
+                            </div>
                         </Col>
                     </Row>
                    
                     <Row style={{marginTop:'2%'}} align="center">
-                        <Col className="col-md-2"/>
-                        <Col className="col-md-8">
+                        <Col className="col-md-1"/>
+                        <Col className="col-md-10">
                            <Table striped>
                                <thead>
                                     <th>Rank</th>
+                                    <th>Course Code</th>
                                     <th>Name</th>
                                     <th>Rating</th>
                                     <th>Department</th>
                                </thead>
                                <tbody>
-                                   {!this.state.entries.length ? 
+                                   {this.state.displayedCourses === null? 
                                    <Spinner color="dark"/>
-                                :this.state.entries.map((item, index) =>{ {/**5 courses */}
+                                :this.state.displayedCourses.map((item, index) =>{ {/**10 courses */}
                                     return(
                                     <tr key={index}>  
                                         <th>{index + 1}</th>
                                         <th><a style={linkStyle} href={"/course/"+item.name}>{item.name}</a></th>
+                                        <th><a style={linkStyle} href={"/course/"+item.name}>{item.course_full_name}</a></th>
                                         <th><StarRatings
                                             rating={item.rating}
                                             starDimension="25px"
@@ -238,13 +229,13 @@ export default class Courses extends Component {
                                             numberOfStars={5}
                                             name='avgRating'/>
                                         </th>
-                                        <th><a style={linkStyle} href={"/department/"+item.name}>{item.department}</a></th>
+                                        <th><a style={linkStyle} href={"/department/"+item.department}>{item.department}</a></th>
                                     </tr>)
                                 })}
                                </tbody>
                            </Table>
                         </Col>
-                        <Col className="col-md-2"/>
+                        <Col className="col-md-1"/>
                     </Row>
                     
                 </Container>

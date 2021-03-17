@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SignupForm from '../components/SignupForm'
+import { Button } from "react-bootstrap";
 export default class Signup extends Component {
     constructor() {
         super();
@@ -12,8 +13,10 @@ export default class Signup extends Component {
                         <div className="container">
                         <div className="title-brand">
                             <SignupForm/>
-                        </div>
-                            <h2 className="presentation-subtitle text-center"><a style={{marginTop: '20px',color:"white", borderColor:"black", border:'1px'}}href="/">Return Home</a></h2>
+                        </div >
+                        <div style={{paddingTop: '10%', textAlign: "center"}}>
+                              <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
+                            </div>
                         </div>
                     </div>
             </div>

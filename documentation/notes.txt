@@ -3,3 +3,4 @@ USER API CALLS:
 
 BUGS
 -sometimes when creating new users the verification code is replicated from a previous generation (unsure how to replicate)
+-fixed bug that courses page departments would direct to courses

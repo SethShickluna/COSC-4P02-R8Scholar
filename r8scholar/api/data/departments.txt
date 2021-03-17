@@ -4,10 +4,8 @@ Accounting
 Adult Education
 Administration
 Applied Disability Studies
+Applied Linguistics
 Academic English as a Subsequent Language
-Applied Computing
-Arabic
-Astronomy
 Biochemistry
 Biology
 Biomedical Sciences
@@ -18,7 +16,6 @@ Canadian Studies
 Chemistry
 Child and Youth Studies
 Classics
-Communication Studies
 Computer Science
 Communication, Popular Culture and Film
 Criminology
@@ -26,61 +23,40 @@ Dramatic Arts
 Economics
 Education- Teacher Education
 Education
-Creative Writing
 English
-Engineering Science
 Environmental Sustainability
-Entrepreneurship
 Earth Sciences
 Science
-Ethics
-Film
 Finance
-French
 Geography
-German
-Greek
 Health Sciences
 History
 Health Sciences
 Indigenous Studies
 Interactive Arts and Science
-Intercultural Studies
-Italian
 Information Technology Information Systems
-Japanese
 Kinesiology
 Labour Studies
-Latin
-Linguistics
-Mandarin
 Medieval and Renaissance Studies
+Modern Languages, Literatures and Cultures
 Mathematics
-Management
 Marketing
 Music
 Neuroscience
 Nursing
-Organizational Behaviour and Human Resources
+Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics
 Oenology and Viticulture
 Operations Management
-Popular Culture
 Philosophy
 Physics
 Professional Masters Preparation Business
 Political Science
-Portuguese
 Psychology
 Recreation and Leisure Studies
-Russian
 Science
-Studies in Comparative Literatures and Cultures
 Sociology
-Spanish
 Sport Management
 Studies in Arts and Culture
-Swahili
 Tourism
 Visual Arts
 Women's and Gender Studies
-Writing, Rhetoric and Discourse Studies

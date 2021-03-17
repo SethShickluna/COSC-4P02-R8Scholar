@@ -1,11 +1,9 @@
 import React from "react";
-// nodejs library that concatenates strings
+import SearchBar from './SearchBar'; 
 import classnames from "classnames";
-// reactstrap components
+
 import {
-  Form,
-  FormGroup, 
-  Input,
+
   Button,
   Collapse,
   NavbarBrand,
@@ -14,7 +12,19 @@ import {
   NavLink,
   Nav,
   Container,
+  Col,
 } from "reactstrap";
+
+const navLinkStyles = { 
+  fontSize: '16px',
+}
+
+
+const title={
+  paddingLeft:"5%",
+  paddingRight: "3%",
+  fontSize: '18px',
+}
 
 import cookie from 'react-cookies';
 
@@ -50,65 +60,60 @@ function HomeNavbar() {
   });
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
-      <Container>
-        <div className="navbar-translate">
-          <NavbarBrand
-            data-placement="bottom"
-            href="/"
-            target="_blank"
-            title="Landing Page">
-            R8Scholar
-          </NavbarBrand>
-          <button
-            aria-expanded={navbarCollapse}
-            className={classnames("navbar-toggler navbar-toggler", {
-              toggled: navbarCollapse,
-            })}
-            onClick={toggleNavbarCollapse}
-          >
-            <span className="navbar-toggler-bar bar1" />
-            <span className="navbar-toggler-bar bar2" />
-            <span className="navbar-toggler-bar bar3" />
-          </button>
-        </div>
-        <Form className="form-inline ml-auto">
-              <FormGroup className="has-white">
-                <Input placeholder="Search" type="text" />
-              </FormGroup>
-         </Form>
+          <div style={{paddingLeft:"5%"}}className="navbar-translate">
+            <NavbarBrand style={{fontSize:"18px"}}
+              data-placement="bottom"
+              href="/"
+              target="_blank"
+              title="Landing Page">
+              R8Scholar
+            </NavbarBrand>
+            <button
+              aria-expanded={navbarCollapse}
+              className={classnames("navbar-toggler navbar-toggler", {
+                toggled: navbarCollapse,
+              })}
+              onClick={toggleNavbarCollapse}
+            >
+              <span className="navbar-toggler-bar bar1" />
+              <span className="navbar-toggler-bar bar2" />
+              <span className="navbar-toggler-bar bar3" />
+            </button>
+          </div>
+          <SearchBar color="transparent"/>
         <Collapse
           className="justify-content-end"
           navbar
           isOpen={navbarCollapse}>
-          <Nav navbar>
+          <Nav style={{paddingRight:"10%"}}navbar>
             {/** pages */}
-            <NavItem>
-              <NavLink href="/courses">
+            <NavItem >
+              <NavLink style={navLinkStyles} 
+                href="/courses">
                 Courses
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
+            <NavItem >
+              <NavLink style={navLinkStyles}
                 href="/instructors">
                 Instructors
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
+            <NavItem >
+              <NavLink style={navLinkStyles} 
                 href="/departments">
                 Departments
               </NavLink>
             </NavItem>
             {cookie.load('isLoggedIn') === "true"? 
-                <NavItem>
-                <NavLink
+                <NavItem >
+                <NavLink style={navLinkStyles} 
                   href="/profile">
                   Profile
                 </NavLink>
               </NavItem>
             : null
             }
-        
             <NavItem> {/**youtube icon/link */}
               <NavLink
                 data-placement="bottom"
@@ -151,7 +156,6 @@ function HomeNavbar() {
             </NavItem>
           </Nav>
         </Collapse>
-      </Container>
     </Navbar>
   );
 }

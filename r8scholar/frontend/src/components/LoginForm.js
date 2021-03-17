@@ -44,7 +44,6 @@ class LoginForm extends Component {
 
     submitForm = () => {
         //send info to backend 
-            
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
@@ -66,7 +65,6 @@ class LoginForm extends Component {
                         alert("Invalid username or password please enter your information again.")
                     }
                 });
-               
             }
         }else{ 
             alert("Make sure to use a brock email!");

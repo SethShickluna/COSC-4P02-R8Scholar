@@ -1,7 +1,7 @@
 //form that is presented to user when they create a review 
 import React, {Component} from 'react'; 
 import Form from 'react-bootstrap/Form'; 
-import {Button} from 'react-bootstrap'; 
+import {Button, FormText} from 'react-bootstrap'; 
 import cookie from 'react-cookies'; 
 
 
@@ -138,6 +138,7 @@ export default class ReviewForm extends Component {
                         <Form.Control isInvalid={this.state.title === null} placeholder="Title..." onChange={this.updateTitleInput}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
+                        <FormText><h4>On a scale of 0-5 rate the following:</h4></FormText>
                         {questions[this.props.review].map((question, index) => 
                         (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                         <Form.Label>{question}</Form.Label>
