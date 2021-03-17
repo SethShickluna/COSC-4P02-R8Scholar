@@ -9,10 +9,23 @@ const formStyle = {
     marginTop: '8%',
 }
 
+
 export default class Login extends Component {
     constructor() {
         super();
+
+        this.hide = this.hide.bind(this);
     }
+
+    hide = () => {
+        var x = document.getElementById("helpDIV");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+    
 
     render() {
         return ( 
@@ -22,6 +35,9 @@ export default class Login extends Component {
                         <div className="title-brand">
                             <LoginForm/>
                         </div>
+                        <div><Button onClick={this.hide}>Help?</Button></div> 
+                        <div id="helpDIV" style={{display: "none", color: "white", border: '10px', backgroundColor:"black", marginTop: '5%'}}>
+                        Password: has minimum 8 characters, a capital and a number.</div>
                             <div style={{paddingTop: '25%', textAlign: "center"}}>
                               <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
                             </div>
