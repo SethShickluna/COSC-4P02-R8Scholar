@@ -150,19 +150,19 @@ ADST 4P95|Applied Disability Studies|Research Methods in Applied Disability Stud
 ADST 4P96|Applied Disability Studies|Directed Studies in Applied Disability Studies I
 ADST 4P97|Applied Disability Studies|Directed Studies in Applied Disability Studies II
 AESL 1P92|Academic English as a Subsequent Language|Advanced English for Subsequent Language Learners
-APCO 1P00|Applied Computing|Introduction to Media Computation
-APCO 1P01|Applied Computing|Fluency With Technology
-APCO 1P30|Applied Computing|Programming for Interactive Media
-APCO 1P50|Applied Computing|Integrity and Literacy in the Information Age
-APCO 1P93|Applied Computing|Applied Programming
-APCO 2P11|Applied Computing|Personal Computers and Networks
-APCO 2P61|Applied Computing|Website Creation
-APCO 2P89|Applied Computing|Internet Technologies
-APCO 2P99|Applied Computing|Project in Applied Computing
-APCO 3P94|Applied Computing|Introduction to Human Computer Interaction
-ARAB 1F00|Arabic|Introductory Classical Arabic
-ASTR 1P01|Astronomy|Introduction to Astronomy I
-ASTR 1P02|Astronomy|Introduction to Astronomy II
+APCO 1P00|Computer Science|Introduction to Media Computation
+APCO 1P01|Computer Science|Fluency With Technology
+APCO 1P30|Computer Science|Programming for Interactive Media
+APCO 1P50|Computer Science|Integrity and Literacy in the Information Age
+APCO 1P93|Computer Science|Applied Programming
+APCO 2P11|Computer Science|Personal Computers and Networks
+APCO 2P61|Computer Science|Website Creation
+APCO 2P89|Computer Science|Internet Technologies
+APCO 2P99|Computer Science|Project in Applied Computing
+APCO 3P94|Computer Science|Introduction to Human Computer Interaction
+ARAB 1F00|Modern Languages, Literatures and Cultures|Introductory Classical Arabic
+ASTR 1P01|Physics|Introduction to Astronomy I
+ASTR 1P02|Physics|Introduction to Astronomy II
 BCHM 0N01|Biochemistry|Work Placement 1
 BCHM 0N02|Biochemistry|Work Placement II
 BCHM 0N03|Biochemistry|Work Placement III
@@ -570,113 +570,113 @@ CLAS 4V50-4V69|Classics|Special Subjects in Classics
 CLAS 4V53|Classics|2021-2022: The Ancient Greek Household
 CLAS 4V80-4V89|Classics|Advanced Archaeological Fieldwork and Directed Research
 CLAS 4V90-4V99|Classics|Advanced Study and Directed Research
-COMM 1F90|Communication Studies|Introduction to Communication and Media Studies
-COMM 1P96|Communication Studies|Professional Communication
-COMM 1P97|Communication Studies|Introduction to Communication in Business
-COMM 2F00|Communication Studies|New Media Literacy
-COMM 2P14|Communication Studies|Technical Writing
-COMM 2P15|Communication Studies|Research Methods in Communication and Culture
-COMM 2P16|Communication Studies|Communication for Organizations
-COMM 2P18|Communication Studies|Reporting and News Writing for Mass Media
-COMM 2P20|Communication Studies|Theories of Popular Culture
-COMM 2P21|Communication Studies|Canadian Popular Culture
-COMM 2P26|Communication Studies|The Information Society
-COMM 2P50|Communication Studies|Communication Theory
-COMM 2P51|Communication Studies|Language and Communication
-COMM 2P52|Communication Studies|Nonverbal Communication
-COMM 2P54|Communication Studies|Documentary Film
-COMM 2P55|Communication Studies|Interpersonal Communication
-COMM 2P56|Communication Studies|Canadian Cinema
-COMM 2P63|Communication Studies|Communication Design
-COMM 2P65|Communication Studies|Organizational Culture
-COMM 2P70|Communication Studies|Popular Music and Society
-COMM 2P71|Communication Studies|Popular Arts and the Modern Middle East
-COMM 2P90|Communication Studies|Networks, Digital Identities and Interactions
-COMM 2P91|Communication Studies|Social Media
-COMM 2P92|Communication Studies|Hip Hop and the Urban Working Class
-COMM 2P93|Communication Studies|Popular Narrative
-COMM 2P94|Communication Studies|Popular Cinema
-COMM 2P98|Communication Studies|Media Industries
-COMM 2Q91|Communication Studies|Ethnography and Popular Culture
-COMM 2Q98|Communication Studies|Introduction to Canadian Public Administration
-COMM 3P01|Communication Studies|Directed Reading
-COMM 3P03|Communication Studies|Advanced Studies in Popular Narrative
-COMM 3P15|Communication Studies|Media Analysis
-COMM 3P17|Communication Studies|Politics and the Mass Media in Canada
-COMM 3P18|Communication Studies|Audience Studies
-COMM 3P19|Communication Studies|Communication and Media Policy
-COMM 3P20|Communication Studies|Television Studies
-COMM 3P21|Communication Studies|Canadian Television
-COMM 3P22|Communication Studies|Media and Sport
-COMM 3P26|Communication Studies|Social and Cultural Aspects of Digital Gaming
-COMM 3P33|Communication Studies|Psychology of Intergroup Behaviour
-COMM 3P51|Communication Studies|Language and Public Communication
-COMM 3P54|Communication Studies|Issues in Documentary Film
-COMM 3P55|Communication Studies|Advertising in Context
-COMM 3P56|Communication Studies|Issues in Canadian Cinema
-COMM 3P62|Communication Studies|Public Relations and Integrated Marketing Communication
-COMM 3P63|Communication Studies|Digital Design and Communication
-COMM 3P73|Communication Studies|Popular Music and Youth Culture
-COMM 3P75|Communication Studies|Cultures of Consumption
-COMM 3P80|Communication Studies|Psychology of Interpersonal Behaviour
-COMM 3P90|Communication Studies|Advanced Topics in Digital Culture
-COMM 3P91|Communication Studies|Information Technology: Policies and Issues
-COMM 3P92|Communication Studies|Technology and Culture
-COMM 3P93|Communication Studies|Indigenous People in Media and Popular Culture
-COMM 3P94|Communication Studies|Film Genre
-COMM 3P96|Communication Studies|Issues in Popular Culture
-COMM 3P97|Communication Studies|Gender and Cinema to the 1960s
-COMM 3P98|Communication Studies|Gender and Contemporary Cinema
-COMM 3Q90|Communication Studies|Indigenous Cultural Production and Activism
-COMM 3Q91|Communication Studies|The History and Culture of Role-Playing Games
-COMM 3Q92|Communication Studies|Food and Popular Culture
-COMM 3Q93|Communication Studies|Issues in International Communication
-COMM 3Q94|Communication Studies|Television Genres
-COMM 3Q95|Communication Studies|Issues in Intercultural Communication
-COMM 3Q97|Communication Studies|Events Management
-COMM 3Q98|Communication Studies|The Psychology of Screens (Television and Beyond)
-COMM 3Q99|Communication Studies|Conflict and Negotiation
-COMM 3R90|Communication Studies|Sound and Vision: The Rockumentary
-COMM 3V50|Communication Studies|2021-2022: Applied Projects in Communication
-COMM 3V50-3V59|Communication Studies|Special Topics in Communication Studies
-COMM 3V90|Communication Studies|2021-2022: The Superhero in American Culture
-COMM 3V90-3V99|Communication Studies|Advanced Topics in Communication Studies
-COMM 4F00|Communication Studies|Internship in Communication, Popular Culture or Film
-COMM 4F80|Communication Studies|Directed Reading
-COMM 4F99|Communication Studies|Honours Thesis
-COMM 4P00|Communication Studies|Placement in Communication, Popular Culture or Film
-COMM 4P01|Communication Studies|Placement in Communication, Popular Culture or Film
-COMM 4P03|Communication Studies|Applied Studies in Popular Narrative
-COMM 4P06|Communication Studies|Advanced Studies in Popular Culture
-COMM 4P10|Communication Studies|Language and Discourse: Theory and Practice
-COMM 4P14|Communication Studies|Advanced Research in Cultural Industries
-COMM 4P18|Communication Studies|Media and the Natural Environment
-COMM 4P23|Communication Studies|Research on Media and Popular Culture
-COMM 4P28|Communication Studies|Special Topics in Video Production
-COMM 4P30|Communication Studies|Theories of Mass Culture
-COMM 4P31|Communication Studies|Theories of the Visible
-COMM 4P32|Communication Studies|Comparative Mass Media
-COMM 4P33|Communication Studies|Gender and Communication
-COMM 4P34|Communication Studies|Taste and Cultural Politics
-COMM 4P35|Communication Studies|Data and Society
-COMM 4P50|Communication Studies|Ethnography of Communication
-COMM 4P51|Communication Studies|Language and Power
-COMM 4P53|Communication Studies|Interpersonal Dialogue
-COMM 4P55|Communication Studies|History of Advertising
-COMM 4P57|Communication Studies|Crisis Communication
-COMM 4P58|Communication Studies|Ecocinema: History, Theory and Practice
-COMM 4P59|Communication Studies|Writing Cultural Criticism for the Media
-COMM 4P61|Communication Studies|Conventions of Screen Realism
-COMM 4P65|Communication Studies|Special Topics in Business Communication I
-COMM 4P66|Communication Studies|Special Topics in Business Communication II
-COMM 4P80|Communication Studies|Directed Reading
-COMM 4P90|Communication Studies|Advanced Research in Digital Culture
-COMM 4P91|Communication Studies|Directed Reading in Digital Culture
-COMM 4V50-4V59|Communication Studies|Contemporary Research in Communication Studies
-COMM 4V52|Communication Studies|2021-2022: Cultures of Entrepreneurialism
-COMM 4V57|Communication Studies|2021-2022: Visual Culture
-COMM 4V60-4V69|Communication Studies|Historical Perspectives in Communication Studies
-COMM 4V70-4V79|Communication Studies|Special Topics in International Communication
+COMM 1F90|Communication, Popular Culture and Film|Introduction to Communication and Media Studies
+COMM 1P96|Communication, Popular Culture and Film|Professional Communication
+COMM 1P97|Communication, Popular Culture and Film|Introduction to Communication in Business
+COMM 2F00|Communication, Popular Culture and Film|New Media Literacy
+COMM 2P14|Communication, Popular Culture and Film|Technical Writing
+COMM 2P15|Communication, Popular Culture and Film|Research Methods in Communication and Culture
+COMM 2P16|Communication, Popular Culture and Film|Communication for Organizations
+COMM 2P18|Communication, Popular Culture and Film|Reporting and News Writing for Mass Media
+COMM 2P20|Communication, Popular Culture and Film|Theories of Popular Culture
+COMM 2P21|Communication, Popular Culture and Film|Canadian Popular Culture
+COMM 2P26|Communication, Popular Culture and Film|The Information Society
+COMM 2P50|Communication, Popular Culture and Film|Communication Theory
+COMM 2P51|Communication, Popular Culture and Film|Language and Communication
+COMM 2P52|Communication, Popular Culture and Film|Nonverbal Communication
+COMM 2P54|Communication, Popular Culture and Film|Documentary Film
+COMM 2P55|Communication, Popular Culture and Film|Interpersonal Communication
+COMM 2P56|Communication, Popular Culture and Film|Canadian Cinema
+COMM 2P63|Communication, Popular Culture and Film|Communication Design
+COMM 2P65|Communication, Popular Culture and Film|Organizational Culture
+COMM 2P70|Communication, Popular Culture and Film|Popular Music and Society
+COMM 2P71|Communication, Popular Culture and Film|Popular Arts and the Modern Middle East
+COMM 2P90|Communication, Popular Culture and Film|Networks, Digital Identities and Interactions
+COMM 2P91|Communication, Popular Culture and Film|Social Media
+COMM 2P92|Communication, Popular Culture and Film|Hip Hop and the Urban Working Class
+COMM 2P93|Communication, Popular Culture and Film|Popular Narrative
+COMM 2P94|Communication, Popular Culture and Film|Popular Cinema
+COMM 2P98|Communication, Popular Culture and Film|Media Industries
+COMM 2Q91|Communication, Popular Culture and Film|Ethnography and Popular Culture
+COMM 2Q98|Communication, Popular Culture and Film|Introduction to Canadian Public Administration
+COMM 3P01|Communication, Popular Culture and Film|Directed Reading
+COMM 3P03|Communication, Popular Culture and Film|Advanced Studies in Popular Narrative
+COMM 3P15|Communication, Popular Culture and Film|Media Analysis
+COMM 3P17|Communication, Popular Culture and Film|Politics and the Mass Media in Canada
+COMM 3P18|Communication, Popular Culture and Film|Audience Studies
+COMM 3P19|Communication, Popular Culture and Film|Communication and Media Policy
+COMM 3P20|Communication, Popular Culture and Film|Television Studies
+COMM 3P21|Communication, Popular Culture and Film|Canadian Television
+COMM 3P22|Communication, Popular Culture and Film|Media and Sport
+COMM 3P26|Communication, Popular Culture and Film|Social and Cultural Aspects of Digital Gaming
+COMM 3P33|Communication, Popular Culture and Film|Psychology of Intergroup Behaviour
+COMM 3P51|Communication, Popular Culture and Film|Language and Public Communication
+COMM 3P54|Communication, Popular Culture and Film|Issues in Documentary Film
+COMM 3P55|Communication, Popular Culture and Film|Advertising in Context
+COMM 3P56|Communication, Popular Culture and Film|Issues in Canadian Cinema
+COMM 3P62|Communication, Popular Culture and Film|Public Relations and Integrated Marketing Communication
+COMM 3P63|Communication, Popular Culture and Film|Digital Design and Communication
+COMM 3P73|Communication, Popular Culture and Film|Popular Music and Youth Culture
+COMM 3P75|Communication, Popular Culture and Film|Cultures of Consumption
+COMM 3P80|Communication, Popular Culture and Film|Psychology of Interpersonal Behaviour
+COMM 3P90|Communication, Popular Culture and Film|Advanced Topics in Digital Culture
+COMM 3P91|Communication, Popular Culture and Film|Information Technology: Policies and Issues
+COMM 3P92|Communication, Popular Culture and Film|Technology and Culture
+COMM 3P93|Communication, Popular Culture and Film|Indigenous People in Media and Popular Culture
+COMM 3P94|Communication, Popular Culture and Film|Film Genre
+COMM 3P96|Communication, Popular Culture and Film|Issues in Popular Culture
+COMM 3P97|Communication, Popular Culture and Film|Gender and Cinema to the 1960s
+COMM 3P98|Communication, Popular Culture and Film|Gender and Contemporary Cinema
+COMM 3Q90|Communication, Popular Culture and Film|Indigenous Cultural Production and Activism
+COMM 3Q91|Communication, Popular Culture and Film|The History and Culture of Role-Playing Games
+COMM 3Q92|Communication, Popular Culture and Film|Food and Popular Culture
+COMM 3Q93|Communication, Popular Culture and Film|Issues in International Communication
+COMM 3Q94|Communication, Popular Culture and Film|Television Genres
+COMM 3Q95|Communication, Popular Culture and Film|Issues in Intercultural Communication
+COMM 3Q97|Communication, Popular Culture and Film|Events Management
+COMM 3Q98|Communication, Popular Culture and Film|The Psychology of Screens (Television and Beyond)
+COMM 3Q99|Communication, Popular Culture and Film|Conflict and Negotiation
+COMM 3R90|Communication, Popular Culture and Film|Sound and Vision: The Rockumentary
+COMM 3V50|Communication, Popular Culture and Film|2021-2022: Applied Projects in Communication
+COMM 3V50-3V59|Communication, Popular Culture and Film|Special Topics in Communication Studies
+COMM 3V90|Communication, Popular Culture and Film|2021-2022: The Superhero in American Culture
+COMM 3V90-3V99|Communication, Popular Culture and Film|Advanced Topics in Communication Studies
+COMM 4F00|Communication, Popular Culture and Film|Internship in Communication, Popular Culture or Film
+COMM 4F80|Communication, Popular Culture and Film|Directed Reading
+COMM 4F99|Communication, Popular Culture and Film|Honours Thesis
+COMM 4P00|Communication, Popular Culture and Film|Placement in Communication, Popular Culture or Film
+COMM 4P01|Communication, Popular Culture and Film|Placement in Communication, Popular Culture or Film
+COMM 4P03|Communication, Popular Culture and Film|Applied Studies in Popular Narrative
+COMM 4P06|Communication, Popular Culture and Film|Advanced Studies in Popular Culture
+COMM 4P10|Communication, Popular Culture and Film|Language and Discourse: Theory and Practice
+COMM 4P14|Communication, Popular Culture and Film|Advanced Research in Cultural Industries
+COMM 4P18|Communication, Popular Culture and Film|Media and the Natural Environment
+COMM 4P23|Communication, Popular Culture and Film|Research on Media and Popular Culture
+COMM 4P28|Communication, Popular Culture and Film|Special Topics in Video Production
+COMM 4P30|Communication, Popular Culture and Film|Theories of Mass Culture
+COMM 4P31|Communication, Popular Culture and Film|Theories of the Visible
+COMM 4P32|Communication, Popular Culture and Film|Comparative Mass Media
+COMM 4P33|Communication, Popular Culture and Film|Gender and Communication
+COMM 4P34|Communication, Popular Culture and Film|Taste and Cultural Politics
+COMM 4P35|Communication, Popular Culture and Film|Data and Society
+COMM 4P50|Communication, Popular Culture and Film|Ethnography of Communication
+COMM 4P51|Communication, Popular Culture and Film|Language and Power
+COMM 4P53|Communication, Popular Culture and Film|Interpersonal Dialogue
+COMM 4P55|Communication, Popular Culture and Film|History of Advertising
+COMM 4P57|Communication, Popular Culture and Film|Crisis Communication
+COMM 4P58|Communication, Popular Culture and Film|Ecocinema: History, Theory and Practice
+COMM 4P59|Communication, Popular Culture and Film|Writing Cultural Criticism for the Media
+COMM 4P61|Communication, Popular Culture and Film|Conventions of Screen Realism
+COMM 4P65|Communication, Popular Culture and Film|Special Topics in Business Communication I
+COMM 4P66|Communication, Popular Culture and Film|Special Topics in Business Communication II
+COMM 4P80|Communication, Popular Culture and Film|Directed Reading
+COMM 4P90|Communication, Popular Culture and Film|Advanced Research in Digital Culture
+COMM 4P91|Communication, Popular Culture and Film|Directed Reading in Digital Culture
+COMM 4V50-4V59|Communication, Popular Culture and Film|Contemporary Research in Communication Studies
+COMM 4V52|Communication, Popular Culture and Film|2021-2022: Cultures of Entrepreneurialism
+COMM 4V57|Communication, Popular Culture and Film|2021-2022: Visual Culture
+COMM 4V60-4V69|Communication, Popular Culture and Film|Historical Perspectives in Communication Studies
+COMM 4V70-4V79|Communication, Popular Culture and Film|Special Topics in International Communication
 COSC 0N01|Computer Science|Co-op Work Placement I
 COSC 0N02|Computer Science|Co-op Work Placement II
 COSC 0N03|Computer Science|Co-op Work Placement III
@@ -1239,17 +1239,17 @@ EDUC 9M50-9M59|Education|Honours Specialist
 EDUC 9M51|Education|Honour Specialist Mathematics
 EDUC 9M53|Education|Honour Specialist History
 EDUC 9M57|Education|Honour Specialist Health and Physical Education
-ENCW 1P06|Creative Writing|History and Future of Storytelling
-ENCW 2P72|Creative Writing|The Creative Writer
-ENCW 3P06|Creative Writing|Creative Writing: Short Fiction
-ENCW 3P07|Creative Writing|Creative Writing: Poetry
-ENCW 3P08|Creative Writing|Creative Non-Fiction Writing
-ENCW 3P72|Creative Writing|The Creative Writer and the Community
-ENCW 3P73|Creative Writing|Creative Writing for Digital Media
-ENCW 3P92|Creative Writing|Scriptwriting
-ENCW 4P06|Creative Writing|Advanced Creative Writing: Short Fiction
-ENCW 4P07|Creative Writing|Advanced Creative Writing: Poetry
-ENCW 4P08|Creative Writing|Advanced Creative Non-Fiction Writing
+ENCW 1P06|English|History and Future of Storytelling
+ENCW 2P72|English|The Creative Writer
+ENCW 3P06|English|Creative Writing: Short Fiction
+ENCW 3P07|English|Creative Writing: Poetry
+ENCW 3P08|English|Creative Non-Fiction Writing
+ENCW 3P72|English|The Creative Writer and the Community
+ENCW 3P73|English|Creative Writing for Digital Media
+ENCW 3P92|English|Scriptwriting
+ENCW 4P06|English|Advanced Creative Writing: Short Fiction
+ENCW 4P07|English|Advanced Creative Writing: Poetry
+ENCW 4P08|English|Advanced Creative Non-Fiction Writing
 ENGL 1F91|English|English Literature: Tradition and Innovation
 ENGL 1F95|English|Literature in English: Forms, Themes and Approaches
 ENGL 1F97|English|Literature of Trauma and Recovery
@@ -1354,13 +1354,13 @@ ENGL 4V40-4V49|English|Topics in Contemporary Literature
 ENGL 4V60-4V69|English|Topics in Contemporary Canadian Writing
 ENGL 4V70-4V79|English|Text and Context
 ENGL 4V90-4V99|English|English Area Studies
-ENGS 1P01|Engineering Science|The Humanist Engineer
-ENGS 2P02|Engineering Science|Invitational Education Theory for Engineers
-ENGS 3P12|Engineering Science|Feeding the World: Restorative Engineering
-ENGS 3P21|Engineering Science|Shaping the Future: New Automation
-ENGS 3P22|Engineering Science|Shaping the Future: Energy Frontiers
-ENGS 3P41|Engineering Science|Creating Healthy Communities: Human Mechanics
-ENGS 3P42|Engineering Science|Creating Healthy Communities: Inclusive Cities
+ENGS 1P01|Physics|The Humanist Engineer
+ENGS 2P02|Physics|Invitational Education Theory for Engineers
+ENGS 3P12|Physics|Feeding the World: Restorative Engineering
+ENGS 3P21|Physics|Shaping the Future: New Automation
+ENGS 3P22|Physics|Shaping the Future: Energy Frontiers
+ENGS 3P41|Physics|Creating Healthy Communities: Human Mechanics
+ENGS 3P42|Physics|Creating Healthy Communities: Inclusive Cities
 ENSU 2P01|Environmental Sustainability|Introduction to Environmental Sustainability
 ENSU 2P02|Environmental Sustainability|Environmental Sustainability in Practice
 ENSU 3P90|Environmental Sustainability|Contemporary Environmental Issues
@@ -1368,20 +1368,20 @@ ENSU 3P91|Environmental Sustainability|Leadership in Environmental Sustainabilit
 ENSU 3P92|Environmental Sustainability|Environmental Psychology
 ENSU 3P95|Environmental Sustainability|Directed Readings
 ENSU 3V90-3V99|Environmental Sustainability|Special Topics in Environment and Sustainability
-ENTR 2P51|Entrepreneurship|Entrepreneurship Basics
-ENTR 2P91|Entrepreneurship|Entrepreneurship
-ENTR 3P92|Entrepreneurship|Creativity and the Entrepreneur
-ENTR 3P93|Entrepreneurship|Managing Growth in Entrepreneurial Firms
-ENTR 3P94|Entrepreneurship|Corporate Entrepreneurship and Innovation
-ENTR 3P96|Entrepreneurship|Venture Capital and the Entrepreneur
-ENTR 3P98|Entrepreneurship|Family Business
-ENTR 3P99|Entrepreneurship|Research Methods in Organization Studies
-ENTR 3V90-3V99|Entrepreneurship|Topics in Entrepreneurship I
-ENTR 4F90|Entrepreneurship|Research Topic
-ENTR 4P10|Entrepreneurship|Planning New Venture Creation
-ENTR 4P91|Entrepreneurship|Research Topic
-ENTR 4P93|Entrepreneurship|International Dimensions of Entrepreneurship
-ENTR 4V90-4V99|Entrepreneurship|Topics in Entrepreneurship II
+ENTR 2P51|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Entrepreneurship Basics
+ENTR 2P91|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Entrepreneurship
+ENTR 3P92|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Creativity and the Entrepreneur
+ENTR 3P93|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Managing Growth in Entrepreneurial Firms
+ENTR 3P94|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Corporate Entrepreneurship and Innovation
+ENTR 3P96|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Venture Capital and the Entrepreneur
+ENTR 3P98|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Family Business
+ENTR 3P99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Methods in Organization Studies
+ENTR 3V90-3V99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Topics in Entrepreneurship I
+ENTR 4F90|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Topic
+ENTR 4P10|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Planning New Venture Creation
+ENTR 4P91|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Topic
+ENTR 4P93|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|International Dimensions of Entrepreneurship
+ENTR 4V90-4V99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Topics in Entrepreneurship II
 ERSC 0N01|Earth Sciences|Work Placement I
 ERSC 0N02|Earth Sciences|Work Placement II
 ERSC 0N03|Earth Sciences|Work Placement III
@@ -1454,58 +1454,48 @@ ERSC 4P85|Earth Sciences|Ecosystems and Changing Disturbance Regimes
 ERSC 4P92|Earth Sciences|Remotely Piloted Aircraft Systems: Practicum
 ERSC 4P94|Earth Sciences|Ore Geology and Associated Geophysical Techniques
 ESCI 3P91|Science|Science for Elementary School Teachers
-ETHC 2P51|Ethics|Business, Society, and Ethics
-ETHC 3P82|Ethics|Business Ethics
-FILM 1F94|Film|Introduction to Film Studies
-FILM 2F00|Film|New Media Literacy
-FILM 2F98|Film|Introduction to Digital Film Production
-FILM 2P20|Film|Theories of Popular Culture
-FILM 2P21|Film|Canadian Popular Culture
-FILM 2P54|Film|Documentary Film
-FILM 2P56|Film|Canadian Cinema
-FILM 2P90|Film|Film History I
-FILM 2P91|Film|Early Film Theory
-FILM 2P93|Film|Popular Narrative
-FILM 2P94|Film|Popular Cinema
-FILM 2P95|Film|Latin American and Iberian Film
-FILM 2P99|Film|Film History II
-FILM 3P03|Film|Advanced Studies in Popular Narrative
-FILM 3P18|Film|Audience Studies
-FILM 3P20|Film|Television Studies
-FILM 3P21|Film|Canadian Television
-FILM 3P54|Film|Issues in Documentary Film
-FILM 3P56|Film|Issues in Canadian Cinema
-FILM 3P91|Film|Contemporary Film Theory
-FILM 3P93|Film|Authorship in the Cinema
-FILM 3P94|Film|Film Genre
-FILM 3P95|Film|National Cinema
-FILM 3P96|Film|Issues in Popular Culture
-FILM 3P97|Film|Gender and Cinema to the 1960s
-FILM 3P98|Film|Gender and Contemporary Cinema
-FILM 3Q94|Film|Television Genres
-FILM 3R90|Film|Sound & Vision: The Rockumentary
-FILM 3V50-3V59|Film|Special Topics in Film Studies
-FILM 3V90|Film|2021-2022: The Superhero in American Culture
-FILM 3V90-3V99|Film|Advanced Topics in Film Studies
-FILM 4F00|Film|Internship in Communication, Popular Culture or Film
-FILM 4F80|Film|Directed Reading
-FILM 4F99|Film|Honours Thesis
-FILM 4P00|Film|Placement in Communication, Popular Culture or Film
-FILM 4P01|Film|Placement in Communication, Popular Culture or Film
-FILM 4P03|Film|Applied Studies in Popular Narrative
-FILM 4P06|Film|Advanced Studies in Popular Culture
-FILM 4P28|Film|Special Topics in Video Production
-FILM 4P30|Film|Theories of Mass Culture
-FILM 4P31|Film|Theories of the Visible
-FILM 4P34|Film|Taste and Cultural Politics
-FILM 4P58|Film|Ecocinema: History, Theory and Practice
-FILM 4P59|Film|Writing Cultural Criticism for the Media
-FILM 4P61|Film|Conventions of Screen Realism
-FILM 4P80|Film|Directed Reading
-FILM 4V50-4V59|Film|Special Topics in Film Studies
-FILM 4V57|Film|2021-2022: Visual Culture
-FILM 4V60-4V69|Film|Issues in Film History
-FILM 4V70-4V79|Film|Issues in International Cinema
+ETHC 2P51|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Business, Society, and Ethics
+ETHC 3P82|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Business Ethics
+FILM 1F94|Communication, Popular Culture and Film|Introduction to Film Studies
+FILM 2F00|Communication, Popular Culture and Film|New Media Literacy
+FILM 2F98|Communication, Popular Culture and Film|Introduction to Digital Film Production
+FILM 2P20|Communication, Popular Culture and Film|Theories of Popular Culture
+FILM 2P21|Communication, Popular Culture and Film|Canadian Popular Culture
+FILM 2P54|Communication, Popular Culture and Film|Documentary Film
+FILM 2P56|Communication, Popular Culture and Film|Canadian Cinema
+FILM 2P90|Communication, Popular Culture and Film|Film History I
+FILM 2P91|Communication, Popular Culture and Film|Early Film Theory
+FILM 2P93|Communication, Popular Culture and Film|Popular Narrative
+FILM 2P94|Communication, Popular Culture and Film|Popular Cinema
+FILM 2P95|Communication, Popular Culture and Film|Latin American and Iberian Film
+FILM 2P99|Communication, Popular Culture and Film|Film History II
+FILM 3P03|Communication, Popular Culture and Film|Advanced Studies in Popular Narrative
+FILM 3P18|Communication, Popular Culture and Film|Audience Studies
+FILM 3P20|Communication, Popular Culture and Film|Television Studies
+FILM 3P21|Communication, Popular Culture and Film|Canadian Television
+FILM 3P54|Communication, Popular Culture and Film|Issues in Documentary Film
+FILM 3P56|Communication, Popular Culture and Film|Issues in Canadian Cinema
+FILM 3P91|Communication, Popular Culture and Film|Contemporary Film Theory
+FILM 3P93|Communication, Popular Culture and Film|Authorship in the Cinema
+FILM 3P94|Communication, Popular Culture and Film|Film Genre
+FILM 3P95|Communication, Popular Culture and Film|National Cinema
+FILM 3P96|Communication, Popular Culture and Film|Issues in Popular Culture
+FILM 3P97|Communication, Popular Culture and Film|Gender and Cinema to the 1960s
+FILM 3P98|Communication, Popular Culture and Film|Gender and Contemporary Cinema
+FILM 3Q94|Communication, Popular Culture and Film|Television Genres
+FILM 3R90|Communication, Popular Culture and Film|Sound & Vision: The Rockumentary
+FILM 3V50-3V59|Communication, Popular Culture and Film|Special Topics in Film Studies
+FILM 3V90|Communication, Popular Culture and Film|2021-2022: The Superhero in American Culture
+FILM 3V90-3V99|Communication, Popular Culture and Film|Advanced Topics in Film Studies
+FILM 4F00|Communication, Popular Culture and Film|Internship in Communication, Popular Culture or Film
+FILM 4F80|Communication, Popular Culture and Film|Directed Reading
+FILM 4F99|Communication, Popular Culture and Film|Honours Thesis
+FILM 4P00|Communication, Popular Culture and Film|Placement in Communication, Popular Culture or Film
+FILM 4P01|Communication, Popular Culture and Film|Placement in Communication, Popular Culture or Film
+FILM 4P03|Communication, Popular Culture and Film|Applied Studies in Popular Narrative
+FILM 4P06|Communication, Popular Culture and Film|Advanced Studies in Popular Culture
+FILM 4P28|Communication, Popular Culture and Film|Special Topics in Video Production
+FILM 4P30|Communication, Popular Culture and Film|Theories of Mass Culture
 FNCE 2P50|Finance|Introduction to Personal Financial Planning
 FNCE 2P51|Finance|Introduction to Finance
 FNCE 2P91|Finance|Corporate Finance I
@@ -1525,49 +1515,49 @@ FNCE 4P18|Finance|Fixed Income Securities
 FNCE 4P19|Finance|Fintech with Blockchain and Cryptocurrencies
 FNCE 4P91|Finance|Research Topic
 FNCE 4V90-4V99|Finance|Topics in Finance
-FREN 1F00|French|French I
-FREN 1F50|French|French II
-FREN 1F90|French|French III
-FREN 1P93|French|French Grammar Review and Practice
-FREN 2F00|French|Grammar and Composition
-FREN 2F03|French|Literature and Culture: The French-Speaking World
-FREN 2P10|French|Introduction to the Linguistic Study of French
-FREN 2P44|French|Children's Literature in French: The Picture Book and Beyond
-FREN 2P55|French|Francophone Cultures and Civilizations
-FREN 2P57|French|Phonetics and Phonology
-FREN 2P65|French|Culture and Civilization of France to 1800
-FREN 3P03|French|Composition and Stylistics
-FREN 3P05|French|Business French I
-FREN 3P06|French|Translation I
-FREN 3P20|French|Oral French Workshop
-FREN 3P21|French|Seventeenth/Eighteenth-Century French Literature
-FREN 3P42|French|Nineteenth-Century French Literature
-FREN 3P53|French|Twentieth-Century French Literature to 1935
-FREN 3P65|French|Culture and Civilization of France from 1800 to the Present
-FREN 3P75|French|Canadian Literature in French up to the Révolution tranquille
-FREN 3P90|French|Sociolinguistics of Francophone World
-FREN 3P94|French|Caribbean Literature in French
-FREN 3P95|French|French Literature and Culture in Film
-FREN 3P96|French|Critical Theory and Methodology
-FREN 3P99|French|Contemporary Canadian Theatre in French
-FREN 3Q90|French|Postcolonial (North) African Literature in French
-FREN 3Q91|French|Medieval French Literature
-FREN 4P03|French|Linguistic Approach to Textual Analysis
-FREN 4P04|French|Translation II: Applications
-FREN 4P05|French|French Internship
-FREN 4P07|French|Business French II
-FREN 4P20|French|Sixteenth-Century Literature
-FREN 4P40|French|Nineteenth-Century French Society
-FREN 4P55|French|Twentieth-Century French Literature from 1935 to 1970
-FREN 4P56|French|French Literature after 1970
-FREN 4P65|French|(Im)Migrant Identity in Bande Dessinée
-FREN 4P75|French|Canadian Literature in French after 1960
-FREN 4P79|French|Text and Image in Literature in French
-FREN 4P80|French|Beur Literature and Film
-FREN 4P92|French|Research Project
-FREN 4V20-4V29|French|Special Topics in French Studies
-FREN 4V21|French|2021-2022: Documentation and Terminology
-FREN 4V60-4V99|French|Special Research Topics in French Literature
+FREN 1F00|Modern Languages, Literatures and Cultures|French I
+FREN 1F50|Modern Languages, Literatures and Cultures|French II
+FREN 1F90|Modern Languages, Literatures and Cultures|French III
+FREN 1P93|Modern Languages, Literatures and Cultures|French Grammar Review and Practice
+FREN 2F00|Modern Languages, Literatures and Cultures|Grammar and Composition
+FREN 2F03|Modern Languages, Literatures and Cultures|Literature and Culture: The French-Speaking World
+FREN 2P10|Modern Languages, Literatures and Cultures|Introduction to the Linguistic Study of French
+FREN 2P44|Modern Languages, Literatures and Cultures|Children's Literature in French: The Picture Book and Beyond
+FREN 2P55|Modern Languages, Literatures and Cultures|Francophone Cultures and Civilizations
+FREN 2P57|Modern Languages, Literatures and Cultures|Phonetics and Phonology
+FREN 2P65|Modern Languages, Literatures and Cultures|Culture and Civilization of France to 1800
+FREN 3P03|Modern Languages, Literatures and Cultures|Composition and Stylistics
+FREN 3P05|Modern Languages, Literatures and Cultures|Business French I
+FREN 3P06|Modern Languages, Literatures and Cultures|Translation I
+FREN 3P20|Modern Languages, Literatures and Cultures|Oral French Workshop
+FREN 3P21|Modern Languages, Literatures and Cultures|Seventeenth/Eighteenth-Century French Literature
+FREN 3P42|Modern Languages, Literatures and Cultures|Nineteenth-Century French Literature
+FREN 3P53|Modern Languages, Literatures and Cultures|Twentieth-Century French Literature to 1935
+FREN 3P65|Modern Languages, Literatures and Cultures|Culture and Civilization of France from 1800 to the Present
+FREN 3P75|Modern Languages, Literatures and Cultures|Canadian Literature in French up to the Révolution tranquille
+FREN 3P90|Modern Languages, Literatures and Cultures|Sociolinguistics of Francophone World
+FREN 3P94|Modern Languages, Literatures and Cultures|Caribbean Literature in French
+FREN 3P95|Modern Languages, Literatures and Cultures|French Literature and Culture in Film
+FREN 3P96|Modern Languages, Literatures and Cultures|Critical Theory and Methodology
+FREN 3P99|Modern Languages, Literatures and Cultures|Contemporary Canadian Theatre in French
+FREN 3Q90|Modern Languages, Literatures and Cultures|Postcolonial (North) African Literature in French
+FREN 3Q91|Modern Languages, Literatures and Cultures|Medieval French Literature
+FREN 4P03|Modern Languages, Literatures and Cultures|Linguistic Approach to Textual Analysis
+FREN 4P04|Modern Languages, Literatures and Cultures|Translation II: Applications
+FREN 4P05|Modern Languages, Literatures and Cultures|French Internship
+FREN 4P07|Modern Languages, Literatures and Cultures|Business French II
+FREN 4P20|Modern Languages, Literatures and Cultures|Sixteenth-Century Literature
+FREN 4P40|Modern Languages, Literatures and Cultures|Nineteenth-Century French Society
+FREN 4P55|Modern Languages, Literatures and Cultures|Twentieth-Century French Literature from 1935 to 1970
+FREN 4P56|Modern Languages, Literatures and Cultures|French Literature after 1970
+FREN 4P65|Modern Languages, Literatures and Cultures|(Im)Migrant Identity in Bande Dessinée
+FREN 4P75|Modern Languages, Literatures and Cultures|Canadian Literature in French after 1960
+FREN 4P79|Modern Languages, Literatures and Cultures|Text and Image in Literature in French
+FREN 4P80|Modern Languages, Literatures and Cultures|Beur Literature and Film
+FREN 4P92|Modern Languages, Literatures and Cultures|Research Project
+FREN 4V20-4V29|Modern Languages, Literatures and Cultures|Special Topics in French Studies
+FREN 4V21|Modern Languages, Literatures and Cultures|2021-2022: Documentation and Terminology
+FREN 4V60-4V99|Modern Languages, Literatures and Cultures|Special Research Topics in French Literature
 GEOG 0N01|Geography|Co-op Work Placement I
 GEOG 0N02|Geography|Co-op Work Placement II
 GEOG 0N03|Geography|Co-op Work Placement III
@@ -1651,34 +1641,220 @@ GEOG 4P85|Geography|Ecosystems and Changing Disturbance Regimes
 GEOG 4P92|Geography|Remotely Piloted Aircraft Systems: practicum
 GEOG 4P95|Geography|Directed Readings I
 GEOG 4P96|Geography|Directed Readings II
-GERM 1F00|German|Introductory Language
-GERM 1F90|German|Intermediate Language
-GERM 1P03|German|Introductory German for Exchange Students
-GERM 1P91|German|Intermediate German for Exchange Students
-GERM 1P93|German|Culture and Civilization of Central Europe: From the Prehistoric to 350CE
-GERM 2F00|German|Language, Literature and Culture
-GERM 2P80|German|Tutorial I
-GERM 2P90|German|German Cinema
-GERM 2P92|German|Language and Literature of the 20th Century
-GERM 2P95|German|Language through Film and Literature of the 20th Century
-GERM 3F99|German|Advanced Language Study
-GERM 3P80|German|Tutorial II
-GREE 1F00|Greek|Language (Introductory)
-GREE 2P01|Greek|Language and Literature I
-GREE 2P02|Greek|Language and Literature II
-GREE 4P01|Greek|Epic I
-GREE 4P02|Greek|Epic II
-GREE 4P05|Greek|Historians I
-GREE 4P06|Greek|Historians II
-GREE 4P11|Greek|Greek Oratory and Dialogue I
-GREE 4P12|Greek|Greek Oratory and Dialogue II
-GREE 4P21|Greek|Greek Tragedy I
-GREE 4P22|Greek|Greek Tragedy II
-GREE 4P31|Greek|Greek Comedy I
-GREE 4P32|Greek|Greek Comedy II
-GREE 4P41|Greek|Greek Lyric and Elegy I
-GREE 4P42|Greek|Greek Lyric and Elegy II
-GREE 4V90-4V99|Greek|Advanced Readings and Directed Research
+GERM 1F00|Modern Languages, Literatures and Cultures|Introductory Language
+GERM 1F90|Modern Languages, Literatures and Cultures|Intermediate Language
+GERM 1P03|Modern Languages, Literatures and Cultures|Introductory German for Exchange Students
+GERM 1P91|Modern Languages, Literatures and Cultures|Intermediate German for Exchange Students
+GERM 1P93|Modern Languages, Literatures and Cultures|Culture and Civilization of Central Europe: From the Prehistoric to 350CE
+GERM 2F00|Modern Languages, Literatures and Cultures|Language, Literature and Culture
+GERM 2P80|Modern Languages, Literatures and Cultures|Tutorial I
+GERM 2P90|Modern Languages, Literatures and Cultures|German Cinema
+GERM 2P92|Modern Languages, Literatures and Cultures|Language and Literature of the 20th Century
+GERM 2P95|Modern Languages, Literatures and Cultures|Language through Film and Literature of the 20th Century
+GERM 3F99|Modern Languages, Literatures and Cultures|Advanced Language Study
+GERM 3P80|Modern Languages, Literatures and Cultures|Tutorial II
+GREE 1F00|Modern Languages, Literatures and Cultures|Language (Introductory)
+GREE 2P01|Modern Languages, Literatures and Cultures|Language and Literature I
+GREE 2P02|Modern Languages, Literatures and Cultures|Language and Literature II
+GREE 4P01|Modern Languages, Literatures and Cultures|Epic I
+GREE 4P02|Modern Languages, Literatures and Cultures|Epic II
+GREE 4P05|Modern Languages, Literatures and Cultures|Historians I
+GREE 4P06|Modern Languages, Literatures and Cultures|Historians II
+GREE 4P11|Modern Languages, Literatures and Cultures|Greek Oratory and Dialogue I
+GREE 4P12|Modern Languages, Literatures and Cultures|Greek Oratory and Dialogue II
+GREE 4P21|Modern Languages, Literatures and Cultures|Greek Tragedy I
+GREE 4P22|Modern Languages, Literatures and Cultures|Greek Tragedy II
+GREE 4P31|Modern Languages, Literatures and Cultures|Greek Comedy I
+GREE 4P32|Modern Languages, Literatures and Cultures|Greek Comedy II
+GREE 4P41|Modern Languages, Literatures and Cultures|Greek Lyric and Elegy I
+GREE 4P42|Modern Languages, Literatures and Cultures|Greek Lyric and Elegy II
+GREE 4V90-4V99|Modern Languages, Literatures and Cultures|Advanced Readings and Directed Research
+HIST 0N01|History|Work Placement I
+HIST 0N02|History|Work Placement II
+HIST 0N03|History|Work Placement III
+HIST 0N04|History|Work Placement IV
+HIST 0N05|History|Work Placement V
+HIST 0N90|History|Co-op Professional Preparation
+HIST 0N97|History|Co-op Leadership Workshop
+HIST 1F00|History|Looking Forward: Developing Historical Skills
+HIST 1F90|History|Empires and Revolutions
+HIST 1F92|History|Lords of the Sea: British Maritime History, 400-1800
+HIST 1F95|History|World History since 1914
+HIST 1F96|History|The Americas
+HIST 1P50|History|Co-operative Historical Projects
+HIST 1P90|History|Life in (and after) hard times: how disasters change societies
+HIST 1P91|History|Trendsetting: Global History and Fashion since 1750
+HIST 1P94|History|American History Through its Music
+HIST 1P97|History|The History of Sports in the United States
+HIST 1P98|History|Western European Society and Politics to 1800
+HIST 1P99|History|Western European Ideas and Worldviews to 1800
+HIST 2C01|History|Co-op Reflective Learning and Integration I
+HIST 2C02|History|Co-op Reflective Learning and Integration II
+HIST 2C03|History|Co-op Reflective Learning and Integration III
+HIST 2C04|History|Co-op Reflective Learning and Integration IV
+HIST 2C05|History|Co-op Reflective Learning and Integration V
+HIST 2F00|History|Great Lakes Maritime and Coastal History
+HIST 2F20|History|The History of Britain, 1485-2000
+HIST 2F27|History|Historical Geographic Information Systems
+HIST 2F90|History|Money and Power in the Atlantic World
+HIST 2P00|History|The Early Modern World
+HIST 2P01|History|Colonial Canada
+HIST 2P02|History|Post-Confederation Canada
+HIST 2P03|History|Early Medieval Britain 400-1000: Celts, Saxons and Vikings
+HIST 2P04|History|The Medieval British Isles, 1000-1485
+HIST 2P08|History|Colonial Latin America
+HIST 2P09|History|Modern Latin America
+HIST 2P15|History|Glory and Despair: The United States 1607-1865
+HIST 2P16|History|Ambiguities of Greatness: The United States 1865 to the Present
+HIST 2P25|History|Revolutions in Communication
+HIST 2P26|History|Introduction to Digital History
+HIST 2P40|History|French Society and Politics in the 18th Century
+HIST 2P51|History|Europe, 1815-1914
+HIST 2P52|History|Twentieth-Century Europe
+HIST 2P53|History|Totalitarian Temptation: The 20th Century
+HIST 2P55|History|The Culture of War in the Early Modern World
+HIST 2P56|History|Gender in Modern European History
+HIST 2P60|History|Introduction to the History of Medicine
+HIST 2P61|History|Piracy and Ransoming in African History
+HIST 2P62|History|Africa to 1800
+HIST 2P63|History|Conflicts and Revolutions in Africa
+HIST 2P64|History|War and Peace in the Modern Age
+HIST 2P65|History|Late Imperial East Asia
+HIST 2P66|History|Twentieth-Century East Asia
+HIST 2P70|History|The Middle East, 600 - 1800
+HIST 2P71|History|Popular Culture in the Modern Middle East
+HIST 2P72|History|Modern Middle East
+HIST 2P75|History|Heaven and Earth
+HIST 2P76|History|Making Modern Science
+HIST 2P91|History|Europe's Reformations, 1450-1650
+HIST 2P92|History|The French Revolution Contested
+HIST 2P93|History|History of Early Greece
+HIST 2P94|History|History of Classical Greece
+HIST 2P96|History|Early Russia
+HIST 2P97|History|History of the Early Roman Empire
+HIST 2P98|History|Modern Russia
+HIST 2P99|History|Ideas and Culture before 1850
+HIST 2Q90|History|Canada: War and Nationalism
+HIST 2Q92|History|The United States, 1870-1930
+HIST 2Q93|History|Women in North America to 1865
+HIST 2Q94|History|Women in North America, 1865 to the Present
+HIST 2Q96|History|History of the Roman Republic
+HIST 2Q97|History|Native-Newcomer Relations in Canada
+HIST 2Q98|History|Everyday Life in Early America
+HIST 2V90-2V99|History|Topics in History
+HIST 3F01|History|Historians and the Craft of History
+HIST 3F02|History|Making History in Niagara
+HIST 3F50|History|Reading the Italian Medieval and Renaissance City
+HIST 3F75|History|Archaeological Practicum in Mediterranean Lands
+HIST 3F93|History|Project Collaborations Across Diverse Programs
+HIST 3M50-3M59|History|Historical Studies Abroad
+HIST 3M60|History|2021-2022: Field School in Local Historical Archaeology
+HIST 3M60-3M65|History|Experiential Historical Studies
+HIST 3M61|History|2021-2022: Local Historical Archaeology
+HIST 3P00|History|Ideas and Culture since 1800
+HIST 3P01|History|Britain and the World, 1500 - 1960
+HIST 3P02|History|Introduction to Food History
+HIST 3P07|History|Growing Up: Childhood and Youth Since 1800
+HIST |History|African American History, 1619 - 1877
+HIST 3P11|History|African American History, 1877 - present
+HIST 3P15|History|American Enlightenment
+HIST 3P16|History|The American Revolution
+HIST 3P18|History|Modern American Popular Culture
+HIST 3P19|History|Histories of Crime and Violence
+HIST 3P21|History|Race, Class and Gender in Latin America
+HIST 3P30|History|The Viking Age
+HIST 3P31|History|The Historian's Toolbox
+HIST 3P33|History|Imagining the Past: Introduction to Historiography
+HIST 3P35|History|North America's First Nations
+HIST 3P36|History|Digital Innovations: History and Computing I
+HIST 3P37|History|Digital Innovations: History and Computing II
+HIST 3P45|History|United States Foreign Policy Since 1945
+HIST 3P48|History|Wealth, Work and Power in the United States
+HIST 3P55|History|London, Paris, Berlin: History Through the Urban Landscape
+HIST 3P56|History|Weimar Germany, 1918-1933
+HIST 3P57|History|Living with the Enemy: The History of World War II Occupation in Europe
+HIST 3P58|History|The History of Modern East-Central Europe
+HIST 3P59|History|History of Terrorism:Threat, Spin and Struggle
+HIST 3P60|History|The World of Genghis Khan: Inner Asia since 500 BC
+HIST 3P61|History|Gender and Society in Ancient Mediterranean
+HIST 3P63|History|Western Diasporas In the Ancient and Modern Eras
+HIST 3P64|History|African Migration, Displacement & Diaspora
+HIST 3P65|History|Ancient Law in the Near Eastern and Mediterranean Lands
+HIST 3P66|History|African Economic History
+HIST 3P67|History|Environment and Development in Africa
+HIST 3P74|History|Canadian Immigration and Ethnic History
+HIST 3P75|History|Canadian Labour History
+HIST 3P76|History|Canadian Regional History
+HIST 3P77|History|The Canadian West
+HIST 3P81|History|History of Technology
+HIST 3P82|History|A History of Disability Technologies
+HIST 3P85|History|Minorities of the Middle East
+HIST 3P86|History|Cultures and Societies of the Middle East
+HIST 3P87|History|The American West
+HIST 3P88|History|Women and Gender in China
+HIST 3P89|History|Traditional Chinese World: People and Culture
+HIST 3P90|History|The Rise and Fall of the Russian Empire
+HIST 3P91|History|Epidemics and Ideas: History of Medicine and Disease
+HIST 3P92|History|The Church Besieged: Religion in North America after 1850
+HIST 3P93|History|Fraternalism and the Freemasons
+HIST 3P94|History|Historians and the Age of Religious Wars and Absolutism, 1559-1715
+HIST 3P95|History|God's Country? Religion in North America before 1850
+HIST 3P96|History|Medieval and Early Modern Christianity
+HIST 3P97|History|The World of the Renaissance and Beyond
+HIST 3P98|History|French Colonial Canada
+HIST 3P99|History|The Challenge to Social Order in 18th-Century England
+HIST 3Q91|History|Renaissance Perceptions of Indigenous Cultures
+HIST 3Q92|History|Moors, New Christians and Renegades
+HIST 3Q94|History|Revolution in Latin America
+HIST 3Q96|History|The Vikings and the Historians
+HIST 3Q97|History|History and the North American Environment
+HIST 3Q98|History|Environment and History in the Early Modern World
+HIST 3Q99|History|The Sixties
+HIST 3V90-3V94|History|Topics in Canadian History
+HIST 4F00|History|Voices from the Past: Oral History
+HIST 4P00|History|Literature of the English Revolution
+HIST 4P01|History|Sources and Methods of Medieval and Renaissance Studies
+HIST 4P02|History|Early Modern Cops and Robbers
+HIST 4P08|History|Slavery in Africa
+HIST |History|The American Ghetto
+HIST 4P10|History|History in the Field: Ontario and the War of 1812
+HIST 4P11|History|State and Society in Colonial Canada
+HIST 4P18|History|Women and Gender in African History
+HIST 4P22|History|Africa in World History
+HIST 4P25|History|Race, Ethnicity and Immigration in the United States
+HIST 4P26|History|Topics in Latin American History
+HIST 4P29|History|Wallace, Bruce and the Wars of Scotland
+HIST 4P33|History|The United States and the Cold War
+HIST 4P35|History|Witchcraft Episodes in Britain and America, 1500-1700
+HIST 4P36|History|American Political Ideas, 1760-1805
+HIST 4P37|History|Cultures of Consumption in the British World
+HIST 4P38|History|The Russian Revolution
+HIST 4P39|History|Gender and Empire in the British World
+HIST 4P41|History|The Holocaust
+HIST 4P42|History|Nazi Germany
+HIST 4P43|History|Censorship: A Comparative Approach
+HIST 4P44|History|The French Revolution
+HIST 4P46|History|Food and Drink: Society, Science and Economy
+HIST 4P47|History|Material Cultures of Science and Technology
+HIST 4P48|History|Science, Technology and Gender
+HIST 4P49|History|Science and 19th-Century Culture
+HIST 4P50|History|Directed Research
+HIST 4P51|History|Digital History Research Seminar
+HIST 4P53|History|Nations and Nationalism in Modern Europe
+HIST 4P55|History|Social History of the Renaissance
+HIST 4P56|History|Intellectuals in Revolutionary China
+HIST 4P57|History|China under Communist Rule
+HIST 4P59|History|Women of the Middle East
+HIST 4P61|History|Histories of the End: Varieties of Apocalypticism
+HIST 4P62|History|Religious Radicalism
+HIST 4P64|History|Slavery in the Middle East
+HIST 4P65|History|First Nations in Modern Canada
+HIST 4P67|History|The World We Have Lost: Comparative Rural History
+HIST 4P70|History|Seminar in Academic Editing and Publishing
+HIST 4P90|History|Advanced Seminar
+HIST 4P99|History|Honours Tutorial
+HIST 4V00-4V05|History|Themes in Literature and History
+HIST 4V06-4V79|History|Topics in History
 HLSC 0N01|Health Sciences|Work Placement I
 HLSC 0N02|Health Sciences|Work Placement II
 HLSC 0N03|Health Sciences|Work Placement III
@@ -1909,36 +2085,36 @@ INDG 4P76|Indigenous Studies|Indigenous Social and Political Thought
 INDG 4P84|Indigenous Studies|Indigenous Peoples and Social Justice: Contemporary Issues
 INDG 4P91|Indigenous Studies|Contemporary Indigenous Performance I
 INDG 4P92|Indigenous Studies|Contemporary Indigenous Performance II
-ITAL 1F00|Italian|Introductory Italian
-ITAL 1F90|Italian|Intermediate Italian
-ITAL 1P91|Italian|Italian for International Exchange Students
-ITAL 1P96|Italian|Italian Culture and Civilization
-ITAL 2F00|Italian|Language, Literature and Culture
-ITAL 2P80|Italian|Italian Cinema
-ITAL 2P90|Italian|Translation and Language Practice
-ITAL 2P92|Italian|Early to High Renaissance Art and Architecture
-ITAL 2P94|Italian|Linguistic and Cultural Regionalism in Italy
-ITAL 2P95|Italian|Modern Culture and Civilization
-ITAL 2P96|Italian|Italian Culture and Society
-ITAL 2P97|Italian|History of the Early Roman Empire
-ITAL 2P98|Italian|Italians in Canada and Italy-Canada Relations
-ITAL 2P99|Italian|Medieval and Renaissance Tales
-ITAL 2Q90|Italian|Digital Archives: Construction, Scholarship and Functionality
-ITAL 2Q95|Italian|Queer Stories in Italy and the West
-ITAL 2Q96|Italian|History of the Roman Republic
-ITAL 3F50|Italian|Reading the Italian Medieval and Renaissance City
-ITAL 3M20-3M24|Italian|Special Topics in Italian
-ITAL 3P09|Italian|The Later Roman Empire
-ITAL 3P22|Italian|Art and Architecture of the Roman Republic and Early Empire
-ITAL 3P23|Italian|Art and Architecture of the Roman Empire
-ITAL 3P90|Italian|Literature of the 19th Century
-ITAL 3P92|Italian|Petrarch and Boccaccio
-ITAL 3P93|Italian|Dante's Inferno
-ITAL 3P94|Italian|Modern and Contemporary Italian Literature in Translation
-ITAL 3P97|Italian|Italian for Teachers
-ITAL 3Q90|Italian|Translating and Interpreting in the Community: An Internship
-ITAL 3Q91|Italian|Grammar, Composition and Conversation
-ITAL 4P04|Italian|Translation: Applications
+ITAL 1F00|Modern Languages, Literatures and Cultures|Introductory Italian
+ITAL 1F90|Modern Languages, Literatures and Cultures|Intermediate Italian
+ITAL 1P91|Modern Languages, Literatures and Cultures|Italian for International Exchange Students
+ITAL 1P96|Modern Languages, Literatures and Cultures|Italian Culture and Civilization
+ITAL 2F00|Modern Languages, Literatures and Cultures|Language, Literature and Culture
+ITAL 2P80|Modern Languages, Literatures and Cultures|Italian Cinema
+ITAL 2P90|Modern Languages, Literatures and Cultures|Translation and Language Practice
+ITAL 2P92|Modern Languages, Literatures and Cultures|Early to High Renaissance Art and Architecture
+ITAL 2P94|Modern Languages, Literatures and Cultures|Linguistic and Cultural Regionalism in Italy
+ITAL 2P95|Modern Languages, Literatures and Cultures|Modern Culture and Civilization
+ITAL 2P96|Modern Languages, Literatures and Cultures|Italian Culture and Society
+ITAL 2P97|Modern Languages, Literatures and Cultures|History of the Early Roman Empire
+ITAL 2P98|Modern Languages, Literatures and Cultures|Italians in Canada and Italy-Canada Relations
+ITAL 2P99|Modern Languages, Literatures and Cultures|Medieval and Renaissance Tales
+ITAL 2Q90|Modern Languages, Literatures and Cultures|Digital Archives: Construction, Scholarship and Functionality
+ITAL 2Q95|Modern Languages, Literatures and Cultures|Queer Stories in Italy and the West
+ITAL 2Q96|Modern Languages, Literatures and Cultures|History of the Roman Republic
+ITAL 3F50|Modern Languages, Literatures and Cultures|Reading the Italian Medieval and Renaissance City
+ITAL 3M20-3M24|Modern Languages, Literatures and Cultures|Special Topics in Italian
+ITAL 3P09|Modern Languages, Literatures and Cultures|The Later Roman Empire
+ITAL 3P22|Modern Languages, Literatures and Cultures|Art and Architecture of the Roman Republic and Early Empire
+ITAL 3P23|Modern Languages, Literatures and Cultures|Art and Architecture of the Roman Empire
+ITAL 3P90|Modern Languages, Literatures and Cultures|Literature of the 19th Century
+ITAL 3P92|Modern Languages, Literatures and Cultures|Petrarch and Boccaccio
+ITAL 3P93|Modern Languages, Literatures and Cultures|Dante's Inferno
+ITAL 3P94|Modern Languages, Literatures and Cultures|Modern and Contemporary Italian Literature in Translation
+ITAL 3P97|Modern Languages, Literatures and Cultures|Italian for Teachers
+ITAL 3Q90|Modern Languages, Literatures and Cultures|Translating and Interpreting in the Community: An Internship
+ITAL 3Q91|Modern Languages, Literatures and Cultures|Grammar, Composition and Conversation
+ITAL 4P04|Modern Languages, Literatures and Cultures|Translation: Applications
 ITIS 1P97|Information Technology Information Systems|Data Analysis and Business Modelling
 ITIS 2P51|Information Technology Information Systems|Introduction to Information Systems
 ITIS 2P91|Information Technology Information Systems|Management of Information Systems and Technology
@@ -1952,8 +2128,8 @@ ITIS 4P25|Information Technology Information Systems|Systems Analysis and Design
 ITIS 4P26|Information Technology Information Systems|Supply Chain Management
 ITIS 4P91|Information Technology Information Systems|Research Topic
 ITIS 4V90-4V99|Information Technology Information Systems|Topics in Information Systems
-JAPA 1F00|Japanese|Introductory Japanese
-JAPA 1F80|Japanese|Intermediate Japanese
+JAPA 1F00|Modern Languages, Literatures and Cultures|Introductory Japanese
+JAPA 1F80|Modern Languages, Literatures and Cultures|Intermediate Japanese
 KINE 0N03|Kinesiology|Work Placement III
 KINE 1P90|Kinesiology|Human Systems Anatomy
 KINE 1P93|Kinesiology|Foundations of Movement Studies
@@ -2107,80 +2283,80 @@ LABR 4P53|Labour Studies|Masculinities, Culture and Economy
 LABR 4P54|Labour Studies|Business-Government Relations
 LABR 4P92|Labour Studies|Directed Studies I
 LABR 4P93|Labour Studies|Directed Studies II
-LATI 1F00|Latin|Language (Introductory)
-LATI 2P01|Latin|Language and Literature I
-LATI 2P02|Latin|Language and Literature II
-LATI 4P01|Latin|Epic, Didactic and Pastoral I
-LATI 4P02|Latin|Epic, Didactic and Pastoral II
-LATI 4P05|Latin|Historians I
-LATI 4P06|Latin|Historians II
-LATI 4P07|Latin|Historians III
-LATI 4P11|Latin|Latin Oratory, Letters and Dialogues I
-LATI 4P12|Latin|Latin Oratory, Letters and Dialogues II
-LATI 4P21|Latin|Roman Elegy I
-LATI 4P22|Latin|Roman Elegy II
-LATI 4P31|Latin|Roman Comedy and Satire I
-LATI 4P32|Latin|Roman Comedy and Satire II
-LATI 4P41|Latin|Roman Lyric I
-LATI 4P42|Latin|Roman Lyric II
-LATI 4V90-4V99|Latin|Advanced Readings and Directed Research
-LING 1F25|Linguistics|The Study of Language
-LING 1P00|Linguistics|American Sign Language I
-LING 1P01|Linguistics|American Sign Language II
-LING 1P92|Linguistics|Introduction to the Psychology of Language
-LING 1P93|Linguistics|Introduction to Communication Disorders
-LING 1P94|Linguistics|Introduction to General Linguistics I
-LING 1P95|Linguistics|Introduction to General Linguistics II
-LING 2P01|Linguistics|American Sign Language III
-LING 2P02|Linguistics|American Sign Language IV
-LING 2P10|Linguistics|Fundamentals of English Grammar
-LING 2P50|Linguistics|Phonetics
-LING 2P53|Linguistics|Phonology
-LING 2P72|Linguistics|Sociolinguistics
-LING 2P90|Linguistics|Anatomy and Physiology of Speech and Swallowing
-LING 2P91|Linguistics|Acoustic and Physiological Phonetics
-LING 2P93|Linguistics|Language and Power
-LING 2P99|Linguistics|Literacy in Childhood and Youth
-LING 3P51|Linguistics|Applied Phonetics
-LING 3P61|Linguistics|Child Language Acquisition: Early Stages
-LING 3P71|Linguistics|Syntax
-LING 3P80|Linguistics|Comparative Analysis of Romance Languages
-LING 3P90|Linguistics|Language Disorders in Children and Youth
-LING 3P91|Linguistics|Materials and Curriculum Design
-LING 3P93|Linguistics|Gender and Language
-LING 3P94|Linguistics|Semantics and Pragmatics
-LING 3P95|Linguistics|Discourse Analysis
-LING 3P97|Linguistics|Introduction to Audiology
-LING 3Q91|Linguistics|Subsequent Language Acquisition and Learning
-LING 3Q93|Linguistics|Introduction to Neurolinguistics
-LING 3V80-3V99|Linguistics|Special Issues in Applied Linguistics
-LING 4F01|Linguistics|Honours Thesis
-LING 4N01|Linguistics|Academic and Cultural Orientation in Applied Linguistics
-LING 4P10|Linguistics|Topics in Subsequent Language Acquisition and Learning
-LING 4P11|Linguistics|Reflective Practice
-LING 4P20|Linguistics|Evaluation of Speech and Language Disorders
-LING 4P21|Linguistics|Clinical Analysis of Communication Disorders
-LING 4P25|Linguistics|Research Practicum
-LING 4P27|Linguistics|Assistive Listening Devices and Aural Rehabilitation
-LING 4P28|Linguistics|Research Methods in Applied Linguistics
-LING 4P40|Linguistics|Language Testing
-LING 4P41|Linguistics|Bilingualism
-LING 4P45|Linguistics|Research Issues in Applied Linguistics
-LING 4P80|Linguistics|Supervised Teaching
-LING 4P81|Linguistics|Reflective Practicum
-LING 4P82|Linguistics|Teaching Listening and Speaking in a Subsequent Language
-LING 4P83|Linguistics|Teaching Reading and Writing in a Subsequent Language
-LING 4P87|Linguistics|Communication and Aging
-LING 4P99|Linguistics|Honours Tutorial
-LING 4Q80|Linguistics|Historical Romance Linguistics
-LING 4V80-4V86|Linguistics|Advanced Topics in Applied Linguistics/Teaching English as a Subsequent Language
-LING 4V87-4V93|Linguistics|Advanced Topics in Speech, Language and Hearing Sciences
-LING 4V94-4V99|Linguistics|Advanced Topics in Applied Linguistics
-LING 4V95|Linguistics|2021-2022: Introduction to Forensic Linguistics
-MAND 1P00|Mandarin|Mandarin Chinese I
-MAND 1P01|Mandarin|Mandarin Chinese II
-MAND 1P80|Mandarin|Mandarin Chinese III
-MAND 1P81|Mandarin|Mandarin Chinese IV
+LATI 1F00|Modern Languages, Literatures and Cultures|Language (Introductory)
+LATI 2P01|Modern Languages, Literatures and Cultures|Language and Literature I
+LATI 2P02|Modern Languages, Literatures and Cultures|Language and Literature II
+LATI 4P01|Modern Languages, Literatures and Cultures|Epic, Didactic and Pastoral I
+LATI 4P02|Modern Languages, Literatures and Cultures|Epic, Didactic and Pastoral II
+LATI 4P05|Modern Languages, Literatures and Cultures|Historians I
+LATI 4P06|Modern Languages, Literatures and Cultures|Historians II
+LATI 4P07|Modern Languages, Literatures and Cultures|Historians III
+LATI 4P11|Modern Languages, Literatures and Cultures|Latin Oratory, Letters and Dialogues I
+LATI 4P12|Modern Languages, Literatures and Cultures|Latin Oratory, Letters and Dialogues II
+LATI 4P21|Modern Languages, Literatures and Cultures|Roman Elegy I
+LATI 4P22|Modern Languages, Literatures and Cultures|Roman Elegy II
+LATI 4P31|Modern Languages, Literatures and Cultures|Roman Comedy and Satire I
+LATI 4P32|Modern Languages, Literatures and Cultures|Roman Comedy and Satire II
+LATI 4P41|Modern Languages, Literatures and Cultures|Roman Lyric I
+LATI 4P42|Modern Languages, Literatures and Cultures|Roman Lyric II
+LATI 4V90-4V99|Modern Languages, Literatures and Cultures|Advanced Readings and Directed Research
+LING 1F25|Applied Linguistics|The Study of Language
+LING 1P00|Applied Linguistics|American Sign Language I
+LING 1P01|Applied Linguistics|American Sign Language II
+LING 1P92|Applied Linguistics|Introduction to the Psychology of Language
+LING 1P93|Applied Linguistics|Introduction to Communication Disorders
+LING 1P94|Applied Linguistics|Introduction to General Linguistics I
+LING 1P95|Applied Linguistics|Introduction to General Linguistics II
+LING 2P01|Applied Linguistics|American Sign Language III
+LING 2P02|Applied Linguistics|American Sign Language IV
+LING 2P10|Applied Linguistics|Fundamentals of English Grammar
+LING 2P50|Applied Linguistics|Phonetics
+LING 2P53|Applied Linguistics|Phonology
+LING 2P72|Applied Linguistics|Sociolinguistics
+LING 2P90|Applied Linguistics|Anatomy and Physiology of Speech and Swallowing
+LING 2P91|Applied Linguistics|Acoustic and Physiological Phonetics
+LING 2P93|Applied Linguistics|Language and Power
+LING 2P99|Applied Linguistics|Literacy in Childhood and Youth
+LING 3P51|Applied Linguistics|Applied Phonetics
+LING 3P61|Applied Linguistics|Child Language Acquisition: Early Stages
+LING 3P71|Applied Linguistics|Syntax
+LING 3P80|Applied Linguistics|Comparative Analysis of Romance Languages
+LING 3P90|Applied Linguistics|Language Disorders in Children and Youth
+LING 3P91|Applied Linguistics|Materials and Curriculum Design
+LING 3P93|Applied Linguistics|Gender and Language
+LING 3P94|Applied Linguistics|Semantics and Pragmatics
+LING 3P95|Applied Linguistics|Discourse Analysis
+LING 3P97|Applied Linguistics|Introduction to Audiology
+LING 3Q91|Applied Linguistics|Subsequent Language Acquisition and Learning
+LING 3Q93|Applied Linguistics|Introduction to Neurolinguistics
+LING 3V80-3V99|Applied Linguistics|Special Issues in Applied Linguistics
+LING 4F01|Applied Linguistics|Honours Thesis
+LING 4N01|Applied Linguistics|Academic and Cultural Orientation in Applied Linguistics
+LING 4P10|Applied Linguistics|Topics in Subsequent Language Acquisition and Learning
+LING 4P11|Applied Linguistics|Reflective Practice
+LING 4P20|Applied Linguistics|Evaluation of Speech and Language Disorders
+LING 4P21|Applied Linguistics|Clinical Analysis of Communication Disorders
+LING 4P25|Applied Linguistics|Research Practicum
+LING 4P27|Applied Linguistics|Assistive Listening Devices and Aural Rehabilitation
+LING 4P28|Applied Linguistics|Research Methods in Applied Linguistics
+LING 4P40|Applied Linguistics|Language Testing
+LING 4P41|Applied Linguistics|Bilingualism
+LING 4P45|Applied Linguistics|Research Issues in Applied Linguistics
+LING 4P80|Applied Linguistics|Supervised Teaching
+LING 4P81|Applied Linguistics|Reflective Practicum
+LING 4P82|Applied Linguistics|Teaching Listening and Speaking in a Subsequent Language
+LING 4P83|Applied Linguistics|Teaching Reading and Writing in a Subsequent Language
+LING 4P87|Applied Linguistics|Communication and Aging
+LING 4P99|Applied Linguistics|Honours Tutorial
+LING 4Q80|Applied Linguistics|Historical Romance Linguistics
+LING 4V80-4V86|Applied Linguistics|Advanced Topics in Applied Linguistics/Teaching English as a Subsequent Language
+LING 4V87-4V93|Applied Linguistics|Advanced Topics in Speech, Language and Hearing Sciences
+LING 4V94-4V99|Applied Linguistics|Advanced Topics in Applied Linguistics
+LING 4V95|Applied Linguistics|2021-2022: Introduction to Forensic Linguistics
+MAND 1P00|Modern Languages, Literatures and Cultures|Mandarin Chinese I
+MAND 1P01|Modern Languages, Literatures and Cultures|Mandarin Chinese II
+MAND 1P80|Modern Languages, Literatures and Cultures|Mandarin Chinese III
+MAND 1P81|Modern Languages, Literatures and Cultures|Mandarin Chinese IV
 MARS 1F90|Medieval and Renaissance Studies|Medieval and Renaissance Civilizations
 MARS 2P08|Medieval and Renaissance Studies|Colonial Latin America
 MARS 2P70|Medieval and Renaissance Studies|The Middle East, 600 - 1800
@@ -2294,21 +2470,21 @@ MATH 4P90|Mathematics|Euclidean and Non Euclidean Geometry II
 MATH 4P92|Mathematics|Topics in Number Theory and Cryptography
 MATH 4P94|Mathematics|Relativity Theory and Black Holes
 MATH 4P96|Mathematics|Technology and Mathematics Education
-MGMT 1P93|Management|Principles of Business
-MGMT 1P96|Management|Principles of Communication in the Business Environment
-MGMT 3P98|Management|International Business
-MGMT 3P99|Management|Business Case Analysis and Action
-MGMT 3V90-3V99|Management|Topics in Management I
-MGMT 4F90|Management|Research Topic
-MGMT 4P35|Management|Export Strategy and Management
-MGMT 4P36|Management|Business in Developing Countries
-MGMT 4P90|Management|Business Strategy
-MGMT 4P91|Management|Research Topic
-MGMT 4P94|Management|Transnational Business Management
-MGMT 4P96|Management|Business and Society
-MGMT 4P97|Management|Advanced Topics in Business and Society
-MGMT 4P99|Management|Management Consulting
-MGMT 4V90-4V99|Management|Topics in Management II
+MGMT 1P93|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Principles of Business
+MGMT 1P96|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Principles of Communication in the Business Environment
+MGMT 3P98|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|International Business
+MGMT 3P99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Business Case Analysis and Action
+MGMT 3V90-3V99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Topics in Management I
+MGMT 4F90|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Topic
+MGMT 4P35|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Export Strategy and Management
+MGMT 4P36|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Business in Developing Countries
+MGMT 4P90|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Business Strategy
+MGMT 4P91|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Topic
+MGMT 4P94|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Transnational Business Management
+MGMT 4P96|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Business and Society
+MGMT 4P97|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Advanced Topics in Business and Society
+MGMT 4P99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Management Consulting
+MGMT 4V90-4V99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Topics in Management II
 MKTG 2P51|Marketing|Marketing Basics
 MKTG 2P52|Marketing|General Marketing Management
 MKTG 2P91|Marketing|Introduction to Marketing
@@ -2497,29 +2673,29 @@ NUSC 4P32|Nursing|Advanced Directed Readings
 NUSC 4P50|Nursing|Applied Nursing Research
 NUSC 4P60|Nursing|Trends and Issues in Professional Nursing
 NUSC 4Q90|Nursing|Foundations of Collaboration and Teamwork
-OBHR 2P51|Organizational Behaviour and Human Resources|Basics of Organizational Behaviour and Design
-OBHR 2P52|Organizational Behaviour and Human Resources|Basics of Human Resources Management and Industrial Relations
-OBHR 2P91|Organizational Behaviour and Human Resources|Organizational Behaviour
-OBHR 3P42|Organizational Behaviour and Human Resources|Organizational Structure and Redesign
-OBHR 3P96|Organizational Behaviour and Human Resources|Labour Relations
-OBHR 3P97|Organizational Behaviour and Human Resources|Human Resource Management
-OBHR 3P98|Organizational Behaviour and Human Resources|Occupational Health and Safety
-OBHR 3P99|Organizational Behaviour and Human Resources|Research Methods in Organization Studies
-OBHR 4F90|Organizational Behaviour and Human Resources|Research Topic
-OBHR 4P65|Organizational Behaviour and Human Resources|Negotiating in Organizations
-OBHR 4P66|Organizational Behaviour and Human Resources|Compensation Management
-OBHR 4P67|Organizational Behaviour and Human Resources|Training and Development
-OBHR 4P68|Organizational Behaviour and Human Resources|Leadership
-OBHR 4P69|Organizational Behaviour and Human Resources|Recruitment and Selection
-OBHR 4P72|Organizational Behaviour and Human Resources|Labour Law
-OBHR 4P90|Organizational Behaviour and Human Resources|International Organizational Behaviour
-OBHR 4P91|Organizational Behaviour and Human Resources|Research Topic
-OBHR 4P93|Organizational Behaviour and Human Resources|Leading Change
-OBHR 4P94|Organizational Behaviour and Human Resources|Human Resources Planning
-OBHR 4P95|Organizational Behaviour and Human Resources|Managing a Diverse Workplace
-OBHR 4P96|Organizational Behaviour and Human Resources|Labour Arbitration
-OBHR 4V90-4V99|Organizational Behaviour and Human Resources|Topics in Organizational Behaviour and Human Resources
-OBHR 4V98|Organizational Behaviour and Human Resources|2020-2021: HR Analytics
+OBHR 2P51|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Basics of Organizational Behaviour and Design
+OBHR 2P52|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Basics of Human Resources Management and Industrial Relations
+OBHR 2P91|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Organizational Behaviour
+OBHR 3P42|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Organizational Structure and Redesign
+OBHR 3P96|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Labour Relations
+OBHR 3P97|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Human Resource Management
+OBHR 3P98|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Occupational Health and Safety
+OBHR 3P99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Methods in Organization Studies
+OBHR 4F90|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Topic
+OBHR 4P65|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Negotiating in Organizations
+OBHR 4P66|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Compensation Management
+OBHR 4P67|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Training and Development
+OBHR 4P68|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Leadership
+OBHR 4P69|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Recruitment and Selection
+OBHR 4P72|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Labour Law
+OBHR 4P90|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|International Organizational Behaviour
+OBHR 4P91|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Research Topic
+OBHR 4P93|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Leading Change
+OBHR 4P94|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Human Resources Planning
+OBHR 4P95|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Managing a Diverse Workplace
+OBHR 4P96|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Labour Arbitration
+OBHR 4V90-4V99|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|Topics in Organizational Behaviour and Human Resources
+OBHR 4V98|Organizational Behaviour, Human Resource Management, Entrepreneurship and Ethics|2020-2021: HR Analytics
 OEVI 0N01|Oenology and Viticulture|Wine Appreciation - Exploring Varietals
 OEVI 0N02|Oenology and Viticulture|Introduction to the Wines of Ontario
 OEVI 0N03|Oenology and Viticulture|Wine Appreciation - Wine Regions of the World
@@ -2567,79 +2743,81 @@ OPER 4P31|Operations Management|Simulation of Business Systems
 OPER 4P41|Operations Management|Management Science
 OPER 4P91|Operations Management|Research Topic
 OPER 4V90-4V99|Operations Management|Topics in Operations Management
-PCUL 1F92|Popular Culture|Introduction to Popular Culture
-PCUL 1P00|Popular Culture|Music in Popular Culture I
-PCUL 1P01|Popular Culture|Music in Popular Culture II
-PCUL 2F00|Popular Culture|New Media Literacy
-PCUL 2P06|Popular Culture|Cultural and Historical Geography
-PCUL 2P15|Popular Culture|Research Methods in Communication and Culture
-PCUL 2P18|Popular Culture|Reporting and News Writing for Mass Media
-PCUL 2P20|Popular Culture|Theories of Popular Culture
-PCUL 2P21|Popular Culture|Canadian Popular Culture
-PCUL 2P26|Popular Culture|The Information Society
-PCUL 2P56|Popular Culture|Canadian Cinema
-PCUL 2P63|Popular Culture|Communication Design
-PCUL 2P70|Popular Culture|Popular Music and Society
-PCUL 2P71|Popular Culture|Popular Arts in the Modern Middle East
-PCUL 2P91|Popular Culture|Social Media
-PCUL 2P92|Popular Culture|Hip Hop and the Urban Working Class
-PCUL 2P93|Popular Culture|Popular Narrative
-PCUL 2P94|Popular Culture|Popular Cinema
-PCUL 2P98|Popular Culture|Media Industries
-PCUL 2Q91|Popular Culture|Ethnography and Popular Culture
-PCUL 3P01|Popular Culture|Directed Reading
-PCUL 3P03|Popular Culture|Advanced Studies in Popular Narrative
-PCUL 3P06|Popular Culture|Class and Culture
-PCUL 3P15|Popular Culture|Media Analysis
-PCUL 3P18|Popular Culture|Audience Studies
-PCUL 3P19|Popular Culture|Communication and Media Policy
-PCUL 3P20|Popular Culture|Television Studies
-PCUL 3P21|Popular Culture|Canadian Television
-PCUL 3P22|Popular Culture|Media and Sport
-PCUL 3P26|Popular Culture|Social and Cultural Aspects of Digital Gaming
-PCUL 3P55|Popular Culture|Advertising in Context
-PCUL 3P63|Popular Culture|Digital Design and Communication
-PCUL 3P73|Popular Culture|Popular Music and Youth Culture
-PCUL 3P75|Popular Culture|Cultures of Consumption
-PCUL 3P92|Popular Culture|Technology and Culture
-PCUL 3P93|Popular Culture|Indigenous People in Media and Popular Culture
-PCUL 3P94|Popular Culture|Film Genre
-PCUL 3P96|Popular Culture|Issues in Popular Culture
-PCUL 3P97|Popular Culture|Gender and Cinema to the 1960s
-PCUL 3P98|Popular Culture|Gender and Contemporary Cinema
-PCUL 3Q90|Popular Culture|Indigenous Cultural Production and Activism
-PCUL 3Q91|Popular Culture|The History and Culture of Role-Playing Games
-PCUL 3Q92|Popular Culture|Food and Popular Culture
-PCUL 3Q94|Popular Culture|Television Genres
-PCUL 3Q97|Popular Culture|Events Management
-PCUL 3Q98|Popular Culture|The Psychology of Screens (Television and Beyond)
-PCUL 3R90|Popular Culture|Sound & Vision: The Rockumentary
-PCUL 3V50|Popular Culture|2021-2022: Applied Projects in Communication
-PCUL 3V50-3V59|Popular Culture|Special Topics in Popular Culture Studies
-PCUL 3V90|Popular Culture|2021-2022: The Superhero in American Culture
-PCUL 3V90-3V99|Popular Culture|Advanced Topics in Popular Culture Studies
-PCUL 4F00|Popular Culture|Internship in Communication, Popular Culture or Film
-PCUL 4F99|Popular Culture|Honours Thesis
-PCUL 4P00|Popular Culture|Placement in Communication, Popular Culture or Film
-PCUL 4P01|Popular Culture|Placement in Communication, Popular Culture or Film
-PCUL 4P03|Popular Culture|Applied Studies in Popular Narrative
-PCUL 4P06|Popular Culture|Advanced Studies in Popular Culture
-PCUL 4P14|Popular Culture|Advanced Research in Cultural Industries
-PCUL 4P18|Popular Culture|Media and the Natural Environment
-PCUL 4P23|Popular Culture|Research on Media and Popular Culture
-PCUL 4P30|Popular Culture|Theories of Mass Culture
-PCUL 4P31|Popular Culture|Theories of the Visible
-PCUL 4P34|Popular Culture|Taste and Cultural Politics
-PCUL 4P40|Popular Culture|Popular Culture and Identity
-PCUL 4P55|Popular Culture|History of Advertising
-PCUL 4P58|Popular Culture|Ecocinema: History, Theory and Practice
-PCUL 4P59|Popular Culture|Writing Cultural Criticism for the Media
-PCUL 4P61|Popular Culture|Conventions of Screen Realism
-PCUL 4P80|Popular Culture|Directed Reading
-PCUL 4V50-4V59|Popular Culture|Contemporary Issues in Popular Culture Studies
-PCUL 4V57|Popular Culture|2021-2022: Visual Culture
-PCUL 4V60-4V69|Popular Culture|Historical Perspectives in Popular Culture
-PCUL 4V70-4V79|Popular Culture|Issues in International Popular Culture
+PCUL 1F92|Communication, Popular Culture and Film|Introduction to Popular Culture
+PCUL 1P00|Communication, Popular Culture and Film|Music in Popular Culture I
+PCUL 1P01|Communication, Popular Culture and Film|Music in Popular Culture II
+PCUL 2F00|Communication, Popular Culture and Film|New Media Literacy
+PCUL 2P06|Communication, Popular Culture and Film|Cultural and Historical Geography
+PCUL 2P15|Communication, Popular Culture and Film|Research Methods in Communication and Culture
+PCUL 2P18|Communication, Popular Culture and Film|Reporting and News Writing for Mass Media
+PCUL 2P20|Communication, Popular Culture and Film|Theories of Popular Culture
+PCUL 2P21|Communication, Popular Culture and Film|Canadian Popular Culture
+PCUL 2P26|Communication, Popular Culture and Film|The Information Society
+PCUL 2P56|Communication, Popular Culture and Film|Canadian Cinema
+PCUL 2P63|Communication, Popular Culture and Film|Communication Design
+PCUL 2P70|Communication, Popular Culture and Film|Popular Music and Society
+PCUL 2P71|Communication, Popular Culture and Film|Popular Arts in the Modern Middle East
+PCUL 2P91|Communication, Popular Culture and Film|Social Media
+PCUL 2P92|Communication, Popular Culture and Film|Hip Hop and the Urban Working Class
+PCUL 2P93|Communication, Popular Culture and Film|Popular Narrative
+PCUL 2P94|Communication, Popular Culture and Film|Popular Cinema
+PCUL 2P98|Communication, Popular Culture and Film|Media Industries
+PCUL 2Q91|Communication, Popular Culture and Film|Ethnography and Popular Culture
+PCUL 3P01|Communication, Popular Culture and Film|Directed Reading
+PCUL 3P03|Communication, Popular Culture and Film|Advanced Studies in Popular Narrative
+PCUL 3P06|Communication, Popular Culture and Film|Class and Culture
+PCUL 3P15|Communication, Popular Culture and Film|Media Analysis
+PCUL 3P18|Communication, Popular Culture and Film|Audience Studies
+PCUL 3P19|Communication, Popular Culture and Film|Communication and Media Policy
+PCUL 3P20|Communication, Popular Culture and Film|Television Studies
+PCUL 3P21|Communication, Popular Culture and Film|Canadian Television
+PCUL 3P22|Communication, Popular Culture and Film|Media and Sport
+PCUL 3P26|Communication, Popular Culture and Film|Social and Cultural Aspects of Digital Gaming
+PCUL 3P55|Communication, Popular Culture and Film|Advertising in Context
+PCUL 3P63|Communication, Popular Culture and Film|Digital Design and Communication
+PCUL 3P73|Communication, Popular Culture and Film|Popular Music and Youth Culture
+PCUL 3P75|Communication, Popular Culture and Film|Cultures of Consumption
+PCUL 3P92|Communication, Popular Culture and Film|Technology and Culture
+PCUL 3P93|Communication, Popular Culture and Film|Indigenous People in Media and Popular Culture
+PCUL 3P94|Communication, Popular Culture and Film|Film Genre
+PCUL 3P96|Communication, Popular Culture and Film|Issues in Popular Culture
+PCUL 3P97|Communication, Popular Culture and Film|Gender and Cinema to the 1960s
+PCUL 3P98|Communication, Popular Culture and Film|Gender and Contemporary Cinema
+PCUL 3Q90|Communication, Popular Culture and Film|Indigenous Cultural Production and Activism
+PCUL 3Q91|Communication, Popular Culture and Film|The History and Culture of Role-Playing Games
+PCUL 3Q92|Communication, Popular Culture and Film|Food and Popular Culture
+PCUL 3Q94|Communication, Popular Culture and Film|Television Genres
+PCUL 3Q97|Communication, Popular Culture and Film|Events Management
+PCUL 3Q98|Communication, Popular Culture and Film|The Psychology of Screens (Television and Beyond)
+PCUL 3R90|Communication, Popular Culture and Film|Sound & Vision: The Rockumentary
+PCUL 3V50|Communication, Popular Culture and Film|2021-2022: Applied Projects in Communication
+PCUL 3V50-3V59|Communication, Popular Culture and Film|Special Topics in Popular Culture Studies
+PCUL 3V90|Communication, Popular Culture and Film|2021-2022: The Superhero in American Culture
+PCUL 3V90-3V99|Communication, Popular Culture and Film|Advanced Topics in Popular Culture Studies
+PCUL 4F00|Communication, Popular Culture and Film|Internship in Communication, Popular Culture or Film
+PCUL 4F99|Communication, Popular Culture and Film|Honours Thesis
+PCUL 4P00|Communication, Popular Culture and Film|Placement in Communication, Popular Culture or Film
+PCUL 4P01|Communication, Popular Culture and Film|Placement in Communication, Popular Culture or Film
+PCUL 4P03|Communication, Popular Culture and Film|Applied Studies in Popular Narrative
+PCUL 4P06|Communication, Popular Culture and Film|Advanced Studies in Popular Culture
+PCUL 4P14|Communication, Popular Culture and Film|Advanced Research in Cultural Industries
+PCUL 4P18|Communication, Popular Culture and Film|Media and the Natural Environment
+PCUL 4P23|Communication, Popular Culture and Film|Research on Media and Popular Culture
+PCUL 4P30|Communication, Popular Culture and Film|Theories of Mass Culture
+PCUL 4P31|Communication, Popular Culture and Film|Theories of the Visible
+PCUL 4P34|Communication, Popular Culture and Film|Taste and Cultural Politics
+PCUL 4P40|Communication, Popular Culture and Film|Popular Culture and Identity
+PCUL 4P55|Communication, Popular Culture and Film|History of Advertising
+PCUL 4P58|Communication, Popular Culture and Film|Ecocinema: History, Theory and Practice
+PCUL 4P59|Communication, Popular Culture and Film|Writing Cultural Criticism for the Media
+PCUL 4P61|Communication, Popular Culture and Film|Conventions of Screen Realism
+PCUL 4P80|Communication, Popular Culture and Film|Directed Reading
+PCUL 4V50-4V59|Communication, Popular Culture and Film|Contemporary Issues in Popular Culture Studies
+PCUL 4V57|Communication, Popular Culture and Film|2021-2022: Visual Culture
+PCUL 4V60-4V69|Communication, Popular Culture and Film|Historical Perspectives in Popular Culture
+PCUL 4V70-4V79|Communication, Popular Culture and Film|Issues in International Popular Culture
+PCUL 4V60-4V69|Communication, Popular Culture and Film|Historical Perspectives in Popular Culture
+PCUL 4V70-4V79|Communication, Popular Culture and Film|Issues in International Popular Culture
 PHIL 1F90|Philosophy|Introduction to Philosophy: Philosophical Classics and Contemporary Life
 PHIL 1F91|Philosophy|Introduction to Philosophy: Human Nature
 PHIL 1F93|Philosophy|Introduction to Philosophy: The Foundations of the Present
@@ -2702,6 +2880,52 @@ PHIL 4V15-4V29|Philosophy|Modern Philosophical Studies
 PHIL 4V24|Philosophy|2021-2022: Philosophical Methodologies
 PHIL 4V30-4V45|Philosophy|Advanced Studies in Eastern Philosophy
 PHIL 4V46-4V60|Philosophy|Advanced Studies in Comparative Philosophy
+PHYS 0N01|Physics|Co-op Work Placement I
+PHYS 0N02|Physics|Co-op Work Placement II
+PHYS 0N03|Physics|Co-op Work Placement III
+PHYS 0N04|Physics|Co-op Work Placement IV
+PHYS 0N05|Physics|Co-op Work Placement V
+PHYS 1P21|Physics|Introductory Physics I
+PHYS 1P22|Physics|Introductory Physics II
+PHYS 1P91|Physics|Introductory Physics I with Laboratory
+PHYS 1P92|Physics|Introductory Physics II with Laboratory
+PHYS 1P94|Physics|Introductory Physics III
+PHYS 2C01|Physics|Co-op Reflective Learning and Integration I
+PHYS 2C02|Physics|Co-op Reflective Learning and Integration II
+PHYS 2C03|Physics|Co-op Reflective Learning and Integration III
+PHYS 2C04|Physics|Co-op Reflective Learning and Integration IV
+PHYS 2C05|Physics|Co-op Reflective Learning and Integration V
+PHYS 2P02|Physics|Introduction to Medical Physics
+PHYS 2P20|Physics|Introductory Mechanics
+PHYS 2P30|Physics|Introduction to Electronics
+PHYS 2P42|Physics|Physics of the Universe
+PHYS 2P50|Physics|Modern Physics
+PHYS 2P51|Physics|Introduction to Classical and Modern Optics
+PHYS 3P02|Physics|Cellular Biophysics
+PHYS 3P35|Physics|Electromagnetism I
+PHYS 3P36|Physics|Electromagnetism II
+PHYS 3P41|Physics|Statistical Physics I
+PHYS 3P70|Physics|Introduction to Quantum Mechanics
+PHYS 3P90|Physics|Classical Mechanics
+PHYS 3P91|Physics|Experimental Physics I
+PHYS 3P92|Physics|Experimental Physics (Electronics) II
+PHYS 3P93|Physics|Solid-State Devices
+PHYS 3P94|Physics|Mathematical Methods in Physics
+PHYS 3P95|Physics|Introduction to Mathematical Physics
+PHYS 3V94-3V99|Physics|Special Topics
+PHYS 4F90|Physics|Research Project I
+PHYS 4F91|Physics|Research Project II
+PHYS 4P09|Physics|Solitons and Nonlinear Wave Equations
+PHYS 4P10|Physics|Introduction to Scientific Computing
+PHYS 4P41|Physics|Statistical Physics II
+PHYS 4P51|Physics|Quantum Mechanics
+PHYS 4P61|Physics|Nuclear Physics
+PHYS 4P62|Physics|Modern Wave Optics: Optical Tweezers to Atom Clouds
+PHYS 4P70|Physics|Condensed Matter Physics I
+PHYS 4P71|Physics|Condensed Matter Physics II
+PHYS 4P92|Physics|Advanced Electronics Laboratory
+PHYS 4P94|Physics|Relativity Theory and Black Holes
+PHYS 4V80-4V89|Physics|Special Topics
 PMPB 6F20|Professional Masters Preparation Business|Preparing for Business Graduate Studies in Canada
 PMPB 6F21|Professional Masters Preparation Business|Writing for Business Purposes
 PMPB 6F22|Professional Masters Preparation Business|Listening and Speaking for Business Purposes
@@ -2801,8 +3025,8 @@ POLI 4P76|Political Science|Tutorial in Political Science
 POLI 4P95|Political Science|Political Science Internship
 POLI 4V80|Political Science|2021-2022: Special Topics in Indigenous Politics
 POLI 4V80-4V89|Political Science|Special topics in Political Science
-PORT 1F00|Portuguese|Introductory Portuguese Language
-PORT 1F90|Portuguese|Intermediate Portuguese Language
+PORT 1F00|Modern Languages, Literatures and Cultures|Introductory Portuguese Language
+PORT 1F90|Modern Languages, Literatures and Cultures|Intermediate Portuguese Language
 PSYC 0N01|Psychology|Work Placement I
 PSYC 0N02|Psychology|Work Placement II
 PSYC 0N03|Psychology|Work Placement III
@@ -2993,47 +3217,193 @@ RECL 4Q36|Recreation and Leisure Studies|Outward Bound Canada Field Experience I
 RECL 4Q56|Recreation and Leisure Studies|Outdoor Field Experience II
 RECL 4Q90|Recreation and Leisure Studies|Foundations of Collaboration and Teamwork
 RECL 4Q96|Recreation and Leisure Studies|Experiential Education in Recreation and Leisure
-RUSS 1F00|Russian|Introductory Russian
+RUSS 1F00|Modern Languages, Literatures and Cultures|Introductory Russian
 SCIE 0N01|Science|Work Experience
 SCIE 0N90|Science|Co-op Professional Preparation
 SCIE 1P50|Science|Science and Society I
 SCIE 1P51|Science|Science and Society II
 SCIE 1P52|Science|Chemistry in Everyday Life
-SPAN 1F00|Spanish|Introductory Spanish Language
-SPAN 1F90|Spanish|Intermediate Spanish Language
-SPAN 1P95|Spanish|Conquest and Colonization
-SPAN 2P10|Spanish|Latin American Cultures Since Independence
-SPAN 2P11|Spanish|Cultures of Spain and Portugal
-SPAN 2P19|Spanish|Applied Language: Review and Practice
-SPAN 2P20|Spanish|Survey of Literary and Cultural Texts
-SPAN 2P87|Spanish|Blood, Genealogy and Identity in Medieval and Early Modern Spain
-SPAN 2P90|Spanish|Culture and Nationhood in the Hispanic World
-SPAN 2P92|Spanish|Afro-Latino Narratives
-SPAN 2P95|Spanish|Latin American and Iberian Film
-SPAN 2P96|Spanish|Indigenous Latin America
-SPAN 2V90-2V99|Spanish|Culture in Spanish- and Portuguese-Speaking Regions
-SPAN 3F80|Spanish|Im/migrant and Community Outreach Internship
-SPAN 3P84|Spanish|Diaspora Communities
-SPAN 3P85|Spanish|Indigenous and Mestizo Narratives
-SPAN 3P90|Spanish|Early Modern Spanish Literature and Culture
-SPAN 3P93|Spanish|Advanced Language and Discourse
-SPAN 3P94|Spanish|Iberian Narrative
-SPAN 3P95|Spanish|Contemporary Latin American Narrative
-SPAN 3P97|Spanish|Modern Spanish Literature and Culture
-SPAN 3P98|Spanish|Chronicle and Testimonial Writing
-SPAN 3P99|Spanish|Hispanic Linguistics
-SPAN 3Q91|Spanish|Renaissance Perceptions of Indigenous Cultures
-SPAN 3Q92|Spanish|Moors, New Christians and Renegades
-SPAN 4F80|Spanish|Im/migrant and Community Outreach Research and Internship
-SPAN 4F99|Spanish|Honours Thesis
-SPAN 4P01|Spanish|Latin American Women's Perspectives
-SPAN 4P04|Spanish|Translation: Applications
-SPAN 4P10|Spanish|Readings in Medieval Iberian Narrative
-SPAN 4P15|Spanish|Imagining Identity in the Early Modern Hispanic World
-SPAN 4P60|Spanish|Women in Hispanic Literature: Witches, Vampires and Virgins
-SPAN 4P64|Spanish|Island Narratives: Re-imagining Ibero-American Insular Worlds
-SPAN 4P84|Spanish|Diaspora/Diasporas: Cross-cultural Texts and Context
-SPAN 4V60-4V69|Spanish|Special Research Topics
+SOCI 0N01|Sociology|Work Placement I
+SOCI 0N02|Sociology|Work Placement II
+SOCI 0N03|Sociology|Work Placement III
+SOCI 0N90|Sociology|Co-op Professional Preparation
+SOCI 1F90|Sociology|Introduction to Sociology
+SOCI 1P01|Sociology|Global Issues: Canadian Connections
+SOCI 1P80|Sociology|Introduction to Cultural Anthropology
+SOCI 2C01|Sociology|Co-op Reflective Learning and Integration I
+SOCI 2C02|Sociology|Co-op Reflective Learning and Integration II
+SOCI 2C03|Sociology|Co-op Reflective Learning and Integration III
+SOCI 2F14|Sociology|Decolonizing Indigenous Women's Identities
+SOCI 2F60|Sociology|Foundations for Community Engagement
+SOCI 2P00|Sociology|Foundations in Sociological Thinking
+SOCI 2P11|Sociology|Introduction to Research Methods
+SOCI 2P20|Sociology|Sexualities and Society
+SOCI 2P21|Sociology|Sociology of Families
+SOCI 2P22|Sociology|Education and Equity
+SOCI 2P23|Sociology|Sociology of Climate Change
+SOCI 2P26|Sociology|Health, Healthcare and Society
+SOCI 2P32|Sociology|In and Out of Work in the Global Economy
+SOCI 2P33|Sociology|Law and Social Justice
+SOCI 2P38|Sociology|Childhood, Youth and Society
+SOCI 2P47|Sociology|Racialization and Society
+SOCI 2P51|Sociology|Sociology of Gender
+SOCI 2P54|Sociology|Documentary Film
+SOCI 2P58|Sociology|Self and Society
+SOCI 2P61|Sociology|Foundations of Critical Criminology
+SOCI 2P62|Sociology|Sociology of Criminal Justice
+SOCI 2P70|Sociology|Popular Music and Society
+SOCI 2P71|Sociology|Social Class and Social Conflict
+SOCI 2P73|Sociology|Globalization, Inequality and New World Disorders
+SOCI 2P75|Sociology|Sociology of Dogs and Other Canids
+SOCI 2P80|Sociology|Labour, Environment and Consumption
+SOCI 2P81|Sociology|Sociology of Food and Agriculture
+SOCI 2P83|Sociology|Changing Cultures and Societies
+SOCI 2P85|Sociology|Animals and Human Society
+SOCI 2P86|Sociology|Women, Gender and the Economy
+SOCI 2P90|Sociology|Women and Gender: Sexuality, Class, Ethnicity
+SOCI 2P91|Sociology|Directed Studies I
+SOCI 2P92|Sociology|Directed Studies II
+SOCI 2P93|Sociology|Beauty, Bodies and Cultures
+SOCI 2P95|Sociology|Troubling Identities
+SOCI 2P96|Sociology|Women, Gender and Development
+SOCI 2P98|Sociology|Media Industries
+SOCI 2P99|Sociology|Gender in Canada: Global Contexts
+SOCI 2Q90|Sociology|Parenting: 'Family', Images, Issues and Patterns
+SOCI 2Q94|Sociology|Sociology of Veganism
+SOCI 2Q95|Sociology|Animals at Work
+SOCI 2V80-2V89|Sociology|Selected Topics in Sociology
+SOCI 3P00|Sociology|Introduction to Early Modern Social Theory
+SOCI 3P01|Sociology|Contemporary Social Theory
+SOCI 3P02|Sociology|Qualitative Sociological Methods
+SOCI 3P06|Sociology|Class and Culture
+SOCI 3P11|Sociology|Quantitative Data Analysis I
+SOCI 3P12|Sociology|Quantitative Data Analysis II
+SOCI 3P20|Sociology|Queer Communities and Popular Culture
+SOCI 3P26|Sociology|Medical Sociology
+SOCI 3P33|Sociology|Law and Social Regulation
+SOCI 3P35|Sociology|Communities in Crisis
+SOCI 3P38|Sociology|Sociology of Gender, Families and Care
+SOCI 3P44|Sociology|Gender and Sexuality in Childhood and Youth
+SOCI 3P45|Sociology|Sociology of African Canadians
+SOCI 3P51|Sociology|Gender and Society
+SOCI 3P52|Sociology|Sociology of Eco-terrorism
+SOCI 3P54|Sociology|Issues in Documentary Film
+SOCI 3P55|Sociology|Sociology of Professional Wrestling
+SOCI 3P60|Sociology|Criminology and the Sociology of Knowledge
+SOCI 3P61|Sociology|Sociology of Punishment
+SOCI 3P63|Sociology|Crime, Surveillance and Security
+SOCI 3P64|Sociology|Animals, Plagues and Pandemics
+SOCI 3P65|Sociology|Animals and the Law
+SOCI 3P66|Sociology|Social Movements
+SOCI 3P67|Sociology|Crime and the Media
+SOCI 3P68|Sociology|Critical Gang Studies
+SOCI 3P69|Sociology|Critical Perspectives in Indigenous Criminalization
+SOCI 3P70|Sociology|Social Justice Research
+SOCI 3P71|Sociology|The State and Society
+SOCI 3P73|Sociology|Popular Music and Youth Culture
+SOCI 3P74|Sociology|Youth Culture, Crime and Criminalization
+SOCI 3P75|Sociology|Sociology of Animal Agriculture
+SOCI 3P77|Sociology|Post-Radical Criminological Theories
+SOCI 3P80|Sociology|Environmental Justice
+SOCI 3P81|Sociology|Indigenous Mothering and Motherhood: Historical and Contemporary Realities
+SOCI 3P82|Sociology|Gender, Crime and Justice
+SOCI 3P85|Sociology|Animals in Cross-Cultural Perspective
+SOCI 3P86|Sociology|Indigenous Peoples in Global Perspective
+SOCI 3P90|Sociology|Directed Studies III
+SOCI 3P91|Sociology|Directed Studies IV
+SOCI 3P92|Sociology|Advanced Seminar in Eco-Feminism
+SOCI 3P93|Sociology|Indigenous People in Media and Popular Culture
+SOCI 3P94|Sociology|Economy, Culture and Society
+SOCI 3P95|Sociology|Sociology of Wildlife
+SOCI 3P96|Sociology|Human Migration in a Globalized World
+SOCI 3P97|Sociology|Liberties, Rights and Protections
+SOCI 3P98|Sociology|Domestic and Intimate Violence
+SOCI 3P99|Sociology|Social Dimensions of Mental Health and Illness
+SOCI 3Q90|Sociology|Indigenous Cultural Production and Activism
+SOCI 3Q92|Sociology|Capitalism, the State and Informal Economies
+SOCI 3Q95|Sociology|Sex Work and Sex Workers
+SOCI 3Q96|Sociology|Critical Issues in Contemporary Society
+SOCI 3Q97|Sociology|Indigenous Feminisms
+SOCI 3Q98|Sociology|Indigenous Peoples in North America
+SOCI 3V10-3V19|Sociology|Selected Research Topics
+SOCI 3V80-3V99|Sociology|Selected Topics in Sociology
+SOCI 4F01|Sociology|Honours Seminar
+SOCI 4F90|Sociology|Honours Thesis
+SOCI 4P00|Sociology|Engaging the Sociological Imagination
+SOCI 4P01|Sociology|Service Learning in Community Justice
+SOCI 4P02|Sociology|Selected Topics in Social Theory
+SOCI 4P03|Sociology|Collaborative Prison Education
+SOCI 4P11|Sociology|Critical Approaches to Applied Social Research Design
+SOCI 4P12|Sociology|Foundations in Digital Social Research
+SOCI 4P21|Sociology|Labour and Social Justice Organizing
+SOCI 4P22|Sociology|Education and Equity
+SOCI 4P23|Sociology|Research on Media and Popular Culture
+SOCI 4P24|Sociology|Resurgence of Right-wing Politics
+SOCI 4P26|Sociology|Sociology of Health
+SOCI 4P31|Sociology|Women, Work and Leadership
+SOCI 4P32|Sociology|Sociology of Work
+SOCI 4P33|Sociology|Law and Society
+SOCI 4P35|Sociology|Gendered Patterns of Resistance and Survival
+SOCI 4P37|Sociology|Exploring Alternatives to Capitalism
+SOCI 4P38|Sociology|Advanced Topics in Childhood, Youth and Society
+SOCI 4P51|Sociology|Gender and Society
+SOCI 4P53|Sociology|Masculinities, Culture and Economy
+SOCI 4P57|Sociology|Global Racism/Antiracism
+SOCI 4P61|Sociology|Interrogating Criminal Justice
+SOCI 4P62|Sociology|Social and Moral Regulation
+SOCI 4P65|Sociology|Animals and the Law
+SOCI 4P67|Sociology|Racism/Antiracism in Canada
+SOCI 4P68|Sociology|Social Movements and Globalization
+SOCI 4P70|Sociology|Social Issues in the Community
+SOCI 4P76|Sociology|Indigenous Social and Political Thought
+SOCI 4P80|Sociology|Critical Animal Studies
+SOCI 4P81|Sociology|Selected Issues in Criminology
+SOCI 4P82|Sociology|Race and the War for Drugs
+SOCI 4P83|Sociology|War and Non-Violence
+SOCI 4P85|Sociology|Animals and Human Societies
+SOCI 4P87|Sociology|Social Inequality
+SOCI 4P88|Sociology|Social Problems
+SOCI 4P89|Sociology|Controversies in Sociology
+SOCI 4P90|Sociology|Directed Studies V
+SOCI 4P91|Sociology|Directed Studies VI
+SOCI 4Q41|Sociology|Social Policy
+SOCI 4V10-4V19|Sociology|Selected Research Topics
+SOCI 4V80-4V89|Sociology|Special Topics in Sociolog
+SPAN 1F00|Modern Languages, Literatures and Cultures|Introductory Spanish Language
+SPAN 1F90|Modern Languages, Literatures and Cultures|Intermediate Spanish Language
+SPAN 1P95|Modern Languages, Literatures and Cultures|Conquest and Colonization
+SPAN 2P10|Modern Languages, Literatures and Cultures|Latin American Cultures Since Independence
+SPAN 2P11|Modern Languages, Literatures and Cultures|Cultures of Spain and Portugal
+SPAN 2P19|Modern Languages, Literatures and Cultures|Applied Language: Review and Practice
+SPAN 2P20|Modern Languages, Literatures and Cultures|Survey of Literary and Cultural Texts
+SPAN 2P87|Modern Languages, Literatures and Cultures|Blood, Genealogy and Identity in Medieval and Early Modern Spain
+SPAN 2P90|Modern Languages, Literatures and Cultures|Culture and Nationhood in the Hispanic World
+SPAN 2P92|Modern Languages, Literatures and Cultures|Afro-Latino Narratives
+SPAN 2P95|Modern Languages, Literatures and Cultures|Latin American and Iberian Film
+SPAN 2P96|Modern Languages, Literatures and Cultures|Indigenous Latin America
+SPAN 2V90-2V99|Modern Languages, Literatures and Cultures|Culture in Spanish- and Portuguese-Speaking Regions
+SPAN 3F80|Modern Languages, Literatures and Cultures|Im/migrant and Community Outreach Internship
+SPAN 3P84|Modern Languages, Literatures and Cultures|Diaspora Communities
+SPAN 3P85|Modern Languages, Literatures and Cultures|Indigenous and Mestizo Narratives
+SPAN 3P90|Modern Languages, Literatures and Cultures|Early Modern Spanish Literature and Culture
+SPAN 3P93|Modern Languages, Literatures and Cultures|Advanced Language and Discourse
+SPAN 3P94|Modern Languages, Literatures and Cultures|Iberian Narrative
+SPAN 3P95|Modern Languages, Literatures and Cultures|Contemporary Latin American Narrative
+SPAN 3P97|Modern Languages, Literatures and Cultures|Modern Spanish Literature and Culture
+SPAN 3P98|Modern Languages, Literatures and Cultures|Chronicle and Testimonial Writing
+SPAN 3P99|Modern Languages, Literatures and Cultures|Hispanic Linguistics
+SPAN 3Q91|Modern Languages, Literatures and Cultures|Renaissance Perceptions of Indigenous Cultures
+SPAN 3Q92|Modern Languages, Literatures and Cultures|Moors, New Christians and Renegades
+SPAN 4F80|Modern Languages, Literatures and Cultures|Im/migrant and Community Outreach Research and Internship
+SPAN 4F99|Modern Languages, Literatures and Cultures|Honours Thesis
+SPAN 4P01|Modern Languages, Literatures and Cultures|Latin American Women's Perspectives
+SPAN 4P04|Modern Languages, Literatures and Cultures|Translation: Applications
+SPAN 4P10|Modern Languages, Literatures and Cultures|Readings in Medieval Iberian Narrative
+SPAN 4P15|Modern Languages, Literatures and Cultures|Imagining Identity in the Early Modern Hispanic World
+SPAN 4P60|Modern Languages, Literatures and Cultures|Women in Hispanic Literature: Witches, Vampires and Virgins
+SPAN 4P64|Modern Languages, Literatures and Cultures|Island Narratives: Re-imagining Ibero-American Insular Worlds
+SPAN 4P84|Modern Languages, Literatures and Cultures|Diaspora/Diasporas: Cross-cultural Texts and Context
+SPAN 4V60-4V69|Modern Languages, Literatures and Cultures|Special Research Topics
 SPMA 0N40|Sport Management|Experiential Preparation
 SPMA 1P91|Sport Management|Introduction to Sport Management
 SPMA 1P92|Sport Management|Understanding Sport Industry Sectors
@@ -3135,7 +3505,7 @@ STAC 4P01|Studies in Arts and Culture|Creating Social Value from Material Cultur
 STAC 4P68|Studies in Arts and Culture|Arts, Heritage and Culture: Public Policy and Planning
 STAC 4P72|Studies in Arts and Culture|High and Low Art: Intersections, Exchanges and Flows
 STAC 4V70-4V79|Studies in Arts and Culture|Advanced Studies in Arts and Culture
-SWAH 1F00|Swahili|Introductory Kiswahili
+SWAH 1F00|Modern Languages, Literatures and Cultures|Introductory Kiswahili
 TOUR 0N01|Tourism|Work Placement I
 TOUR 0N02|Tourism|Work Placement II
 TOUR 0N03|Tourism|Work Placement III
@@ -3361,32 +3731,32 @@ WGST 4P91|Women's and Gender Studies|Feminist Research: Negotiating Evidence and
 WGST 4P95|Women's and Gender Studies|Gender and Sport
 WGST 4Q41|Women's and Gender Studies|Social Policy
 WGST 4V50-4V69|Women's and Gender Studies|Special Topics in Women's Studies
-WRDS 1F90|Writing, Rhetoric and Discourse Studies|Writing, Rhetoric and Discourse Studies: An Introduction
-WRDS 1P06|Writing, Rhetoric and Discourse Studies|History and Future of Storytelling
-WRDS 2P12|Writing, Rhetoric and Discourse Studies|Technical Communication and Documents
-WRDS 2P14|Writing, Rhetoric and Discourse Studies|Technical Writing
-WRDS 2P16|Writing, Rhetoric and Discourse Studies|Communication for Organizations
-WRDS 2P18|Writing, Rhetoric and Discourse Studies|Reporting and News Writing for Mass Media
-WRDS 2P20|Writing, Rhetoric and Discourse Studies|Identity, Identification and Public Address
-WRDS 2P28|Writing, Rhetoric and Discourse Studies|Persuasive Discourse: Theoretical Foundations
-WRDS 2P63|Writing, Rhetoric and Discourse Studies|Communication Design
-WRDS 2P72|Writing, Rhetoric and Discourse Studies|The Creative Writer
-WRDS 3P15|Writing, Rhetoric and Discourse Studies|Writing for New Media
-WRDS 3P16|Writing, Rhetoric and Discourse Studies|Organizational Discourses
-WRDS 3P18|Writing, Rhetoric and Discourse Studies|True Stories: The Art and Craft of Literary Journalism
-WRDS 3P28|Writing, Rhetoric and Discourse Studies|Rhetorical Analysis
-WRDS 3P63|Writing, Rhetoric and Discourse Studies|Digital Design and Communication
-WRDS 3P72|Writing, Rhetoric and Discourse Studies|The Creative Writer and the Community
-WRDS 3P73|Writing, Rhetoric and Discourse Studies|Creative Writing for Digital Media
-WRDS 3P90|Writing, Rhetoric and Discourse Studies|Life Writing
-WRDS 3P98|Writing, Rhetoric and Discourse Studies|Reporting Arts and Culture
-WRDS 3P99|Writing, Rhetoric and Discourse Studies|Interpretive and Critical Writing in the Arts
-WRDS 3V90-3V99|Writing, Rhetoric and Discourse Studies|Topics in Writing and Culture
-WRDS 4F99|Writing, Rhetoric and Discourse Studies|Independent Studies in Writing, Rhetoric and Discourse
-WRDS 4P01|Writing, Rhetoric and Discourse Studies|e-portfolio for Rhetoric, Writing and Discourse Studies
-WRDS 4P10|Writing, Rhetoric and Discourse Studies|Language and Discourse: Theory and Practice
-WRDS 4P15|Writing, Rhetoric and Discourse Studies|Words on Words: Narratives of Language
-WRDS 4P20|Writing, Rhetoric and Discourse Studies|Studies in Cultural Rhetoric
-WRDS 4P98|Writing, Rhetoric and Discourse Studies|Independent Studies in Writing
-WRDS 4P99|Writing, Rhetoric and Discourse Studies|Independent Studies in Writing
-WRDS 4V90-4V99|Writing, Rhetoric and Discourse Studies|Writing Area Studies
+WRDS 1F90|English|Writing, Rhetoric and Discourse Studies: An Introduction
+WRDS 1P06|English|History and Future of Storytelling
+WRDS 2P12|English|Technical Communication and Documents
+WRDS 2P14|English|Technical Writing
+WRDS 2P16|English|Communication for Organizations
+WRDS 2P18|English|Reporting and News Writing for Mass Media
+WRDS 2P20|English|Identity, Identification and Public Address
+WRDS 2P28|English|Persuasive Discourse: Theoretical Foundations
+WRDS 2P63|English|Communication Design
+WRDS 2P72|English|The Creative Writer
+WRDS 3P15|English|Writing for New Media
+WRDS 3P16|English|Organizational Discourses
+WRDS 3P18|English|True Stories: The Art and Craft of Literary Journalism
+WRDS 3P28|English|Rhetorical Analysis
+WRDS 3P63|English|Digital Design and Communication
+WRDS 3P72|English|The Creative Writer and the Community
+WRDS 3P73|English|Creative Writing for Digital Media
+WRDS 3P90|English|Life Writing
+WRDS 3P98|English|Reporting Arts and Culture
+WRDS 3P99|English|Interpretive and Critical Writing in the Arts
+WRDS 3V90-3V99|English|Topics in Writing and Culture
+WRDS 4F99|English|Independent Studies in Writing, Rhetoric and Discourse
+WRDS 4P01|English|e-portfolio for Rhetoric, Writing and Discourse Studies
+WRDS 4P10|English|Language and Discourse: Theory and Practice
+WRDS 4P15|English|Words on Words: Narratives of Language
+WRDS 4P20|English|Studies in Cultural Rhetoric
+WRDS 4P98|English|Independent Studies in Writing
+WRDS 4P99|English|Independent Studies in Writing
+WRDS 4V90-4V99|English|Writing Area Studies
