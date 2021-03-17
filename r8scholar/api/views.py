@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from .serializers import (UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DeparmentSerializer, 
 InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, 
 loginLogoutSerializer, VerificationSerializer, SearchSerializer)
+from .email_sender import email_user
 
 from itertools import chain
 from drf_multiple_model.views import ObjectMultipleModelAPIView
@@ -292,6 +293,7 @@ class filterCourseListBy(APIView):
         #Filter by rating from highest to lowest
         if (str(filter_by)=="rating_high_low"):
             courses = Course.objects.all()
+            amount = courses.count()
             if len(courses) >= amount: #cannot request more courses than we have 
                 for i in range(amount):
                     for course in courses: #now we just go through the courses and choose the best ones 
@@ -310,6 +312,7 @@ class filterCourseListBy(APIView):
         #Filter by rating from lowest to highest
         if (str(filter_by)=="rating_low_high"):
             courses = Course.objects.all()
+            amount = courses.count()
             if len(courses) >= amount: #cannot request more courses than we have 
                 for i in range(amount):
                     for course in courses: #loop through the top because we are constantly comparing (need indexes)
@@ -355,6 +358,7 @@ class filterInstructorListBy(APIView):
         #Filter by rating from highest to lowest
         if (str(filter_by).equals('rating_high_low')):
             instructors = Instructor.objects.all()
+            amount = instructors.count()
             if len(instructors) >= amount: #cannot request more instructors than we have 
                 for i in range(amount): #loop through the top because we are constantly comparing (need indexes)
                     for instructor in instructors: #now we just go through the instructors and choose the best ones 
@@ -373,6 +377,7 @@ class filterInstructorListBy(APIView):
         #Filter by rating from lowest to highest
         if (str(filter_by).equals('rating_low_high')):
             instructors = Instructor.objects.all()
+            amount = instructors.count()
             if len(instructors) >= amount: #cannot request more instructors than we have 
                 for i in range(amount): #loop through the top because we are constantly comparing (need indexes)
                     for instructor in instructors: 
@@ -419,6 +424,7 @@ class filterDepartmentListBy(APIView):
         #Filter by rating from highest to lowest
         if (str(filter_by).equals('rating_high_low')):
             departments = Department.objects.all()
+            amount = departments.count()
             if len(departments) >= amount: #cannot request more departments than we have 
                 for i in range(amount):
                     for department in departments:
@@ -437,6 +443,7 @@ class filterDepartmentListBy(APIView):
         #Filter by rating from lowest to highest
         if (str(filter_by).equals('rating_low_high')):
             departments = Department.objects.all()
+            amount = departments.count()
             if len(departments) >= amount: #cannot request more departments than we have 
                 for i in range(amount):
                     for department in departments:
@@ -474,10 +481,8 @@ class CreateUserView(APIView):
             user.nickname = nickname
             #user.is_verified =True
             user.save()
-            user.email_user(subject="Please Verify your R8Scholar Account!", 
-            message=f"Please enter the following code into the prompt: {user.verification_code}", 
-            from_email="ss16wn@brocku.ca")
-            #https://stackoverflow.com/questions/5802189/django-errno-111-connection-refused
+            #Uses email sending script called email_sender.py
+            #email_user(user.email,user.verification_code)
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         else:
             return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
