@@ -469,12 +469,14 @@ Dawn Prentice|Nursing
 Joanne Crawford|Nursing
 Jane Moore|Nursing
 Sheila O'Keefe-McCarthy|Nursing
-Zaida Rahaman, Jenn Salfi|Nursing
+Zaida Rahaman|Nursing
+Jenn Salfi|Nursing
 Karyn Taplay|Nursing
 Constance Schumacher|Nursing
 Elizabeth Orr|Nursing
 Brian E. Power|Music
-Karin Di Bella, Peter Landey|Music
+Karin Di Bella|Music
+Peter Landey|Music
 Rachel Rensink-Hoff|Music
 Matthew Royal|Music
 Nina Penner|Music
@@ -486,7 +488,8 @@ Eric Muller|Mathematics
 S. Ejaz Ahmed|Mathematics
 Stephen Anco|Mathematics
 Hichem Ben-El-Mechaiekh|Mathematics
-Henryk Fukś, Omar Kihel|Mathematics
+Henryk Fukś|Mathematics
+Omar Kihel|Mathematics
 Yuanlin Li|Mathematics
 Alexander Odesskii|Mathematics
 Jan Vrbik|Mathematics
@@ -554,7 +557,8 @@ Andrea Josse|Kinesiology
 James L. Mandigo|Kinesiology
 Michael Taber|Kinesiology
 Michael Sonne|Kinesiology
-John Hay, Martin Tammemagi|Health Sciences
+John Hay|Health Sciences
+Martin Tammemagi|Health Sciences
 Anthony F. Bogaert|Health Sciences
 Jens Coorssen|Health Sciences
 Brent E. Faught|Health Sciences
@@ -686,7 +690,8 @@ Karen Campbell|Psychology
 William Hall|Psychology
 Elizabeth Shulman|Psychology
 Sabrina Thai|Psychology
-Marie Good, Michelle Jetha|Psychology
+Marie Good|Psychology
+Michelle Jetha|Psychology
 Chrissy Lackner|Psychology
 Don McCreary|Psychology
 Danielle Molnar|Psychology
@@ -756,7 +761,7 @@ Shawn Serfas|Visual Arts
 Linda Steer|Visual Arts
 Donna Szoke|Visual Arts
 Suzanne Morrissette|Visual Arts
-Troy Ouellette,|Visual Arts
+Troy Ouellette|Visual Arts
 Donna Akrey|Visual Arts
 Gustavo Cerquera Benjumea|Visual Arts
 Julie Gemuend|Visual Arts

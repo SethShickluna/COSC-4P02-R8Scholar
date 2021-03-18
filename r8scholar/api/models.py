@@ -18,7 +18,7 @@ from .generators import generate_validation_code
 class Comment(models.Model):
     comment_id = models.IntegerField()
     review_id = models.IntegerField()
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=32)
     content = models.TextField(default=None)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
     date = models.DateTimeField(default=None)
@@ -32,8 +32,8 @@ class Comment(models.Model):
 class CustomUser(AbstractBaseUser):
     username = None
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
-    nickname = models.CharField(max_length=20,unique=True,default=uuid.uuid4)
-    password = models.CharField(max_length=32,validators=[password_validator])
+    nickname = models.CharField(max_length=25,unique=True,default=uuid.uuid4)
+    password = models.CharField(max_length=100,validators=[password_validator])
     reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
     comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
@@ -74,10 +74,13 @@ class CustomUser(AbstractBaseUser):
         return self.is_admin
 
 class Department(models.Model):
-    name = models.CharField(max_length=20,default=None,primary_key=True)
+    name = models.CharField(max_length=75,default=None,primary_key=True)
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
+
+    class Meta:
+        ordering = ['name']
         
     def update_rating(self): # NEEDS TESTING #
         count = 0
@@ -119,9 +122,12 @@ class Department(models.Model):
 
 
 class Instructor(models.Model):
-    name  = models.CharField(max_length=30,primary_key=True)
+    name  = models.CharField(max_length=50,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
+
+    class Meta:
+        ordering = ['name']
     
     def update_rating(self): # NEEDS TESTING #
         count = 0
@@ -136,10 +142,13 @@ class Instructor(models.Model):
         self.save()
 
 class Course(models.Model):
-    name = models.CharField(max_length=10, unique=True,primary_key=True)
+    name = models.CharField(max_length=40, unique=True,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
     course_full_name  = models.CharField(max_length=30,default=None)
+
+    class Meta:
+        ordering = ['name']
 
     def update_rating(self): # NEEDS TESTING #
         count = 0
@@ -158,8 +167,8 @@ class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
     nickname = models.CharField(max_length=30, default=None)
-    subject = models.CharField(max_length=32)
-    title = models.CharField(max_length=32)
+    subject = models.CharField(max_length=75)
+    title = models.CharField(max_length=45)
     content = models.TextField(default=None, null=True)
     rating = models.FloatField(default=None, validators=[rating_validator])
     numb_reports = models.IntegerField(default=0)
@@ -167,7 +176,7 @@ class Review(models.Model):
     department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
     instructor_name = models.ForeignKey(Instructor, null=True, on_delete=models.DO_NOTHING)
     course_name = models.ForeignKey(Course, null=True, on_delete=models.DO_NOTHING)
-    review_type = models.CharField(max_length=10)
+    review_type = models.CharField(max_length=25)
 
     def _str_(self):
         return self.reviewer
