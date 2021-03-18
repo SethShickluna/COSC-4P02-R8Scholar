@@ -44,7 +44,7 @@ export default class Courses extends Component {
         var requestType = () =>{
             switch(this.state.sortOption){
                 case "Rating: High to Low":
-                case "rating: Low to High":
+                case "Rating: Low to High":
                     return "rating_high_low"; 
                 default: 
                     return "name";

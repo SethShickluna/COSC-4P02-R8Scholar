@@ -32,10 +32,7 @@ export default class Courses extends Component {
 
     componentDidMount() {
         this.getEntries(); 
-
-    }
-
-    
+    }   
 
     getDepartmentRatings = async(name) => { 
         await fetch("/api/get-department?name="+name).then((response) => {
@@ -64,7 +61,7 @@ export default class Courses extends Component {
         var requestType = () =>{
             switch(this.state.sortOption){
                 case "Rating: High to Low":
-                case "rating: Low to High":
+                case "Rating: Low to High":
                     return "rating_high_low"; 
                 case "Department":
                     return "department";
@@ -103,7 +100,6 @@ export default class Courses extends Component {
     }
 
     changePages(button){
-        this.setState({displayedInstructors: null, }); 
         var newPage = button.target.innerHTML; //reads the html of the pressed button 
         switch(newPage){
             case 'First':
@@ -114,8 +110,10 @@ export default class Courses extends Component {
                 break; 
         }
         this.setState({
+            displayedInstructors: null,
             currentPage:Number(newPage),
         }); 
+
         this.getEntries();
 
         this.setState({
@@ -132,9 +130,10 @@ export default class Courses extends Component {
 
     setFilter(filter){
         this.setState({
+            displayedInstructors: null,
             sortOption: filter.target.innerText,
             loaded: false, 
-            displayedCourses: null,
+            
         });
         
         this.getEntries(); 
