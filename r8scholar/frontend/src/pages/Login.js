@@ -2,13 +2,6 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import LoginForm from '../components/LoginForm'
 
-const formStyle = {
-    alignItems: 'center', 
-    justifyContent: 'center',
-    display: 'flex', 
-    marginTop: '8%',
-}
-
 
 export default class Login extends Component {
     constructor() {
@@ -37,7 +30,7 @@ export default class Login extends Component {
                         </div>
                         <div><Button onClick={this.hide}>Help?</Button></div> 
                         <div id="helpDIV" style={{display: "none", color: "white", border: '10px', backgroundColor:"black", marginTop: '5%'}}>
-                        Password: has minimum 8 characters, a capital and a number.</div>
+                        Password: has minimum 10 characters, at least one capital & lowercase letter, and a number.</div>
                             <div style={{paddingTop: '25%', textAlign: "center"}}>
                               <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
                             </div>
