@@ -100,10 +100,9 @@ export default class Home extends Component {
                 <div className="page-header section-dark" style={{backgroundImage:'url(https://brocku.ca/brock-news/wp-content/uploads/2019/05/Cairns-at-night-1600x1056.jpg?x68208)'}}> 
                     <div className="content-center">
                         <div className="container">
-                        <div className="title-brand">
-                            <h1 className="presentation-title">Brock University R8Scholar</h1>
-                        </div>
-                            <b><h2 style={{marginTop: '20px', fontWeight: "bold", borderColor: "black", borderWidth:"2px"}}className="presentation-subtitle text-center">Review and share opinions on scholarly aspects of Brock University</h2></b>
+                            <div className="title-brand">
+                                <h1 className="presentation-title">Brock University R8Scholar</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,7 +132,7 @@ export default class Home extends Component {
                                                     <tr>
                                                         <th scope="row">{index  + 1}</th>    
                                                         <th><a style={linkStyle} href={"/course/"+item.name}>{item.name}</a></th>
-                                                        <th><StarRatings
+                                                        <th style={{minWidth:"100px"}}><StarRatings
                                                         rating={item.rating}
                                                         starDimension="25px"
                                                         starSpacing="5px"
@@ -194,7 +193,7 @@ export default class Home extends Component {
                                     </thead>
                                     <tbody>
                                         {this.state.departments.length? 
-                                            this.state.departments.slice(0,5).map((item, index) =>{
+                                            this.state.departments  .map((item, index) =>{
                                                 return(
                                                     <tr>
                                                         <th scope="row">{index + 1}</th>    

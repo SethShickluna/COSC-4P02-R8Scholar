@@ -24,6 +24,7 @@ class SearchBar extends Component {
         this.doSearch = this.doSearch.bind(this); 
     }
 
+
     updateSearch = (obj) => { 
         this.setState({
             dropdownOpen: (obj.target.value.length > 0),
@@ -31,6 +32,9 @@ class SearchBar extends Component {
         });
         if(this.state.query.length >= 1){
             this.doSearch(); 
+        }
+        if(obj.key === 'Enter'){
+            this.props.history.push("/search/"+this.state.query);
         }
     }
 
@@ -63,12 +67,12 @@ class SearchBar extends Component {
     render(){
         return(
             <div>
-                <Dropdown color={this.props.color}toggle={false} isOpen={this.state.dropdownOpen}>
+                <Dropdown primary onSubmit={this.doFullSearch} color={this.props.color}toggle={false} isOpen={this.state.dropdownOpen}>
                     <DropdownToggle color={this.props.color}>
-                        <Input color={this.props.color}as={Form}onChange={this.updateSearch}placeholder="Search" type="text" />
+                        <Input color={this.props.color} as="submit" onChange={this.updateSearch} placeholder="Search" type="text" />
                     </DropdownToggle>
                     <DropdownMenu container="body" >
-                        <DropdownItem>Query for {this.state.query} returned: </DropdownItem>
+                        <DropdownItem color={this.props.color}>Query for {this.state.query} returned: </DropdownItem>
                         {!this.state.results.length? null:
                         this.state.results.slice(0, this.min(this.state.results.length, this.state.maxDisplayed)).map((item, index) => {
                             return(

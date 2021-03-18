@@ -66,31 +66,30 @@ export default class SearchPage extends Component {
                             </div>
                             <div style={{marginTop:"3%"}}/>
                             <div>
-                                <nav aria-label="Page navigation example">
+                            <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem color="primary">
-                                            <PaginationLink href='#'>
+                                        <PaginationItem color="danger">
+                                            <PaginationLink onClick={this.changePages}href="#">
                                                 First
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink previous href='#'/>   
-                                        </PaginationItem>
-                                        <PaginationItem active>
-                                            <PaginationLink href="#">
+                                        <PaginationItem disabled={this.state.currentPage - 1 < 1}>
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage - 1}
+                                            </PaginationLink>
+                                        </PaginationItem >
+                                        <PaginationItem className="active">
+                                            <PaginationLink onClick={this.changePages} href="#">
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink href="#">
+                                        <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
+                                            <PaginationLink onClick={this.changePages} href="#">
                                                 {this.state.currentPage + 1}
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem>
-                                            <PaginationLink next href='#'/>   
-                                        </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink href='#'>
+                                            <PaginationLink onClick={this.changePages} href='#'>
                                                 Last
                                             </PaginationLink>
                                         </PaginationItem>
@@ -122,7 +121,7 @@ export default class SearchPage extends Component {
                                         <th>{index + 1}</th>                                     
                                         <th><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></th>
                                         <th>{this.determineType(item).split("/")[0]}</th>
-                                        <th><StarRatings
+                                        <th style={{minWidth:"100px"}}><StarRatings
                                             rating={item.rating}
                                             starDimension="25px"
                                             starSpacing="5px"

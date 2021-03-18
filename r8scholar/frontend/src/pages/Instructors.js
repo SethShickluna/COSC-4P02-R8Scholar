@@ -23,6 +23,7 @@ export default class Courses extends Component {
             departmentRatings:{}, 
             sortOption: "Alphabetical: A-Z",
             droppedDown: false,
+            loaded: false, 
         };
         this.changePages = this.changePages.bind(this); 
         this.activateMenu = this.activateMenu.bind(this);
@@ -33,70 +34,6 @@ export default class Courses extends Component {
         this.getEntries(this.state.currentPage); 
     }
 
-    getEntries = async(page) => {//this fetches the courses based on the filter 
-        const displayEntries = [];
-        switch(this.state.sortOption){
-            case "Rating: High to Low":
-                const requestHigh = { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        "filter_by":"rating_high_low",
-                        "amount": this.state.perPage,
-                    }),
-                }; 
-                await fetch("/api/filter-instructorlist", requestHigh).then((response) => {
-                    response.json().then((data) => { //guys im gonna be honest i have no idea what this means just dont touch it 
-                        var newMax = parseInt(Math.floor(data.length / this.state.perPage)); 
-                        this.setState({ 
-                            displayedInstructors: data,
-                            maxPage: newMax,
-                        });
-                    });
-                });
-                break; 
-            case "Rating: High to Low": 
-                const requestLow = { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        "filter_by":"rating_low_high",
-                        "amount": this.state.perPage,
-                    }),
-                }; 
-                await fetch("/api/filter-instructorlist", requestLow).then((response) => {
-                    response.json().then((data) => { //guys im gonna be honest i have no idea what this means just dont touch it 
-                        var newMax = parseInt(Math.floor(data.length / this.state.perPage)); 
-                        this.setState({ 
-                            displayedInstructors: data,
-                            maxPage: newMax,
-                        });
-                    });
-                });
-                break; 
-            default:
-                await fetch("/api/instructors").then((response) => {
-                    response.json().then((data) => { //guys im gonna be honest i have no idea what this means just dont touch it 
-                        if(this.state.sortOption === "Alphabetical: Z-A"){
-                            data = data.reverse(); 
-                        }
-                        data.slice((page - 1)*this.state.perPage, 
-                        (page*this.state.perPage))
-                        .map((item) =>{
-                            displayEntries.push(item);
-                        }); 
-                        var newMax = parseInt(Math.floor(data.length / this.state.perPage)); 
-                        this.setState({ 
-                            displayedInstructors: displayEntries,
-                            maxPage: newMax,
-                        });
-                    });
-                }
-            );
-                
-        }
-    };
-
     getDepartmentRatings = async(name) => { 
         await fetch("/api/get-department?name="+name).then((response) => {
             if(response.ok){ //yay
@@ -106,7 +43,6 @@ export default class Courses extends Component {
             }
         })
         .then((data) =>{
-            console.log(data);
             const deptRatings = this.state.departmentRatings;
             if(data !== null){
                 deptRatings[name]=data.rating;
@@ -120,16 +56,56 @@ export default class Courses extends Component {
     );
     }
 
+    getEntries = async() => {
+
+        var requestType = () =>{
+            switch(this.state.sortOption){
+                case "Rating: High to Low":
+                case "rating: Low to High":
+                    return "rating_high_low"; 
+                default: 
+                    return "name";
+            }
+        }
+
+        const request = {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                "filter_by":requestType(),
+            }),
+        }
+        
+        await fetch("/api/filter-instructorlist", request)
+            .then((response) => { response.json().then((data) => {
+                console.log(data);
+                if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 
+                    data = data.reverse(); 
+                }   
+                var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1); 
+                data.map((item) =>{
+                    this.getDepartmentRatings(item.department); 
+                });
+                this.setState({ 
+                    displayedInstructors: data,
+                    maxPage: newMax,
+                });
+            });
+        });
+        this.setState({
+            loaded: true, 
+        }); 
+    }
 
     changePages(button){
         this.setState({displayedCourses: null, }); 
-        var newPage = button.target.innerHTML; 
+        var newPage = button.target.innerHTML; //reads the html of the pressed button 
         switch(newPage){
             case 'First':
                 newPage = 1; 
                 break;
             case 'Last':
-                newPage = this.state.maxPage - 1; 
+                newPage = this.state.maxPage; 
                 break; 
         }
         this.setState({
@@ -149,11 +125,12 @@ export default class Courses extends Component {
     setFilter(filter){
         this.setState({
             sortOption: filter.target.innerText,
+            loaded: false, 
             displayedCourses: null,
         });
         
-        this.getEntries(this.state.currentPage); 
-    }   
+        this.getEntries(); 
+    }  
 
     render() {
         return(
@@ -177,9 +154,9 @@ export default class Courses extends Component {
                                 <DropdownToggle onClick={this.activateMenu} caret>
                                         {this.state.sortOption}
                                 </DropdownToggle>
-                                <DropdownMenu container="body">      
+                                <DropdownMenu container="body">   
+                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: A-Z</a></DropdownItem>   
                                     <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: Z-A</a></DropdownItem>
-                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: A-Z</a></DropdownItem>
                                     <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: High to Low</a></DropdownItem>
                                     <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: Low to High</a></DropdownItem>
                                     </DropdownMenu>
@@ -187,26 +164,26 @@ export default class Courses extends Component {
                             </div>
                             <div style={{marginTop:"3%"}}/>
                             <div>
-                                <nav aria-label="Page navigation example">
+                            <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem color="primary">
-                                            <PaginationLink onClick={this.changePages} href='#'>
+                                        <PaginationItem color="danger">
+                                            <PaginationLink onClick={this.changePages}href="#">
                                                 First
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem active>
+                                        <PaginationItem disabled={this.state.currentPage - 1 < 1}>
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage - 1}
+                                            </PaginationLink>
+                                        </PaginationItem >
+                                        <PaginationItem className="active">
                                             <PaginationLink onClick={this.changePages} href="#">
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem>
+                                        <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#">
                                                 {this.state.currentPage + 1}
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink onClick={this.changePages} onClick="" href="#">
-                                                {this.state.currentPage + 2}
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem>
@@ -221,8 +198,8 @@ export default class Courses extends Component {
                     </Row>
                    
                     <Row style={{marginTop:'2%'}} align="center">
-                        <Col className="col-md-2"/>
-                        <Col className="col-md-8">
+                        <Col className="col-md-1"/>
+                        <Col className="col-md-10">
                            <Table striped>
                                <thead>
                                     <th>Rank</th>
@@ -234,12 +211,13 @@ export default class Courses extends Component {
                                <tbody>
                                    {this.state.displayedInstructors === null? 
                                    <Spinner color="dark"/>
-                                :this.state.displayedInstructors.map((item, index) =>{ {/**5 courses */}
+                                :this.state.displayedInstructors.slice((this.state.currentPage - 1)*this.state.perPage, 
+                                (this.state.currentPage*this.state.perPage)).map((item, index) =>{ {/**5 courses */}
                                     return(
                                     <tr key={index}>  
-                                        <th>{index + 1}</th>
+                                        <th>{(this.state.currentPage - 1)*this.state.perPage + index + 1}</th>
                                         <th><a style={linkStyle} href={"/instructor/"+item.name}>{item.name}</a></th>
-                                        <th><StarRatings
+                                        <th style={{minWidth:"100px"}}><StarRatings
                                             rating={item.rating}
                                             starDimension="25px"
                                             starSpacing="5px"
@@ -247,8 +225,8 @@ export default class Courses extends Component {
                                             numberOfStars={5}
                                             name='avgRating'/>
                                         </th>
-                                        <th><a style={linkStyle} href={"/department/"+item.name}>{item.department}</a></th>
-                                        <th><StarRatings
+                                        <th><a style={linkStyle} href={"/department/"+item.department}>{item.department}</a></th>
+                                        <th style={{minWidth:"100px"}}><StarRatings
                                             rating={this.state.departmentRatings[item.department]}
                                             starDimension="25px"
                                             starSpacing="5px"
@@ -261,7 +239,7 @@ export default class Courses extends Component {
                                </tbody>
                            </Table>
                         </Col>
-                        <Col className="col-md-2"/>
+                        <Col className="col-md-1"/>
                     </Row>
                 </Container>
             </div>

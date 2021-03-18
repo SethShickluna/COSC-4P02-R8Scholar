@@ -98,7 +98,8 @@ class SignupForm extends Component {
         return this.state.username.length > 3; 
     }
 
-    submitForm = () => {
+    submitForm = e => {
+        e.preventDefault(); //stop a reload
         this.checkEmail(); 
         
         const request = { 
@@ -114,12 +115,11 @@ class SignupForm extends Component {
         .then((response) => {
             switch(response.status){
                 case 201: 
-                    alert("Account created successfully!"); 
                     cookie.save("email", this.state.email, {path: "/"}); 
                     this.props.history.push('/verify');
                     break; 
                 default:
-                    alert("Something went wrong :/ " + response.statusText); 
+                    alert("Please enter valid data! Press help for more information."); 
             }
         });
     }
@@ -130,7 +130,7 @@ class SignupForm extends Component {
                 <Card style={formStyle}>
                     <Card.Header as='h4'>Create Account</Card.Header>
                     <Card.Body>
-                        <Form>
+                        <Form onSubmit={this.submitForm}>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter email" />
@@ -147,7 +147,7 @@ class SignupForm extends Component {
                                 <Form.Label>Re-enter Password</Form.Label>
                                 <Form.Control type="password" onChange={this.updateVerifyPasswordInput} placeholder="Password" />
                             </Form.Group>
-                            <Button onClick={this.submitForm} variant="primary">
+                            <Button type="submit" variant="primary">
                                 Register 
                             </Button>
                         </Form>

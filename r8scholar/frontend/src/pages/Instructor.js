@@ -234,7 +234,7 @@ export default class Course extends Component {6
                         <Col>
                             <h1>The instructor "{this.state.name + " "}" was not found.</h1>
     
-                            <h5 style={{marginTop:'15%'}}><a href="/courses">Return to Instructors</a></h5>
+                            <h5 style={{marginTop:'15%'}}><a href="/instructors">Return to Instructors</a></h5>
                         </Col>
                     </Row>}
                     </Container>

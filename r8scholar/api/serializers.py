@@ -26,7 +26,7 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = ('name', 'course_full_name', 'department', 'rating')
 
-class DeparmentSerializer(serializers.ModelSerializer):
+class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = ('name', 'courses_rating', 'instructors_rating', 'rating')
@@ -49,7 +49,7 @@ class TicketSerializer(serializers.ModelSerializer):
 class SearchSerializer(serializers.Serializer):
     instructor = InstructorSerializer(required=False)
     course = CourseSerializer(required=False)
-    department = DeparmentSerializer(required=False)
+    department = DepartmentSerializer(required=False)
 
 
 #Creation serializers 

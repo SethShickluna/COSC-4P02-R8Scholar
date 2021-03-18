@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 
 // reactstrap components
 import {
-  UncontrolledCollapse,
+  Collapse,
   Button,
   NavbarBrand,
   Navbar,
@@ -57,7 +57,7 @@ function SecondaryNav() {
             <span className="navbar-toggler-bar bar2" />
             <span className="navbar-toggler-bar bar3" />
           </button>
-          <UncontrolledCollapse navbar toggler="#navbarTogglerDemo01">
+          <Collapse navbar toggler="#navbarTogglerDemo01">
             <NavbarBrand  style={title} href="/">
               R8Scholar Home
             </NavbarBrand>
@@ -106,11 +106,11 @@ function SecondaryNav() {
                 null
 
             : <Button href="/login" className="btn-round lg" color="primary">
-                Login
+                Sign In
             </Button>}
             </NavItem>
             </Nav>
-          </UncontrolledCollapse>
+          </Collapse>
         </Container>
       </Navbar>
     </>

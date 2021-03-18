@@ -10,7 +10,7 @@ from rest_framework import generics, status, filters,viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project files# 
-from .serializers import (UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DeparmentSerializer, 
+from .serializers import (UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DepartmentSerializer, 
 InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, 
 loginLogoutSerializer, VerificationSerializer, SearchSerializer)
 from .email_sender import email_user
@@ -40,7 +40,7 @@ class CourseView(generics.ListAPIView):
     queryset = Course.objects.all()
 
 class DepartmentView(generics.ListAPIView):
-    serializer_class = DeparmentSerializer
+    serializer_class = DepartmentSerializer
     queryset = Department.objects.all()
 
 class InstructorView(generics.ListAPIView):
@@ -60,7 +60,7 @@ class SearchView(ObjectMultipleModelAPIView):
     querylist = (
         {'queryset': Course.objects.all(), 'serializer_class': CourseSerializer},
         {'queryset': Instructor.objects.all(), 'serializer_class': InstructorSerializer},
-        {'queryset': Department.objects.all(), 'serializer_class': DeparmentSerializer},
+        {'queryset': Department.objects.all(), 'serializer_class': DepartmentSerializer},
         
     )
     filter_backends = (filters.SearchFilter,)
@@ -84,7 +84,7 @@ class SearchDeptView(generics.ListCreateAPIView):
     search_fields = ['name']
     filter_backends = (filters.SearchFilter,)
     queryset = Department.objects.all()
-    serializer_class = DeparmentSerializer
+    serializer_class = DepartmentSerializer
 
 #get views 
 class GetUser(APIView):
@@ -137,7 +137,7 @@ class GetCourseView(APIView):
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
 class GetDepartmentView(APIView): 
-    serializer_class = DeparmentSerializer
+    serializer_class = DepartmentSerializer
     lookup_url_kwarg = 'name'
 
     def get(self, request, format=None):
@@ -250,7 +250,7 @@ class getTopInstructors(APIView):
             return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class getTopDepartments(APIView):
-    serializer_class = DeparmentSerializer
+    serializer_class = DepartmentSerializer
     lookup_url_kwarg = 'amount'
 
     def get(self, request, format=None):
@@ -272,88 +272,48 @@ class getTopDepartments(APIView):
 # amount will specifiy how many courses should be in the returned list
 # filter_by will specify which filter to use one the course list
 # sample data:
-# {"filter_by":"rating_high_low","amount":"10"}
+# {"filter_by":"rating_high_low"}
 class filterCourseListBy(APIView):
-
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
 
-        courses = None
+        courses = Course.objects.all() #consider all entries
+        course_list = []
         #Filter by name
-        if (str(filter_by)=="name"):
-            courses = Course.objects.all()
-            amount = courses.count()
-            course_list = [None]*amount
+        if (str(filter_by)=="rating_high_low"): #sort by rating 
             #Get list of courses sorted by rating
-            courses_sorted_name = Instructor.objects.order_by('name')
-            for course in courses_sorted_name:
-                course_list.append(course)
-            #Serialize final list
-            for c in range(amount):
-                course_list[c] = CourseSerializer(course_list[c]).data
-            return Response(course_list, status=status.HTTP_200_OK) 
-        #Filter by rating from highest to lowest
-        if (str(filter_by)=="rating_high_low"):
-            courses = Course.objects.all()
-            amount = courses.count()
-            course_list = [None]*amount
-            #Get list of courses sorted by rating
-            courses_sorted_rating = Instructor.objects.order_by('-rating')#minus sign orders by descending
-            for course in courses_sorted_rating:
-                course_list.append(course)
-            #serialize the final choices 
-            for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                course_list[c] = CourseSerializer(course_list[c]).data
-            return Response(course_list, status=status.HTTP_200_OK) 
+            for course in courses.order_by('-rating'): #negative rating for high to low 
+                course_list.append(CourseSerializer(course).data)
+        else: #default alphabetical 
+            for course in courses.order_by('name'):
+                course_list.append(CourseSerializer(course).data)
+
+        return Response(course_list, status=status.HTTP_200_OK) 
 #Returns a list of instructors filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
 # amount will specifiy how many instructors should be in the returned list
 # filter_by will specify which filter to use one the instructor list
 class filterInstructorListBy(APIView):
 
-    def post(self,request):
+     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
-        filter_by = data['filter_by']
-        
-        instructors = None
+        filter_by = data["filter_by"]
+
+        instructors = Instructor.objects.all() #consider all entries
+        instructor_list = []
         #Filter by name
-        if (str(filter_by)=='name'):
-            instructors = Instructor.objects.all()
-            amount = instructors.count()
-            instructor_list = [None]*amount
-            #Get list of instructors sorted by name
-            instructors_sorted_name = Instructor.objects.order_by('name')
-            for instructor in instructors_sorted_name:
-                instructor_list.append(instructor)
-            #Serialize final list
-            for c in range(amount):
-                instructor_list[c] = InstructorSerializer(instructor_list[c]).data
-            return Response(instructor_list, status=status.HTTP_200_OK) 
-            
-        #Filter by rating from highest to lowest
-        if (str(filter_by)=='rating_high_low'):
-            instructors = Instructor.objects.all()
-            amount = instructors.count()
-            instructor_list = [None]*amount
-            #Get list of instructors sorted by rating
-            instructors_sorted_rating = Instructor.objects.order_by('-rating')#minus sign orders by descending
-            for instructor in instructors_sorted_rating:
-                instructor_list.append(instructor)
-            for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                instructor_list[c] = InstructorSerializer(instructor_list[c]).data
-            return Response(instructor_list, status=status.HTTP_200_OK) 
+        if (str(filter_by)=="rating_high_low"): #sort by rating 
+            #Get list of courses sorted by rating
+            for instructor in instructors.order_by('-rating'): #negative rating for high to low 
+                instructor_list.append(InstructorSerializer(instructor).data)
+        elif(str(filter_by)=="department"):
+            for instructor in instructors.order_by('department'): #negative rating for high to low 
+                instructor_list.append(InstructorSerializer(instructor).data)
+        else: #default alphabetical 
+            for instructor in instructors.order_by('name'): #negative rating for high to low 
+                instructor_list.append(InstructorSerializer(instructor).data)
         
-        if(str(filter_by)=='department'):
-            instructors = Instructor.objects.all()
-            amount = instructors.count()
-            instructor_list = [None]*amount
-            #Get list of instructors sorted by rating
-            instructors_sorted_department = Instructor.objects.order_by('department')
-            for instructor in instructors_sorted_department:
-                instructor_list.append(instructor)
-            for c in range(amount): #cannot do this before because we need to compared the ratings constantly 
-                instructor_list[c] = InstructorSerializer(instructor_list[c]).data
-            return Response(instructor_list, status=status.HTTP_200_OK) 
+        return Response(instructor_list, status=status.HTTP_200_OK) 
             
 
 #Returns a list of departments filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
@@ -363,36 +323,21 @@ class filterDepartmentListBy(APIView):
 
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
-        filter_by = data['filter_by']
+        filter_by = data["filter_by"]
 
-        departments = None
+        departments = Department.objects.all() #consider all entries
+        department_list = []
         #Filter by name
-        if (str(filter_by)=='name'):
-            departments = Department.objects.all()
-            amount = departments.count()
-            department_list = [None]*amount
-            #Get list of departments sorted by name
-            departments_sorted_name = Department.objects.order_by('name')
-            for department in departments_sorted_name:
-                department_list.append(department)
-            #serialize the final list
-            for c in range(amount):
-                department_list[c] = DeparmentSerializer(department_list[c]).data
-            return Response(department_list, status=status.HTTP_200_OK) 
-            
-        #Filter by rating from highest to lowest
-        if (str(filter_by)=='rating_high_low'):
-            departments = Department.objects.all()
-            amount = departments.count()
-            department_list = [None]*amount
-            #Get list of departments sorted by rating
-            departments_sorted_rating = Department.objects.order_by('-rating') #minus sign orders by descending
-            for department in departments_sorted_rating:
-                department_list.append(department)
-            #serialize the final list 
-            for c in range(amount):
-                department_list[c] = DeparmentSerializer(department_list[c]).data
-            return Response(department_list, status=status.HTTP_200_OK) 
+        if (str(filter_by)=="rating_high_low"): #sort by rating 
+            #Get list of courses sorted by rating
+            for course in departments.order_by('-rating'): #negative rating for high to low 
+                department_list.append(DepartmentSerializer(course).data)
+        else: #default alphabetical 
+            for course in departments.order_by('name'):
+                department_list.append(DepartmentSerializer(course).data)
+        
+        return Response(department_list, status=status.HTTP_200_OK) 
+
 
 
 #create views 

@@ -3,7 +3,6 @@ import SearchBar from './SearchBar';
 import classnames from "classnames";
 
 import {
-
   Button,
   Collapse,
   NavbarBrand,
@@ -11,22 +10,24 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container,
-  Col,
 } from "reactstrap";
+
+import cookie from 'react-cookies';
 
 const navLinkStyles = { 
   fontSize: '16px',
 }
 
-
-const title={
-  paddingLeft:"5%",
-  paddingRight: "3%",
-  fontSize: '18px',
+const separate = { 
+  paddingRight: "2%", 
+  paddingLeft: "2%",
 }
 
-import cookie from 'react-cookies';
+const title={
+  paddingLeft:"10%",
+  paddingRight: "3%",
+  fontSize: '22px',
+}
 
 function HomeNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -60,11 +61,10 @@ function HomeNavbar() {
   });
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
-          <div style={{paddingLeft:"5%"}}className="navbar-translate">
-            <NavbarBrand style={{fontSize:"18px"}}
+          <div style={{paddingLeft:"5%"}}className="navbar-translate justify-content-left">
+            <NavbarBrand style = {title}
               data-placement="bottom"
               href="/"
-              target="_blank"
               title="Landing Page">
               R8Scholar
             </NavbarBrand>
@@ -80,65 +80,44 @@ function HomeNavbar() {
               <span className="navbar-toggler-bar bar3" />
             </button>
           </div>
-          <SearchBar color="transparent"/>
-        <Collapse
-          className="justify-content-end"
-          navbar
-          isOpen={navbarCollapse}>
-          <Nav style={{paddingRight:"10%"}}navbar>
-            {/** pages */}
-            <NavItem >
-              <NavLink style={navLinkStyles} 
-                href="/courses">
-                Courses
-              </NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink style={navLinkStyles}
-                href="/instructors">
-                Instructors
-              </NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink style={navLinkStyles} 
-                href="/departments">
-                Departments
-              </NavLink>
-            </NavItem>
-            {cookie.load('isLoggedIn') === "true"? 
-                <NavItem >
-                <NavLink style={navLinkStyles} 
+          <Collapse navbar isOpen={navbarCollapse}>
+          
+          <NavbarBrand  style={title} href="/">
+             
+            </NavbarBrand>
+            <Nav className="mr-auto mt-2 mt-lg-0" navbar>
+              <NavItem style={separate}className="active">
+                <NavLink href="/courses"style={navLinkStyles}>
+                  Courses 
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink style={separate}href="/instructors"style={navLinkStyles}>
+                  Instructors
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink style={separate}style={navLinkStyles}
+                  href="/departments"
+                >
+                  Departments
+                </NavLink>
+              </NavItem>
+              {cookie.load('isLoggedIn') === "true"? 
+                <NavItem>
+                <NavLink style={separate} style={navLinkStyles}
                   href="/profile">
                   Profile
                 </NavLink>
               </NavItem>
             : null
             }
-            <NavItem> {/**youtube icon/link */}
-              <NavLink
-                data-placement="bottom"
-                href="https://twitter.com/CreativeTim?ref=creativetim"
-                target="_blank"
-                title="Behind the Scenes"
-              >
-                <i className="fa fa-youtube" />
-                <p className="d-lg-none">Youtube</p>
-              </NavLink>
-            </NavItem>
-            <NavItem> {/**github icon/link */}
-              <NavLink
-                data-placement="bottom"
-                href="https://github.com/SethShickluna/COSC-4P02-R8Scholar"
-                target="_blank"
-                title="Check out our GitHub"
-              >
-                <i className="fa fa-github" />
-                <p className="d-lg-none">GitHub</p>
-              </NavLink>
-            </NavItem>
+            </Nav>
+            <SearchBar color="transparent"/>
+            <Nav style={{marginRight:"10%"}}navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 
-                <Button className="btn-round lg" color="primary" href="/signout">
+                <Button className="btn-round lg outline" color="info" href="/signout">
                 
                     Sign Out
                 </Button>
@@ -151,10 +130,10 @@ function HomeNavbar() {
                 null
 
             : <Button href="/login" className="btn-round lg" color="primary">
-                Login
+                Sign In
             </Button>}
             </NavItem>
-          </Nav>
+            </Nav>
         </Collapse>
     </Navbar>
   );

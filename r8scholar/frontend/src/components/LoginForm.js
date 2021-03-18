@@ -42,8 +42,10 @@ class LoginForm extends Component {
         });
     }
 
-    submitForm = () => {
+    submitForm = e => {
+        e.preventDefault(); //stop a reload
         //send info to backend 
+        console.log("hi")
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
             if(this.state.email.substring(length - 10, length) === "@brocku.ca"){ //brock email check 
@@ -77,7 +79,7 @@ class LoginForm extends Component {
                 <Card style={formStyle}>
                     <Card.Header as='h4'>Sign In</Card.Header>
                     <Card.Body>
-                        <Form>
+                        <Form onSubmit={this.submitForm}>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter email" />
@@ -86,7 +88,7 @@ class LoginForm extends Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Password" />
                             </Form.Group>
-                            <Button style={buttonStyle}variant="primary" onClick={this.submitForm}>
+                            <Button style={buttonStyle}variant="primary" type="submit">
                                 Sign In
                             </Button>
                             <Button style={buttonStyle} variant="primary" as={Link} to='/Signup'>
