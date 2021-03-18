@@ -83,9 +83,9 @@ export default class Courses extends Component {
                     data = data.reverse(); 
                 }   
                 var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1); 
-                data.map((item) =>{
+                /*data.map((item) =>{
                     this.getDepartmentRatings(item.department); 
-                });
+                });*/
                 this.setState({ 
                     displayedInstructors: data,
                     maxPage: newMax,
