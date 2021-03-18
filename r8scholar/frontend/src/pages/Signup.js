@@ -29,7 +29,7 @@ export default class Signup extends Component {
                         <div id="helpDIV" style={{display: "none", color: "white", border: '10px', backgroundColor:"black", marginTop: '5%', fontWeight: "normal"}}>
                         <p>Email: must be a Brock email.</p>
                         <p>Username: has minimum 4 characters.</p>
-                        <p>Password: has minimum 8 characters, a capital and a number.</p>
+                        <p>Password: has minimum 10 characters, at least one capital & lowercase letter, and a number.</p>
                         </div>
                         <div style={{paddingTop: '10%', textAlign: "center"}}>
                               <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
