@@ -100,15 +100,17 @@ export default class Departments extends Component {
     getEntries = async() => {
 
         var requestType = () =>{
-            switch(this.state.sortOption){
-                case "Rating: High to Low":
-                case "rating: Low to High":
-                    return "rating_high_low"; 
-                default: 
-                    return "name";
+
+            if(this.state.sortOption === "Rating: High to Low"){
+                return "rating_high_low";
+            }else if(this.state.sortOption === "Rating: Low to High"){
+                return "rating_high_low";
+            }else{ 
+                return "name";
             }
         }
 
+        console.log(requestType())
         const request = {
             method: "POST",
             headers: { "Content-Type": "application/json"},
@@ -119,19 +121,18 @@ export default class Departments extends Component {
         
         await fetch("/api/filter-departmentlist", request)
             .then((response) => { response.json().then((data) => {
-                console.log(data);
                 if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 
                     data = data.reverse(); 
                 }   
                 var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1); 
-                data.map((item) =>{
-                    this.getTopInstructor(item.name); 
-                    this.getTopCourse(item.name); 
-                });
                 this.setState({ 
                     displayedDepartments: data,
                     maxPage: newMax,
                 });
+                this.state.displayedDepartments.slice((this.state.currentPage - 1)*this.state.perPage, 
+                (this.state.currentPage*this.state.perPage)).map((item) =>{
+                    this.getTopInstructor(item.name); 
+                    this.getTopCourse(item.name); }); 
             });
         });
         this.setState({
@@ -140,7 +141,6 @@ export default class Departments extends Component {
     }
 
     changePages(button){
-        this.setState({displayedCourses: null, }); 
         var newPage = button.target.innerHTML; //reads the html of the pressed button 
         switch(newPage){
             case 'First':
@@ -151,6 +151,7 @@ export default class Departments extends Component {
                 break; 
         }
         this.setState({
+            displayedDepartments: null,
             currentPage:Number(newPage),
         }); 
         this.getEntries();
@@ -171,7 +172,7 @@ export default class Departments extends Component {
         this.setState({
             sortOption: filter.target.innerText, //reads the html of the pressed button 
             loaded: false, 
-            displayedCourses: null,
+            displayedDepartments: null,
         });
         
         this.getEntries(); 
