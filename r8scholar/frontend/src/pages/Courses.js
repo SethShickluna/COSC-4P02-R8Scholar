@@ -92,8 +92,11 @@ export default class Courses extends Component {
         this.setState({
             currentPage:Number(newPage),
         }); 
-       this.getEntries(this.state.currentPage);
-       
+        this.getEntries();
+        
+        this.setState({
+            loaded: true, 
+        });
     }
 
     activateMenu(){

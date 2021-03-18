@@ -31,8 +31,11 @@ export default class Courses extends Component {
     }
 
     componentDidMount() {
-        this.getEntries(this.state.currentPage); 
+        this.getEntries(); 
+
     }
+
+    
 
     getDepartmentRatings = async(name) => { 
         await fetch("/api/get-department?name="+name).then((response) => {
@@ -63,6 +66,8 @@ export default class Courses extends Component {
                 case "Rating: High to Low":
                 case "rating: Low to High":
                     return "rating_high_low"; 
+                case "Department":
+                    return "department";
                 default: 
                     return "name";
             }
@@ -78,27 +83,27 @@ export default class Courses extends Component {
         
         await fetch("/api/filter-instructorlist", request)
             .then((response) => { response.json().then((data) => {
-                console.log(data);
                 if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 
                     data = data.reverse(); 
                 }   
                 var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1); 
-                /*data.map((item) =>{
-                    this.getDepartmentRatings(item.department); 
-                });*/
                 this.setState({ 
                     displayedInstructors: data,
                     maxPage: newMax,
                 });
+                this.state.displayedInstructors.slice((this.state.currentPage - 1)*this.state.perPage, 
+                (this.state.currentPage*this.state.perPage)).map((item) =>{
+                this.getDepartmentRatings(item.department)}); 
             });
         });
+
         this.setState({
             loaded: true, 
         }); 
     }
 
     changePages(button){
-        this.setState({displayedCourses: null, }); 
+        this.setState({displayedInstructors: null, }); 
         var newPage = button.target.innerHTML; //reads the html of the pressed button 
         switch(newPage){
             case 'First':
@@ -111,8 +116,11 @@ export default class Courses extends Component {
         this.setState({
             currentPage:Number(newPage),
         }); 
-       this.getEntries(this.state.currentPage);
-       
+        this.getEntries();
+
+        this.setState({
+            loaded: true, 
+        });
     }
 
     activateMenu(){
@@ -130,6 +138,11 @@ export default class Courses extends Component {
         });
         
         this.getEntries(); 
+
+        this.state.displayedInstructors.slice((this.state.currentPage - 1)*this.state.perPage, 
+        (this.state.currentPage*this.state.perPage)).map((item) =>{
+            this.getDepartmentRatings(item.department)
+        }); 
     }  
 
     render() {
@@ -225,7 +238,7 @@ export default class Courses extends Component {
                                             numberOfStars={5}
                                             name='avgRating'/>
                                         </th>
-                                        <th><a style={linkStyle} href={"/department/"+item.department}>{item.department}</a></th>
+                                        <th style={{maxWidth:"220px"}}><a style={linkStyle} href={"/department/"+item.department}>{item.department}</a></th>
                                         <th style={{minWidth:"100px"}}><StarRatings
                                             rating={this.state.departmentRatings[item.department]}
                                             starDimension="25px"
