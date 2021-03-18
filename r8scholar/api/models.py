@@ -74,7 +74,7 @@ class CustomUser(AbstractBaseUser):
         return self.is_admin
 
 class Department(models.Model):
-    name = models.CharField(max_length=75,default=None,primary_key=True)
+    name = models.CharField(max_length=100,default=None,primary_key=True)
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
