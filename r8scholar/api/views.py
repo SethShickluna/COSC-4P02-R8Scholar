@@ -285,6 +285,10 @@ class filterCourseListBy(APIView):
             #Get list of courses sorted by rating
             for course in courses.order_by('-rating'): #negative rating for high to low 
                 course_list.append(CourseSerializer(course).data)
+        #Get list of courses sorted by department
+        elif(str(filter_by)=="department"):
+            for course in courses.order_by('department'):
+                course_list.append(CourseSerializer(course).data)
         else: #default alphabetical 
             for course in courses.order_by('name'):
                 course_list.append(CourseSerializer(course).data)
@@ -306,6 +310,7 @@ class filterInstructorListBy(APIView):
             #Get list of courses sorted by rating
             for instructor in instructors.order_by('-rating'): #negative rating for high to low 
                 instructor_list.append(InstructorSerializer(instructor).data)
+        #Get list of instructors sorted by department
         elif(str(filter_by)=="department"):
             for instructor in instructors.order_by('department'): #negative rating for high to low 
                 instructor_list.append(InstructorSerializer(instructor).data)
