@@ -143,6 +143,7 @@ export default class ReviewForm extends Component {
                         (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                         <Form.Label>{question}</Form.Label>
                             <Form.Control onChange={index === 1 ?this.updateRating1 : index === 2 ? this.updateRating2 : this.updateRating3} as="select">
+                                <option>0</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>

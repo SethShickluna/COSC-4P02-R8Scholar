@@ -364,7 +364,7 @@ class CreateUserView(APIView):
             #user.is_verified =True
             user.save()
             #Uses email sending script called email_sender.py
-            #email_user(user.email,user.verification_code)
+            email_user(user.email,user.verification_code)
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         else:
             return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
