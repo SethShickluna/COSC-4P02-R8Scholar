@@ -227,9 +227,6 @@ export default class Course extends Component {6
                                 : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
                                 /* generate all the reviews for this page */} 
                                 </Tab>
-                                <Tab eventKey="forums" title="Forums">
-                                    <h6>Nothing to show yet; come back soon!</h6>
-                                </Tab>
                                 <Tab eventKey="create-review" title="Create Review">
                                 {cookie.load('isLoggedIn') === "true" ? 
                                         (<ReviewForm name={this.state.name} review="department"/>)

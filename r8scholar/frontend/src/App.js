@@ -22,7 +22,6 @@ import Instructor from "./pages/Instructor";
 import Course from "./pages/Course";
 import Courses from "./pages/Courses";
 import Signup from "./pages/Signup";
-import Forum from "./pages/Forum";
 import PageNotFound from "./pages/PageNotFound";
 import Profile from "./pages/Profile"; 
 import Settings from "./pages/Settings"; 
@@ -54,7 +53,6 @@ export default class App extends Component {
                     <Route path="/verify" component={Verification} />
                     <Route exact path="/courses" component={Courses} />
                     <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/forum" component={Forum} />
                     <Route exact path="/account" component={Profile} />
                     <Route exact path="/settings" component={Settings} />   
                     <Route exact path="/signout" component={Signout} />

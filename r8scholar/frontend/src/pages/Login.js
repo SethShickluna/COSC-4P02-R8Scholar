@@ -29,7 +29,8 @@ export default class Login extends Component {
                             <LoginForm/>
                         </div>
                         <div><Button onClick={this.hide}>Help?</Button></div> 
-                        <div id="helpDIV" style={{display: "none", color: "white", border: '10px', backgroundColor:"black", marginTop: '5%'}}>
+                        <div id="helpDIV" style={{display: "none", color: "white", border: '10px', backgroundColor:"DodgerBlue", marginTop: '5%', fontWeight: 'bold', borderRadius:"10px" 
+                    }}>
                         Password: has minimum 10 characters, at least one capital & lowercase letter, and a number.</div>
                             <div style={{paddingTop: '25%', textAlign: "center"}}>
                               <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
