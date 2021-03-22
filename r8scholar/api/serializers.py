@@ -71,6 +71,18 @@ class CreateReviewSerializer(serializers.ModelSerializer):
         fields = ('nickname','subject','title', 'content', 
         'rating','review_type')
 
+#Review serializers
+class EditReviewSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Review
+        fields = ('review_id','subject','title', 'content', 
+        'rating','review_type')
+
+class DeleteReviewSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Review
+        fields = ('review_id')
+
 #Authentication serializers
 class loginLogoutSerializer(serializers.ModelSerializer):
     class Meta:
