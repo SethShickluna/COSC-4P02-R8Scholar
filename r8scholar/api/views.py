@@ -11,14 +11,16 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project files# 
 from .serializers import (UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DepartmentSerializer, 
-InstructorSerializer, ForumSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, 
-loginLogoutSerializer, VerificationSerializer, SearchSerializer)
+InstructorSerializer, TicketSerializer, CreateUserSerializer, CreateReviewSerializer, 
+loginLogoutSerializer, VerificationSerializer, SearchSerializer,UserReviewSerializer, UserCommentSerializer)
 from .email_sender import email_user
 
 from itertools import chain
 from drf_multiple_model.views import ObjectMultipleModelAPIView
+from drf_multiple_model.viewsets import ObjectMultipleModelAPIViewSet
 
-from .models import CustomUser, Review, Comment, Course, Department, Instructor, Forum, Ticket
+
+from .models import CustomUser, Review, Comment, Course, Department, Instructor, Ticket, UserReviews, UserComments
 
 import json 
 
@@ -47,16 +49,22 @@ class InstructorView(generics.ListAPIView):
     serializer_class = InstructorSerializer
     queryset = Instructor.objects.all()
 
-class ForumView(generics.ListAPIView):
-    serializer_class = ForumSerializer
-    queryset = Forum.objects.all()
-
 class TicketView(generics.ListAPIView):
     serializer_class = TicketSerializer
     queryset = Ticket.objects.all()
 
+class UserReviewView(generics.ListAPIView):
+    serializer_class = UserReviewSerializer
+    queryset = UserReviews.objects.all()
+
+class UserCommentView(generics.ListAPIView):
+    serializer_class = UserCommentSerializer
+    queryset = UserComments.objects.all()
+
+
 #search view
 class SearchView(ObjectMultipleModelAPIView):
+
     querylist = (
         {'queryset': Course.objects.all(), 'serializer_class': CourseSerializer},
         {'queryset': Instructor.objects.all(), 'serializer_class': InstructorSerializer},
@@ -64,7 +72,7 @@ class SearchView(ObjectMultipleModelAPIView):
         
     )
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('name',)
+    search_fields = ['name','course_full_name']
 
     
 
@@ -75,7 +83,7 @@ class SearchInstructorView(generics.ListCreateAPIView):
     serializer_class = InstructorSerializer
 
 class SearchCourseView(generics.ListCreateAPIView):
-    search_fields = ['name']
+    search_fields = ['name','course_full_name']
     filter_backends = (filters.SearchFilter,)
     queryset = Course.objects.all()
     serializer_class = CourseSerializer

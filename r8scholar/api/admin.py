@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Comment, Course, CustomUser, Department, Forum, Instructor, Review, Ticket
+from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket, UserReviews
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
@@ -70,6 +70,9 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
+class UserReviewAdmin(admin.ModelAdmin):
+    list_display = ('email', 'review_id')
+
 class ReviewAdmin(admin.ModelAdmin):
     list_display =  ('review_id', 'reviewer', 'nickname', 'subject', 'title','content',
         'rating', 'numb_reports','date_created', 'department_name', 'instructor_name', 
@@ -87,9 +90,6 @@ class InstructorAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('comment_id', 'review_id', 'name', 'content', 'child', 'date', 'numb_reports')
 
-class ForumAdmin(admin.ModelAdmin):
-    list_display = ('nickname_id', 'title', 'comment')
-
 class TicketAdmin(admin.ModelAdmin):
     list_display = ('email', 'content', 'date')
 
@@ -100,6 +100,5 @@ admin.site.register(Department,DepartmentAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Instructor, InstructorAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Forum, ForumAdmin)
 admin.site.register(Ticket, TicketAdmin)
 
