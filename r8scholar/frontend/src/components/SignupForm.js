@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Button, Card} from 'react-bootstrap'; 
 import {withRouter} from 'react-router-dom'; 
 import cookie from 'react-cookies'; 
+import CustomPopover from "./CustomPopover";
 
 
 const formStyle = {
@@ -20,7 +21,6 @@ class SignupForm extends Component {
             password: "", 
             verifPassword: "", 
             email: "", 
-            termsAgreed: false, 
             formComplete: false, 
         }
 
@@ -29,7 +29,6 @@ class SignupForm extends Component {
         this.updatePasswordInput = this.updatePasswordInput.bind(this);
         this.updateUsernameInput = this.updateUsernameInput.bind(this);
         this.updateVerifyPasswordInput = this.updateVerifyPasswordInput.bind(this); 
-
         this.submitForm = this.submitForm.bind(this);
         this.checkPassword = this.checkPassword.bind(this); 
         this.checkEmail = this.checkEmail.bind(this);
@@ -150,6 +149,8 @@ class SignupForm extends Component {
                             <Button type="submit" variant="primary">
                                 Register 
                             </Button>
+                            <div style={{marginTop:"2%"}}/>
+                            <CustomPopover index={0}/>
                         </Form>
                     </Card.Body>
                 </Card>

@@ -282,7 +282,36 @@ export default class Departments extends Component {
                         </Col>
                         <Col className="col-md-1"/>
                     </Row>
-                    
+                    <div style={{marginBottom:"3%"}}/>
+                    <nav aria-label="Page navigation example">
+                        <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                            <PaginationItem color="danger">
+                                <PaginationLink onClick={this.changePages}href="#">
+                                    First
+                                </PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem disabled={this.state.currentPage - 1 < 1}>
+                                <PaginationLink onClick={this.changePages} href="#">
+                                    {this.state.currentPage - 1}
+                                </PaginationLink>
+                            </PaginationItem >
+                            <PaginationItem className="active">
+                                <PaginationLink onClick={this.changePages} href="#">
+                                    {this.state.currentPage}
+                                </PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
+                                <PaginationLink onClick={this.changePages} href="#">
+                                    {this.state.currentPage + 1}
+                                </PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationLink onClick={this.changePages} href='#'>
+                                    Last
+                                </PaginationLink>
+                            </PaginationItem>
+                        </Pagination>
+                    </nav>
                 </Container>
                     
             </div>

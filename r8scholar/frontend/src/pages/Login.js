@@ -7,18 +7,7 @@ export default class Login extends Component {
     constructor() {
         super();
 
-        this.hide = this.hide.bind(this);
-    }
-
-    hide = () => {
-        var x = document.getElementById("helpDIV");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-    
+    }  
 
     render() {
         return ( 
@@ -27,13 +16,9 @@ export default class Login extends Component {
                         <div className="container">
                         <div className="title-brand">
                             <LoginForm/>
-                        </div>
-                        <div><Button onClick={this.hide}>Help?</Button></div> 
-                        <div id="helpDIV" style={{display: "none", color: "white", border: '10px', backgroundColor:"DodgerBlue", marginTop: '5%', fontWeight: 'bold', borderRadius:"10px" 
-                    }}>
-                        Password: has minimum 10 characters, at least one capital & lowercase letter, and a number.</div>
+                        </div> 
                             <div style={{paddingTop: '25%', textAlign: "center"}}>
-                              <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "bold", textAlign: "center" }} href="/"> Return Home</a> </Button>
+                              <Button> <a style={{color:"white", borderColor:"black", border:'10px', fontWeight: "normal", textAlign: "center" }} href="/"> Return Home</a> </Button>
                             </div>
                         </div>
                     </div>

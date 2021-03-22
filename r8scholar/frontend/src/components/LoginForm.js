@@ -3,6 +3,9 @@ import {Form, Button, Card} from 'react-bootstrap';
 import cookie from 'react-cookies'; 
 import {Link, withRouter} from 'react-router-dom'; 
 
+import CustomPopover from "./CustomPopover";
+
+
 
 const formStyle = {
     //textAlign: 'center',
@@ -94,6 +97,8 @@ class LoginForm extends Component {
                             <Button style={buttonStyle} variant="primary" as={Link} to='/Signup'>
                                 Register
                             </Button>
+                            <div style={{marginTop:"2%"}}/>
+                            <CustomPopover index={1}/>
                         </Form>
                     </Card.Body>
                 </Card>
