@@ -11,8 +11,9 @@ urlpatterns = [
     path('courses', views.CourseView.as_view()), 
     path('departments', views.DepartmentView.as_view()), 
     path('instructors', views.InstructorView.as_view()),
-    path('forum', views.ForumView.as_view()), 
     path('ticket', views.TicketView.as_view()),
+    path('user-reviews', views.UserReviewView.as_view()),
+    path('user-comments', views.UserCommentView.as_view()),
     #searchviews
     path('search-instructors/', views.SearchInstructorView.as_view()),
     path('search-courses/', views.SearchCourseView.as_view()),

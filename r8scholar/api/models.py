@@ -34,9 +34,8 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
     nickname = models.CharField(max_length=25,unique=True,default=uuid.uuid4)
     password = models.CharField(max_length=100,validators=[password_validator])
-    reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
-    comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
-    forum_posts = models.ForeignKey('Forum',default=None, null=True, on_delete = models.DO_NOTHING)
+    # reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
+    # comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
     is_admin = models.BooleanField(default=False)
     min_length = models.IntegerField('min_length',default=4)
@@ -73,11 +72,13 @@ class CustomUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+
 class Department(models.Model):
     name = models.CharField(max_length=100,default=None,primary_key=True)
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
+    course_full_name= models.CharField(max_length=30, default=None, null=True)
 
     class Meta:
         ordering = ['name']
@@ -125,6 +126,7 @@ class Instructor(models.Model):
     name  = models.CharField(max_length=50,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
+    course_full_name= models.CharField(max_length=30, default=None, null=True)
 
     class Meta:
         ordering = ['name']
@@ -145,10 +147,10 @@ class Course(models.Model):
     name = models.CharField(max_length=40, unique=True,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
-    course_full_name  = models.CharField(max_length=30,default=None)
+    course_full_name  = models.CharField(max_length=40,default=None)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['name', 'course_full_name']
 
     def update_rating(self): # NEEDS TESTING #
         count = 0
@@ -181,14 +183,25 @@ class Review(models.Model):
     def _str_(self):
         return self.reviewer
 
-class Forum(models.Model):
-    
-    nickname_id = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
-    title = models.CharField(max_length=40)
-    comment = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
 
 class Ticket(models.Model):
     email = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
     content = models.TextField(default=None, null=True)
     date = models.DateTimeField(default=None, null=True)
 
+class UserReviews(models.Model):
+    email = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
+    review_id = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['email', 'review_id'], name='user_review_key')
+        ]
+
+class UserComments(models.Model):
+    email = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
+    review_id = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
+    comment_id = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['email', 'review_id', 'comment_id'], name='user_comment_key')
+        ]
