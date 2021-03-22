@@ -1,45 +1,54 @@
 #Django#
-from django.urls import path, include
+from django.urls import path
 #Project Files#
-from . import views
+from .views import list_views
+from .views import search_views
+from .views import get_views 
+from .views import filter_views 
+from .views import create_views 
+from .views import authentication_views 
+from .views import edit_user_views 
+from .views import functionality_views 
+
 
 urlpatterns = [
     #list views 
-    path('users', views.UserView.as_view(),name='users'),
-    path('reviews', views.ReviewView.as_view()),
-    path('comment', views.CommentView.as_view()), 
-    path('courses', views.CourseView.as_view()), 
-    path('departments', views.DepartmentView.as_view()), 
-    path('instructors', views.InstructorView.as_view()),
-    path('ticket', views.TicketView.as_view()),
-    path('user-reviews', views.UserReviewView.as_view()),
-    path('user-comments', views.UserCommentView.as_view()),
+    path('users', list_views.UserView.as_view(),name='users'),
+    path('reviews', list_views.ReviewView.as_view()),
+    path('comment', list_views.CommentView.as_view()), 
+    path('courses', list_views.CourseView.as_view()), 
+    path('departments', list_views.DepartmentView.as_view()), 
+    path('instructors', list_views.InstructorView.as_view()),
+    path('ticket', list_views.TicketView.as_view()),
+    path('user-reviews', list_views.UserReviewView.as_view()),
+    path('user-comments', list_views.UserCommentView.as_view()),
     #searchviews
-    path('search-instructors/', views.SearchInstructorView.as_view()),
-    path('search-courses/', views.SearchCourseView.as_view()),
-    path('search-department/', views.SearchDeptView.as_view()),
-    path('search/', views.SearchView.as_view()),
+    path('search-instructors/', search_views.SearchInstructorView.as_view()),
+    path('search-courses/', search_views.SearchCourseView.as_view()),
+    path('search-department/', search_views.SearchDeptView.as_view()),
+    path('search/', search_views.SearchView.as_view()),
     #get views 
-    path('get-user', views.GetUser.as_view()), 
-    path('get-reviews', views.GetReviewsView.as_view()), 
-    path('get-course',views.GetCourseView.as_view(),name='get-course'),
-    path('get-department',views.GetDepartmentView.as_view(),name='get-department'),
-    path('get-instructor',views.GetInstructorView.as_view(),name='get-instructor'),
-    path('get-top-courses', views.getTopCourses.as_view()), 
-    path('get-top-instructors', views.getTopInstructors.as_view()), 
-    path('get-top-departments', views.getTopDepartments.as_view()), 
+    path('get-user', get_views.GetUser.as_view()), 
+    path('get-reviews', get_views.GetReviewsView.as_view()), 
+    path('get-course',get_views.GetCourseView.as_view(),name='get-course'),
+    path('get-department',get_views.GetDepartmentView.as_view(),name='get-department'),
+    path('get-instructor',get_views.GetInstructorView.as_view(),name='get-instructor'),
+    path('get-top-courses', get_views.getTopCourses.as_view()), 
+    path('get-top-instructors', get_views.getTopInstructors.as_view()), 
+    path('get-top-departments', get_views.getTopDepartments.as_view()), 
     #Filter views
-    path('filter-courselist',views.filterCourseListBy.as_view(),name='filter-courselist'),
-    path('filter-departmentlist',views.filterDepartmentListBy.as_view(),name='filter-courselist'),
-    path('filter-instructorlist',views.filterInstructorListBy.as_view(),name='filter-instructorlist'),
+    path('filter-courselist',filter_views.filterCourseListBy.as_view(),name='filter-courselist'),
+    path('filter-departmentlist',filter_views.filterDepartmentListBy.as_view(),name='filter-departmentlist'),
+    path('filter-instructorlist',filter_views.filterInstructorListBy.as_view(),name='filter-instructorlist'),
     #create views 
-    path('create-user', views.CreateUserView.as_view()), 
-    path('create-review', views.CreateReviewView.as_view()), 
+    path('create-user', create_views.CreateUserView.as_view()), 
+    path('create-review', create_views.CreateReviewView.as_view()), 
     #authentication views
-    path('login/',views.login.as_view(),name = 'login'),
-    path('logout',views.logout.as_view(),name = 'logout'),
-    path('change-nickname',views.change_nickname.as_view(),name='change-nickname'),
-    path('change-password',views.change_password.as_view(),name = 'change-password'),
+    path('login/',authentication_views.login.as_view(),name = 'login'),
+    path('logout',authentication_views.logout.as_view(),name = 'logout'),
+    #edit user views
+    path('change-nickname',edit_user_views.change_nickname.as_view(),name='change-nickname'),
+    path('change-password',edit_user_views.change_password.as_view(),name = 'change-password'),
     #functionality views 
-    path('verify-user', views.VerifyUserView.as_view())
+    path('verify-user', functionality_views.VerifyUserView.as_view())
 ]
