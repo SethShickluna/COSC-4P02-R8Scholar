@@ -3,8 +3,27 @@ from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project Files
-from ..models import Review, Course, Department, Instructor
-from ..serializers import (DeleteReviewSerializer, ReviewSerializer, EditReviewSerializer)
+from ..models import CustomUser, Review, Course, Department, Instructor, UserReviews
+from ..serializers import (DeleteReviewSerializer, ReportReviewSerializer, ReviewSerializer, EditReviewSerializer)
+from .email_report import email_r8scholar
+
+#Notifies admins of a review being reported
+class ReportReview(APIView):
+    serializer_class = ReportReviewSerializer
+    def post(self,request, format =None):
+        serializer = self.serializer_class(data=request.data)
+        #Make sure data conforms to the constraints of the database models
+        if serializer.is_valid():
+            #Data from frontend
+            review_id = serializer.data['review_id']
+            report_description = serializer.data['report_description']
+            #Get data on user who created the review
+            user = CustomUser.objects.get(email = UserReviews.objects.get(review_id=review_id).email)
+            #Get data on review that was reported
+            review = Review.objects.get(review_id=review_id)
+            #Increment report counter 
+            review.numb_reports += 1
+            email_r8scholar(review_id,report_description,review.numb_reports,user.email,user.nickname,review.subject,review.title,review.content)
 
 #Deletes an existing review
 class DeleteReviewView(APIView):

@@ -83,6 +83,11 @@ class DeleteReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ('review_id')
 
+class ReportReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ('review_id','report_description')
+
 #Authentication serializers
 class loginLogoutSerializer(serializers.ModelSerializer):
     class Meta:
