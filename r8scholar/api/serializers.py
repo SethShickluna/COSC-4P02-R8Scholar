@@ -2,11 +2,28 @@
 from rest_framework import serializers
 #Project Files#
 from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket, UserReviews, UserComments
+from .validators import password_validator
 
 class UserSerializer(serializers.ModelSerializer):
+
+    email = serializers.EmailField(
+        required=True
+    )
+    nickname = serializers.CharField()
+    password = serializers.CharField(min_length=10, write_only=True, validators=[password_validator])
     class Meta:
         model = CustomUser
-        fields = ('email', 'nickname', 'password', 'is_verified', 'verification_code')
+        fields = ('email', 'nickname', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+    
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

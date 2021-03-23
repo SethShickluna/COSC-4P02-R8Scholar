@@ -3,7 +3,7 @@ from ..models import CustomUser, Review, Course, Department, Instructor
 from ..serializers import (UserSerializer, ReviewSerializer, CourseSerializer, DepartmentSerializer, 
 InstructorSerializer)
 #REST
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Python
@@ -13,6 +13,7 @@ import json
 class GetUser(APIView):
     serializer_class = UserSerializer
     lookup_url_kwarg = 'email'
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         email = request.GET.get(self.lookup_url_kwarg)
@@ -30,6 +31,7 @@ class GetUser(APIView):
 class GetReviewsView(APIView): 
     serializer_class = ReviewSerializer
     lookup_url_kwarg = 'subject'
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         subject = request.GET.get(self.lookup_url_kwarg)
@@ -47,6 +49,7 @@ class GetReviewsView(APIView):
 class GetCourseView(APIView): 
     serializer_class = CourseSerializer
     lookup_url_kwarg = 'name'
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         name = request.GET.get(self.lookup_url_kwarg)
@@ -62,6 +65,7 @@ class GetCourseView(APIView):
 class GetDepartmentView(APIView): 
     serializer_class = DepartmentSerializer
     lookup_url_kwarg = 'name'
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         name = request.GET.get(self.lookup_url_kwarg)
@@ -77,6 +81,7 @@ class GetDepartmentView(APIView):
 class GetInstructorView(APIView): 
     serializer_class = InstructorSerializer
     lookup_url_kwarg = 'name'
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         name = request.GET.get(self.lookup_url_kwarg)
@@ -90,7 +95,7 @@ class GetInstructorView(APIView):
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
 class getTopCourses(APIView): #im only going to comment this one because instructors is the exact same 
-    
+    permission_classes = (permissions.AllowAny,)
     def post(self,request):
         data = json.loads(request.body.decode("utf-8")) #info is given by a post request
         department = data['department']#since we need both a departmant and an amount 
@@ -132,6 +137,7 @@ class getTopCourses(APIView): #im only going to comment this one because instruc
             return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class getTopInstructors(APIView):
+    permission_classes = (permissions.AllowAny,)
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         department = data['department']
@@ -173,6 +179,7 @@ class getTopInstructors(APIView):
             return Response({"Invalid Request":"Courses not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class getTopDepartments(APIView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = DepartmentSerializer
     lookup_url_kwarg = 'amount'
 

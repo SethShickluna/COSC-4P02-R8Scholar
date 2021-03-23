@@ -1,7 +1,8 @@
 #REST
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 #Project Files
 from ..models import CustomUser, Review, Course, Department, Instructor
 from ..serializers import (UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer)
@@ -9,26 +10,18 @@ from ..email_sender import email_user
 
 #creates a new custom user
 class CreateUserView(APIView): 
-    serializer_class = CreateUserSerializer
-    
-    def post(self, request, format=None): 
-        #checks for or creates an active session with the server -- might not matter 
-        if not self.request.session.exists(self.request.session.session_key):
-            self.request.session.create()
+    permission_classes = (permissions.AllowAny,)
 
-        serializer = self.serializer_class(data=request.data)
+    def post(self, request, format='json'): 
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=False):
-            email = serializer.data.get('email')
-            nickname = serializer.data.get('nickname')
-            password = serializer.data.get('password')
-            user = CustomUser.objects.create_user(email=email, nickname=nickname, password=password)
-            user.nickname = nickname
-            user.save()
-            #Uses email sending script called email_sender.py
-            email_user(user.email,user.verification_code)
-            return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
+            user = serializer.save()
+            if user: 
+                response = serializer.data 
+                email_user(user.email,user.verification_code)
+                return Response(response, status=status.HTTP_201_CREATED)
         else:
-            return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #Creates a new review of a course/instructor/department
 class CreateReviewView(APIView):

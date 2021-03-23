@@ -22,9 +22,10 @@ export default class Home extends Component {
             this.getTopCourses(); 
             this.getTopDepartments(); 
             this.getTopInstructors();
+            this.getToken(); 
         }, 200);
     }
-
+    
     
     getTopInstructors = async() => { 
         const request = { 

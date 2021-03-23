@@ -1,5 +1,8 @@
 #Django#
 from django.urls import path
+#Django REST framework* 
+from rest_framework_simplejwt import views as jwt_views
+ #token based authentication views 
 #Project Files#
 from .views import list_views
 from .views import search_views
@@ -12,6 +15,9 @@ from .views import functionality_views
 from .views import review_views
 
 urlpatterns = [
+    #token based authentication views 
+    path('token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     #list views 
     path('users', list_views.UserView.as_view(),name='users'),
     path('reviews', list_views.ReviewView.as_view()),
@@ -41,7 +47,7 @@ urlpatterns = [
     path('filter-departmentlist',filter_views.filterDepartmentListBy.as_view(),name='filter-departmentlist'),
     path('filter-instructorlist',filter_views.filterInstructorListBy.as_view(),name='filter-instructorlist'),
     #create views 
-    path('create-user', create_views.CreateUserView.as_view()), 
+    path('create-user', create_views.CreateUserView.as_view(), name="create-user"), 
     path('create-review', create_views.CreateReviewView.as_view()), 
     #Review views
     path('edit-review',review_views.EditReviewView.as_view(),name='edit-review'),

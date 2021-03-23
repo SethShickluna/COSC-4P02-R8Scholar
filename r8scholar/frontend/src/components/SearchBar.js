@@ -120,8 +120,7 @@ class SearchBar extends Component {
                                                       "/" +
                                                       this.determineType(item)
                                                   }
-                                                  style={linkStyle}
-                                              >
+                                                  style={linkStyle}>
                                                   {item.name}
                                               </DropdownItem>
                                           </div>

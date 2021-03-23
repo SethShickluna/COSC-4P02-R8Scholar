@@ -2,7 +2,7 @@
 from ..models import Course, Department, Instructor
 from ..serializers import (CourseSerializer, DepartmentSerializer, InstructorSerializer)
 #REST
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Python
@@ -14,6 +14,7 @@ import json
 # sample data:
 # {"filter_by":"rating_high_low"}
 class filterCourseListBy(APIView):
+    permission_classes = (permissions.AllowAny,)
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
@@ -38,8 +39,8 @@ class filterCourseListBy(APIView):
 # amount will specifiy how many instructors should be in the returned list
 # filter_by will specify which filter to use one the instructor list
 class filterInstructorListBy(APIView):
-
-     def post(self,request):
+    permission_classes = (permissions.AllowAny,)
+    def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
 
@@ -65,7 +66,7 @@ class filterInstructorListBy(APIView):
 # amount will specifiy how many departments should be in the returned list
 # filter_by will specify which filter to use one the department list
 class filterDepartmentListBy(APIView):
-
+    permission_classes = (permissions.AllowAny,)
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
