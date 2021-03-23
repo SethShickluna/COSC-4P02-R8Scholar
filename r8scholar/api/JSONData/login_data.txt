@@ -1,2 +1,0 @@
-{"email":"gn17az@brocku.ca", "password":"Homologicus123"}
-{"email":"gn17az@brocku.ca", "old_password":"Homologicus123","new_password":"Homologicus420"}

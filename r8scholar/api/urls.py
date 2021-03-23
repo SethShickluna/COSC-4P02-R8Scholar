@@ -46,6 +46,7 @@ urlpatterns = [
     #Review views
     path('edit-review',review_views.EditReviewView.as_view(),name='edit-review'),
     path('delete-review',review_views.DeleteReviewView.as_view(),name='delete-review'),
+    path('report-review',review_views.ReportReview.as_view(),name='report-review'),
     #authentication views
     path('login/',authentication_views.login.as_view(),name = 'login'),
     path('logout',authentication_views.logout.as_view(),name = 'logout'),
