@@ -20,8 +20,6 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
     nickname = models.CharField(max_length=25,unique=True,default=uuid.uuid4)
     password = models.CharField(max_length=100,validators=[password_validator])
-    # reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
-    # comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
     is_admin = models.BooleanField(default=False)
     min_length = models.IntegerField('min_length',default=4)
@@ -174,9 +172,9 @@ class Review(models.Model):
 class Comment(models.Model):
     comment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #Relates review to comment
-    review = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
+    review = models.ForeignKey(Review,default=None, on_delete = models.DO_NOTHING)
     #Relates user to comment
-    commenter = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
+    commenter = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
     name = models.CharField(max_length=32)
     content = models.TextField(default=None)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
@@ -185,7 +183,7 @@ class Comment(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
+            models.UniqueConstraint(fields=['comment_id'], name='comment_key')
         ]
 
 

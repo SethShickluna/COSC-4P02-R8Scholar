@@ -3,7 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project Files
-from ..models import CustomUser, Review, Course, Department, Instructor, UserReviews
+from ..models import CustomUser, Review, Course, Department, Instructor
 from ..serializers import (DeleteReviewSerializer, ReportReviewSerializer, ReviewSerializer, EditReviewSerializer)
 from .email_report import email_r8scholar
 

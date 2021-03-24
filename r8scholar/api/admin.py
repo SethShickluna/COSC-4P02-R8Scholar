@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket, UserReviews
+from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
