@@ -33,7 +33,7 @@ urlpatterns = [
     path('get-instructor',get_views.GetInstructorView.as_view(),name='get-instructor'),
     path('get-top-courses', get_views.getTopCourses.as_view()), 
     path('get-top-instructors', get_views.getTopInstructors.as_view()), 
-    path('get-top-departments', get_views.getTopDepartments.as_view()), 
+    path('get-top-departments/', get_views.getTopDepartments.as_view()), 
     #Filter views
     path('filter-courselist',filter_views.filterCourseListBy.as_view(),name='filter-courselist'),
     path('filter-departmentlist',filter_views.filterDepartmentListBy.as_view(),name='filter-departmentlist'),
