@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Button, Card} from 'react-bootstrap'; 
 import cookie from 'react-cookies'; 
 import {Link, withRouter} from 'react-router-dom'; 
+import axiosInstance from "../axiosApi";
 
 import CustomPopover from "./CustomPopover";
 
@@ -27,54 +28,40 @@ class LoginForm extends Component {
             password: "", 
         }
         
-        this.updateEmailInput = this.updateEmailInput.bind(this);
-        this.updatePasswordInput = this.updatePasswordInput.bind(this);
+        this.handleInput = this.handleInput.bind(this);
 
         this.submitForm = this.submitForm.bind(this); 
     }
 
-    updateEmailInput(obj){
-        this.setState({
-            email: obj.target.value, 
-        });
+    handleInput(obj){
+        this.setState({[obj.target.name]: obj.target.value}); 
     }
 
-    updatePasswordInput(obj){
-        this.setState({
-            password: obj.target.value, 
-        });
-    }
-
-    submitForm = e => {
+    
+    /**
+     * need to display error codes to user: TODO
+     * 401 = incorrect username or password 
+    */
+    async submitForm (e) {
         e.preventDefault(); //stop a reload
-        //send info to backend 
-        console.log("hi")
-        let length = this.state.email.length; 
-        if(length > 10){ // otherwise the next line would be problematic 
-            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){ //brock email check 
-                const request = { 
-                    method: "POST",
-                    headers: { "Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        email: this.state.email, 
-                        password: this.state.password, 
-                    }),
-                }; 
-                fetch("/api/login/", request)
-                .then((response) => {
-                    if(response.ok){ //yay
-                        cookie.save("isLoggedIn", "true", {path:"/"}); 
-                        cookie.save("email", this.state.email, {path: "/"}); 
-                        this.props.history.push('/');
-                    }else{//nay 
-                        alert("Invalid username or password please enter your information again...") //response message from backend
-                    }
-                });
-            }else{ 
-                alert("Make sure to use a brock email!");
+        
+        //attempt to get an authentication token via post request 
+        try { 
+            const response = await axiosInstance.post('/token/obtain/', { //note the use of async and await in this function 
+                email: this.state.email,
+                password: this.state.password
+            });
+            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+            cookie.save('email', this.state.email, {path: '/'}); 
+            cookie.save('isLoggedIn', "true", {path: '/'});
+            this.props.history.push('/');
+            return data;
+        }catch(error){
+            throw error; 
         }
     }
-}
 
     render() { 
         return (
@@ -85,11 +72,11 @@ class LoginForm extends Component {
                         <Form onSubmit={this.submitForm}>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter email" />
+                                <Form.Control name="email" type="email" onChange={this.handleInput} placeholder="Enter email" />
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updatePasswordInput} placeholder="Password" />
+                                <Form.Control name="password" type="password" onChange={this.handleInput} placeholder="Password" />
                             </Form.Group>
                             <Button style={buttonStyle}variant="primary" type="submit">
                                 Sign In

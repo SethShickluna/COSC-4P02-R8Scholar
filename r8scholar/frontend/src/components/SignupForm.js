@@ -6,63 +6,31 @@ import CustomPopover from "./CustomPopover";
 
 
 const formStyle = {
-    //textAlign: 'center',
     width: '30rem',
-    //justifyContent: 'center',
 }
-
-
 class SignupForm extends Component {
 
     constructor(props){
         super(props); 
         this.state = {
+            email: "", 
             username: "", 
             password: "", 
             verifPassword: "", 
-            email: "", 
-            formComplete: false, 
         }
 
         //allows us to this "this" inside the methods 
-        this.updateEmailInput = this.updateEmailInput.bind(this);
-        this.updatePasswordInput = this.updatePasswordInput.bind(this);
-        this.updateUsernameInput = this.updateUsernameInput.bind(this);
-        this.updateVerifyPasswordInput = this.updateVerifyPasswordInput.bind(this); 
+        this.handleInput = this.handleInput.bind(this);
+
         this.submitForm = this.submitForm.bind(this);
         this.checkPassword = this.checkPassword.bind(this); 
         this.checkEmail = this.checkEmail.bind(this);
         this.checkUsername = this.checkUsername.bind(this);
     }
 
-    updateEmailInput(obj){
-        this.setState({
-            email: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
-        }); 
+    handleInput(obj){
+        this.setState({[obj.target.name]: obj.target.value}); 
     }
-
-    updateUsernameInput(obj){
-        this.setState({
-            username: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
-        }); 
-    }
-
-    updatePasswordInput(obj){ 
-        this.setState({
-            password: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
-        });
-    }
-
-    updateVerifyPasswordInput(obj){
-        this.setState({
-            verifPassword: obj.target.value, 
-            formComplete: (this.checkPassword() && this.checkUsername() && this.checkEmail()),
-        });
-    }
-
 
     checkEmail = () => {
         //first check @brocku.ca
@@ -87,40 +55,33 @@ class SignupForm extends Component {
     }
     
 
-    //password boxes match and are at least 8 characters 
+    //password boxes match and are at least 10 characters 
     checkPassword = () => {
-        return this.state.password === this.state.verifPassword && this.state.password.length > 7;
+        return this.state.password === this.state.verifPassword && this.state.password.length >= 10;
     }
 
-    //min 4 character username (this is becuase i really want the username 'seth' but open to discussion of course)
+    //min 4 character username 
     checkUsername = () => {
-        return this.state.username.length > 3; 
+        return this.state.username.length >= 4; 
     }
 
-    submitForm = e => {
+    async submitForm(e) {
         e.preventDefault(); //stop a reload
-        this.checkEmail(); 
-        
-        const request = { 
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({
-                email: this.state.email, 
-                nickname: this.state.username,
-                password: this.state.password, 
-            }),
-        }; 
-        fetch("/api/create-user", request)
-        .then((response) => {
-            switch(response.status){
-                case 201: 
-                    cookie.save("email", this.state.email, {path: "/"}); 
-                    this.props.history.push('/verify');
-                    break; 
-                default:
-                    alert("Please enter valid data! Press help for more information."); 
+       
+        if(this.checkEmail() && this.checkUsername && this.checkPassword){
+            try {
+                const response = await axiosInstance.post('/user/create/', {
+                    nickname: this.state.nickname,
+                    email: this.state.email,
+                    password: this.state.password
+                });
+                return response;
+            } catch (error) {
+                 console.log(error.stack);
             }
-        });
+        }else{
+            //tell the user uh oh 
+        }
     }
 
     render() { 
@@ -132,19 +93,19 @@ class SignupForm extends Component {
                         <Form onSubmit={this.submitForm}>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" onChange={this.updateEmailInput} placeholder="Enter email" />
+                                <Form.Control type="email" onChange={this.handleInput} name="email"placeholder="Enter email" />
                             </Form.Group>
                             <Form.Group controlId="formGroupUsername">
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control type="username" onChange={this.updateUsernameInput} placeholder="Username" />
+                                <Form.Control type="username" oonChange={this.handleInput} name="username" placeholder="Username" />
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updatePasswordInput}  placeholder="Password" />
+                                <Form.Control type="password" onChange={this.handleInput} name="password" placeholder="Password" />
                             </Form.Group>
                             <Form.Group controlId="formGroupVerifPassword">
                                 <Form.Label>Re-enter Password</Form.Label>
-                                <Form.Control type="password" onChange={this.updateVerifyPasswordInput} placeholder="Password" />
+                                <Form.Control type="password" onChange={this.handleInput} name="verifPassword" placeholder="Password" />
                             </Form.Group>
                             <Button type="submit" variant="primary">
                                 Register 

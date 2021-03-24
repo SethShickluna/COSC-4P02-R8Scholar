@@ -40,13 +40,13 @@ class change_password(APIView):
         try:
             user = CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist as e:
-            return Response({'Bad Request': 'Invalid email...'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request': f'Invalid email...{e}'}, status=status.HTTP_400_BAD_REQUEST)
         
         if user.check_password(old_password):
             try:
                 validate_password(new_password)
             except ValidationError as e:
-                return Response({'Bad Request': 'New password must be at least ...'+e.message}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'Bad Request': f'New password must be at least ...{e}'}, status=status.HTTP_400_BAD_REQUEST)
             user.set_password(new_password)
             user.save()
             return Response({'Ok': 'Password Changed...'}, status=status.HTTP_200_OK)

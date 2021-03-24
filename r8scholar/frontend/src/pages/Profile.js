@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router";
 import { Container, Row, Col, Tab, Button } from "reactstrap";
 import ReviewItem from "../components/ReviewItem";
 import SecondaryNav from "../components/SecondaryNav";
@@ -9,6 +8,7 @@ import imageOne from "../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg";
 import $ from "jquery";
 import EditNicknameForm from "../components/EditNicknameForm";
 import EditPasswordForm from "../components/EditPasswordForm";
+import axiosInstance from "../axiosApi";
 
 const pageStyles = {
     margin: "0 auto",
@@ -16,14 +16,6 @@ const pageStyles = {
     width: "90%",
 };
 
-const buttonStyle = {
-    //height: '100vh',
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-    background: "red",
-};
 
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles
@@ -79,47 +71,45 @@ export default class Profile extends Component {
             reviews: null,
         };
 
-        this.verifyUser = this.verifyUser.bind(this);
-        this.getAllReviews = this.getAllReviews.bind(this);
-        this.changeConstant = this.changeConstant.bind(this);
-        this.constantName = null;
+        //this.getAllReviews = this.getAllReviews.bind(this);
     }
 
     componentDidMount() {
-        fetch("/api/get-user" + "?email=" + cookie.load("email"))
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState({
-                    // the data.<variable> is just an example and will need to be changed to reflect what the backend returns
-                    user: data,
-                });
-            });
+        this.authenicateUser(); //check their token --otherwise send them off this page 
     }
 
-    changeConstant() {
-        //change the nickname and get reviews from modified views.py
-        this.constantName = this.state.user.nickname;
-        this.getAllReviews(this.constantName);
+    async authenicateUser() { 
+        try {
+            const response = await axiosInstance.post('/token/refresh/', {
+                refresh: localStorage.getItem('refresh_token') 
+            });
+            this.getUser(); 
+            return response;//this is good we can stay 
+        } catch (error) {
+            this.props.history.push('/login');
+        }
     }
 
-    getAllReviews(name) {
-        //this is just to have but will need to be slightly refactored
-        //make changes to the views to allow this functionality.
-        return fetch("/api/get-reviews" + "?nickname=" + this.constantName)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return null;
-                }
-            })
-            .then((data) => {
-                this.setState({
-                    reviews: data,
-                    //loaded: true,
-                });
+    async getUser(){
+        try {
+            let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
+            const user = response.data;
+            this.setState({
+                user: user,
             });
+            //get a users reviews 
+            console.log("Getting Reviews"); 
+            return response;
+        }catch(error){
+            console.log("Hello error: ", JSON.stringify(error, null, 4));
+            // throw error; todo
+        }
     }
+
+    getAllReviews() {
+        console.log("Needs backend implementation")
+    }
+
 
     verifyUser() {
         var code = prompt(
@@ -146,10 +136,7 @@ export default class Profile extends Component {
     }
 
     render() {
-        console.log(cookie.load("isLoggeIn"));
-        return cookie.load("isLoggedIn") === "false" ? (
-            <Redirect to={"/login"} />
-        ) : (
+        return(
             <div>
                 <SecondaryNav />
                 {this.state.user ? (

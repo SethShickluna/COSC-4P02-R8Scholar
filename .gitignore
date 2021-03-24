@@ -7,7 +7,8 @@ __pycache__
 db.sqlite3
 media
 
-/api/migrations
+migrations/
+    frontend/migrations/
 
 # Backup files # 
 *.bak 
@@ -120,8 +121,6 @@ GitHub.sublime-settings
 
 # React 
 node_modules/
-/.build
-/r8scholar/frontend/static/
 
 # testing
 /coverage

@@ -14,7 +14,7 @@ getToken = async () => {
         .then((response) => {
             return response.json()
         }).then((data) =>{
-            localStorage.setItem("refreshToken", data.refresh);
-            localStorage.setItem("accessToken", data.access);
+            localStorage.setItem("refresh_token", data.refresh);
+            localStorage.setItem("access_token", data.access);
         })
 }

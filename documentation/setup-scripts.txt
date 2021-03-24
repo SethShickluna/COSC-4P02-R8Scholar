@@ -25,6 +25,7 @@ then
 
 npm i react-icons react-icons-kit react-star-ratings react-cookies jquery 
 
+npm install --save axios
 
 to run the program cd into /r8scholar (the directory with manage.py) 
 

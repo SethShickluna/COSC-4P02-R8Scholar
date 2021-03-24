@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import StarRatings from 'react-star-ratings';
 import {Container, Button, Row, Col,  Table, Spinner} from 'reactstrap'; 
+import axiosInstance from "../axiosApi"; 
 
 const linkStyle = {
     color: 'black',
@@ -22,7 +23,6 @@ export default class Home extends Component {
             this.getTopCourses(); 
             this.getTopDepartments(); 
             this.getTopInstructors();
-            this.getToken(); 
         }, 200);
     }
     
@@ -36,7 +36,7 @@ export default class Home extends Component {
                 amount: 5, 
             }),
         }; 
-        await fetch("/api/get-top-instructors", request)
+        await fetch("/api/get-top-instructors/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -60,7 +60,7 @@ export default class Home extends Component {
                 amount: 5, 
             }),
         }; 
-        await fetch("/api/get-top-courses", request)
+        await fetch("/api/get-top-courses/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -90,7 +90,6 @@ export default class Home extends Component {
             })
         });
     }
-
 
     render() {
         return (

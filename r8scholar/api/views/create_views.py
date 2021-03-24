@@ -11,6 +11,7 @@ from ..email_sender import email_user
 #creates a new custom user
 class CreateUserView(APIView): 
     permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
 
     def post(self, request, format='json'): 
         serializer = UserSerializer(data=request.data)
