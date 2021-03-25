@@ -1,8 +1,9 @@
+#Project Files
 from ..models import Course, Department, Instructor
 from ..serializers import ( CourseSerializer, DepartmentSerializer,InstructorSerializer)
 #REST
 from rest_framework import filters, generics
-#Multiple Models Module?
+#Multiple Models Module
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 
 #search view
