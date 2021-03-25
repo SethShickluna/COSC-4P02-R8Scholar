@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, CardHeader, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
-
-
+import { BsFillExclamationCircleFill } from 'react-icons/bs';
 
 
 export default class ReviewItem extends Component {
@@ -20,11 +19,15 @@ export default class ReviewItem extends Component {
         -Comments (object)
         */
        console.log(this.props.reviewItem)
+       this.report = this.report.bind(this);
     }
 
     openFullReview(){
 
     }
+
+    report = () => alert("Reported!");
+        
 
     //the JSX that is rendered when this file is imported as a component 
     render() {
@@ -42,7 +45,10 @@ export default class ReviewItem extends Component {
                                         numberOfStars={5}
                                         name='avgRating'/></CardTitle>
                         <CardText><h5>{this.props.reviewItem.content}</h5></CardText>
-                        <Button onclick={this.openFullReview} color="success">View Full Review</Button>
+                        <div><Button onclick={this.openFullReview} color="success">View Full Review</Button></div>
+                        
+                        <div /*add a check if the review is the user's */ style ={{marginTop:'2%',float:'left'}}> <Button color = "danger"> Edit Review</Button> </div>
+                     <div style={{float:'right', marginTop:'2%'}}><Button  onClick={this.report}><BsFillExclamationCircleFill></BsFillExclamationCircleFill> Report</Button> </div> 
                     </CardBody>
                 </Card>
             </div>
