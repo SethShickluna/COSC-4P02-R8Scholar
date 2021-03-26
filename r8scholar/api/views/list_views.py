@@ -1,9 +1,9 @@
 #REST
 from rest_framework import generics
 #Project Files
-from ..models import CustomUser, Review, Comment, Course, Department, Instructor, Ticket, UserReviews, UserComments
+from ..models import CustomUser, Review, Comment, Course, Department, Instructor, Ticket
 from ..serializers import (UserSerializer, ReviewSerializer, CommentSerializer, CourseSerializer, DepartmentSerializer, 
-InstructorSerializer, TicketSerializer, UserReviewSerializer, UserCommentSerializer)
+InstructorSerializer, TicketSerializer)
 
 class ReviewView(generics.ListAPIView):
     serializer_class = ReviewSerializer
@@ -32,11 +32,3 @@ class InstructorView(generics.ListAPIView):
 class TicketView(generics.ListAPIView):
     serializer_class = TicketSerializer
     queryset = Ticket.objects.all()
-
-class UserReviewView(generics.ListAPIView):
-    serializer_class = UserReviewSerializer
-    queryset = UserReviews.objects.all()
-
-class UserCommentView(generics.ListAPIView):
-    serializer_class = UserCommentSerializer
-    queryset = UserComments.objects.all()

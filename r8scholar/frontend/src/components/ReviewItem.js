@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, CardHeader, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 
@@ -19,7 +18,6 @@ export default class ReviewItem extends Component {
         -User
         -Comments (object)
         */
-       console.log(this.props.reviewItem)
     }
 
     openFullReview(){

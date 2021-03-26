@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = '/api/';
+const baseURL = 'http://localhost:8000/api/';
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -60,8 +60,6 @@ axiosInstance.interceptors.response.use(
                     window.location.href = '/login/';
                 }
         }
-      
-     
       // specific error handling done elsewhere
       return Promise.reject(error);
   }

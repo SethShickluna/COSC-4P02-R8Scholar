@@ -1,13 +1,13 @@
 from ..models import Course, Department, Instructor
 from ..serializers import ( CourseSerializer, DepartmentSerializer,InstructorSerializer)
 #REST
-from rest_framework import filters, generics
+from rest_framework import filters, generics, permissions
 #Multiple Models Module?
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 
 #search view
 class SearchView(ObjectMultipleModelAPIView):
-
+    permission_classes = (permissions.AllowAny,)
     querylist = (
         {'queryset': Course.objects.all(), 'serializer_class': CourseSerializer},
         {'queryset': Instructor.objects.all(), 'serializer_class': InstructorSerializer},

@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {Container, Row, Col, Form, Input, Button} from 'reactstrap'; 
 import cookie from 'react-cookies';
 import SecondaryNav from '../components/SecondaryNav'; 
+import axiosInstance from "../axiosApi"; 
 
 const title = { 
     marginTop: '5%', 
@@ -13,22 +14,27 @@ class Verification extends Component {
     constructor(props){
         super(props); 
         this.state = { 
-            user: null,
             code: "", 
+            user: null, 
         }; 
         this.updateCodeValue = this.updateCodeValue.bind(this); 
         this.verifyUser = this.verifyUser.bind(this); 
     }
 
-    componentDidMount(){ 
-        console.log
-        fetch('/api/get-user' + '?email=' + cookie.load('email'))//get the info on the reviewer 
-        .then((response) => {
-            return response.json(); 
-        })
-        .then((data) => {
-            this.setState({user: data})
-        });
+    async componentDidMount(){
+        //get the user 
+        try {
+            let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
+            const user = response.data;
+            if(user.is_verified){
+                this.props.history.push('/');
+            }else{
+                this.setState({user:user}); 
+            }
+            return user;
+        }catch(error){
+            this.props.history.push('/login'); //redirect to login if a valid token is not presented
+        }
     }
 
     updateCodeValue(obj){
@@ -37,30 +43,18 @@ class Verification extends Component {
         })
     }
 
-
-    verifyUser(){ 
-        if(this.state.user.is_verified){
-            this.props.history.push('/');
-        }else{
-            const request = { 
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({
-                    verification_code: this.state.code,
-                }),
-            }; 
-            fetch("/api/verify-user?email="+this.state.user.email, request)
-            .then((response) => {
-                if(response.ok){
-                    //reload page 
-                    alert("Success");
-                    cookie.save("isLoggedIn", "true", {path:"/"}); 
-                    cookie.save("email", this.state.user.email, {path: "/"}); 
-                    this.props.history.push('/');
-                }else{
-                    alert("Invalid Code!");
-                };
+    async verifyUser(){ 
+        try {
+            let response = await axiosInstance.post("/verify-user/", {
+                email: this.state.user.email,
+                verification_code: this.state.code, 
             });
+            alert("Success!"); 
+            this.props.history.push('/');
+            //Make so
+            return response;
+        }catch(error){
+            alert("Invalid code!")
         }
     }
 

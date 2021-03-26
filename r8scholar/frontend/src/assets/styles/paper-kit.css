@@ -22,6 +22,11 @@
  * Copyright 2012-2013 Mattia Larentis
  * http://www.apache.org/licenses/LICENSE-2.0
  */
+
+.pointer-nav:hover{
+  cursor: pointer !important;
+}
+
 .bootstrap-switch {
   display: inline-block;
   direction: ltr;
@@ -309,7 +314,7 @@
 .noUi-state-drag * {
   cursor: inherit !important; }
 
-/* Painting and performance;
+/* Painting and performance;nav
  * Browsers can paint handles in their own layer.
  */
 .noUi-base,

@@ -1,7 +1,7 @@
 #REST#
 from rest_framework import serializers
 #Project Files#
-from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket, UserReviews, UserComments
+from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket
 from .validators import password_validator
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=10, write_only=True, validators=[password_validator])
     class Meta:
         model = CustomUser
-        fields = ('email', 'nickname', 'password')
+        fields = ('email', 'nickname', 'is_verified', 'password')
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):
@@ -31,17 +31,6 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = ('review_id', 'reviewer', 'nickname', 'subject', 'title','content',
         'rating', 'numb_reports','date_created', 'department_name', 'instructor_name', 
         'course_name', 'review_type')
-
-class UserReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserReviews
-        fields = ('email', 'review_id')
-
-class UserCommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserComments
-        fields = ('email', 'review_id', 'comment_id')
-
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -115,4 +104,4 @@ class loginLogoutSerializer(serializers.ModelSerializer):
 class VerificationSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = CustomUser
-        fields = ('verification_code',)
+        fields = ('email', 'verification_code',)

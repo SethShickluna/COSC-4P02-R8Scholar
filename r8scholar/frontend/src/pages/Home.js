@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import StarRatings from 'react-star-ratings';
 import {Container, Button, Row, Col,  Table, Spinner} from 'reactstrap'; 
-import axiosInstance from "../axiosApi"; 
+import {Link} from "react-router-dom";
 
 const linkStyle = {
     color: 'black',
@@ -76,7 +76,7 @@ export default class Home extends Component {
     }   
 
     getTopDepartments = async() => {
-        await fetch("/api/get-top-departments?amount=5")
+        await fetch("/api/get-top-departments/?amount=5")
         .then((response) => {
             if(response.ok){ //yay
                 return response.json(); 
@@ -144,7 +144,7 @@ export default class Home extends Component {
                                             :<Spinner color="dark"/>}
                                         </tbody>
                                     </Table>
-                                    <Button className="btn-round" href="/courses" color="primary">View All Courses</Button>
+                                    <Link to="/courses"><Button className="btn-round" size="lg"  color="info">View All Courses</Button></Link>
                                 </div>
                             </Col>
                             <Col className="col-md-4">
@@ -178,7 +178,7 @@ export default class Home extends Component {
                                         </tbody>
                                     </Table>
                                 </div>
-                                <Button className="btn-round" href="/instructors" color="primary">View All Instructors</Button>
+                                <Link to="/instructors"><Button className="btn-round" size="lg"  color="info">View All Instructors</Button></Link>
                             </Col>
                             <Col className="col-md-4">
                                 <div className="department-title">
@@ -211,7 +211,7 @@ export default class Home extends Component {
                                         </tbody>
                                     </Table>
                                 </div>
-                                <Button className="btn-round btn-icon" href="/departments" color="primary">View All Departments</Button>
+                                <Link to="/departments"><Button className="btn-round" size="lg"  color="info">View All Departments</Button></Link>
                             </Col>
 
                         </Row>

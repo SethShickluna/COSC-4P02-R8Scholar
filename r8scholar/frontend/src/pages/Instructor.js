@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {Container, Row, Col, Tab, Spinner} from 'reactstrap'; 
+import {Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Spinner} from 'reactstrap'; 
 import ReviewItem from '../components/ReviewItem'; 
-import Tabs from 'react-bootstrap/Tabs'; 
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
 import cookie from 'react-cookies'; 
@@ -29,10 +28,6 @@ const pageBreak = {
     border: 'none',
 }
 
-const tabStyle = { 
-    paddingTop: '2.5%',  
-}
-
 export default class Course extends Component {6
     constructor(props) {
         super(props);
@@ -46,6 +41,7 @@ export default class Course extends Component {6
             courses: [],
             valid: false,
             loaded: false,  
+            activeTab:"1", 
         } 
 
     }
@@ -60,7 +56,7 @@ export default class Course extends Component {6
     }
 
     verifyInstructor = async (myName) => {
-        await fetch('/api/get-instructor' + '?name=' + myName)
+        await fetch('/api/get-instructor/' + '?name=' + myName)
         .then((response) => {
             if(response.ok){
                 return response.json(); 
@@ -89,7 +85,7 @@ export default class Course extends Component {6
                 amount: 2, 
             }),
         }; 
-        await fetch("/api/get-top-courses", request)
+        await fetch("/api/get-top-courses/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -100,7 +96,7 @@ export default class Course extends Component {6
             .then((data) =>{
                 this.setState({courses:data});
             });
-        await fetch("/api/get-top-instructors", request)
+        await fetch("/api/get-top-instructors/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -116,7 +112,7 @@ export default class Course extends Component {6
     getAllReviews(myName) {
         //this is just to have but will need to be slightly refactored 
         //once we talk to the back end people about how their stuff is named such as 'get-course'
-        return fetch('/api/get-reviews' + '?subject=' + myName)
+        return fetch('/api/get-reviews/' + '?subject=' + myName)
         .then((response) => {
             if(response.ok){
                 return response.json(); 
@@ -210,21 +206,55 @@ export default class Course extends Component {6
                                 
                             </Col>
                             <Col sm={7}>
-                                <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
-                                    <Tab eventKey="reviews" title="Reviews">
-                                    {this.state.reviews !== null ? 
-                                    this.state.reviews.reverse().map((item, index) => 
-                                    (<ReviewItem id={index} key={"course-review"+index}reviewItem={item}/>)) 
-                                    : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
-                                    /* generate all the reviews for this page */} 
-                                    </Tab>
-                                    <Tab eventKey="create-review" title="Create Review">
-                                    {cookie.load('isLoggedIn') === "true" ? 
-                                            (<ReviewForm name ={this.state.name} review="instructor"/>)
-                                            : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
-                                        }
-                                    </Tab>
-                                </Tabs>
+                            <div style={{marginTop:"107px"}}/>
+                            <div className="nav-tabs-navigation">
+                                <div className="nav-tabs-wrapper pointer-nav">
+                                    <Nav role="tablist" tabs>
+                                        <NavItem>
+                                            <NavLink
+                                                className={this.state.activeTab === "1" ? "active" : ""}
+                                                onClick={() => {
+                                                    this.setState({activeTab:"1"});}}>
+                                                Reviews
+                                            </NavLink>
+                                        </NavItem>
+                                        {cookie.load('isLoggedIn') === "true" ? 
+                                            <NavItem>
+                                                <NavLink
+                                                    className={this.state.activeTab === "2" ? "active" : ""}
+                                                    onClick={() => {
+                                                        this.setState({activeTab:"2"});
+                                                        }}>
+                                                        Create Review
+                                                </NavLink>
+                                            </NavItem>   
+                                        :null}
+                                        
+                                    </Nav>
+                                </div>
+                            </div>
+                            {/* Tab panes */}
+                            <TabContent className="following" activeTab={this.state.activeTab}>
+                                <TabPane tabId="1" id="follows">
+                                    <Row>
+                                        <Col className="ml-auto mr-auto" md="6">
+                                            {this.state.reviews !== null ? 
+                                            this.state.reviews.reverse().map((item, index) => 
+                                            (<ReviewItem id={index} key={"instructor-review"+index} reviewItem={item}/>)) 
+                                            : (<Container fluid>
+                                                <Row>
+                                                    <Col align="center">
+                                                        <h4>Nothing to see here. Would you like to leave a review?</h4>
+                                                    </Col>
+                                                </Row>
+                                            </Container>) /* generate all the reviews for this page */} 
+                                        </Col>
+                                    </Row>
+                                </TabPane>
+                                <TabPane className="text-center" tabId="2" id="following">
+                                    <ReviewForm name={this.state.name} review="instructor"/>
+                                </TabPane>
+                            </TabContent>
                             </Col>
                         </Row>
                         :<Row align='center'> {/**show message that course isnt found */}

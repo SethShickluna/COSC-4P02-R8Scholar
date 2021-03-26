@@ -16,11 +16,11 @@ class Signout extends Component{
             const response = await axiosInstance.post('/logout/', {
                 "refresh_token": localStorage.getItem("refresh_token")
             });
+            cookie.save('isLoggedIn', 'false',{path:'/'});
+            cookie.save('email', '',{path:'/'});
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             axiosInstance.defaults.headers['Authorization'] = null;
-            cookie.save('isLoggedIn', 'false',{path:'/'});
-            cookie.save('email', '',{path:'/'});
             this.props.history.push('/'); 
             return response;
         }

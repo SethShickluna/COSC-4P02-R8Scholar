@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Tab, Button } from "reactstrap";
+import { Container, Row, Col, Button, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
+import {Link} from "react-router-dom"; 
 import ReviewItem from "../components/ReviewItem";
 import SecondaryNav from "../components/SecondaryNav";
-import Tabs from "react-bootstrap/Tabs";
 import cookie from "react-cookies";
 import imageOne from "../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg";
 import $ from "jquery";
@@ -16,7 +16,6 @@ const pageStyles = {
     width: "90%",
 };
 
-
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles
     marginBottom: "2%",
@@ -24,10 +23,6 @@ const pageBreak = {
     height: "1px",
     backgroundColor: "#dedede",
     border: "none",
-};
-
-const tabStyle = {
-    paddingTop: "2.5%",
 };
 
 const imgStyle = {
@@ -67,11 +62,16 @@ export default class Profile extends Component {
         //use state because react forces an update when it is modifed in some way
         this.state = {
             //all the content that is gonna be retrieved from the api stored here locally
-            user: null,
+            user: {
+                email: null, 
+                nickname: null, 
+                verified: false, 
+            },
             reviews: null,
+            activeTab: "1", 
         };
 
-        //this.getAllReviews = this.getAllReviews.bind(this);
+        this.authenicateUser = this.authenicateUser.bind(this); 
     }
 
     componentDidMount() {
@@ -80,59 +80,18 @@ export default class Profile extends Component {
 
     async authenicateUser() { 
         try {
-            const response = await axiosInstance.post('/token/refresh/', {
-                refresh: localStorage.getItem('refresh_token') 
-            });
-            this.getUser(); 
-            return response;//this is good we can stay 
-        } catch (error) {
-            this.props.history.push('/login');
-        }
-    }
-
-    async getUser(){
-        try {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
-            this.setState({
-                user: user,
-            });
-            //get a users reviews 
-            console.log("Getting Reviews"); 
-            return response;
+            this.setState({user:user}); 
+            this.getReviews(); 
+            return user;
         }catch(error){
-            console.log("Hello error: ", JSON.stringify(error, null, 4));
-            // throw error; todo
+            this.props.history.push('/login'); //redirect to login if a valid token is not presented
         }
     }
 
-    getAllReviews() {
+    async getReviews() {
         console.log("Needs backend implementation")
-    }
-
-
-    verifyUser() {
-        var code = prompt(
-            "Enter the 6 digit code emailed to " + this.state.user.email
-        );
-        const request = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                verification_code: code,
-            }),
-        };
-        fetch("/api/verify-user?email=" + this.state.user.email, request).then(
-            (response) => {
-                if (response.ok) {
-                    //reload page
-                    alert("Success");
-                    window.location.reload();
-                } else {
-                    alert("Invalid Code!");
-                }
-            }
-        );
     }
 
     render() {
@@ -149,20 +108,19 @@ export default class Profile extends Component {
                                             <h2>
                                                 Your account is not verfied!
                                             </h2>
-                                            <Button
-                                                onClick={this.verifyUser}
-                                                color="info"
+                                            <Link to="/verify"><Button
+                                                color="danger"
                                                 size="lg"
                                             >
                                                 Verify Now
-                                            </Button>
+                                            </Button></Link>
                                         </div>
                                     ) : null}
                                 </Col>
                             </Row>
-                            <Row style={{ marginTop: "3%" }}>
+                            <Row >
                                 <Col sm={4}>
-                                    <div name="title">
+                                    <div>
                                         {/*insert image edit, accept image and input it */}
                                         <h1 style={{ textAlign: "center" }}>
                                             {this.state.user.nickname}
@@ -203,85 +161,56 @@ export default class Profile extends Component {
                                     <div style={pageBreak} /> {/* underline */}
                                 </Col>
 
-                                <Col sm={7}>
-                                    {" "}
-                                    {/*change this section to one with 2 tabs , change the state form.*/}
-                                    <Tabs
-                                        style={tabStyle}
-                                        defaultActiveKey="reviews"
-                                        transition={false}
-                                    >
-                                        <Tab eventKey="reviews" title="Reviews">
-                                            {/*<Button onClick ={this.changeConstant} >Reload</Button>*/}
-                                            {this.state.reviews !== null ? (
-                                                this.state.reviews.map(
-                                                    (item, index) => (
-                                                        <ReviewItem
-                                                            id={index}
-                                                            key={
-                                                                "course-review" +
-                                                                index
-                                                            }
-                                                            reviewItem={item}
-                                                        />
-                                                    )
-                                                )
-                                            ) : (
-                                                <div
-                                                    style={{
-                                                        marginLeft: "20px",
-                                                    }}
-                                                >
-                                                    No reviews yet! Be the first
-                                                    to leave one?
-                                                </div>
-                                            )}
-                                        </Tab>
-
-                                        <Tab
-                                            eventKey="edit-profile"
-                                            title="Change Password"
-                                        >
-                                            {" "}
-                                            {/*Edit password form */}
-                                            {cookie.load("isLoggedIn") ===
-                                            "true" ? (
-                                                <EditPasswordForm>
-                                                    {" "}
-                                                </EditPasswordForm> //custom password change form
-                                            ) : (
-                                                <div
-                                                    style={{
-                                                        marginLeft: "20px",
-                                                    }}
-                                                >
-                                                    Please log in or signup to
-                                                    edit your profile
-                                                </div>
-                                            )}
-                                        </Tab>
-
-                                        <Tab
-                                            eventKey="edit-nickname"
-                                            title="Change Nickname"
-                                        >
-                                            {" "}
-                                            {/*Edit nickname form */}
-                                            {cookie.load("isLoggedIn") ===
-                                            "true" ? (
-                                                <EditNicknameForm></EditNicknameForm> //custom password change form
-                                            ) : (
-                                                <div
-                                                    style={{
-                                                        marginLeft: "20px",
-                                                    }}
-                                                >
-                                                    Please log in or signup to
-                                                    edit your profile
-                                                </div>
-                                            )}
-                                        </Tab>
-                                    </Tabs>
+                                <Col style={{marginTop:"53px"}}sm={7}>
+                                <div className="nav-tabs-navigation">
+                                    <div className="nav-tabs-wrapper pointer-nav">
+                                        <Nav role="tablist" tabs>
+                                            <NavItem>
+                                                <NavLink
+                                                    className={this.state.activeTab === "1" ? "active" : ""}
+                                                    onClick={() => {
+                                                        this.setState({activeTab:"1"});}}>
+                                                    Your Reviews
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem>
+                                                <NavLink
+                                                    className={this.state.activeTab === "2" ? "active" : ""}
+                                                    onClick={() => {
+                                                        this.setState({activeTab:"2"});
+                                                    }}>
+                                                    Edit Account Information
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem>
+                                                <NavLink
+                                                    className={this.state.activeTab === "3" ? "active" : ""}
+                                                    onClick={() => {
+                                                        this.setState({activeTab:"3"});
+                                                    }}>
+                                                    Settings
+                                                </NavLink>
+                                            </NavItem>
+                                        </Nav>
+                                        </div>
+                                    </div>
+                                    {/* Tab panes */}
+                                    <TabContent className="following" activeTab={this.state.activeTab}>
+                                        <TabPane tabId="1" id="follows">
+                                            <Row>
+                                                <Col className="ml-auto mr-auto" md="6">
+                                                
+                                                </Col>
+                                            </Row>
+                                        </TabPane>
+                                        <TabPane className="text-center" tabId="2" id="following">
+                                                <EditNicknameForm/>
+                                                <EditPasswordForm/>
+                                        </TabPane>
+                                        <TabPane className="text-center" tabId="3" id="following">
+                                            Settings.
+                                        </TabPane>
+                                    </TabContent>
                                 </Col>
                             </Row>
                         </Container>

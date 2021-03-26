@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from './SearchBar'; 
 import classnames from "classnames";
-
+import {Link} from "react-router-dom"; 
 import {
   Button,
   Collapse,
@@ -15,7 +15,7 @@ import {
 import cookie from 'react-cookies';
 
 const navLinkStyles = { 
-  fontSize: '16px',
+  fontSize: '20px',
 }
 
 const separate = { 
@@ -24,9 +24,9 @@ const separate = {
 }
 
 const title={
-  paddingLeft:"10%",
+  paddingLeft:"4%",
   paddingRight: "3%",
-  fontSize: '22px',
+  fontSize: '28px',
 }
 
 function HomeNavbar() {
@@ -87,28 +87,34 @@ function HomeNavbar() {
             </NavbarBrand>
             <Nav className="mr-auto mt-2 mt-lg-0" navbar>
               <NavItem style={separate}className="active">
-                <NavLink href="/courses"style={navLinkStyles}>
-                  Courses 
-                </NavLink>
+                <Link to="/courses">
+                    <NavLink style={separate} style={navLinkStyles}>
+                        Courses
+                    </NavLink>
+                </Link>
               </NavItem>
               <NavItem>
-                <NavLink style={separate}href="/instructors"style={navLinkStyles}>
-                  Instructors
-                </NavLink>
+              <Link to="/instructors">
+                    <NavLink style={separate} style={navLinkStyles}>
+                        Instructors
+                    </NavLink>
+                </Link>
               </NavItem>
               <NavItem>
-                <NavLink style={separate}style={navLinkStyles}
-                  href="/departments"
-                >
-                  Departments
-                </NavLink>
+                  <Link to="/departments">
+                    <NavLink style={separate} style={navLinkStyles}>
+                        Departments
+                    </NavLink>
+                  </Link>
+                
               </NavItem>
               {cookie.load('isLoggedIn') === "true"? 
-                <NavItem>
-                <NavLink style={separate} style={navLinkStyles}
-                  href="/profile">
-                  Profile
-                </NavLink>
+                <NavItem> 
+                  <Link to="/profile">
+                    <NavLink style={separate} style={navLinkStyles}>
+                      Profile
+                  </NavLink>
+                </Link>
               </NavItem>
             : null
             }
@@ -117,19 +123,19 @@ function HomeNavbar() {
             <Nav style={{marginRight:"10%"}}navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 
-                <Button className="btn-round lg outline" color="info" href="/signout">
+                <Button className="btn-round lg outline" color="danger" href="/signout">
                 
                     Sign Out
                 </Button>
 
-            : <Button className="btn-round lg" href="/signup" color="primary">
+            : <Button className="btn-round lg" href="/signup" color="danger">
             <i className="nc-icon nc-spaceship before"></i>
                 Sign up Today
             </Button>}
             {cookie.load('isLoggedIn') === "true"? 
                 null
 
-            : <Button href="/login" className="btn-round lg" color="primary">
+            : <Button href="/login" className="btn-round lg" color="danger">
                 Sign In
             </Button>}
             </NavItem>

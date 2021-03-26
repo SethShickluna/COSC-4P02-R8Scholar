@@ -20,4 +20,5 @@ urlpatterns = [
     path('signout/', views.index),
     path('settings/', views.index), 
     path('profile/', views.index),
+    path('settings/', views.index),
 ]

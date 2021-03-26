@@ -26,8 +26,6 @@ urlpatterns = [
     path('departments/', list_views.DepartmentView.as_view()), 
     path('instructors/', list_views.InstructorView.as_view()),
     path('ticket/', list_views.TicketView.as_view()),
-    path('user-reviews/', list_views.UserReviewView.as_view()),
-    path('user-comments/', list_views.UserCommentView.as_view()),
     #searchviews
     path('search-instructors/', search_views.SearchInstructorView.as_view()),
     path('search-courses/', search_views.SearchCourseView.as_view()),
@@ -46,6 +44,7 @@ urlpatterns = [
     path('filter-courselist/',filter_views.filterCourseListBy.as_view(),name='filter-courselist'),
     path('filter-departmentlist/',filter_views.filterDepartmentListBy.as_view(),name='filter-departmentlist'),
     path('filter-instructorlist/',filter_views.filterInstructorListBy.as_view(),name='filter-instructorlist'),
+    path('filter-course-department/',filter_views.GetCoursesPerDepartment.as_view()),
     #create views 
     path('create-user/', create_views.CreateUserView.as_view(), name="create-user"), 
     path('create-review/', create_views.CreateReviewView.as_view()), 

@@ -44,6 +44,15 @@ export default class SearchPage extends Component {
         return "department/"+item.name; 
     }
 
+    getName(item){
+        if(item.course_full_name){
+            return item.course_full_name; 
+        }else if(item.department){
+            return "Instructor";  
+        }
+        return "Department"; 
+    }
+
     render() {
         return(
         <div className="departments-page">
@@ -111,7 +120,7 @@ export default class SearchPage extends Component {
                                <thead>
                                     <th>Result</th>
                                     <th>Name</th>
-                                    <th>Type</th>
+                                    <th>Type / Full Name</th>
                                     <th>Rating</th>
                                </thead>
                                <tbody>
@@ -120,7 +129,7 @@ export default class SearchPage extends Component {
                                         <tr key={index}>  
                                         <th>{index + 1}</th>                                     
                                         <th><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></th>
-                                        <th>{this.determineType(item).split("/")[0]}</th>
+                                        <th>{this.getName(item)}</th>
                                         <th style={{minWidth:"100px"}}><StarRatings
                                             rating={item.rating}
                                             starDimension="25px"

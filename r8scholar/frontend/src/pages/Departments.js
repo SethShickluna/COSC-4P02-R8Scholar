@@ -46,7 +46,7 @@ export default class Departments extends Component {
             }),
         }; 
 
-        await fetch("/api/get-top-courses", request)
+        await fetch("/api/get-top-courses/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -76,7 +76,7 @@ export default class Departments extends Component {
                 amount: 1, 
             }),
         }; 
-        await fetch("/api/get-top-instructors", request)
+        await fetch("/api/get-top-instructors/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -119,7 +119,7 @@ export default class Departments extends Component {
             }),
         }
         
-        await fetch("/api/filter-departmentlist", request)
+        await fetch("/api/filter-departmentlist/", request)
             .then((response) => { response.json().then((data) => {
                 if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 
                     data = data.reverse(); 

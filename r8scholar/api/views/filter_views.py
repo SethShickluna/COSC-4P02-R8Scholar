@@ -83,3 +83,20 @@ class filterDepartmentListBy(APIView):
                 department_list.append(DepartmentSerializer(course).data)
         
         return Response(department_list, status=status.HTTP_200_OK) 
+
+
+class GetCoursesPerDepartment(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        dept_name = data["department"]
+        print(dept_name)
+        department = Department.objects.get(name=dept_name)
+        if department:
+            courses = Course.objects.filter(department=department) 
+            course_list = []
+            for course in courses: #serialize each entry and return 
+                course_list.append(CourseSerializer(course).data)
+            return Response(course_list, status=status.HTTP_200_OK) 
+        return Response({"Invalid Department Name": "No departments found"}, status=status.HTTP_400_BAD_REQUEST) 
+        

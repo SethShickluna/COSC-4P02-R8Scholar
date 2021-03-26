@@ -15,27 +15,11 @@ from .validators import validate_brock_mail, password_validator, rating_validato
 from .generators import generate_validation_code
 
 
-class Comment(models.Model):
-    comment_id = models.IntegerField()
-    review_id = models.IntegerField()
-    name = models.CharField(max_length=32)
-    content = models.TextField(default=None)
-    child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
-    date = models.DateTimeField(default=None)
-    numb_reports = models.IntegerField(default=None)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['comment_id', 'review_id'], name='comment_key')
-        ]
-
 class CustomUser(AbstractBaseUser):
     username = None
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
     nickname = models.CharField(max_length=25,unique=True,default=uuid.uuid4)
     password = models.CharField(max_length=100,validators=[password_validator])
-    # reviews = models.ForeignKey('Review',default=None, null=True,  on_delete = models.DO_NOTHING)
-    # comments = models.ForeignKey('Comment',default=None, null=True, on_delete = models.DO_NOTHING)
     is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
     is_admin = models.BooleanField(default=False)
     min_length = models.IntegerField('min_length',default=4)
@@ -105,8 +89,6 @@ class Department(models.Model):
                 count +=1
         self.instructors_rating = my_sum / count
         self.save()
-            
-
 
     def update_course_rating(self):
         count = 0
@@ -167,7 +149,9 @@ class Course(models.Model):
 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #Relates user to review
     reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    #User's nickname
     nickname = models.CharField(max_length=30, default=None)
     subject = models.CharField(max_length=100)
     title = models.CharField(max_length=45)
@@ -183,25 +167,25 @@ class Review(models.Model):
     def _str_(self):
         return self.reviewer
 
+class Comment(models.Model):
+    comment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    #Relates review to comment
+    review = models.ForeignKey(Review,default=None, on_delete = models.DO_NOTHING)
+    #Relates user to comment
+    commenter = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    name = models.CharField(max_length=32)
+    content = models.TextField(default=None)
+    child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
+    date = models.DateTimeField(default=None)
+    numb_reports = models.IntegerField(default=None)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['comment_id'], name='comment_key')
+        ]
+
 
 class Ticket(models.Model):
     email = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
     content = models.TextField(default=None, null=True)
     date = models.DateTimeField(default=None, null=True)
-
-class UserReviews(models.Model):
-    email = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
-    review_id = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['email', 'review_id'], name='user_review_key')
-        ]
-
-class UserComments(models.Model):
-    email = models.ForeignKey(CustomUser, on_delete = models.DO_NOTHING)
-    review_id = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
-    comment_id = models.ForeignKey(Comment, on_delete = models.DO_NOTHING)
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['email', 'review_id', 'comment_id'], name='user_comment_key')
-        ]

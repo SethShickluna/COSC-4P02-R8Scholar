@@ -12,8 +12,6 @@ const linkStyle = {
     fontSize: "18", 
 }
 
-
-
 export default class Courses extends Component {
     
     constructor(props) {
@@ -58,8 +56,7 @@ export default class Courses extends Component {
                 "filter_by":requestType(),
             }),
         }
-        
-        await fetch("/api/filter-courselist", request)
+        await fetch("/api/filter-courselist/", request)
             .then((response) => { response.json().then((data) => {
                 console.log(data);
                 if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 

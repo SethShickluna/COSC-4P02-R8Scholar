@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import {Container, Row, Col, Tab, Spinner} from 'reactstrap'; 
+import {Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Spinner} from 'reactstrap'; 
 import ReviewItem from '../components/ReviewItem'; 
 import SecondaryNav from "../components/SecondaryNav";
-import Tabs from 'react-bootstrap/Tabs'
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
 import cookie from 'react-cookies'; 
 
 const pageStyles={
-    margin: '0 auto', 
-    marginTop: '3%', 
+    margin: '0 auto',  
     width: '90%', 
 }; 
 
@@ -29,9 +27,6 @@ const pageBreak = {
     border: 'none',
 }
 
-const tabStyle = { 
-    paddingTop: '2.5%',  
-}
 
 export default class Course extends Component {
     constructor(props) {
@@ -47,6 +42,7 @@ export default class Course extends Component {
             courses: [],
             valid: false,
             loaded: false,  
+            activeTab: "1", 
         }
 
         
@@ -55,7 +51,7 @@ export default class Course extends Component {
     componentDidMount(){
         this.verifyCourse(this.state.name); 
         this.getAllReviews(this.state.name);
-
+        
         setTimeout(() => {
             this.getPopularChoices(); 
         }, 200);
@@ -63,7 +59,7 @@ export default class Course extends Component {
     }
 
     verifyCourse = async (myName) => {
-        await fetch('/api/get-course' + '?name=' + myName)
+        await fetch('/api/get-course/' + '?name=' + myName)
         .then((response) => {
             if(response.ok){
                 return response.json(); 
@@ -93,7 +89,7 @@ export default class Course extends Component {
                 amount: 2, 
             }),
         }; 
-        await fetch("/api/get-top-courses", request)
+        await fetch("/api/get-top-courses/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -104,7 +100,7 @@ export default class Course extends Component {
             .then((data) =>{
                 this.setState({courses:data});
             });
-        await fetch("/api/get-top-instructors", request)
+        await fetch("/api/get-top-instructors/", request)
             .then((response) => {
                 if(response.ok){ //yay
                     return response.json(); 
@@ -117,10 +113,8 @@ export default class Course extends Component {
             });
     }   
 
-    getAllReviews(myName) {
-        //this is just to have but will need to be slightly refactored 
-        //once we talk to the back end people about how their stuff is named such as 'get-course'
-        return fetch('/api/get-reviews' + '?subject=' + myName)
+    async getAllReviews(myName) {
+        await fetch('/api/get-reviews/' + '?subject=' + myName)
         .then((response) => {
             if(response.ok){
                 return response.json(); 
@@ -205,30 +199,59 @@ export default class Course extends Component {
                                     <h3 style={{textAlign: 'center'}}>Department of <a href={"/department/"+this.state.department}>{this.state.department}</a></h3>
                                 </div>   
                             </div>
-
                             </div>
-
                             <div style={pageBreak}/> {/* underline */}
-                            
-                            
-                            
                         </Col>
                         <Col sm={7}>
-                            <Tabs style={tabStyle} defaultActiveKey="reviews" transition={false}>
-                                <Tab eventKey="reviews" title="Reviews">
-                                {this.state.reviews !== null ? 
-                                this.state.reviews.reverse().map((item, index) => 
-                                (<ReviewItem id={index} key={"course-review"+index}reviewItem={item}/>)) 
-                                : (<div style={{marginLeft: "20px"}}>No reviews yet! Be the first to leave one?</div>) 
-                                /* generate all the reviews for this page */} 
-                                </Tab>
-                                <Tab eventKey="create-review" title="Create Review">
-                                {cookie.load('isLoggedIn') === "true" ? 
-                                        (<ReviewForm name ={this.state.name} review="course"/>)
-                                        : (<div style={{marginLeft: "20px"}}>Please log in or signup to create a review.</div>)
-                                    }
-                                </Tab>
-                            </Tabs>
+                            <div style={{marginTop:"107px"}}/>
+                            <div className="nav-tabs-navigation">
+                                <div className="nav-tabs-wrapper pointer-nav">
+                                    <Nav role="tablist" tabs>
+                                        <NavItem>
+                                            <NavLink
+                                                className={this.state.activeTab === "1" ? "active" : ""}
+                                                onClick={() => {
+                                                    this.setState({activeTab:"1"});}}>
+                                                Reviews
+                                            </NavLink>
+                                        </NavItem>
+                                        {cookie.load('isLoggedIn') === "true" ? 
+                                            <NavItem>
+                                                <NavLink
+                                                    className={this.state.activeTab === "2" ? "active" : ""}
+                                                    onClick={() => {
+                                                        this.setState({activeTab:"2"});
+                                                        }}>
+                                                        Create Review
+                                                </NavLink>
+                                            </NavItem>   
+                                        :null}
+                                        
+                                    </Nav>
+                                </div>
+                            </div>
+                            {/* Tab panes */}
+                            <TabContent className="following" activeTab={this.state.activeTab}>
+                                <TabPane tabId="1" id="follows">
+                                    <Row>
+                                        <Col className="ml-auto mr-auto" md="6">
+                                            {this.state.reviews !== null ? 
+                                            this.state.reviews.reverse().map((item, index) => 
+                                            (<ReviewItem id={index} key={"department-review"+index} reviewItem={item}/>)) 
+                                            : (<Container fluid>
+                                                <Row>
+                                                    <Col align="center">
+                                                        <h4>Nothing to see here. Would you like to leave a review?</h4>
+                                                    </Col>
+                                                </Row>
+                                            </Container>) /* generate all the reviews for this page */} 
+                                        </Col>
+                                    </Row>
+                                </TabPane>
+                                <TabPane className="text-center" tabId="2" id="following">
+                                    <ReviewForm name={this.state.name} review="course"/>
+                                </TabPane>
+                            </TabContent>
                         </Col>
                     </Row>
                     :<Row align='center'> {/**show message that course isnt found */}

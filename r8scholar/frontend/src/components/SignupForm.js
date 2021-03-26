@@ -3,6 +3,7 @@ import {Form, Button, Card} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom'; 
 import cookie from 'react-cookies'; 
 import CustomPopover from "./CustomPopover";
+import axiosInstance from "../axiosApi"; 
 
 
 const formStyle = {
@@ -14,7 +15,7 @@ class SignupForm extends Component {
         super(props); 
         this.state = {
             email: "", 
-            username: "", 
+            nickname: "", 
             password: "", 
             verifPassword: "", 
         }
@@ -25,7 +26,7 @@ class SignupForm extends Component {
         this.submitForm = this.submitForm.bind(this);
         this.checkPassword = this.checkPassword.bind(this); 
         this.checkEmail = this.checkEmail.bind(this);
-        this.checkUsername = this.checkUsername.bind(this);
+        this.checkNickname= this.checkNickname.bind(this);
     }
 
     handleInput(obj){
@@ -36,18 +37,8 @@ class SignupForm extends Component {
         //first check @brocku.ca
         let length = this.state.email.length; 
         if(length > 10){ // otherwise the next line would be problematic 
-            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){
-                //check backend to make sure that email hasnt been used
-                let emailInUse = false; 
-                fetch('/api/get-user' + '?email=' + this.state.email)
-                    .then((response) => {
-                        if(response.ok){
-                            alert("This email is already in use. Did you forget your password?")
-                        }else{
-                            emailInUse = false; 
-                        }
-                    }); 
-                return !emailInUse; // if the email is in use return false cause that email failed the test and vice versa 
+            if(this.state.email.substring(length - 10, length) === "@brocku.ca"){ 
+                return true; 
             }
         }
         //email no good 
@@ -61,26 +52,53 @@ class SignupForm extends Component {
     }
 
     //min 4 character username 
-    checkUsername = () => {
-        return this.state.username.length >= 4; 
+    checkNickname = () => {
+        return this.state.nickname.length >= 4; 
     }
 
     async submitForm(e) {
         e.preventDefault(); //stop a reload
        
-        if(this.checkEmail() && this.checkUsername && this.checkPassword){
+        if(this.checkEmail() && this.checkNickname() && this.checkPassword){
             try {
-                const response = await axiosInstance.post('/user/create/', {
+                const response = await axiosInstance.post('/create-user/', {
                     nickname: this.state.nickname,
                     email: this.state.email,
                     password: this.state.password
                 });
+                switch(response.status){
+                    case 201:
+                        console.log("Created");
+                        this.authenticateLogin(); 
+                        break; 
+                    default:
+                        console.log("Something went wrong. Please enter your information again.")
+                }
                 return response;
             } catch (error) {
-                 console.log(error.stack);
+                console.log("Email or nickname already in use. Please enter different information");
             }
         }else{
-            //tell the user uh oh 
+           console.log("Invalid User Data");
+        }
+    }
+
+    async authenticateLogin(){
+        try { 
+            const response = await axiosInstance.post('/token/obtain/', { //note the use of async and await in this function 
+                email: this.state.email,
+                password: this.state.password
+            });
+            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+            cookie.save('email', this.state.email, {path: '/'}); 
+            cookie.save('isLoggedIn', "true", {path: '/'});
+            this.props.history.push('/verify');
+            return data;
+        }catch(error){
+            throw error; 
+            alert("Invalid Username or Password!")
         }
     }
 
@@ -96,8 +114,8 @@ class SignupForm extends Component {
                                 <Form.Control type="email" onChange={this.handleInput} name="email"placeholder="Enter email" />
                             </Form.Group>
                             <Form.Group controlId="formGroupUsername">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type="username" oonChange={this.handleInput} name="username" placeholder="Username" />
+                                <Form.Label>Nickname</Form.Label>
+                                <Form.Control type="username" onChange={this.handleInput} name="nickname" placeholder="Username" />
                             </Form.Group>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Password</Form.Label>

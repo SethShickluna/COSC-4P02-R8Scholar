@@ -35,7 +35,7 @@ export default class Courses extends Component {
     }   
 
     getDepartmentRatings = async(name) => { 
-        await fetch("/api/get-department?name="+name).then((response) => {
+        await fetch("/api/get-department/?name="+name).then((response) => {
             if(response.ok){ //yay
                 return response.json(); 
             }else{//nay 
@@ -78,7 +78,7 @@ export default class Courses extends Component {
             }),
         }
         
-        await fetch("/api/filter-instructorlist", request)
+        await fetch("/api/filter-instructorlist/", request)
             .then((response) => { response.json().then((data) => {
                 if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 
                     data = data.reverse(); 

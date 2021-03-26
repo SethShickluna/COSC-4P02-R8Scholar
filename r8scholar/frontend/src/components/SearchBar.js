@@ -6,7 +6,6 @@ import {
     DropdownItem,
     DropdownToggle,
     DropdownMenu,
-    Form,
 } from "reactstrap";
 
 const menuStyle = {
@@ -19,6 +18,10 @@ const linkStyle = {
     borderRadius: "0",
     fontSize: "12px",
 };
+const toggleStyle = { 
+    background: "transparent",
+    border: "0px solid transparent",
+}
 
 class SearchBar extends Component {
     constructor(props) {
@@ -29,39 +32,27 @@ class SearchBar extends Component {
             maxDisplayed: 7,
             dropdownOpen: false,
         };
-
-        this.updateSearch = this.updateSearch.bind(this);
         this.doSearch = this.doSearch.bind(this);
     }
 
-    updateSearch = (obj) => {
-        this.setState({
-            dropdownOpen: obj.target.value.length > 0,
-            query: obj.target.value,
-        });
-        if (this.state.query.length >= 1) {
-            this.doSearch();
-        }
-        if (obj.key === "Enter") {
-            this.props.history.push("/search/" + this.state.query);
-        }
-    };
-
-    doSearch = async () => {
-        await fetch("/api/search/?search=" + this.state.query)
+    doSearch = async(e) => { //passed the inputs value 
+        if(e.length >= 1){
+            await fetch("/api/search/?search=" + e)//get results for entities containing {e} in their names
             .then((response) => {
                 return response.json();
             })
-            .then((data) => {
+            .then((data) => { //concat the 3 types of responses
                 const combinedResults = data.Department.concat(
                     data.Instructor,
                     data.Course
                 );
                 this.setState({
                     results: combinedResults,
+                    query: e, //update our query record 
                 });
             });
-        console.log(this.state.results);
+        }
+        this.setState({dropdownOpen: e.length >= 1}); //if there is text, drop down the menu 
     };
 
     determineType(item) {
@@ -83,18 +74,14 @@ class SearchBar extends Component {
                 <Dropdown
                     primary
                     onSubmit={this.doFullSearch}
-                    color={this.props.color}
-                    toggle={false}
                     isOpen={this.state.dropdownOpen}
-                >
-                    <DropdownToggle color={this.props.color}>
+                ><DropdownToggle style={toggleStyle}toggle={this.state.dropdownOpen}>
                         <Input
-                            color={this.props.color}
-                            as="submit"
-                            onChange={this.updateSearch}
+                            onChange={e => this.doSearch(e.target.value)}
                             placeholder="Search"
+                            size="md"
                             type="text"
-                        />
+                        ></Input>
                     </DropdownToggle>
                     <DropdownMenu container="body" style={menuStyle}>
                         <DropdownItem color={this.props.color}>
@@ -121,11 +108,12 @@ class SearchBar extends Component {
                                                       this.determineType(item)
                                                   }
                                                   style={linkStyle}>
-                                                  {item.name}
+                                                  {item.course_full_name ? item.name+ " - " + item.course_full_name : item.name}
                                               </DropdownItem>
                                           </div>
                                       );
                                   })}
+                        <DropdownItem divider />
                         <DropdownItem href={"/search/" + this.state.query}>
                             <b>View All Results</b>
                         </DropdownItem>

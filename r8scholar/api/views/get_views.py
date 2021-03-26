@@ -13,7 +13,6 @@ import json
 class GetUser(APIView):
     serializer_class = UserSerializer
     lookup_url_kwarg = 'email'
-    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         email = request.GET.get(self.lookup_url_kwarg)

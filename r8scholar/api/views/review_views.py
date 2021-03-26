@@ -3,10 +3,11 @@ from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project Files
-from ..models import CustomUser, Review, Course, Department, Instructor, UserReviews
+from ..models import CustomUser, Review, Course, Department, Instructor
 from ..serializers import (DeleteReviewSerializer, ReportReviewSerializer, ReviewSerializer, EditReviewSerializer)
 from .email_report import email_r8scholar
 
+#Notifies admins of a review being reported
 #Notifies admins of a review being reported
 class ReportReview(APIView):
     serializer_class = ReportReviewSerializer
@@ -17,11 +18,11 @@ class ReportReview(APIView):
             #Data from frontend
             review_id = serializer.data['review_id']
             report_description = serializer.data['report_description']
-            #Get data on user who created the review
-            user = CustomUser.objects.get(email = UserReviews.objects.get(review_id=review_id).email)
             #Get data on review that was reported
             review = Review.objects.get(review_id=review_id)
-            #Increment report counter 
+            #Get data on user who created the review
+            user = review.reviewer
+            #Increment report counter
             review.numb_reports += 1
             email_r8scholar(review_id,report_description,review.numb_reports,user.email,user.nickname,review.subject,review.title,review.content)
 
