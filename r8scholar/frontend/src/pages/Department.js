@@ -1,18 +1,17 @@
+//npm modules
 import React, { Component } from "react";
 import {Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Spinner, Table} from 'reactstrap'; 
 import {Link} from "react-router-dom";
-import ReviewItem from '../components/ReviewItem'; 
 import StarRatings from 'react-star-ratings';
-import ReviewForm from '../components/ReviewForm'; 
 import cookie from 'react-cookies'; 
+import axiosInstance from "../axiosApi";
+
+//components
+import ReviewItem from '../components/ReviewItem'; 
+import ReviewForm from '../components/ReviewForm'; 
 import SecondaryNav from "../components/SecondaryNav";
 
-const pageStyles={
-    margin: '0 auto', 
-    width: '90%', 
-}; 
-
-const linkStyle = { 
+const tableEntries = { 
     color: 'black',
     fontSize: "18", 
 }
@@ -20,7 +19,7 @@ const linkStyle = {
 
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles 
-    marginBottom: '2%', 
+    margin: '2%', 
     height: '1px',
     backgroundColor: '#dedede',
     border: 'none',
@@ -43,6 +42,7 @@ export default class Course extends Component {6
             loaded: false, 
             activeTab: "1",
             allDeptCourses:[],
+            currentUser: "", 
         }
     }
 
@@ -51,6 +51,7 @@ export default class Course extends Component {6
         this.getPopularChoices(this.state.name); 
         this.getAllReviews(this.state.name);
         this.getAllCourses(this.state.name); 
+        this.checkOwnership();
     }
 
     verifyDepartment = async (myName) => {
@@ -135,7 +136,6 @@ export default class Course extends Component {6
         }
         await fetch("/api/filter-course-department/", request)
             .then((response) => { response.json().then((data) => {
-                console.log(data)
                 this.setState({ 
                     allDeptCourses: data,
                 });
@@ -143,40 +143,55 @@ export default class Course extends Component {6
         });
     }
 
+    async checkOwnership(){
+        //get the user 
+        try {
+            let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
+            const user = response.data;
+            console.log(response.data);
+            this.setState({currentUser:user.nickname});
+            return user;
+        }catch(error){
+            //user is not logged in 
+        }
+    }
+    
+
     render() {
         return (
             <div>
                 <SecondaryNav/>
-            <div style={pageStyles}>
-                {this.state.loaded?
-                <Container fluid="md">
-                {this.state.valid? 
-                    <Row> {/* title row, includes course name and reviews*/}
-                        <Col align="center"sm={4}>
-                            <div name="title">
-                                <h4>Department of</h4>
-                                <h1>{this.state.name}</h1>
-                            </div>  
-                            <div style={pageBreak}/> {/* underline */}
-
-                            <div name="avg-rating-container">
-                                <div name="avg-rating-title">
-                                    <h4 style={{textAlign: 'center'}}>Overall Rating</h4>
-                                </div>  
-                                <div style={{textAlign: 'center'}} name="avg-rating">
-                                    {/* this displays average # of stars*/}
-                                    <StarRatings
-                                        rating={this.state.rating}
-                                        starDimension="40px"
-                                        starSpacing="10px"
-                                        starRatedColor="#f1c40f"
-                                        numberOfStars={5}
-                                        name='avgRating'
-                                    />
+                <Container fluid >
+                    {this.state.loaded ? 
+                    <div>
+                        <Row align="center">
+                            <Col>
+                                <small className="text-muted"><h3>Department of</h3></small>
+                                <h1 className="title">{this.state.name}</h1>
+                                <br/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={1}/>
+                            <Col md={3}>{/**Data and stuff */}
+                                <div name="avg-rating-container">
+                                    <div name="avg-rating-title">
+                                        <h4 className="title" style={{textAlign: 'center'}}>Overall Rating</h4>
+                                    </div>  
+                                    <div style={{textAlign: 'center'}} name="avg-rating">
+                                        {/* this displays average # of stars*/}
+                                        <StarRatings
+                                            rating={this.state.rating}
+                                            starDimension="40px"
+                                            starSpacing="10px"
+                                            starRatedColor="#f1c40f"
+                                            numberOfStars={5}
+                                            name='avgRating'
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div name="course-rating-container" style={{marginTop: '25px'}}>
+                                <div style={pageBreak}/> {/* underline */}
+                                <div name="course-rating-container" style={{marginTop: '25px'}}>
                                 <div name="course-rating-title">
                                     <h4 style={{textAlign: 'center'}}>Course Rating</h4>
                                 </div>  
@@ -192,6 +207,8 @@ export default class Course extends Component {6
                                     />
                                 </div>
                             </div>
+
+                            <div style={pageBreak}/> {/* underline */}
                             
                             <div name="instructor-rating-container" style={{marginTop: '25px'}}>
                                 <div name="instructor-rating-title">
@@ -238,11 +255,8 @@ export default class Course extends Component {6
                                 </div>
                             </div>
 
-                            <div style={pageBreak}/> {/* underline */}
-                            
-                        </Col>
-                        <Col sm={7}>
-                        <div style={{marginTop:"107px"}}/>
+                            </Col>
+                            <Col md={6}> {/**Tabbed content */}
                             <div className="nav-tabs-navigation">
                                 <div className="nav-tabs-wrapper pointer-nav">
                                     <Nav role="tablist" tabs>
@@ -279,11 +293,11 @@ export default class Course extends Component {6
                             {/* Tab panes */}
                             <TabContent className="following" activeTab={this.state.activeTab}>
                                 <TabPane tabId="1" id="follows">
-                                    <Row>
-                                        <Col className="ml-auto mr-auto" md="6">
+                                    <Row align="left">
+                                        <Col className="ml-auto mr-auto" md="10">
                                             {this.state.reviews !== null ? 
                                             this.state.reviews.reverse().map((item, index) => 
-                                            (<ReviewItem id={index} key={"department-review"+index} reviewItem={item}/>)) 
+                                            (<ReviewItem id={index} isOwner={item.nickname === this.state.currentUser} key={"department-review"+index} reviewItem={item}/>)) 
                                             : (<Container fluid>
                                                 <Row>
                                                     <Col align="center">
@@ -307,8 +321,8 @@ export default class Course extends Component {6
                                             return( 
                                             <tr key={index}>  
                                                 <th>{index + 1}</th>
-                                                <th><Link to={"/course/"+item.name}>{item.name}</Link></th>
-                                                <th style={{maxWidth: "200px"}}><a style={linkStyle} href={"/course/"+item.name}>{item.course_full_name}</a></th>
+                                                <th><Link style={tableEntries}to={"/course/"+item.name}>{item.name}</Link></th>
+                                                <th style={{maxWidth: "200px"}}><Link style={tableEntries} to={"/course/"+item.name}>{item.course_full_name}</Link></th>
                                                 <th style={{minWidth:"100px"}}><StarRatings
                                                     rating={item.rating}
                                                     starDimension="25px"
@@ -322,21 +336,27 @@ export default class Course extends Component {6
                                     </Table>
                                 </TabPane>
                                 <TabPane className="text-center" tabId="3" id="following">
-                                    <ReviewForm name={this.state.name} review="department"/>
+                                    <Row>
+                                        <Col align="center">
+                                            <ReviewForm name={this.state.name} review="department"/>
+                                        </Col>
+                                    </Row>
+                                    
                                 </TabPane>
                             </TabContent>
-                        </Col>
-                    </Row>
-                :<Row align='center'> {/**show message that course isnt found */}
+                            </Col>
+                            <Col md={2}/>
+                        </Row>
+                    </div>
+                    :<Row align='center'> {/**show message that course isnt found */}
                     <Col>
                         <h1>The department "{this.state.name + " "}" was not found.</h1>
 
-                        <h5 style={{marginTop:'15%'}}><a href="/departments">Return to Departments</a></h5>
+                        <h5 style={{marginTop:'15%'}}><Link to="/departments">Return to Deparments</Link></h5>
                     </Col>
                 </Row>}
                 </Container>
-            :<Spinner color="dark"/>}
-            </div>
+
             </div>
         );
     }

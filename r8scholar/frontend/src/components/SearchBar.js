@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
     Input,
     Dropdown,
@@ -54,6 +54,10 @@ class SearchBar extends Component {
         }
         this.setState({dropdownOpen: e.length >= 1}); //if there is text, drop down the menu 
     };
+
+    doFullSearch = e =>{
+        e.preventDefault(); 
+    }
 
     determineType(item) {
         if (item.course_full_name) {
@@ -114,9 +118,11 @@ class SearchBar extends Component {
                                       );
                                   })}
                         <DropdownItem divider />
-                        <DropdownItem href={"/search/" + this.state.query}>
-                            <b>View All Results</b>
-                        </DropdownItem>
+                            <DropdownItem>
+                            <Link to={"/search/" + this.state.query}>
+                                <b>View All Results</b>
+                                </Link>
+                            </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </div>

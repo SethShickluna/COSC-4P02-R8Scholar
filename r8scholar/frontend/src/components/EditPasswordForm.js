@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import cookie from "react-cookies"; 
+import {
+    FormGroup,
+    Label,
+    Input,
+    FormText,
+    Button
+} from "reactstrap";
 import axiosInstance from "../axiosApi"; 
 
 
@@ -17,7 +24,6 @@ export default class EditPasswordForm extends Component {
             oldPassword: "",
             password: "",
             verifPassword: "",
-            formComplete: false,
         }
 
         //allows us to this "this" inside the methods 
@@ -43,7 +49,7 @@ export default class EditPasswordForm extends Component {
         if(this.checkPassword){
             try { 
                 const response = await axiosInstance.post('/change-password/', {
-                    email: this.state.email,
+                    email: cookie.load("email"),
                     old_password: this.state.oldPassword, 
                     new_password: this.state.password, 
                 });
@@ -59,37 +65,50 @@ export default class EditPasswordForm extends Component {
 
     render() {
         return (
-            <div>
-                <Card style={formStyle}>
-                    <Card.Header as='h4'>Change Password</Card.Header>
-                    <Card.Body>
-                    <Form.Group controlId="formGroupPasswordEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control name="email" type="email" onChange={this.handleInput} placeholder="Enter your email" />
-                            </Form.Group>
-                        <Form onSubmit={this.submitForm}>
-                            <Form.Group controlId="formGroupOldPassword">
-                                <Form.Label>Enter Old Password</Form.Label>
-                                <Form.Control name="oldPassword" type="password" onChange={this.handleInput} placeholder="Enter old password..." />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupNewPassword">
-                                <Form.Label>Enter New Password</Form.Label>
-                                <Form.Control name="password" type="password" onChange={this.handleInput} placeholder="Enter new password..." />
-                            </Form.Group>
-
-                            <Form.Group controlId="formGroupVerifyPassword">
-                                <Form.Label>Confirm New Password</Form.Label>
-                                <Form.Control name="verifPassword" type="password" onChange={this.handleInput} placeholder="Confirm password..." />
-                            </Form.Group>
-
-                            <Button type="submit" variant="primary">
-                                Update Password
-                            </Button>
-
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </div>
+            <form onSubmit={this.submitForm}>
+                <h3>Change Password</h3>
+                <div style={{marginBottom:"2%"}}></div>
+                <FormGroup>
+                    <Label for="examplePassword">Old Password</Label>
+                    <Input
+                    type="password"
+                    name="oldPassword"
+                    id="oldPassword"
+                    placeholder="Current Password"
+                    autoComplete="off"
+                    onChange={this.handleInput}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="examplePassword">New Password</Label>
+                    <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="New Password"
+                    autoComplete="off"
+                    onChange={this.handleInput}
+                    />
+                    <FormText color="muted">
+                        Your password must be 10 digits, and contain 1 capital, lowercase & number
+                    </FormText>
+                </FormGroup>
+                
+                <FormGroup>
+                    <Label for="examplePassword">Verify New Password</Label>
+                    <Input
+                    type="password"
+                    name="verifPassword"
+                    id="verifPassword"
+                    placeholder="Verify New Password"
+                    autoComplete="off"
+                    onChange={this.handleInput}
+                    />
+                </FormGroup>
+                <Button color="primary" type="submit">
+                    Change Password
+                </Button>
+            </form>
         );
     }
 }

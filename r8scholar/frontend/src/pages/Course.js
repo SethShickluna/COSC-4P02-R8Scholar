@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import {Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Spinner} from 'reactstrap'; 
+import {Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap'; 
+import {Link} from "react-router-dom";
 import ReviewItem from '../components/ReviewItem'; 
 import SecondaryNav from "../components/SecondaryNav";
 import StarRatings from 'react-star-ratings';
 import ReviewForm from '../components/ReviewForm'; 
 import cookie from 'react-cookies'; 
+import axiosInstance from "../axiosApi";
 
 const pageStyles={
     margin: '0 auto',  
@@ -43,6 +45,7 @@ export default class Course extends Component {
             valid: false,
             loaded: false,  
             activeTab: "1", 
+            currentUser: "",
         }
 
         
@@ -51,6 +54,7 @@ export default class Course extends Component {
     componentDidMount(){
         this.verifyCourse(this.state.name); 
         this.getAllReviews(this.state.name);
+        this.checkOwnership();
         
         setTimeout(() => {
             this.getPopularChoices(); 
@@ -130,23 +134,37 @@ export default class Course extends Component {
         });
     }
 
+    async checkOwnership(){
+        //get the user 
+        try {
+            let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
+            const user = response.data;
+            console.log(response.data);
+            this.setState({currentUser:user.nickname});
+            return user;
+        }catch(error){
+            //user is not logged in 
+        }
+    }
+
     render() {
         return (
-        <div>
-        <SecondaryNav/>
-            <div style={pageStyles}>
-            {this.state.loaded?
-                <Container fluid="md">
-                {this.state.valid?
-                    <Row> {/* title row, includes course name and reviews*/}
-                        <Col align="center" sm={4}>
-                            <div name="title">
-                                <b><h1>{this.state.name}</h1></b>
-                                <h5>{this.state.fullName}</h5>
-                            </div>  
-                            <div style={pageBreak}/> {/* underline */}
-
-                            <div name="avg-rating-container">
+            <div>
+            <SecondaryNav/>
+            <Container fluid >
+                {this.state.loaded ? 
+                <div>
+                    <Row align="center">
+                        <Col>
+                            <h1 className="title">{this.state.name}</h1>
+                            <small className="text-muted"><h3>{this.state.fullName}</h3></small>
+                            <br/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={1}/>
+                        <Col md={3}>{/**Data and stuff */}
+                        <div name="avg-rating-container">
                             <div name="avg-rating-title">
                                     <h4 style={{textAlign: 'center'}}>Overall Rating</h4>
                                 </div>  
@@ -173,8 +191,8 @@ export default class Course extends Component {
                                 </div>   
                                 <div name="pop-prof-name" style={{textAlign: 'center'}}>
                                     {this.state.instructors !== null?
-                                    this.state.instructors.map((item) => 
-                                    (<h4><a href={"/instructor/" + item.name}>{item.name}</a></h4>))
+                                    this.state.instructors.map((item, index) => 
+                                    (<h4 key={index}><a href={"/instructor/" + item.name}>{item.name}</a></h4>))
                                 :null}
                                 </div>
                             </div>
@@ -186,8 +204,8 @@ export default class Course extends Component {
                                     <h3 style={{textAlign: 'center'}}>Popular Courses</h3>
                                 </div>   
                                 <div name="pop-course-name" style={{textAlign: 'center'}}>
-                                    {this.state.courses !== null ?this.state.courses.map((item) => 
-                                    (<h4><a href={"/course/" + item.name}>{item.name}</a></h4>))
+                                    {this.state.courses !== null ?this.state.courses.map((item, index) => 
+                                    (<h4 key={index}><a href={"/course/" + item.name}>{item.name}</a></h4>))
                                 : null}
                                 </div>
                             </div>
@@ -202,69 +220,72 @@ export default class Course extends Component {
                             </div>
                             <div style={pageBreak}/> {/* underline */}
                         </Col>
-                        <Col sm={7}>
-                            <div style={{marginTop:"107px"}}/>
-                            <div className="nav-tabs-navigation">
-                                <div className="nav-tabs-wrapper pointer-nav">
-                                    <Nav role="tablist" tabs>
+                        <Col md={6}> {/**Tabbed content */}
+                        <div className="nav-tabs-navigation">
+                            <div className="nav-tabs-wrapper pointer-nav">
+                                <Nav role="tablist" tabs>
+                                    <NavItem>
+                                        <NavLink
+                                            className={this.state.activeTab === "1" ? "active" : ""}
+                                            onClick={() => {
+                                                this.setState({activeTab:"1"});}}>
+                                            Reviews
+                                        </NavLink>
+                                    </NavItem>
+                                    {cookie.load('isLoggedIn') === "true" ? 
                                         <NavItem>
                                             <NavLink
-                                                className={this.state.activeTab === "1" ? "active" : ""}
+                                                className={this.state.activeTab === "2" ? "active" : ""}
                                                 onClick={() => {
-                                                    this.setState({activeTab:"1"});}}>
-                                                Reviews
+                                                    this.setState({activeTab:"2"});
+                                                    }}>
+                                                    Create Review
                                             </NavLink>
-                                        </NavItem>
-                                        {cookie.load('isLoggedIn') === "true" ? 
-                                            <NavItem>
-                                                <NavLink
-                                                    className={this.state.activeTab === "2" ? "active" : ""}
-                                                    onClick={() => {
-                                                        this.setState({activeTab:"2"});
-                                                        }}>
-                                                        Create Review
-                                                </NavLink>
-                                            </NavItem>   
-                                        :null}
-                                        
-                                    </Nav>
-                                </div>
+                                        </NavItem>   
+                                    :null}
+                                </Nav>
                             </div>
-                            {/* Tab panes */}
-                            <TabContent className="following" activeTab={this.state.activeTab}>
-                                <TabPane tabId="1" id="follows">
-                                    <Row>
-                                        <Col className="ml-auto mr-auto" md="6">
-                                            {this.state.reviews !== null ? 
-                                            this.state.reviews.reverse().map((item, index) => 
-                                            (<ReviewItem id={index} key={"department-review"+index} reviewItem={item}/>)) 
-                                            : (<Container fluid>
-                                                <Row>
-                                                    <Col align="center">
-                                                        <h4>Nothing to see here. Would you like to leave a review?</h4>
-                                                    </Col>
-                                                </Row>
-                                            </Container>) /* generate all the reviews for this page */} 
-                                        </Col>
-                                    </Row>
-                                </TabPane>
-                                <TabPane className="text-center" tabId="2" id="following">
-                                    <ReviewForm name={this.state.name} review="course"/>
-                                </TabPane>
-                            </TabContent>
+                        </div>
+                        {/* Tab panes */}
+                        <TabContent className="following" activeTab={this.state.activeTab}>
+                            <TabPane tabId="1" id="follows">
+                                <Row align="left">
+                                    <Col className="ml-auto mr-auto" md="10">
+                                        {this.state.reviews !== null ? 
+                                        this.state.reviews.reverse().map((item, index) => 
+                                        (<ReviewItem id={index} isOwner={item.nickname === this.state.currentUser} key={"department-review"+index} reviewItem={item}/>)) 
+                                        : (<Container fluid>
+                                            <Row>
+                                                <Col align="center">
+                                                    <h4>Nothing to see here. Would you like to leave a review?</h4>
+                                                </Col>
+                                            </Row>
+                                        </Container>) /* generate all the reviews for this page */} 
+                                    </Col>
+                                </Row>
+                            </TabPane>
+                            <TabPane className="text-center" tabId="2" id="following">
+                                <Row>
+                                    <Col align="center">
+                                        <ReviewForm name={this.state.name} review="course"/>
+                                    </Col>
+                                </Row>
+                            </TabPane>
+                        </TabContent>
                         </Col>
+                        <Col md={2}/>
                     </Row>
-                    :<Row align='center'> {/**show message that course isnt found */}
-                    <Col>
-                        <h1>The course "{this.state.name + " "}" was not found.</h1>
+                </div>
+                :<Row align='center'> {/**show message that course isnt found */}
+                <Col>
+                    <h1>The course "{this.state.name + " "}" was not found.</h1>
 
-                        <h5 style={{marginTop:'15%'}}><a href="/courses">Return to Courses</a></h5>
-                    </Col>
-                </Row>}
-                </Container>
-                :<Spinner color="dark"/>}
-            </div>
-            </div>
+                    <h5 style={{marginTop:'15%'}}><Link to="/courses">Return to Courses</Link></h5>
+                </Col>
+            </Row>}
+            </Container>
+
+        </div>
         );
     }
 }

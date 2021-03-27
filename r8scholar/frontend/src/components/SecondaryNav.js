@@ -15,6 +15,9 @@ import {
   Container
 } from "reactstrap";
 
+//axios 
+import axiosInstance from "../axiosApi"; 
+
 const navLinkStyles = { 
   fontSize: '20px',
 }
@@ -28,6 +31,26 @@ const title={
   paddingLeft:"4%",
   paddingRight: "3%",
   fontSize: '28px',
+}
+
+async function handleLogout(){ 
+  try {
+      const response = await axiosInstance.post('/logout/', {
+          "refresh_token": localStorage.getItem("refresh_token")
+      });
+      cookie.save('isLoggedIn', 'false',{path:'/'});
+      cookie.save('email', '',{path:'/'});
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
+      window.location.href = "/";
+      return response;
+  }
+  catch (e) {
+      console.log(e);
+  }
+  
+  
 }
 
 function SecondaryNav() {
@@ -100,7 +123,7 @@ function SecondaryNav() {
             <Nav style={{paddingRight:"10%"}}navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 
-                <Button className="btn-round" color="default" href="/signout" outline>
+                <Button className="btn-round" color="default" type="submit" onClick={handleLogout}>
                 
                     Sign Out
                 </Button>

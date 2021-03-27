@@ -19,13 +19,11 @@ npm install --save css-loader style-loader url-loader file-loader webpack @babel
 
 then 
 
-npm install --save react react-dom react-router-dom reactstrap react-bootstrap 
+npm install --save react react-dom react-router-dom reactstrap
 
 then 
 
-npm i react-icons react-icons-kit react-star-ratings react-cookies jquery 
-
-npm install --save axios
+npm i --save react-icons react-icons-kit react-star-ratings react-cookies axios
 
 to run the program cd into /r8scholar (the directory with manage.py) 
 

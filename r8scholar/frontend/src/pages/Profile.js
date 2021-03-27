@@ -1,13 +1,20 @@
+//npm modules
 import React, { Component } from "react";
 import { Container, Row, Col, Button, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
 import {Link} from "react-router-dom"; 
-import ReviewItem from "../components/ReviewItem";
-import SecondaryNav from "../components/SecondaryNav";
 import cookie from "react-cookies";
+
+//js stuff
 import imageOne from "../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg";
-import $ from "jquery";
+
+//components
 import EditNicknameForm from "../components/EditNicknameForm";
 import EditPasswordForm from "../components/EditPasswordForm";
+import ReviewItem from "../components/ReviewItem";
+import SecondaryNav from "../components/SecondaryNav";
+
+
+//axios 
 import axiosInstance from "../axiosApi";
 
 const pageStyles = {
@@ -30,32 +37,6 @@ const imgStyle = {
     height: "200px",
 };
 
-//code for submitting a profile image
-$(document).ready(function () {
-    var readURL = function (input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $(".profile-pic").attr("src", e.target.result);
-                newImage = e.target.result; //set new image to result
-                //this.setState({profile_picture : e.target.result}) //change the state object
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    };
-
-    $(".file-upload").on("change", function () {
-        readURL(this);
-    });
-
-    $(".upload-button").on("click", function () {
-        $(".file-upload").click();
-    });
-});
-//end of this section of code.
-
 export default class Profile extends Component {
     constructor(props) {
         super(props);
@@ -69,6 +50,7 @@ export default class Profile extends Component {
             },
             reviews: null,
             activeTab: "1", 
+            activeSubtab: "1",
         };
 
         this.authenicateUser = this.authenicateUser.bind(this); 
@@ -179,7 +161,7 @@ export default class Profile extends Component {
                                                     onClick={() => {
                                                         this.setState({activeTab:"2"});
                                                     }}>
-                                                    Edit Account Information
+                                                    Change Password
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem>
@@ -188,7 +170,7 @@ export default class Profile extends Component {
                                                     onClick={() => {
                                                         this.setState({activeTab:"3"});
                                                     }}>
-                                                    Settings
+                                                    Change Nickname
                                                 </NavLink>
                                             </NavItem>
                                         </Nav>
@@ -199,16 +181,15 @@ export default class Profile extends Component {
                                         <TabPane tabId="1" id="follows">
                                             <Row>
                                                 <Col className="ml-auto mr-auto" md="6">
-                                                
+                                                    {/**Reviews */}
                                                 </Col>
                                             </Row>
                                         </TabPane>
-                                        <TabPane className="text-center" tabId="2" id="following">
-                                                <EditNicknameForm/>
-                                                <EditPasswordForm/>
+                                        <TabPane className="text-center" tabId="2" id="chnage-pass">
+                                            <EditPasswordForm/>
                                         </TabPane>
-                                        <TabPane className="text-center" tabId="3" id="following">
-                                            Settings.
+                                        <TabPane className="text-center" tabId="3" id="change-nick">
+                                            <EditNicknameForm/>
                                         </TabPane>
                                     </TabContent>
                                 </Col>

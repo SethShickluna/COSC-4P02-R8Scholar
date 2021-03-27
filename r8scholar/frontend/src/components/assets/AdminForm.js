@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card } from 'reactstrap';
 
 
 const formStyle = {

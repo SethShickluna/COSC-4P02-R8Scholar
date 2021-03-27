@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-import cookie from "react-cookies";
 import StarRatings from 'react-star-ratings'; 
 import {Spinner, Table, Container, Row, Col, Pagination, 
     PaginationItem, PaginationLink,
-    Dropdown, DropdownToggle, DropdownMenu, DropdownItem
+    UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 import SecondaryNav from "../components/SecondaryNav";
 
@@ -131,17 +130,23 @@ export default class Courses extends Component {
                                 <h4>Filter Options</h4>
                             </div>  
                             <div>
-                            <Dropdown color="primary"isOpen={this.state.droppedDown}>
-                                <DropdownToggle onClick={this.activateMenu} caret>
-                                        {this.state.sortOption}
-                                </DropdownToggle>
-                                <DropdownMenu container="body">      
-                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: A-Z</a></DropdownItem>
-                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: Z-A</a></DropdownItem>
-                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: High to Low</a></DropdownItem>
-                                    <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: Low to High</a></DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
+                            <UncontrolledDropdown className="btn-group">
+                                    <DropdownToggle 
+                                        aria-expanded={false}
+                                        aria-haspopup={true}
+                                        caret
+                                        color="info"
+                                        data-toggle="dropdown"
+                                        type="button">
+                                            {this.state.sortOption}
+                                    </DropdownToggle>
+                                    <DropdownMenu container="body">   
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: A-Z</a></DropdownItem>   
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: Z-A</a></DropdownItem>
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: High to Low</a></DropdownItem>
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: Low to High</a></DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
                             </div>
                             <div style={{marginTop:"3%"}}/>
                             <div>

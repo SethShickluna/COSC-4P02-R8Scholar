@@ -1,7 +1,9 @@
 //form that is presented to user when they create a review 
 import React, {Component} from 'react'; 
-import Form from 'react-bootstrap/Form'; 
-import {Button, FormText, Row, Container, Col, Spinner} from 'reactstrap'; 
+import {Button, Form, FormText, FormGroup, Label, 
+    Input, Row, Container, Col, 
+    Spinner
+} from 'reactstrap'; 
 import {Link} from 'react-router-dom';
 import cookie from 'react-cookies'; 
 import axiosInstance from "../axiosApi"; 
@@ -24,15 +26,6 @@ const questions = {
     ],  
 }
 
-const formStyle = { 
-    marginTop: '5%', 
-}
-
-const buttonStyle={ 
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
 export default class ReviewForm extends Component { 
     constructor(props){
         super(props); 
@@ -55,7 +48,6 @@ export default class ReviewForm extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({reviewer:user});
-            console.log(user); 
             return user;
         }catch(error){
             //user is not logged in 
@@ -67,11 +59,12 @@ export default class ReviewForm extends Component {
     }
 
     //TODO make this require fields 
-    async submitReview (){
+    async submitReview (e){
+        e.preventDefault(); 
         let overallRating = (Number(this.state.rating1) + Number(this.state.rating2) + Number(this.state.rating3)) / 3;
         try { 
             const review = await axiosInstance.post('/create-review/', {
-                nickname: this.state.reviewer.nickname, 
+                nickname: this.state.reviewer.nickname,
                 subject: this.props.name,
                 title: this.state.title, 
                 content: this.state.content, 
@@ -87,41 +80,37 @@ export default class ReviewForm extends Component {
 
     render() { 
         return( 
-            <div>
-            {this.state.reviewer !== null ?
-                <div style={formStyle} name="review-form-container">
-                    {this.state.reviewer.is_verified ?
-                    <Form>
-                        <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control isInvalid={this.state.title === null} placeholder="Title..."  name="title" onChange={this.handleInput}/>
-                        </Form.Group>
-                        <Form.Group controlId="exampleForm.ControlSelect1">
-                            <FormText><h4>On a scale of 0-5 rate the following:</h4></FormText>
-                            {questions[this.props.review].map((question, index) => 
-                            (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
-                            <Form.Label>{question}</Form.Label>
-                                <Form.Control name={"rating"+(index+1)} onChange={this.handleInput}as="select">
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </Form.Control> </div>
-                            ))}
-                        </Form.Group>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>What did you think of this {this.props.review}? </Form.Label>
-                            <Form.Control name="content"onChange={this.handleInput} as="textarea" rows={5} />
-                        </Form.Group>
-                        <div style={buttonStyle}>
-                            <Button onClick={this.submitReview} color="primary" size="lg">
-                                Submit Review
-                            </Button>
-                        </div>
-                        
-                    </Form>
+            <Container fluid>
+            <div style={{maxWidth:"60%"}}>
+                {this.state.reviewer !== null ?
+                    this.state.reviewer.is_verified ?
+                        <Form onSubmit={this.submitReview}>
+                            <FormGroup>
+                                <Label for="exampleEmail"><h4 className="title">Review Title:</h4></Label>
+                                <Input type="text" name="title" id="title" onChange={this.handleInput} placeholder="A Captivating Title" />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormText><h4 className="title">On a scale of 0-5 rate the following:</h4></FormText>
+                                {questions[this.props.review].map((question, index) => 
+                                (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
+                                <Label><b>{question}</b></Label>
+                                    <Input name={"rating"+(index+1)} onChange={this.handleInput} type="select" >
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </Input> </div>
+                                ))}
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="exampleText"> <h5 className="title">Tell us what you thought about this {this.props.review}</h5></Label>
+                                <Input type="textarea" onChange={this.handleInput} name="content" id="content" rows={5}/>
+                            </FormGroup>
+
+                            <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
+                        </Form>
                     : 
                     <div>
                         <Container fluid>
@@ -131,21 +120,21 @@ export default class ReviewForm extends Component {
                                     <Link to="/verify"><Button color="danger">Verify Now</Button></Link>
                                 </Col>
                             </Row>
-                        </Container>
-                        
-                    </div>}
-                </div>
-                : 
-                <div>
-                   <Container fluid>
+                        </Container>  
+                    </div>
+                    : 
+                    <div>
+                    <Container fluid>
                             <Row>
                                 <Col align="center">
                                     <Spinner color="black"/>
                                 </Col>
                             </Row>
                         </Container>
-                </div>}
+                    </div>}
             </div>
+            <div style={{marginBottom:"15%"}}/>
+            </Container>
         ); 
     }
 }

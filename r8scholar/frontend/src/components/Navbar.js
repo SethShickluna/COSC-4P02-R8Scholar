@@ -11,6 +11,7 @@ import {
   NavLink,
   Nav,
 } from "reactstrap";
+import axiosInstance from "../axiosApi"; 
 
 import cookie from 'react-cookies';
 
@@ -27,6 +28,26 @@ const title={
   paddingLeft:"4%",
   paddingRight: "3%",
   fontSize: '28px',
+}
+
+async function handleLogout(){ 
+  try {
+      const response = await axiosInstance.post('/logout/', {
+          "refresh_token": localStorage.getItem("refresh_token")
+      });
+      cookie.save('isLoggedIn', 'false',{path:'/'});
+      cookie.save('email', '',{path:'/'});
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
+      window.location.href = "/";
+      return response;
+  }
+  catch (e) {
+      console.log(e);
+  }
+  
+  
 }
 
 function HomeNavbar() {
@@ -123,7 +144,7 @@ function HomeNavbar() {
             <Nav style={{marginRight:"10%"}}navbar>
             <NavItem> {/**signup button */}
             {cookie.load('isLoggedIn') === "true"? 
-                <Button className="btn-round lg outline" color="danger" href="/signout">
+                <Button className="btn-round lg outline" color="danger" type="submit" onClick={handleLogout}>
                 
                     Sign Out
                 </Button>

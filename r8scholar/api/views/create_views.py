@@ -19,6 +19,7 @@ class CreateUserView(APIView):
             user = serializer.save()
             if user: 
                 response = serializer.data 
+                print(user.verification_code)
                 email_user(user.email,user.verification_code)
                 return Response(response, status=status.HTTP_201_CREATED)
         else:

@@ -24,6 +24,7 @@ class ReportReview(APIView):
             user = review.reviewer
             #Increment report counter
             review.numb_reports += 1
+            review.save() #remeber to write the new changes to db
             email_r8scholar(review_id,report_description,review.numb_reports,user.email,user.nickname,review.subject,review.title,review.content)
 
 #Deletes an existing review

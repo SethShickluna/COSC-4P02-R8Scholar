@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StarRatings from 'react-star-ratings'; 
+import {Link} from "react-router-dom";
 import {Spinner, Table, Container, Row, Col, Pagination, PaginationItem, PaginationLink} from 'reactstrap';
 import SecondaryNav from "../components/SecondaryNav";
 
@@ -15,6 +16,7 @@ export default class SearchPage extends Component {
             query:this.props.match.params.query,
             results:[], 
             currentPage: 1,
+            loaded: false, 
         };
     }
 
@@ -32,7 +34,7 @@ export default class SearchPage extends Component {
                 results: combinedResults, 
             })
         }); 
-        console.log(this.state.results); 
+        this.setState({loaded:true}); 
     }
     
     determineType(item){
@@ -75,7 +77,7 @@ export default class SearchPage extends Component {
                             </div>
                             <div style={{marginTop:"3%"}}/>
                             <div>
-                            <nav aria-label="Page navigation example">
+                                <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
                                         <PaginationItem color="danger">
                                             <PaginationLink onClick={this.changePages}href="#">
@@ -114,7 +116,7 @@ export default class SearchPage extends Component {
                             {this.state.results.length == 0 || this.state.results === null?
                             <div>
                                 <h3>No matching results found.</h3>
-                                <h5><a href="/">Return Home</a></h5>
+                                <h5><Link><a>Return Home</a></Link></h5>
                             </div>
                            :<Table striped>
                                <thead>
@@ -124,24 +126,25 @@ export default class SearchPage extends Component {
                                     <th>Rating</th>
                                </thead>
                                <tbody>
-                                   {this.state.results.map((item, index) =>{
-                                       return(
-                                        <tr key={index}>  
-                                        <th>{index + 1}</th>                                     
-                                        <th><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></th>
-                                        <th>{this.getName(item)}</th>
-                                        <th style={{minWidth:"100px"}}><StarRatings
-                                            rating={item.rating}
-                                            starDimension="25px"
-                                            starSpacing="5px"
-                                            starRatedColor="#3498db"
-                                            numberOfStars={5}
-                                            name='avgRating'/>
-                                        </th>
-                                    </tr>
-                                       ); 
-                                   })}
-                                   
+                                   {this.state.loaded ? 
+                                    this.state.results.map((item, index) =>{
+                                        return(
+                                            <tr key={index}>  
+                                            <th>{index + 1}</th>                                     
+                                            <th><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></th>
+                                            <th>{this.getName(item)}</th>
+                                            <th style={{minWidth:"100px"}}><StarRatings
+                                                rating={item.rating}
+                                                starDimension="25px"
+                                                starSpacing="5px"
+                                                starRatedColor="#3498db"
+                                                numberOfStars={5}
+                                                name='avgRating'/>
+                                            </th>
+                                        </tr>
+                                        ); 
+                                    })
+                                   :<Spinner color="black"/>}
                                </tbody>
                            </Table>}
                         </Col>

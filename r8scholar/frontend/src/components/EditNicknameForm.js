@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import cookie from "react-cookies"; 
+import {
+    FormGroup,
+    Label,
+    Input,
+    FormText,
+    Button
+} from "reactstrap";
 import axiosInstance from "../axiosApi"; 
-
-
-const formStyle = {
-    width: '30rem',
-}
 
 
 export default class EditNicknameForm extends Component {
@@ -13,7 +15,6 @@ export default class EditNicknameForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
             password: "",
             nickname: "",
             formComplete: false
@@ -42,16 +43,15 @@ export default class EditNicknameForm extends Component {
 
     async submitForm (e) {
         e.preventDefault(); //stop a reload
-        console.log("Hello")
         if(this.checkNickname){
             try { 
                 const response = await axiosInstance.post('/change-nickname/', {
-                    email: this.state.email,
+                    email: cookie.load("email") ,
                     password: this.state.password, 
                     nickname: this.state.nickname, 
                 });
                 const message = response.data; 
-                console.log(message)
+                window.location.reload();
                 return message;
             }catch(error){
                 throw error; 
@@ -63,32 +63,36 @@ export default class EditNicknameForm extends Component {
 
     render() {
         return (
-            <div>
-                <Card style={formStyle}>
-                    <Card.Header as='h4'>Change Nickname</Card.Header>
-                    <Card.Body>
-                        <Form onSubmit={this.submitForm}>
-                        <Form.Group controlId="formGroupNicknameEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control name="email" type="email" onChange={this.handleInput} placeholder="Enter your email" />
-                            </Form.Group>
-                        <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Enter Password</Form.Label>
-                                <Form.Control name="password" type="password" onChange={this.handleInput} placeholder="Enter your password..." />
-                            </Form.Group>
-
-                            <Form.Group controlId="formGroupNickname">
-                                <Form.Label>Change Nickname</Form.Label>
-                                <Form.Control name="nickname"type="username" onChange={this.handleInput} placeholder="Enter new nickname" />
-                            </Form.Group>
-
-                            <Button type="submit" variant="primary">
-                               Update Nickname
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </div>
+            <form onSubmit={this.submitForm}>
+                <h3>Change Nickname</h3>
+                <div style={{marginBottom:"2%"}}></div>
+                <FormGroup>
+                    <Label for="nickname">New Nickname</Label>
+                    <Input
+                    type="text"
+                    name="nickname"
+                    id="nickname"
+                    placeholder="New Nickname"
+                    autoComplete="off"
+                    onChange={this.handleInput}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="password">Password</Label>
+                    <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="New Password"
+                    autoComplete="off"
+                    onChange={this.handleInput}
+                    />
+                </FormGroup>
+                
+                <Button color="primary" type="submit">
+                    Change Nickname
+                </Button>
+            </form>
         );
     }
 }
