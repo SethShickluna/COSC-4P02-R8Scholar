@@ -49,6 +49,7 @@ urlpatterns = [
     path('login/',authentication_views.login.as_view(),name = 'login'),
     path('logout',authentication_views.logout.as_view(),name = 'logout'),
     #edit user views
+    path('delete-user',edit_user_views.DeleteUser.as_view(),name = 'delete-user'),
     path('change-nickname',edit_user_views.change_nickname.as_view(),name='change-nickname'),
     path('change-password',edit_user_views.change_password.as_view(),name = 'change-password'),
     #functionality views 
