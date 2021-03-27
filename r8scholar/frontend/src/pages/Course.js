@@ -139,7 +139,6 @@ export default class Course extends Component {
         try {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
-            console.log(response.data);
             this.setState({currentUser:user.nickname});
             return user;
         }catch(error){
@@ -253,7 +252,12 @@ export default class Course extends Component {
                                     <Col className="ml-auto mr-auto" md="10">
                                         {this.state.reviews !== null ? 
                                         this.state.reviews.reverse().map((item, index) => 
-                                        (<ReviewItem id={index} isOwner={item.nickname === this.state.currentUser} key={"department-review"+index} reviewItem={item}/>)) 
+                                        (<ReviewItem 
+                                            id={index} 
+                                            isOwner={item.nickname === this.state.currentUser} 
+                                            key={"department-review"+index} 
+                                            reviewItem={item}
+                                            type="course"/>)) 
                                         : (<Container fluid>
                                             <Row>
                                                 <Col align="center">

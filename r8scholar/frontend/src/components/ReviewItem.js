@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button, Row, Col } from 'reactstrap';;
 import StarRatings from 'react-star-ratings';
-import { BsFillExclamationCircleFill } from 'react-icons/bs';
+import ReportForm from "./ReportReviewForm";
+import EditForm from "./EditReviewForm"; 
 
 const reviewTitle = {
     color: "black", 
@@ -28,12 +29,8 @@ export default class ReviewItem extends Component {
        //this.props.isOwner
     }
 
-    report(){ 
-        //return report modal 
-    }
-
     edit(){ 
-        //return edit modal 
+        
     }
 
     //the JSX that is rendered when this file is imported as a component 
@@ -49,9 +46,9 @@ export default class ReviewItem extends Component {
                             </Col>
                             <Col className="col-md-2" align="right">
                                 {this.props.isOwner ?
-                                <div stlye={{marginTop:"19px"}}>
+                                <div style={{marginTop:"10px"}}>
                                     
-                                    <Button color="default" onClick={this.edit}>Edit</Button>
+                                    <EditForm type={this.props.type} reviewID={this.props.reviewItem.review_id}/>
                                 </div>
                                 : null} 
                             </Col>
@@ -74,7 +71,7 @@ export default class ReviewItem extends Component {
                                 <Button color="primary" onClick={this.report}>View Comments</Button>
                             </Col>
                             <Col align="right">
-                                <Button color="danger" onClick={this.report}><BsFillExclamationCircleFill/>{" "}Report</Button>
+                                <ReportForm reviewID={this.props.reviewItem.review_id}/>
                             </Col>
                         </Row>
                     </ListGroupItem>

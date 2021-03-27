@@ -46,7 +46,7 @@ export default class EditNicknameForm extends Component {
         if(this.checkNickname){
             try { 
                 const response = await axiosInstance.post('/change-nickname/', {
-                    email: cookie.load("email") ,
+                    email: cookie.load("email"),
                     password: this.state.password, 
                     nickname: this.state.nickname, 
                 });
