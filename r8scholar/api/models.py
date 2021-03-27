@@ -152,7 +152,7 @@ class Course(models.Model):
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #Relates user to review
-    reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.CASCADE)
     #User's nickname
     nickname = models.CharField(max_length=30, default=None)
     subject = models.CharField(max_length=100)
@@ -172,9 +172,9 @@ class Review(models.Model):
 class Comment(models.Model):
     comment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #Relates review to comment
-    review = models.ForeignKey(Review,default=None, on_delete = models.DO_NOTHING)
+    review = models.ForeignKey(Review,default=None, on_delete = models.CASCADE)
     #Relates user to comment
-    commenter = models.ForeignKey(CustomUser,default=None, on_delete = models.DO_NOTHING)
+    commenter = models.ForeignKey(CustomUser,default=None, on_delete = models.CASCADE)
     name = models.CharField(max_length=32)
     content = models.TextField(default=None)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
