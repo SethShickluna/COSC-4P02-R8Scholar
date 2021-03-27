@@ -6,7 +6,10 @@ import axiosInstance from "../axiosApi";
 function EditForm(props) {
     const [loginModal, setLoginModal] = React.useState(false);
     const [content, setContent] = React.useState(""); 
-    const [selected, setSelected] =  React.useState(""); 
+    const [title, setTitle] =  React.useState(""); 
+    const [rating1, setRating1] = React.useState(0);
+    const [rating2, setRating2] = React.useState(0);
+    const [rating3, setRating3] = React.useState(0);
     
     const questions = { 
         "course": [
@@ -26,17 +29,39 @@ function EditForm(props) {
         ],  
     }
 
-
-    const handleChange = e => { 
+    const handleContentChange = e => { 
         setContent(e.target.value); 
     }
 
+    const handleTitleChange = e => { 
+        setTitle(e.target.value); 
+    }
+
+    const changeRating = e => { 
+        if(e.target.name === "rating1"){
+            setRating1(e.target.value); 
+        }else if(e.target.name === "rating2"){
+            setRating2(e.target.value); 
+        }else{ 
+            setRating3(e.target.value); 
+        }
+        
+    }
+    
     const submit = async() => { 
+        e.preventDefault(); 
+        let rating = (rating1 + rating2 + rating3) / 3; 
         try {
             let response = await axiosInstance.post("/edit-review/", {
-               
+                review_id: props.review.review_id, 
+                subject: props.review.subject,
+                title: title, 
+                content: content, 
+                rating: rating, 
+                review_type: "", 
             });
             //let user know it worked 
+            window.location.reload(); 
             return response.status;
         }catch(error){
             //user is not logged in 
@@ -68,21 +93,21 @@ function EditForm(props) {
           >
             <span aria-hidden={true}>×</span>
           </button>
-          <h3 className="modal-title text-center">Edit Review</h3>
+          <h6 className="modal-title text-center">Edit Review</h6>
         </div>
         <div className="modal-body">
         
         <Form onSubmit={submit}>
             <FormGroup>
-                <Label for="exampleEmail"><h4 className="title">Review Title:</h4></Label>
-                <Input type="text" name="title" id="title" onChange={handleChange} placeholder="A Captivating Title" />
+                <Label for="exampleEmail"><p>Review Title:</p></Label>
+                <Input type="text" name="title" id="title" onChange={handleTitleChange} value={props.review.title} />
             </FormGroup>
             <FormGroup>
-            <FormText><h4 className="title">On a scale of 0-5 rate the following:</h4></FormText>
+            <FormText>On a scale of 0-5 rate the following:</FormText>
                 {questions[props.type].map((question, index) => 
                 (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                 <Label><b>{question}</b></Label>
-                <Input name={"rating"+(index+1)} onChange={handleChange} type="select" >
+                <Input name={"rating"+(index+1)} onChange={e => changeRating} type="select" >
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -92,8 +117,8 @@ function EditForm(props) {
                 </Input> </div>))}
                 </FormGroup>
                 <FormGroup>
-                    <Label for="exampleText"> <h5 className="title">Tell us what you thought about this {props.type}</h5></Label>
-                    <Input type="textarea" onChange={handleChange} name="content" id="content" rows={5}/>
+                    <Label for="exampleText">Tell us what you thought about this {props.type}</Label>
+                    <Input type="textarea" value={props.review.content} onChange={handleContentChange} name="content" id="content" rows={5}/>
                 </FormGroup>
                     <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
                 </Form>

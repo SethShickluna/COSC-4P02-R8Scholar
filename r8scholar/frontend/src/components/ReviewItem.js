@@ -48,7 +48,7 @@ export default class ReviewItem extends Component {
                                 {this.props.isOwner ?
                                 <div style={{marginTop:"10px"}}>
                                     
-                                    <EditForm type={this.props.type} reviewID={this.props.reviewItem.review_id}/>
+                                    <EditForm type={this.props.type} review={this.props.reviewItem}/>
                                 </div>
                                 : null} 
                             </Col>

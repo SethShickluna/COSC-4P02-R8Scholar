@@ -19,16 +19,18 @@ function ReportForm(props) {
     }
 
     const submit = async() => { 
+
         try {
             let response = await axiosInstance.post("/report-review/", {
                 review_id: props.reviewID, 
-                description: selected === "4" ? content : reasons[Number[selected]], 
+                description: selected === "4" ? content : reasons[Number(selected) - 1], 
             });
             //let user know it worked 
             return response.status;
         }catch(error){
             //user is not logged in 
         }
+        setLoginModal(false);
     }
 
   return(
