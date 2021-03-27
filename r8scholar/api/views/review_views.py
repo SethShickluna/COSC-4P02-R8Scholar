@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project Files
 from ..models import CustomUser, Review, Course, Department, Instructor
-from ..serializers import (DeleteReviewSerializer, ReportReviewSerializer, ReviewSerializer, EditReviewSerializer)
+from ..serializers import (ReviewSerializer)
 from .email_report import email_r8scholar
 #Python
 import json
@@ -38,9 +38,9 @@ class DeleteReviewView(APIView):
         #Delete the review with the matching review_id
         try:
             Review.objects.get(review_id=review_id).delete()
-            return Response({'OK':'Report message sent'}, status=status.HTTP_201_CREATED)
+            return Response({'OK':'Review Deleted'}, status=status.HTTP_201_CREATED)
         except Review.DoesNotExist:
-            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request': 'Review doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
 
 #Edits an existing review of a course/instructor/department
 class EditReviewView(APIView):

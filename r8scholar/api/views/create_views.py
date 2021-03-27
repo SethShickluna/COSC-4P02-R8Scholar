@@ -1,10 +1,10 @@
 #REST
-from rest_framework import status
+from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 #Project Files
-from ..models import CustomUser, Review, Course, Department, Instructor
-from ..serializers import (UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer)
+from ..models import Comment, CustomUser, Review, Course, Department, Instructor
+from ..serializers import (CommentSerializer, UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer, CreateCommentSerializer)
 from ..email_sender import email_user
 
 #creates a new custom user
@@ -29,6 +29,31 @@ class CreateUserView(APIView):
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         else:
             return Response({'Bad Request': 'Serializer invalid...'+str(serializer.errors)}, status=status.HTTP_400_BAD_REQUEST)
+
+class CreateComment(APIView):
+    serializer_class = CreateCommentSerializer
+    
+    def post(self,request,format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            email = serializer.data['email']
+            review_id = serializer.data['review_id']
+            content = serializer.data['comment']
+            try:
+                user = CustomUser.objects.get(email=email)
+            except CustomUser.DoesNotExist:
+                return Response({'Bad Request': 'User does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                review = Review.objects.get(review_id=review_id)
+            except Review.DoesNotExist:
+                return Response({'Bad Request': 'Review does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
+            #Create a new comment
+            comment = Comment(review = review,commenter = user,nickname=user.nickname,content=content)
+            comment.save()
+            return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+ 
 
 #Creates a new review of a course/instructor/department
 class CreateReviewView(APIView):

@@ -175,17 +175,11 @@ class Comment(models.Model):
     review = models.ForeignKey(Review,default=None, on_delete = models.CASCADE)
     #Relates user to comment
     commenter = models.ForeignKey(CustomUser,default=None, on_delete = models.CASCADE)
-    name = models.CharField(max_length=32)
+    nickname = models.CharField(max_length=32)
     content = models.TextField(default=None)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
-    date = models.DateTimeField(default=None)
+    date_created = models.DateField(auto_now=True)
     numb_reports = models.IntegerField(default=None)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['comment_id'], name='comment_key')
-        ]
-
 
 class Ticket(models.Model):
     email = models.ForeignKey(CustomUser, default=None, on_delete = models.DO_NOTHING)
