@@ -10,6 +10,23 @@ from ..models import CustomUser
 #Python
 import json
 
+#Allows user to delete their account
+class DeleteUser(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        #User may not exist in database
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist as e:
+            return Response({'Bad Request': 'Invalid email...'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
+        #User must confirm password to delete their account
+        if user.check_password(password):
+            user.delete()
+            return Response({'Ok': 'User account deleted'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid password...'}, status=status.HTTP_400_BAD_REQUEST)
 
 #Allows user to change their nickname
 class change_nickname(APIView):

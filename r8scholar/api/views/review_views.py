@@ -24,6 +24,9 @@ class ReportReview(APIView):
             #Increment report counter
             review.numb_reports += 1
             email_r8scholar(review_id,report_description,review.numb_reports,user.email,user.nickname,review.subject,review.title,review.content)
+            return Response({'OK':'Report message sent'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 #Deletes an existing review
 class DeleteReviewView(APIView):
@@ -36,6 +39,9 @@ class DeleteReviewView(APIView):
             review_id = serializer.data['review_id']
             #Delete the review with the matching review_id
             Review.objects.get(review_id=review_id).delete()
+            return Response({'OK':'Report message sent'}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 #Edits an existing review of a course/instructor/department
 class EditReviewView(APIView):
@@ -81,5 +87,5 @@ class EditReviewView(APIView):
                 my_department.update_rating()
 
             return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
-
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
