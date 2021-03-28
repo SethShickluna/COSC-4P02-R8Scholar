@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, CardHeader, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
+import EditReviewForm from './EditReviewForm';
+import ReportReviewForm from './ReportReviewForm';
 
 
 export default class ReviewItem extends Component {
@@ -18,16 +20,35 @@ export default class ReviewItem extends Component {
         -User
         -Comments (object)
         */
-       console.log(this.props.reviewItem)
-       this.report = this.report.bind(this);
+       this.state = { 
+           review_id: this.props.reviewItem.review_id, //getting the id for the review item
+       }
+       //console.log(this.props.reviewItem)
+       this.hide = this.hide.bind(this);
     }
 
     openFullReview(){
 
     }
 
-    report = () => alert("Reported!");
         
+    hide = () => {
+        var x = document.getElementById("hiddenDIV");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      hide2 = () => {
+        var x = document.getElementById("hiddenDIV2");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
 
     //the JSX that is rendered when this file is imported as a component 
     render() {
@@ -45,10 +66,17 @@ export default class ReviewItem extends Component {
                                         numberOfStars={5}
                                         name='avgRating'/></CardTitle>
                         <CardText><h5>{this.props.reviewItem.content}</h5></CardText>
-                        <div><Button onclick={this.openFullReview} color="success">View Full Review</Button></div>
+                        <div><Button onclick={this.openFullReview} color="success">View Comments</Button></div>
                         
-                        <div /*add a check if the review is the user's */ style ={{marginTop:'2%',float:'left'}}> <Button color = "danger"> Edit Review</Button> </div>
-                     <div style={{float:'right', marginTop:'2%'}}><Button  onClick={this.report}><BsFillExclamationCircleFill></BsFillExclamationCircleFill> Report</Button> </div> 
+                        <div  style ={{marginTop:'2%',float:'left'}}> <Button  onClick = {this.hide} color = "danger"> Edit Review</Button> </div>  {/*Insert a form with edit review */}
+                     <div style={{float:'right', marginTop:'2%'}}><Button  onClick={this.hide2}><BsFillExclamationCircleFill></BsFillExclamationCircleFill> Report</Button> </div> {/*Insert a form with dropdown */}
+                     <div style={{display:'none'}} id="hiddenDIV" >
+                     <EditReviewForm review = {this.props.reviewItem}> </EditReviewForm>
+                     </div>
+                    <div style={{display:'none'}} id="hiddenDIV2" >
+                        <ReportReviewForm review ={this.props.reviewItem}></ReportReviewForm>
+
+                    </div>
                     </CardBody>
                 </Card>
             </div>
