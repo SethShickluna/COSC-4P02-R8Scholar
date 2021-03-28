@@ -88,7 +88,7 @@ class InstructorAdmin(admin.ModelAdmin):
     list_display = ('name', 'department', 'department', 'rating')
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('comment_id', 'review_id', 'name', 'content', 'child', 'date', 'numb_reports')
+    list_display = ('comment_id', 'review_id', 'nickname', 'content', 'child', 'date_created', 'numb_reports')
 
 class TicketAdmin(admin.ModelAdmin):
     list_display = ('email', 'content', 'date')
