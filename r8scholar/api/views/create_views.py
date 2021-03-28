@@ -74,7 +74,6 @@ class CreateReviewView(APIView):
                 my_instructor = Instructor.objects.get(name=subject)
                 my_department = my_instructor.department
             else: #review is on a department
-                print(review_type)
                 my_department = Department.objects.get(name=subject)
             
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
