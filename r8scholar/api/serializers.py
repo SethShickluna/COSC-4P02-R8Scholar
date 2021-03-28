@@ -77,6 +77,11 @@ class CreateReviewSerializer(serializers.ModelSerializer):
         fields = ('nickname','subject','title', 'content', 
         'rating','review_type')
 
+class CreateCommentSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Comment
+        fields = ('email','review_id','content')
+
 #Review serializers
 class EditReviewSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -104,4 +109,4 @@ class loginLogoutSerializer(serializers.ModelSerializer):
 class VerificationSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = CustomUser
-        fields = ('email', 'verification_code',)
+        fields = ('verification_code',)

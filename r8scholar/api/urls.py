@@ -13,6 +13,7 @@ from .views import authentication_views
 from .views import edit_user_views 
 from .views import functionality_views 
 from .views import review_views
+from .views import comment_views
 
 urlpatterns = [
     #token based authentication views 
@@ -47,11 +48,16 @@ urlpatterns = [
     path('filter-course-department/',filter_views.GetCoursesPerDepartment.as_view()),
     #create views 
     path('create-user/', create_views.CreateUserView.as_view(), name="create-user"), 
-    path('create-review/', create_views.CreateReviewView.as_view()), 
+    path('create-review/', create_views.CreateReviewView.as_view()),
+    path('create-comment/',create_views.CreateComment.as_view()),
     #Review views
     path('edit-review/',review_views.EditReviewView.as_view(),name='edit-review'),
     path('delete-review/',review_views.DeleteReviewView.as_view(),name='delete-review'),
     path('report-review/',review_views.ReportReview.as_view(),name='report-review'),
+    #Comment views
+    path('edit-comment',comment_views.EditComment.as_view(),name='edit-comment'),
+    path('delete-comment',comment_views.DeleteComment.as_view(),name='delete-comment'),
+    path('report-comment',comment_views.ReportComment.as_view(),name='report-comment'),
     #authentication views
     path('login/',authentication_views.login.as_view(),name = 'login'),
     path('logout/',authentication_views.logout.as_view(),name = 'logout'),
