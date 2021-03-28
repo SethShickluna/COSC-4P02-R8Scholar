@@ -63,7 +63,7 @@ function ReportForm(props) {
         <div className="modal-body">
         
         <FormGroup tag="fieldset">
-            <legend>What is wrong with this report?</legend>
+            <legend>What is wrong with this review?</legend>
             <FormGroup check>
                 <Label check>
                     <Input type="radio" onClick={handlePress} id="1" name="radio1" />{' '}
