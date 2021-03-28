@@ -30,7 +30,6 @@ import axiosInstance from "../axiosApi";
 const pageStyles = {
     margin: "0 auto",
     marginTop: "3%",
-    width: "90%",
 };
 
 const pageBreak = {
@@ -157,7 +156,7 @@ export default class Profile extends Component {
                                     <div style={pageBreak} /> {/* underline */}
                                 </Col>
 
-                                <Col style={{ marginTop: "53px" }} sm={7}>
+                                <Col style={{ marginTop: "53px" }} sm={8}>
                                     <div className="nav-tabs-navigation">
                                         <div className="nav-tabs-wrapper pointer-nav">
                                             <Nav role="tablist" tabs>
