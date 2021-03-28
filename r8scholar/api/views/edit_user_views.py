@@ -52,3 +52,20 @@ class change_password(APIView):
             return Response({'Ok': 'Password Changed...'}, status=status.HTTP_200_OK)
         else:
             return Response({'Bad Request': 'Invalid password...'}, status=status.HTTP_400_BAD_REQUEST)
+
+#Allows user to delete their profile
+class delete_profile(APIView):
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        email = data['email']
+        password = data['password']
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist as e:
+            return Response({'Bad Request': f'Invalid email...{e}'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if user.check_password(password):
+            user.delete()
+            return Response({'Ok': 'Profile deleted...'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'Invalid password...'}, status=status.HTTP_400_BAD_REQUEST)

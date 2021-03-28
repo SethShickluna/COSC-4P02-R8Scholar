@@ -1,7 +1,17 @@
 //npm modules
 import React, { Component } from "react";
-import { Container, Row, Col, Button, Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
-import {Link} from "react-router-dom"; 
+import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Nav,
+    NavItem,
+    NavLink,
+    TabContent,
+    TabPane,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 import cookie from "react-cookies";
 
 //js stuff
@@ -10,11 +20,11 @@ import imageOne from "../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg";
 //components
 import EditNicknameForm from "../components/EditNicknameForm";
 import EditPasswordForm from "../components/EditPasswordForm";
+import DeleteProfileForm from "../components/DeleteProfileForm";
 import ReviewItem from "../components/ReviewItem";
 import SecondaryNav from "../components/SecondaryNav";
 
-
-//axios 
+//axios
 import axiosInstance from "../axiosApi";
 
 const pageStyles = {
@@ -44,40 +54,42 @@ export default class Profile extends Component {
         this.state = {
             //all the content that is gonna be retrieved from the api stored here locally
             user: {
-                email: null, 
-                nickname: null, 
-                verified: false, 
+                email: null,
+                nickname: null,
+                verified: false,
             },
             reviews: null,
-            activeTab: "1", 
+            activeTab: "1",
             activeSubtab: "1",
         };
 
-        this.authenicateUser = this.authenicateUser.bind(this); 
+        this.authenicateUser = this.authenicateUser.bind(this);
     }
 
     componentDidMount() {
-        this.authenicateUser(); //check their token --otherwise send them off this page 
+        this.authenicateUser(); //check their token --otherwise send them off this page
     }
 
-    async authenicateUser() { 
+    async authenicateUser() {
         try {
-            let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
+            let response = await axiosInstance.get(
+                "/get-user/" + "?email=" + cookie.load("email")
+            );
             const user = response.data;
-            this.setState({user:user}); 
-            this.getReviews(); 
+            this.setState({ user: user });
+            this.getReviews();
             return user;
-        }catch(error){
-            this.props.history.push('/login'); //redirect to login if a valid token is not presented
+        } catch (error) {
+            this.props.history.push("/login"); //redirect to login if a valid token is not presented
         }
     }
 
     async getReviews() {
-        console.log("Needs backend implementation")
+        console.log("Needs backend implementation");
     }
 
     render() {
-        return(
+        return (
             <div>
                 <SecondaryNav />
                 {this.state.user ? (
@@ -90,17 +102,19 @@ export default class Profile extends Component {
                                             <h2>
                                                 Your account is not verfied!
                                             </h2>
-                                            <Link to="/verify"><Button
-                                                color="danger"
-                                                size="lg"
-                                            >
-                                                Verify Now
-                                            </Button></Link>
+                                            <Link to="/verify">
+                                                <Button
+                                                    color="danger"
+                                                    size="lg"
+                                                >
+                                                    Verify Now
+                                                </Button>
+                                            </Link>
                                         </div>
                                     ) : null}
                                 </Col>
                             </Row>
-                            <Row >
+                            <Row>
                                 <Col sm={4}>
                                     <div>
                                         {/*insert image edit, accept image and input it */}
@@ -143,53 +157,120 @@ export default class Profile extends Component {
                                     <div style={pageBreak} /> {/* underline */}
                                 </Col>
 
-                                <Col style={{marginTop:"53px"}}sm={7}>
-                                <div className="nav-tabs-navigation">
-                                    <div className="nav-tabs-wrapper pointer-nav">
-                                        <Nav role="tablist" tabs>
-                                            <NavItem>
-                                                <NavLink
-                                                    className={this.state.activeTab === "1" ? "active" : ""}
-                                                    onClick={() => {
-                                                        this.setState({activeTab:"1"});}}>
-                                                    Your Reviews
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem>
-                                                <NavLink
-                                                    className={this.state.activeTab === "2" ? "active" : ""}
-                                                    onClick={() => {
-                                                        this.setState({activeTab:"2"});
-                                                    }}>
-                                                    Change Password
-                                                </NavLink>
-                                            </NavItem>
-                                            <NavItem>
-                                                <NavLink
-                                                    className={this.state.activeTab === "3" ? "active" : ""}
-                                                    onClick={() => {
-                                                        this.setState({activeTab:"3"});
-                                                    }}>
-                                                    Change Nickname
-                                                </NavLink>
-                                            </NavItem>
-                                        </Nav>
+                                <Col style={{ marginTop: "53px" }} sm={7}>
+                                    <div className="nav-tabs-navigation">
+                                        <div className="nav-tabs-wrapper pointer-nav">
+                                            <Nav role="tablist" tabs>
+                                                <NavItem>
+                                                    <NavLink
+                                                        className={
+                                                            this.state
+                                                                .activeTab ===
+                                                            "1"
+                                                                ? "active"
+                                                                : ""
+                                                        }
+                                                        onClick={() => {
+                                                            this.setState({
+                                                                activeTab: "1",
+                                                            });
+                                                        }}
+                                                    >
+                                                        Your Reviews
+                                                    </NavLink>
+                                                </NavItem>
+                                                <NavItem>
+                                                    <NavLink
+                                                        className={
+                                                            this.state
+                                                                .activeTab ===
+                                                            "2"
+                                                                ? "active"
+                                                                : ""
+                                                        }
+                                                        onClick={() => {
+                                                            this.setState({
+                                                                activeTab: "2",
+                                                            });
+                                                        }}
+                                                    >
+                                                        Change Password
+                                                    </NavLink>
+                                                </NavItem>
+                                                <NavItem>
+                                                    <NavLink
+                                                        className={
+                                                            this.state
+                                                                .activeTab ===
+                                                            "3"
+                                                                ? "active"
+                                                                : ""
+                                                        }
+                                                        onClick={() => {
+                                                            this.setState({
+                                                                activeTab: "3",
+                                                            });
+                                                        }}
+                                                    >
+                                                        Change Nickname
+                                                    </NavLink>
+                                                </NavItem>
+                                                <NavItem>
+                                                    <NavLink
+                                                        className={
+                                                            this.state
+                                                                .activeTab ===
+                                                            "4"
+                                                                ? "active"
+                                                                : ""
+                                                        }
+                                                        onClick={() => {
+                                                            this.setState({
+                                                                activeTab: "4",
+                                                            });
+                                                        }}
+                                                    >
+                                                        Delete Profile
+                                                    </NavLink>
+                                                </NavItem>
+                                            </Nav>
                                         </div>
                                     </div>
                                     {/* Tab panes */}
-                                    <TabContent className="following" activeTab={this.state.activeTab}>
+                                    <TabContent
+                                        className="following"
+                                        activeTab={this.state.activeTab}
+                                    >
                                         <TabPane tabId="1" id="follows">
                                             <Row>
-                                                <Col className="ml-auto mr-auto" md="6">
+                                                <Col
+                                                    className="ml-auto mr-auto"
+                                                    md="6"
+                                                >
                                                     {/**Reviews */}
                                                 </Col>
                                             </Row>
                                         </TabPane>
-                                        <TabPane className="text-center" tabId="2" id="chnage-pass">
-                                            <EditPasswordForm/>
+                                        <TabPane
+                                            className="text-center"
+                                            tabId="2"
+                                            id="chnage-pass"
+                                        >
+                                            <EditPasswordForm />
                                         </TabPane>
-                                        <TabPane className="text-center" tabId="3" id="change-nick">
-                                            <EditNicknameForm/>
+                                        <TabPane
+                                            className="text-center"
+                                            tabId="3"
+                                            id="change-nick"
+                                        >
+                                            <EditNicknameForm />
+                                        </TabPane>
+                                        <TabPane
+                                            className="text-center"
+                                            tabId="4"
+                                            id="delete-profile"
+                                        >
+                                            <DeleteProfileForm />
                                         </TabPane>
                                     </TabContent>
                                 </Col>
