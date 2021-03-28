@@ -61,6 +61,7 @@ export default class Signup extends Component {
                     email: this.state.email,
                     password: this.state.password
                 });
+                console.log(response);
                 switch(response.status){
                     case 201:
                         this.authenticateLogin(); 

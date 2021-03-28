@@ -23,7 +23,7 @@ function ReportForm(props) {
         try {
             let response = await axiosInstance.post("/report-review/", {
                 review_id: props.reviewID, 
-                description: selected === "4" ? content : reasons[Number(selected) - 1], 
+                report_description: selected === "4" ? content : reasons[Number(selected) - 1], 
             });
             //let user know it worked 
             return response.status;

@@ -13,6 +13,7 @@ import json
 class ReportReview(APIView):
     def post(self,request, format =None):
         data = json.loads(request.body.decode("utf-8"))
+        print(data)
         #Data from frontend
         review_id = data['review_id']
         report_description = data['report_description']
