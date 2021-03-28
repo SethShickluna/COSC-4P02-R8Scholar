@@ -26,6 +26,7 @@ function ReportForm(props) {
                 report_description: selected === "4" ? content : reasons[Number(selected) - 1], 
             });
             //let user know it worked 
+            setLoginModal(false);
             return response.status;
         }catch(error){
             //user is not logged in 
