@@ -1,5 +1,17 @@
 import React, { Component } from 'react'; 
-import { Button, Card, Form, Input, Container, Row, Col, UncontrolledTooltip } from "reactstrap";
+import { 
+    Button, 
+    Card, 
+    Form, 
+    Input, 
+    FormGroup, 
+    Container, 
+    Row, 
+    Col, 
+    UncontrolledTooltip, 
+    FormFeedback,
+    FormText,
+} from "reactstrap";
 import {Link} from "react-router-dom";
 import cookie from 'react-cookies'; 
 import axiosInstance from "../axiosApi"; 
@@ -11,6 +23,7 @@ export default class Login extends Component {
         this.state = { 
             email: "", 
             password: "", 
+            unauthorized: false,
         }
         
         this.handleInput = this.handleInput.bind(this);
@@ -19,7 +32,8 @@ export default class Login extends Component {
     }
 
     handleInput(obj){
-        this.setState({[obj.target.name]: obj.target.value}); 
+        this.setState({[obj.target.name]: obj.target.value,
+             unauthorized: false}); 
     }
 
     /**
@@ -43,7 +57,7 @@ export default class Login extends Component {
             this.props.history.push('/');
             return data;
         }catch(error){
-            throw error; 
+            this.setState({unauthorized: true})
         }
     }
 
@@ -64,22 +78,24 @@ export default class Login extends Component {
               <Card className="card-register ml-auto mr-auto">
                 <h3 className="title mx-auto">Sign In</h3>
                 <Form className="register-form" onSubmit={this.submitForm}>
-                  <label>Email</label>
-                  <Input placeholder="Email" name="email" id="email" type="text" onChange={this.handleInput}/>
-                  <UncontrolledTooltip placement="right" target="email">
-                      Please use the email given by Brock University, ending in '@brocku.ca'
-                  </UncontrolledTooltip> 
-                  <label>Password</label>
-                  <Input placeholder="Password" id="password"name="password"type="password" onChange={this.handleInput}/>
-                  <UncontrolledTooltip  style={{minWidth: "70px"}} placement="right" target="password">
-                      <h5>Password Requirements: </h5>
-                      <ul>
-                          <li>At least 1 uppercase</li>
-                          <li>At least 1 lowercase</li>
-                          <li>At least 1 number</li>
-                          <li>At least 10 characters</li>
-                      </ul>
-                  </UncontrolledTooltip>
+                    <FormGroup>
+                        <label>Email</label>
+                        <Input placeholder="Email" invalid={this.state.unauthorized} name="email" id="email" type="text" onChange={this.handleInput}/>
+                        <FormFeedback placement="right"tooltip>Invalid Username or Password</FormFeedback>
+                    </FormGroup>
+                  <FormGroup>
+                        <label>Password</label>
+                        <Input placeholder="Password" invalid={this.state.unauthorized} id="password"name="password"type="password" onChange={this.handleInput}/>
+                        <UncontrolledTooltip  style={{minWidth: "70px"}} placement="right" target="password">
+                        <h5>Password Requirements: </h5>
+                            <ul>
+                                <li>At least 1 uppercase</li>
+                                <li>At least 1 lowercase</li>
+                                <li>At least 1 number</li>
+                                <li>At least 10 characters</li>
+                            </ul>
+                        </UncontrolledTooltip>
+                  </FormGroup>
                   <Button block type="submit" className="btn-round" color="info">
                     Sign In
                   </Button>
@@ -89,7 +105,7 @@ export default class Login extends Component {
                     <Button color="info" className="btn-link">
                         Need an account? Sign up Today!
                     </Button>
-                  </Link>
+                </Link>
                 </div>
               </Card>
             </Col>

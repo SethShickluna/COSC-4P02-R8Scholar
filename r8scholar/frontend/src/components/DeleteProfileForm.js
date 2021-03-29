@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import cookie from "react-cookies";
-import { FormGroup, Label, Input, FormText, Button } from "reactstrap";
+import { FormGroup, Label, Input, Button } from "reactstrap";
 import axiosInstance from "../axiosApi";
 
 async function handleLogout() {
@@ -33,7 +33,7 @@ export default class DeleteProfileForm extends Component {
         super(props);
         this.state = {
             email: "",
-            passowrd: "",
+            password: "",
             confirmed: false,
         };
         //allows us to this "this" inside the methods
@@ -49,21 +49,21 @@ export default class DeleteProfileForm extends Component {
     }
 
     handleCheckbox = () => {
-        this.setState((prevState) => ({
-            confirmed: !prevState.confirmed,
-        }));
+        this.setState({
+            confirmed: !this.state.confirmed,
+        });
     };
 
     async submitForm(e) {
         e.preventDefault(); //stop a reload
         if (this.state.confirmed) {
             try {
-                handleLogout();
                 const response = await axiosInstance.post("/delete-profile/", {
                     email: cookie.load("email"),
-                    passsord: this.state.passsord,
+                    password: this.state.password,
                 });
                 const message = response.data;
+                handleLogout();
                 return message;
             } catch (error) {
                 throw error;
@@ -79,7 +79,7 @@ export default class DeleteProfileForm extends Component {
         return (
             <form onSubmit={this.submitForm}>
                 <h3>Delete Profile</h3>
-                <div style={{ marginBottom: "2%" }}></div>
+                <div style={{ marginBottom: "2%" }}/>
                 <FormGroup>
                     <Label for="password">Confirm password</Label>
                     <Input
@@ -90,22 +90,16 @@ export default class DeleteProfileForm extends Component {
                         autoComplete="off"
                         onChange={this.handleInput}
                     />
-                    <Label
-                        for="checkbox"
-                        style={{ wordWrap: "break-word", marginTop: "20px" }}
-                        onClick={this.handleCheckbox}
-                    >
-                        <Button
-                            class="checkbox"
-                            id="confirmation"
-                            style={checkboxStyle}
-                            color={this.state.confirmed && "primary"}
-                            size="sm"
-                            onClick={this.handleCheckbox}
-                        />
-                        I am aware that my profile will be deleted permanently
-                        and that all reviews will be removed.
+                    <FormGroup check>
+                    <div style={{ marginBottom: "1%" }}/>
+                    <Label className="form-check-label">
+                        <Input onClick={this.handleCheckbox} className="form-check-input" type="checkbox" value=""/>
+                        I am aware that my account and each review and comment associated with it will be deleted.
+                        <span className="form-check-sign">
+                            <span className="check"></span>
+                        </span>
                     </Label>
+        </FormGroup>
                 </FormGroup>
                 <Button
                     style={{
