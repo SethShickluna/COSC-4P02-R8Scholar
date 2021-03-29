@@ -1,6 +1,6 @@
 #Project Files
-from ..models import CustomUser, Review, Course, Department, Instructor
-from ..serializers import (UserSerializer, ReviewSerializer, CourseSerializer, DepartmentSerializer, 
+from ..models import Comment, CustomUser, Review, Course, Department, Instructor
+from ..serializers import (CommentSerializer, UserSerializer, ReviewSerializer, CourseSerializer, DepartmentSerializer, 
 InstructorSerializer)
 #REST
 from rest_framework import status, permissions
@@ -69,6 +69,29 @@ class GetReviewsView(APIView):
             else:
                 return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
+
+#Gets comments for a given review
+class GetCommentsView(APIView):
+    serializer_class = CommentSerializer
+    lookup_url_kwarg = 'review_id'
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self,request,format=None):
+        review_id = request.GET.get(self.lookup_url_kwarg)
+        try:
+            review = Review.objects.get(review_id = review_id)
+        except Review.DoesNotExist:
+            return Response({'Bad Request': 'Review does not exist: '+review_id}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            comments = Comment.objects.filter(review=review)
+        except Comment.DoesNotExist:
+            return Response({'Bad Request': 'No comments for review: '+review_id}, status=status.HTTP_400_BAD_REQUEST)
+        #Return all reviews by the user in a list
+        data = []
+        for comment in comments:
+            data.append(CommentSerializer(comment).data)
+        return Response(data, status=status.HTTP_200_OK)
+
 
 class GetCourseView(APIView): 
     serializer_class = CourseSerializer
