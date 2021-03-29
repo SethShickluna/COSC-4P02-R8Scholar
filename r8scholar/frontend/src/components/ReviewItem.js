@@ -3,6 +3,9 @@ import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button,
 import StarRatings from 'react-star-ratings';
 import ReportForm from "./ReportReviewForm";
 import EditForm from "./EditReviewForm"; 
+import CommentItem from './CommentItem';
+import CommentForm from './CommentForm';
+import ReviewForm from './ReviewForm';
 
 const reviewTitle = {
     color: "black", 
@@ -10,14 +13,7 @@ const reviewTitle = {
     fontWeight: "300"
 }
 
-
-
-export default class ReviewItem extends Component {
-
-    //props is going to consist of the review item passed by the course 
-    constructor(props){
-        super(props); 
-        //props contains object called reviewItem containing 
+//props contains object called reviewItem containing 
         /*
         -Title {this.props.reviewItem.title}
         -Content {this.props.reviewItem.content}
@@ -28,6 +24,12 @@ export default class ReviewItem extends Component {
         */
        //second props contains a boolean value which determines of the edit button should be there
        //this.props.isOwner
+export default class ReviewItem extends Component {
+
+    //props is going to consist of the review item passed by the course 
+    constructor(props){
+        super(props); 
+        
     }
 
     edit(){ 
@@ -69,7 +71,8 @@ export default class ReviewItem extends Component {
                     <ListGroupItem>
                         <Row>
                             <Col align="left">
-                                <Button color="primary" onClick={this.report}>View Comments</Button>
+                                
+                               <CommentForm review = {this.props.reviewItem}> </CommentForm>
                             </Col>
                             <Col align="right">
                                 <ReportForm reviewID={this.props.reviewItem.review_id}/>
