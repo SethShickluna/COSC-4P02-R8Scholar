@@ -94,8 +94,7 @@ export default class ReviewForm extends Component {
                                 {questions[this.props.review].map((question, index) => 
                                 (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                                 <Label><b>{question}</b></Label>
-                                    <Input name={"rating"+(index+1)} onChange={this.handleInput} type="select" >
-                                        <option>0</option>
+                                    <Input name={"rating"+(index+1)} onChange={this.handleInput} type="select">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>

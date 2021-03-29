@@ -6,7 +6,7 @@ install python/django dependencies:
 cd into r8scholar/ 
 run the following line 
 pip install Django==3.1.5 djangorestframework==3.12.2 django-cors-headers==3.7.0 djangorestframework-simplejwt==4.6.0
-pip install django-rest-multiple-models
+pip install django-rest-multiple-models djangorestframework-simplejwt
 pip install profanity-filter
 python -m spacy download en
 pip install schedule

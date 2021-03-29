@@ -23,6 +23,7 @@ export default class ReviewItem extends Component {
         -Content {this.props.reviewItem.content}
         -Rating rating={this.props.reviewItem.rating}
         -User {this.props.reviewItem.nickname}
+        -reviewID {this.props.reviewItem.reviewID}
         -Comments (object)
         */
        //second props contains a boolean value which determines of the edit button should be there

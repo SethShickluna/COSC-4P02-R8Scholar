@@ -8,13 +8,13 @@ def email_r8scholar(review_id,report_description,numb_reports,email,nickname,sub
     password = "nuThutL!itr&7het" #R8scholar email password
     message = "Subject: Reported Review \n"
     message += "Review id: " + str(review_id)+"\n"
-    message += "Report description: "+report_description +"\n"
-    message += "Number of reports on review: "+numb_reports+"\n"
-    message += "Email of reviewer: "+email+"\n"
-    message += "Nickname of reviewer: " + nickname+"\n"
-    message += "Review subject: " +subject+"\n"
-    message += "Review title: "+title+"\n"
-    message += "Review content: "+content+"\n"
+    message += "Report description: "+str(report_description) +"\n"
+    message += "Number of reports on review: "+str(numb_reports)+"\n"
+    message += "Email of reviewer: "+str(email)+"\n"
+    message += "Nickname of reviewer: " +str(nickname)+"\n"
+    message += "Review subject: " +str(subject)+"\n"
+    message += "Review title: "+str(title)+"\n"
+    message += "Review content: "+str(content)+"\n"
     #Login to mail server and send email
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:

@@ -1,12 +1,12 @@
 import React from "react";
-import { Button, Input, Modal, FormGroup, Label, Form, FormText} from "reactstrap";
+import { Button, Input, Modal, FormGroup, Label, Form, FormText, Col} from "reactstrap";
 import { BsPencil } from 'react-icons/bs';
 import axiosInstance from "../axiosApi"; 
 
 function EditForm(props) {
     const [loginModal, setLoginModal] = React.useState(false);
-    const [content, setContent] = React.useState(""); 
-    const [title, setTitle] =  React.useState(""); 
+    const [content, setContent] = React.useState(props.review.content); 
+    const [title, setTitle] =  React.useState(props.review.title); 
     const [rating1, setRating1] = React.useState(0);
     const [rating2, setRating2] = React.useState(0);
     const [rating3, setRating3] = React.useState(0);
@@ -49,7 +49,6 @@ function EditForm(props) {
     }
     
     const submit = async() => { 
-        e.preventDefault(); 
         let rating = (rating1 + rating2 + rating3) / 3; 
         try {
             let response = await axiosInstance.post("/edit-review/", {
@@ -97,18 +96,17 @@ function EditForm(props) {
         </div>
         <div className="modal-body">
         
-        <Form onSubmit={submit}>
+        <Form>
             <FormGroup>
                 <Label for="exampleEmail"><p>Review Title:</p></Label>
-                <Input type="text" name="title" id="title" onChange={handleTitleChange} value={props.review.title} />
+                <Input type="text" name="title" id="title" onChange={e => handleTitleChange(e)} value={title} />
             </FormGroup>
             <FormGroup>
-            <FormText>On a scale of 0-5 rate the following:</FormText>
+            <FormText>On a scale of 1-5 rate the following:</FormText>
                 {questions[props.type].map((question, index) => 
                 (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
                 <Label><b>{question}</b></Label>
-                <Input name={"rating"+(index+1)} onChange={e => changeRating} type="select" >
-                    <option>0</option>
+                <Input name={"rating"+(index+1)} onChange={e => changeRating(e)} type="select" >
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -118,9 +116,14 @@ function EditForm(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label for="exampleText">Tell us what you thought about this {props.type}</Label>
-                    <Input type="textarea" value={props.review.content} onChange={handleContentChange} name="content" id="content" rows={5}/>
+                    <Input type="textarea" value={content} onChange={e => handleContentChange(e)} name="content" id="content" rows={5}/>
+                
                 </FormGroup>
-                    <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
+
+                <Col align="center">
+                  <Button className="btn-round" size="lg" color="success" onClick={submit} outline>Submit</Button>
+                </Col>
+                   
                 </Form>
         </div>
       </Modal>

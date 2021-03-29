@@ -274,7 +274,7 @@ export default class Course extends Component {6
                             <TabPane className="text-center" tabId="2" id="following">
                                 <Row>
                                     <Col align="center">
-                                        <ReviewForm name={this.state.name} review="department"/>
+                                        <ReviewForm name={this.state.name} review="instructor"/>
                                     </Col>
                                 </Row>
                             </TabPane>

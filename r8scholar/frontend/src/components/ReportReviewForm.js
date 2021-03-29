@@ -23,9 +23,10 @@ function ReportForm(props) {
         try {
             let response = await axiosInstance.post("/report-review/", {
                 review_id: props.reviewID, 
-                description: selected === "4" ? content : reasons[Number(selected) - 1], 
+                report_description: selected === "4" ? content : reasons[Number(selected) - 1], 
             });
             //let user know it worked 
+            setLoginModal(false);
             return response.status;
         }catch(error){
             //user is not logged in 
@@ -63,7 +64,7 @@ function ReportForm(props) {
         <div className="modal-body">
         
         <FormGroup tag="fieldset">
-            <legend>What is wrong with this report?</legend>
+            <legend>What is wrong with this review?</legend>
             <FormGroup check>
                 <Label check>
                     <Input type="radio" onClick={handlePress} id="1" name="radio1" />{' '}
