@@ -10,7 +10,8 @@ from ..models import CustomUser
 #Python
 import json
 #Profanity Filter
-from profanity_filter import ProfanityFilter as pf
+from profanity_filter import ProfanityFilter
+pf = ProfanityFilter()
 
 #Allows user to change their nickname
 class change_nickname(APIView):

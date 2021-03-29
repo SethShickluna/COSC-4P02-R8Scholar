@@ -1,7 +1,8 @@
 #Django#
 from django.core.exceptions import ValidationError 
 #Profanity filter 
-from profanity_filter import ProfanityFilter as pf
+from profanity_filter import ProfanityFilter
+pf = ProfanityFilter()
 
 #Ensures email given is a brocku email
 def validate_brock_mail(string): 
