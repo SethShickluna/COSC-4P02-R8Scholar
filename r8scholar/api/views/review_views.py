@@ -8,6 +8,8 @@ from ..serializers import (ReviewSerializer)
 from .email_report import email_r8scholar
 #Python
 import json
+#Profanity Filter
+from profanity_filter import ProfanityFilter as pf
 
 #Notifies admins of a review being reported
 class ReportReview(APIView):
@@ -71,8 +73,9 @@ class EditReviewView(APIView):
             review = Review.objects.get(review_id=review_id)
         except Review.DoesNotExist:
             return Response({'Bad Request': 'Review doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
-        review.title = title
-        review.content = content
+        #Ensure any profanity in title or content is censored
+        review.title = pf.censor(title)
+        review.content = pf.censor(content)
         review.rating = rating
         review.save()
         #update rating of the review subject 
