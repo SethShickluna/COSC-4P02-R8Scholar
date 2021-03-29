@@ -9,7 +9,8 @@ from .email_report import email_r8scholar
 #Python
 import json
 #Profanity Filter
-from profanity_filter import ProfanityFilter as pf
+from profanity_filter import ProfanityFilter
+pf = ProfanityFilter()
 
 #Notifies admins of a review being reported
 class ReportReview(APIView):

@@ -8,7 +8,8 @@ from ..models import Comment, CustomUser, Review, Course, Department, Instructor
 from ..serializers import (CommentSerializer, CreateCommentSerializer, UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer)
 from ..email_sender import email_user
 #Profanity Filter
-from profanity_filter import ProfanityFilter as pf
+from profanity_filter import ProfanityFilter
+pf = ProfanityFilter()
 
 #creates a new custom user
 class CreateUserView(APIView): 
@@ -80,8 +81,8 @@ class CreateReviewView(APIView):
             else: #review is on a department
                 my_department = Department.objects.get(name=subject)
             #Censor profanity in title and content
-            title = pf.censor(title)
-            content = pf.censor(content)
+            title = pf.censor(str(title))
+            content = pf.censor(str(content))
             #Create new review
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
             title=title, content=content, rating=rating, department_name=my_department,
