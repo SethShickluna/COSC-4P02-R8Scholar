@@ -7,6 +7,8 @@ from ..models import Comment, CustomUser, Review
 from .email_report import email_r8scholar
 #Python
 import json
+#Profanity Filter
+from profanity_filter import ProfanityFilter as pf
 
 #Notifies admins of a comment being reported
 class ReportComment(APIView):
@@ -53,6 +55,6 @@ class EditComment(APIView):
         except Comment.DoesNotExist:
             return Response({'Bad Request': 'Comment doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
         #Edit the comment
-        comment.content = content
+        comment.content = pf.censor(content) #Ensure any profanity in content is censored
         comment.save()
         return Response({'OK':'Comment Edited'}, status=status.HTTP_201_CREATED)

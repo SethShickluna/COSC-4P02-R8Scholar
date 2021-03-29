@@ -26,6 +26,31 @@ class GetUser(APIView):
 
         return Response({'Bad Request': 'Email not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
+#Returns all reviews made by a particular user
+class getUserReviews(APIView):
+    serializer_class = ReviewSerializer
+    #Email identifies user
+    lookup_url_kwarg = 'email'
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self,request,format=None):
+        email = request.GET.get(self.lookup_url_kwarg)
+        #No user exists with the given email
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return Response({'Bad Request': 'User does not exist with email: '+email}, status=status.HTTP_400_BAD_REQUEST)
+        #No reviews by the given user
+        try:
+            reviews = Review.objects.filter(reviewer = user)
+        except Review.DoesNotExist:
+            return Response({'Bad Request': 'No reviews by user with email: '+email}, status=status.HTTP_400_BAD_REQUEST)
+        #Return all reviews by the user in a list
+        data = []
+        for review in reviews:
+            data.append(ReviewSerializer(review).data)
+        return Response(data, status=status.HTTP_200_OK)
+
 #returns all reviews on a specific subject 
 class GetReviewsView(APIView): 
     serializer_class = ReviewSerializer

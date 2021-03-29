@@ -11,14 +11,14 @@ import uuid
 from django.utils.timezone import datetime, now
 #Project Files#
 from .managers import CustomUserManager
-from .validators import validate_brock_mail, password_validator, rating_validator
+from .validators import profanity_validator, validate_brock_mail, password_validator, rating_validator
 from .generators import generate_validation_code
 
-
+#Models a user of the site
 class CustomUser(AbstractBaseUser):
     username = None
     email = models.EmailField(_('email'), unique=True,validators=[validate_brock_mail])
-    nickname = models.CharField(max_length=25,unique=True,default=uuid.uuid4)
+    nickname = models.CharField(max_length=25,unique=True,default=uuid.uuid4,validators=[profanity_validator])
     password = models.CharField(max_length=100,validators=[password_validator])
     is_active = models.BooleanField('is_active',default=True) #Not sure if this is inherritted from AbstractUser
     is_admin = models.BooleanField(default=False)
@@ -57,7 +57,7 @@ class CustomUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-
+#Models a department at Brock University
 class Department(models.Model):
     name = models.CharField(max_length=100,default=None,primary_key=True)
     courses_rating = models.FloatField(default=0)
@@ -104,7 +104,7 @@ class Department(models.Model):
         self.courses_rating = my_sum / count
         self.save()
 
-
+#Models an instructor(individual who teaches a course)
 class Instructor(models.Model):
     name  = models.CharField(max_length=50,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
@@ -126,6 +126,7 @@ class Instructor(models.Model):
         self.rating = (my_sum / count)
         self.save()
 
+#Models a course being offered by Brock University
 class Course(models.Model):
     name = models.CharField(max_length=40, unique=True,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
@@ -147,7 +148,7 @@ class Course(models.Model):
         self.rating = (my_sum / count)
         self.save()
 
-
+#Models a review of a course/instructor/department created by user 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #Relates user to review
@@ -167,7 +168,7 @@ class Review(models.Model):
 
     def _str_(self):
         return self.reviewer
-
+#Models a comment made by a user on a review 
 class Comment(models.Model):
     comment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     #Relates review to comment

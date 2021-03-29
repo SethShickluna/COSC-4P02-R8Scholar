@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from ..models import Comment, CustomUser, Review, Course, Department, Instructor
 from ..serializers import (CommentSerializer, CreateCommentSerializer, UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer)
 from ..email_sender import email_user
+#Profanity Filter
+from profanity_filter import ProfanityFilter as pf
 
 #creates a new custom user
 class CreateUserView(APIView): 
@@ -33,7 +35,7 @@ class CreateComment(APIView):
         if serializer.is_valid():
             email = serializer.data['email']
             review_id = serializer.data['review_id']
-            content = serializer.data['comment']
+            content = serializer.data['content']
             try:
                 user = CustomUser.objects.get(email=email)
             except CustomUser.DoesNotExist:
@@ -42,6 +44,8 @@ class CreateComment(APIView):
                 review = Review.objects.get(review_id=review_id)
             except Review.DoesNotExist:
                 return Response({'Bad Request': 'Review does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
+            #Censor profanity in content
+            content = pf.censor(content)
             #Create a new comment
             comment = Comment(review = review,commenter = user,name=user.nickname,content=content)
             comment.save()
@@ -75,7 +79,10 @@ class CreateReviewView(APIView):
                 my_department = my_instructor.department
             else: #review is on a department
                 my_department = Department.objects.get(name=subject)
-            
+            #Censor profanity in title and content
+            title = pf.censor(title)
+            content = pf.censor(content)
+            #Create new review
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
             title=title, content=content, rating=rating, department_name=my_department,
             instructor_name=my_instructor, course_name=my_course, review_type=review_type)
