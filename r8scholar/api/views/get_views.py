@@ -70,6 +70,19 @@ class GetReviewsView(APIView):
                 return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
+#Returns the number of reviews on a given subject
+class GetNumbReviews(APIView):
+    lookup_url_kwarg = 'subject'
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self,request,format=None):
+        subject = request.GET.get(self.lookup_url_kwarg)
+        try:
+            count = Review.objects.filter(subject=subject)
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(count,status=status.HTTP_200_OK)
+
 #Gets comments for a given review
 class GetCommentsView(APIView):
     serializer_class = CommentSerializer
