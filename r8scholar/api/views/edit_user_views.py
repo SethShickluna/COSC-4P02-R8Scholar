@@ -28,6 +28,7 @@ class password_reset(APIView):
         required_chars = string.ascii_letters + string.digits + string.punctuation
         temp_password = ''.join(random.choice(required_chars) for i in range(12))
         user.set_password(temp_password)
+        user.save()
         email_password(user.email,temp_password)
         return Response({'Ok': 'Password reset and email sent to user...'}, status=status.HTTP_200_OK)
 
