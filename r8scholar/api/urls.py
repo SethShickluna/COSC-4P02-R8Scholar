@@ -70,6 +70,7 @@ urlpatterns = [
     #edit user views
     path('change-nickname/',edit_user_views.change_nickname.as_view(),name='change-nickname'),
     path('change-password/',edit_user_views.change_password.as_view(),name = 'change-password'),
+    path('reset-password/',edit_user_views.password_reset.as_view(),name = 'reset-password'),
     path('delete-profile/',edit_user_views.delete_profile.as_view(),name = 'delete-profile'),
     #functionality views 
     path('verify-user/', functionality_views.VerifyUserView.as_view())
