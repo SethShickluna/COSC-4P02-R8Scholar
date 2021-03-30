@@ -159,6 +159,7 @@ class Review(models.Model):
     title = models.CharField(max_length=45)
     content = models.TextField(default=None, null=True)
     rating = models.FloatField(default=None, validators=[rating_validator])
+    would_take_again = models.BooleanField(default=False)
     numb_reports = models.IntegerField(default=0)
     date_created = models.DateField(auto_now=True)
     department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)

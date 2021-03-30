@@ -56,6 +56,7 @@ class EditReviewView(APIView):
         title = data['title']
         content = data['content']
         rating = data['rating']
+        would_take_again = data['would_take_again']
         review_type = data['review_type']
         #get data for the type of reviewable being reviewed
         my_department = None
@@ -79,6 +80,7 @@ class EditReviewView(APIView):
         review.title = pf.censor(title)
         review.content = pf.censor(content)
         review.rating = rating
+        review.would_take_again = would_take_again
         review.save()
         #update rating of the review subject 
         if review_type == 'course':

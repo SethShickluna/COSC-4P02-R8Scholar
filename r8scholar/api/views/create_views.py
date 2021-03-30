@@ -66,6 +66,7 @@ class CreateReviewView(APIView):
             title = serializer.data['title']
             content = serializer.data['content']
             rating = serializer.data['rating']
+            would_take_again = serializer.data['would_take_again']
             review_type = serializer.data['review_type']
             #get user who left review and other objects 
             user = CustomUser.objects.get(nickname=nickname)
@@ -85,7 +86,7 @@ class CreateReviewView(APIView):
             content = pf.censor(str(content))
             #Create new review
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
-            title=title, content=content, rating=rating, department_name=my_department,
+            title=title, content=content, rating=rating,would_take_again=would_take_again, department_name=my_department,
             instructor_name=my_instructor, course_name=my_course, review_type=review_type)
             review.save()
             #update rating of the review subject 
