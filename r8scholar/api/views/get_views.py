@@ -83,6 +83,21 @@ class GetNumbReviews(APIView):
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         return Response(count,status=status.HTTP_200_OK)
 
+#Returns the percentage of reviewers who would take the given subject again
+class GetPercentage(APIView):
+    lookup_url_kwarg = 'subject'
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self,request,format=None):
+        subject = request.GET.get(self.lookup_url_kwarg)
+        try:
+            numbWould = Review.objects.filter(subject=subject,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=subject,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        percentage = (numbWould/(numbWould+numbWouldnt))*100
+        return Response(percentage,status=status.HTTP_200_OK)
+
 #Gets comments for a given review
 class GetCommentsView(APIView):
     serializer_class = CommentSerializer
