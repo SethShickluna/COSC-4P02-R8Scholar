@@ -12,11 +12,44 @@ import json
 from profanity_filter import ProfanityFilter
 pf = ProfanityFilter()
 
+#Adds or removes a thumbs up/down to a review
+class ThumbsUpDown(APIView):
+    def post(self,request,format=None):
+        #Data from frontend
+        data = json.loads(request.body.decode("utf-8"))
+        review_id = data['review_id']
+        up_or_down = data['up_or_down']
+        add_or_remove = data['add_or_remove']
+        try:
+            review = Review.objects.get(review_id=review_id)
+        except Review.DoesNotExist:
+            return Response({'Bad Request': 'Review doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
+        if(up_or_down=='up'):
+            if(add_or_remove=='add'):
+                review.thumbs_up +=1
+                review.save()
+                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+            elif(add_or_remove=='remove'):
+                review.thumbs_up -=1 if review.thumbs_up > 0 else 0
+                review.save()
+                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+        elif(up_or_down=='down'):
+            if(add_or_remove=='add'):
+                review.thumbs_down +=1
+                review.save()
+                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+            elif(add_or_remove=='remove'):
+                review.thumbs_down -=1 if review.thumbs_up > 0 else 0
+                review.save()
+                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+        else:
+            return Response({'Bad Request': 'up_or_down data invalid'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 #Notifies admins of a review being reported
 class ReportReview(APIView):
     def post(self,request, format =None):
         data = json.loads(request.body.decode("utf-8"))
-        print(data)
         #Data from frontend
         review_id = data['review_id']
         report_description = data['report_description']
@@ -42,7 +75,7 @@ class DeleteReviewView(APIView):
         #Delete the review with the matching review_id
         try:
             Review.objects.get(review_id=review_id).delete()
-            return Response({'OK':'Review Deleted'}, status=status.HTTP_201_CREATED)
+            return Response({'OK':'Review Deleted'}, status=status.HTTP_200_OK)
         except Review.DoesNotExist:
             return Response({'Bad Request': 'Review doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,4 +124,4 @@ class EditReviewView(APIView):
             my_department.update_instructor_rating()
         else: #review is on a department
             my_department.update_rating()
-        return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
+        return Response(ReviewSerializer(review).data, status=status.HTTP_200_OK)
