@@ -36,6 +36,8 @@ urlpatterns = [
     path('get-user/', get_views.GetUser.as_view()), 
     path('get-reviews/', get_views.GetReviewsView.as_view()),
     path('get-comments/',get_views.GetCommentsView.as_view()),
+    path('get-numb-reviews/',get_views.GetNumbReviews.as_view()),
+    path('get-percentage/',get_views.GetPercentage.as_view()),
     path('get-user-reviews/',get_views.getUserReviews.as_view()),
     path('get-course/',get_views.GetCourseView.as_view(),name='get-course'),
     path('get-department/',get_views.GetDepartmentView.as_view(),name='get-department'),
