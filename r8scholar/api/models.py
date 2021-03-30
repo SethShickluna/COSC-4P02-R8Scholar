@@ -148,6 +148,10 @@ class Course(models.Model):
         self.rating = (my_sum / count)
         self.save()
 
+#Tags for reviews
+class Tags(models.Model):
+    description = models.CharField(max_length=50,default=None)
+
 #Models a review of a course/instructor/department created by user 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -163,7 +167,12 @@ class Review(models.Model):
     #Fields for giving other users ability to thumbs up/down a review
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
+    #Each review can have many tags
+    #https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/
+    tags = models.ManyToManyField(Tags)
+    #Number of times this review has been reported
     numb_reports = models.IntegerField(default=0)
+    #The date this review was initially created
     date_created = models.DateField(auto_now=True)
     department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
     instructor_name = models.ForeignKey(Instructor, null=True, on_delete=models.DO_NOTHING)
@@ -172,6 +181,7 @@ class Review(models.Model):
 
     def _str_(self):
         return self.reviewer
+
 #Models a comment made by a user on a review 
 class Comment(models.Model):
     comment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
