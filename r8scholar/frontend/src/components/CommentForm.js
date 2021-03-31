@@ -1,83 +1,124 @@
 import React from "react";
-import { Button, Input, Modal, FormGroup, Label, Form, FormText} from "reactstrap";
-import { IoCreate } from 'react-icons/io';
-import { BsPencil } from 'react-icons/bs';
+import { Button, Input, Modal, FormGroup, Label, Form, FormText, Container, Row, Col} from "reactstrap";
+import cookie from "react-cookies";
+import { BsTrash } from 'react-icons/bs';
 import axiosInstance from "../axiosApi"; 
-import CommentItem from "./CommentItem";
 
 //props contains object called review
  
 function CommentForm (props){
 
-    const [loginModal, setLoginModal] = React.useState(false);
+    const [modal, setModal] = React.useState(false);
     const [content, setContent] = React.useState(""); 
+	const [comments, setComments] = React.useState(null);
 
+	const commentContainer = { 
+		//backgroundColor: "#f5f6fa", 
+		border: "2px solid #dfe6e9",
+  		borderRadius: "12px",
+		width: "100%", 
+		padding: "5px",
+		marginTop: "20px",
+	}
+
+	React.useEffect(() => {	
+		getMyComments();
+	}, []);
+
+	
+	const getMyComments = async() => { 
+		await fetch("/api/get-comments/?review_id="+props.review.review_id)
+			.then(response => response.json())
+			.then(result => {
+
+				setComments(result.reverse());
+			});
+	}
 
     const handleContentChange = e => { 
         setContent(e.target.value); 
     }
-
     
-    const submitComment = async() => { 
+    const submitComment = async(e) => { 
         e.preventDefault(); 
         //submit for the edit comment 
         try {
-            alert("Tried to add a comment");
             let response = await axiosInstance.post("/create-comment/", {
                 email: cookie.load("email"), //get from user login
                 review_id: props.review.review_id, //get from props
                 content: content, //from the content
             });
-            //let user know it worked 
-            window.location.reload(); 
-            log(response.status);
+            window.location.reload();
             return response.status;
         }catch(error){
-            //user is not logged in 
+          console.log(error);
         }
     }
     
-
 return(
     <>
       <Button
         className="btn-round"
         color="primary"
         type="button"
-        onClick={() => setLoginModal(true)}
-      >
+        onClick={() => setModal(true)}>
         View Comments
       </Button>
       <Modal
-        isOpen={loginModal}
-        toggle={() => setLoginModal(false)}
-        modalClassName="modal-register"
-      >
-        <div className="modal-header no-border-header text-center">
+        isOpen={modal}
+        toggle={() => setModal(false)}
+		className="modal-lg"
+        modalClassName="bd-example-modal-lg">
+		
+        <div className="modal-header">
           <button
             aria-label="Close"
             className="close"
             data-dismiss="modal"
             type="button"
-            onClick={() => setLoginModal(false)}
+            onClick={() => setModal(false)}
           >
             <span aria-hidden={true}>×</span>
           </button>
-          <h6 className="modal-title text-center">Comments</h6>
         </div>
 
-        {/**Insert the comment items from the list of*/}
-        <CommentItem review ={props.review}></CommentItem> 
-        
-
         <div className="modal-body">
-        <Form onSubmit={submitComment}>
-                <FormGroup>
-                    <Label for="exampleText"><h5>Create Comment</h5></Label>
-                    <Input type="textarea" onChange={handleContentChange} name="content" id="content" rows={3}/>
-                </FormGroup>
-                    <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
-                </Form>
+			<Container>
+				<Row>
+					<Col className="col-md-7">
+						<b>{props.review.content}</b>
+					</Col>
+					<Col className="col-md-5" align="center">
+						<Form onSubmit={e => submitComment(e)}>
+							<FormGroup>
+								<Input type="textarea" placeholder="What do you think of this review?"
+								onChange={handleContentChange} name="content" fullWidth={true} id="content" rows={4}/>
+							</FormGroup>
+
+							<Button className="btn-round" size="sm" color="info" type="submit" outline>Submit</Button>
+						</Form>
+					</Col>
+				</Row>
+				<Row>
+					<div className="modal-footer">
+						<h3>Comments {comments !== null ? " (" + comments.length + ")" : "(0)"}</h3>
+        			</div>
+				</Row>
+				<Row>
+					<div>
+						{comments === null || comments.length === 0? 
+						<h6>No Comments yet! Be the first to leave one?</h6>
+						: 
+						comments.map((item, index) =>{
+							return(<div key={index}style={commentContainer}>
+								<h6>{item.name}</h6>
+								<p>{item.content}</p>
+							</div>)
+						})}
+					</div>
+				</Row>
+			</Container>
+			
         </div>
       </Modal>
     </>

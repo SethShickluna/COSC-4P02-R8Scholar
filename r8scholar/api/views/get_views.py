@@ -72,10 +72,10 @@ class GetReviewsView(APIView):
 
 #Gets comments for a given review
 class GetCommentsView(APIView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = CommentSerializer
     lookup_url_kwarg = 'review_id'
-    permission_classes = (permissions.AllowAny,)
-
+    
     def get(self,request,format=None):
         review_id = request.GET.get(self.lookup_url_kwarg)
         try:

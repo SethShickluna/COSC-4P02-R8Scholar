@@ -50,6 +50,7 @@ function EditForm(props) {
     
     const submit = async() => { 
         let rating = (rating1 + rating2 + rating3) / 3; 
+        console.log(rating);
         try {
             let response = await axiosInstance.post("/edit-review/", {
                 review_id: props.review.review_id, 
@@ -60,7 +61,7 @@ function EditForm(props) {
                 review_type: "", 
             });
             //let user know it worked 
-            window.location.reload(); 
+            //window.location.reload(); 
             return response.status;
         }catch(error){
             //user is not logged in 

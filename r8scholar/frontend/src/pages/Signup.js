@@ -44,7 +44,7 @@ export default class Signup extends Component {
         this.submitForm = this.submitForm.bind(this);
         this.authenticateLogin = this.authenticateLogin.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
-        this.onDismiss2 = this.onDismiss.bind(this);
+        this.onDismiss2 = this.onDismiss2.bind(this);
 
         this.checkPassword = this.checkPassword.bind(this); 
         this.checkEmail = this.checkEmail.bind(this);
@@ -92,9 +92,9 @@ export default class Signup extends Component {
         return false;
     }
 
-    //password boxes match and are at least 10 characters 
+    // *TODO* make this check for a special character
     checkPassword = (password) => {
-		let length = password.length >= 10; 
+		let length = password.length >= 12; 
         let capital = password.toUpperCase() !== password; 
         let lower = password.toLowerCase() !== password;
         let number =  /\d/.test(password);
@@ -223,10 +223,11 @@ export default class Signup extends Component {
                     <UncontrolledTooltip style={{minWidth: "70px"}} placement="right" target="password">
                         <h5>Password Requirements: </h5>
                         <ul>
-                            <li>At least 1 uppercase</li>
-                            <li>At least 1 lowercase</li>
-                            <li>At least 1 number</li>
-                            <li>At least 10 characters</li>
+                            <li>1 Uppercase</li>
+                            <li>1 Lowercase</li>
+                            <li>1 Number</li>
+                            <li>1 Symbol </li>
+                            <li>At least 12 characters</li>
                         </ul>
                     </UncontrolledTooltip>
                     <label>Password</label>
@@ -241,7 +242,7 @@ export default class Signup extends Component {
                    
                     </Form> }
                     
-                    <h6 style={{color: "white"}}>We <strong>strongly</strong> reccomend that you use a different password than your Brock Univeristy accounts. </h6>
+                    <h6 style={{color: "white"}}>We <strong>strongly</strong> recommend that you use a different password than your Brock Univeristy accounts. </h6>
                 </Card>
                 </Col>
             </Row>

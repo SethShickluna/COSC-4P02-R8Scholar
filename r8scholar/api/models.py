@@ -178,8 +178,8 @@ class Comment(models.Model):
     name = models.CharField(max_length=32)
     content = models.TextField(default=None)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
-    date = models.DateTimeField(default=None)
-    numb_reports = models.IntegerField(default=None)
+    date_created = models.DateField(auto_now=True)
+    numb_reports = models.IntegerField(default=0)
 
     class Meta:
         constraints = [

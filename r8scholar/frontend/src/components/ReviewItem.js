@@ -3,9 +3,7 @@ import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button,
 import StarRatings from 'react-star-ratings';
 import ReportForm from "./ReportReviewForm";
 import EditForm from "./EditReviewForm"; 
-import CommentItem from './CommentItem';
 import CommentForm from './CommentForm';
-import ReviewForm from './ReviewForm';
 
 const reviewTitle = {
     color: "black", 

@@ -10,6 +10,7 @@ import {
     NavLink,
     TabContent,
     TabPane,
+    Spinner
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import cookie from "react-cookies";
@@ -56,6 +57,8 @@ export default class Profile extends Component {
                 email: null,
                 nickname: null,
                 verified: false,
+                reviews: null, 
+                loaded: false,
             },
             reviews: null,
             activeTab: "1",
@@ -84,7 +87,15 @@ export default class Profile extends Component {
     }
 
     async getReviews() {
-        console.log("Needs backend implementation");
+        console.log("Hi")
+        try {
+            let response = await axiosInstance.get("/get-user-reviews/?email="+cookie.load("email"));
+            this.setState({reviews:response.data, loaded:true})
+            return response.status;
+        }catch(error){
+            //user is not logged in 
+        }
+        this.setState({loaded: true})
     }
 
     render() {
@@ -244,9 +255,19 @@ export default class Profile extends Component {
                                             <Row>
                                                 <Col
                                                     className="ml-auto mr-auto"
-                                                    md="6"
+                                                    md="12"
                                                 >
-                                                    {/**Reviews */}
+                                                    {this.state.loaded ? 
+                                                        this.state.reviews !== null ? 
+                                                        this.state.reviews.reverse().map((item, index) => 
+                                                        (<ReviewItem 
+                                                            id={index} 
+                                                            isOwner={item.nickname === this.state.currentUser} 
+                                                            key={"department-review"+index} 
+                                                            reviewItem={item}
+                                                            type="course"/>))
+                                                    : <p>You have not posted any reviews</p>
+                                                :<Spinner color="black"/>}
                                                 </Col>
                                             </Row>
                                         </TabPane>

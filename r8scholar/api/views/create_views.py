@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from ..models import Comment, CustomUser, Review, Course, Department, Instructor
 from ..serializers import (CommentSerializer, CreateCommentSerializer, UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer)
 from ..email_sender import email_user
+#universal python 
+import json 
 #Profanity Filter
 from profanity_filter import ProfanityFilter
 pf = ProfanityFilter()
@@ -29,30 +31,26 @@ class CreateUserView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateComment(APIView):
-    serializer_class = CreateCommentSerializer
-    
     def post(self,request,format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            email = serializer.data['email']
-            review_id = serializer.data['review_id']
-            content = serializer.data['content']
-            try:
-                user = CustomUser.objects.get(email=email)
-            except CustomUser.DoesNotExist:
-                return Response({'Bad Request': 'User does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
-            try:
-                review = Review.objects.get(review_id=review_id)
-            except Review.DoesNotExist:
-                return Response({'Bad Request': 'Review does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
+        data = json.loads(request.body.decode("utf-8"))
+
+        email = data['email']
+        review_id = data['review_id']
+        content = data['content']
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return Response({'Bad Request': 'User does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            review = Review.objects.get(review_id=review_id)
+        except Review.DoesNotExist:
+            return Response({'Bad Request': 'Review does not exist...'}, status=status.HTTP_400_BAD_REQUEST)
             #Censor profanity in content
-            content = pf.censor(content)
+        content = pf.censor(content)
             #Create a new comment
-            comment = Comment(review = review,commenter = user,name=user.nickname,content=content)
-            comment.save()
-            return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
-        else:
-            return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        comment = Comment(review=review,commenter = user,name=user.nickname,content=content)
+        comment.save()
+        return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
 
 #Creates a new review of a course/instructor/department
 class CreateReviewView(APIView):
