@@ -241,7 +241,7 @@ export default class Signup extends Component {
                    
                     </Form> }
                     
-                    <h6 style={{color: "white"}}>We <strong>strongly</strong> reccomend that you use a different password than your Brock Univeristy accounts. </h6>
+                    <h6 style={{color: "white"}}>We <strong>strongly</strong> recommend that you use a different password than your Brock Univeristy accounts. </h6>
                 </Card>
                 </Col>
             </Row>
