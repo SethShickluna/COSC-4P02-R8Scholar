@@ -168,3 +168,4 @@ AUTH_USER_MODEL = 'api.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+AUTHENTICATION_BACKENDS = ['api.backends.SettingsBackend','django.contrib.auth.backends.ModelBackend']
