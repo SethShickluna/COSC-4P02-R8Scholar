@@ -1,268 +1,257 @@
-import React, { Component } from "react";
-import List from "../components/List";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
-//import { Icon } from "react-icons-kit";
-import { chevronDown } from "react-icons-kit/fa/chevronDown";
-import { chevronUp } from "react-icons-kit/fa/chevronUp";
-import { chevronLeft } from "react-icons-kit/fa/chevronLeft";
-import { chevronRight } from "react-icons-kit/fa/chevronRight";
-import { minus } from "react-icons-kit/fa/minus";
-import Loading from "../components/Loading";
+import React, {Component} from "react";
+import StarRatings from 'react-star-ratings'; 
+import {Spinner, Table, Container, Row, Col, Pagination, 
+    PaginationItem, PaginationLink,
+    UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap';
+import SecondaryNav from "../components/SecondaryNav";
+
+const linkStyle = { 
+    color: 'black',
+    fontSize: "18", 
+}
 
 export default class Courses extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            unfilteredData: [],
-            filters: ["Rating", "Department", "Show per page"],
-            options: { Rating: [], Department: [], "Show per page": [] },
-            Rating: null,
-            Department: null,
-            "Show per page": null,
-            sortButtons: ["Code", "Name", "Rating", "Department"],
-            sortIndex: "",
-            accending: true,
-            perPage: 10,
+            displayedCourses: null, 
+            perPage: 20,
             currentPage: 1,
             maxPage: 0,
+            departmentRatings:{}, 
+            sortOption: "Alphabetical A-Z",
+            droppedDown: false,
+            loaded: false, 
         };
+
+        this.changePages = this.changePages.bind(this); 
+        this.activateMenu = this.activateMenu.bind(this);
+        this.setFilter = this.setFilter.bind(this);
     }
 
     componentDidMount() {
-        this.getOptions();
-        this.getEntries(() => {
-            if (this.props.location.id) {
-                this.handleFilter("Department", this.props.location.id.name);
+        this.getEntries(this.state.currentPage); 
+    }
+
+    
+    getEntries = async() => {
+
+        var requestType = () =>{
+            switch(this.state.sortOption){
+                case "Rating: High to Low":
+                case "Rating: Low to High":
+                    return "rating_high_low"; 
+                default: 
+                    return "name";
             }
+        }
+
+        const request = {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                "filter_by":requestType(),
+            }),
+        }
+        await fetch("/api/filter-courselist/", request)
+            .then((response) => { response.json().then((data) => {
+                console.log(data);
+                if(this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High"){ 
+                    data = data.reverse(); 
+                }   
+                var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1); 
+                
+                this.setState({ 
+                    displayedCourses: data,
+                    maxPage: newMax,
+                });
+            });
+        });
+        this.setState({
+            loaded: true, 
+        }); 
+    }
+
+    changePages(button){
+        this.setState({displayedCourses: null, }); 
+        var newPage = button.target.innerHTML; //reads the html of the pressed button 
+        switch(newPage){
+            case 'First':
+                newPage = 1; 
+                break;
+            case 'Last':
+                newPage = this.state.maxPage; 
+                break; 
+        }
+        this.setState({
+            currentPage:Number(newPage),
+        }); 
+        this.getEntries();
+        
+        this.setState({
+            loaded: true, 
         });
     }
 
-    // TODO: GET courses
-    getEntries = (callback) => {
-        fetch("http://localhost:3000/data/courses.json").then((res) => {
-            res.json().then((data) => {
-                this.setState(
-                    { data: data.data, unfilteredData: data.data },
-                    () => {
-                        var length = Math.ceil(
-                            this.state.data.length / this.state.perPage
-                        );
-                        this.setState({ maxPage: length });
-                        callback();
-                    }
-                );
-            });
-        });
-    };
-
-    getOptions = () => {
-        var options = {
-            Rating: [
-                "4.0 and higher",
-                "3.0 and higher",
-                "2.0 and higher",
-                "1.0 and higher",
-                "All Ratings",
-            ],
-            Department: [
-                "Humanities",
-                "Math and Computer Science",
-                "Social Sciences",
-                "Visual and Performance Arts",
-                "Goodman School of Business",
-                "Applied Health Sciences",
-                "Education",
-                "All Departments",
-            ],
-            "Show per page": ["10", "20", "50", "100", "All"],
-        };
-        this.setState({ options: options });
-    };
-
-    getCurrentPage = () => {
-        if (this.state.perPage === "All") {
-            return this.state.data;
-        } else {
-            var minIndex = (this.state.currentPage - 1) * this.state.perPage;
-            var maxIndex = this.state.currentPage * this.state.perPage;
-            return this.state.data.slice(minIndex, maxIndex);
-        }
-    };
-
-    handleNavigate = (e) => {
-        if (e.target.id === "navigate-back" && this.state.currentPage > 1) {
-            this.setState((old) => {
-                return { currentPage: old.currentPage - 1 };
-            });
-        }
-        if (
-            e.target.id === "navigate-forward" &&
-            this.state.currentPage < this.state.maxPage
-        ) {
-            this.setState((old) => {
-                return { currentPage: old.currentPage + 1 };
-            });
-        }
-    };
-
-    handleClick = (e) => {
-        const newSortIndex = e.target.id.toLowerCase();
-        if (newSortIndex === this.state.sortIndex) {
-            const accending = !this.state.accending;
-            this.setState({ accending: accending }, () =>
-                this.sortData(newSortIndex)
-            );
-        } else {
-            this.setState({ sortIndex: newSortIndex }, () =>
-                this.sortData(newSortIndex)
-            );
-        }
-    };
-
-    handleFilter = (field, value) => {
-        if (field === "Show per page") {
-            this.setState({ perPage: value });
-        }
-        this.setState({ [field]: value }, () => {
-            this.setState({ data: this.state.unfilteredData }, () => {
-                var filteredData = [];
-                this.state.data.forEach((e) => {
-                    if (
-                        (e.department === this.state.Department) |
-                            ((this.state.Department === "All Departments") |
-                                !this.state.Department) &&
-                        (e.rating >= parseFloat(this.state.Rating)) |
-                            ((this.state.Rating === "All Ratings") |
-                                !this.state.Rating)
-                    ) {
-                        filteredData.push(e);
-                    }
-                });
-                var newMaxPage = Math.ceil(
-                    filteredData.length / this.state.perPage
-                );
-                this.setState(
-                    { data: filteredData, maxPage: newMaxPage },
-                    () => {
-                        this.sortData(this.state.sortIndex);
-                    }
-                );
-            });
-        });
-    };
-
-    sortData = (sortIndex) => {
+    activateMenu(){
+        console.log(this.state.droppedDown);
         this.setState({
-            data: this.state.data.sort((a, b) => {
-                if (
-                    (sortIndex == "name") |
-                    (sortIndex == "department") |
-                    (sortIndex === "code")
-                ) {
-                    if (this.state.accending) {
-                        return a[sortIndex].localeCompare(b[sortIndex]);
-                    } else {
-                        return b[sortIndex].localeCompare(a[sortIndex]);
-                    }
-                } else {
-                    if (this.state.accending) {
-                        return a[sortIndex] - b[sortIndex];
-                    } else {
-                        return b[sortIndex] - a[sortIndex];
-                    }
-                }
-            }),
-            currentPage: 1,
+            droppedDown: !this.state.droppedDown,
+        })
+    }
+
+    setFilter(filter){
+        this.setState({
+            sortOption: filter.target.innerText,
+            loaded: false, 
+            displayedCourses: null,
         });
-    };
+        
+        this.getEntries(); 
+    }   
 
     render() {
-        return !this.state.data.length ? (
-            <Loading size="75" />
-        ) : (
-            //Body
-            <div className="courses-container">
-                {
-                    //Filter Buttons
-                    <div className="filter-container">
-                        <div className="filter-label">Filters</div>
-                        <div className="filter-buttons">
-                            {this.state.filters.map((e) => {
-                                return (
-                                    <Dropdown
-                                        id={e}
-                                        className="filter-button"
-                                        text={e}
-                                        options={this.state.options[e]}
-                                        icon={chevronDown}
-                                        iconSize="12"
-                                        handleSelect={this.handleFilter}
-                                        selected={this.state[e]}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </div>
-                }
-                {
-                    <div className="sort-buttons">
-                        {this.state.sortButtons.map((e) => {
-                            var arrow = minus;
-                            if (this.state.sortIndex == e.toLowerCase()) {
-                                arrow = this.state.accending
-                                    ? (arrow = chevronDown)
-                                    : (arrow = chevronUp);
-                            }
-                            return (
-                                <>
-                                    <Button
-                                        id={e}
-                                        className="sort-button"
-                                        text={e}
-                                        onClick={this.handleClick}
-                                        icon={arrow}
-                                        iconSize="10"
-                                    />
-                                </>
-                            );
-                        })}
-                    </div>
-                }
-                {
-                    <div className="list-container">
-                        <List
-                            data={this.getCurrentPage()}
-                            columns={["code", "rating", "department", "name"]}
-                            link={"/course/"}
-                        />
-                    </div>
-                }
-                {this.state.perPage < this.state.data.length && (
-                    <div className="navigation-container">
-                        <Button
-                            id="navigate-back"
-                            className="navigate-button"
-                            text=""
-                            onClick={this.handleNavigate}
-                            icon={chevronLeft}
-                            iconSize="12"
-                        />
-                        <div className="label">
-                            {this.state.currentPage + "/" + this.state.maxPage}
-                        </div>
-                        <Button
-                            id="navigate-forward"
-                            className="navigate-button"
-                            text=""
-                            onClick={this.handleNavigate}
-                            icon={chevronRight}
-                            iconSize="12"
-                        />
-                    </div>
-                )}
+        return(
+        <div className="departments-page">
+                <SecondaryNav/>
+                <Container fluid>
+                    <Row style={{marginTop:'2%'}} align="center">
+                        <Col>
+                            <div >
+                                <h1 className="title lg">Courses</h1>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row align="center"> {/**Filters */}
+                        <Col align="center">
+                            <div>
+                                <h4>Filter Options</h4>
+                            </div>  
+                            <div>
+                            <UncontrolledDropdown className="btn-group">
+                                    <DropdownToggle 
+                                        aria-expanded={false}
+                                        aria-haspopup={true}
+                                        caret
+                                        color="info"
+                                        data-toggle="dropdown"
+                                        type="button">
+                                            {this.state.sortOption}
+                                    </DropdownToggle>
+                                    <DropdownMenu container="body">   
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: A-Z</a></DropdownItem>   
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Alphabetical: Z-A</a></DropdownItem>
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: High to Low</a></DropdownItem>
+                                        <DropdownItem onClick={this.setFilter}> <a style={linkStyle}>Rating: Low to High</a></DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </div>
+                            <div style={{marginTop:"3%"}}/>
+                            <div>
+                                <nav aria-label="Page navigation example">
+                                    <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                                        <PaginationItem color="danger">
+                                            <PaginationLink onClick={this.changePages}href="#">
+                                                First
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem disabled={this.state.currentPage - 1 < 1}>
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage - 1}
+                                            </PaginationLink>
+                                        </PaginationItem >
+                                        <PaginationItem className="active">
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage + 1}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem>
+                                            <PaginationLink onClick={this.changePages} href='#'>
+                                                Last
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    </Pagination>
+                                </nav>
+                            </div>
+                        </Col>
+                    </Row>
+                   
+                    <Row style={{marginTop:'2%'}} align="center">
+                        <Col className="col-md-1"/>
+                        <Col className="col-md-10">
+                           <Table striped>
+                               <thead>
+                                    <th>Rank</th>
+                                    <th>Course Code</th>
+                                    <th>Name</th>
+                                    <th>Rating</th>
+                                    <th>Department</th>
+                               </thead>
+                               <tbody>
+                                   {this.state.displayedCourses === null? 
+                                   <Spinner color="dark"/>
+                                :this.state.displayedCourses.slice((this.state.currentPage - 1)*this.state.perPage, 
+                                (this.state.currentPage*this.state.perPage)).map((item, index) =>{ {/**10 courses */}
+                                    return(
+                                    <tr key={index}>  
+                                        <th>{(this.state.currentPage - 1)*this.state.perPage + index + 1}</th>
+                                        <th><a style={linkStyle} href={"/course/"+item.name}>{item.name}</a></th>
+                                        <th style={{maxWidth: "200px"}}><a style={linkStyle} href={"/course/"+item.name}>{item.course_full_name}</a></th>
+                                        <th style={{minWidth:"100px"}}><StarRatings
+                                            rating={item.rating}
+                                            starDimension="25px"
+                                            starSpacing="5px"
+                                            starRatedColor="#3498db"
+                                            numberOfStars={5}
+                                            name='avgRating'/>
+                                        </th>
+                                        <th><a style={linkStyle} href={"/department/"+item.department}>{item.department}</a></th>
+                                    </tr>)
+                                })}
+                               </tbody>
+                           </Table>
+                        </Col>
+                        <Col className="col-md-1"/>
+                    </Row>
+                    <div style={{marginBottom:"3%"}}/>
+                    <nav aria-label="Page navigation example">
+                        <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                            <PaginationItem color="danger">
+                                <PaginationLink onClick={this.changePages}href="#">
+                                    First
+                                </PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem disabled={this.state.currentPage - 1 < 1}>
+                                <PaginationLink onClick={this.changePages} href="#">
+                                    {this.state.currentPage - 1}
+                                </PaginationLink>
+                            </PaginationItem >
+                            <PaginationItem className="active">
+                                <PaginationLink onClick={this.changePages} href="#">
+                                    {this.state.currentPage}
+                                </PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
+                                <PaginationLink onClick={this.changePages} href="#">
+                                    {this.state.currentPage + 1}
+                                </PaginationLink>
+                            </PaginationItem>
+                            <PaginationItem>
+                                <PaginationLink onClick={this.changePages} href='#'>
+                                    Last
+                                </PaginationLink>
+                            </PaginationItem>
+                        </Pagination>
+                    </nav>
+                </Container>
+                    
             </div>
-        );
-    }
+        )}
 }

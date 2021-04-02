@@ -1,48 +1,69 @@
 #REST#
 from rest_framework import serializers
 #Project Files#
-from .models import Comment, Course, CustomUser, Department, Forum, Instructor, Review, Ticket
+from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket
+from .validators import password_validator
 
 class UserSerializer(serializers.ModelSerializer):
+
+    email = serializers.EmailField(
+        required=True
+    )
+    nickname = serializers.CharField()
+    password = serializers.CharField(min_length=10, write_only=True, validators=[password_validator])
     class Meta:
         model = CustomUser
-        fields = ('email', 'nickname', 'password', 'is_verified', 'verification_code','reviews', 'comments', 'forum_posts')
+        fields = ('email', 'nickname', 'is_verified', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+    
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('review_id', 'reviewer', 'subject','title', 'content', 'rating', 'numb_reports', 'date_created', )
+        fields = ('review_id', 'reviewer', 'nickname', 'subject', 'title','content',
+        'rating', 'numb_reports','date_created', 'department_name', 'instructor_name', 
+        'course_name', 'review_type')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('comment_id', 'review_id', 'name', 'content', 'child', 'date', 'numb_reports')
+        fields = ('comment_id', 'review_id', 'name', 'content', 'child', 'date_created', 'numb_reports')
 
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('code', 'name', 'department', 'rating', 'reviews', 'instructor')
+        fields = ('name', 'course_full_name', 'department', 'rating')
 
-class DeparmentSerializer(serializers.ModelSerializer):
+class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('name', 'courses_rating', 'instructors_rating', 'overall_rating', 'review')
+        fields = ('name', 'courses_rating', 'instructors_rating', 'rating')
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ('name', 'department', 'rating', 'reviews')
+        fields = ('name', 'department', 'rating')
 
-class ForumSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Forum
-        fields = ('nickname_id', 'title', 'comment')
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ('user', 'content', 'date')
+        fields = ('email', 'content', 'date')
+
+class SearchSerializer(serializers.Serializer):
+    instructor = InstructorSerializer(required=False)
+    course = CourseSerializer(required=False)
+    department = DepartmentSerializer(required=False)
+
 
 #Creation serializers 
 class CreateUserSerializer(serializers.ModelSerializer):
@@ -53,7 +74,30 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class CreateReviewSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Review
-        fields = ('reviewer', 'subject','title', 'content', 'rating', )
+        fields = ('nickname','subject','title', 'content', 
+        'rating','review_type')
+
+class CreateCommentSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Comment
+        fields = ('email','review_id','content')
+
+#Review serializers
+class EditReviewSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Review
+        fields = ('review_id','subject','title', 'content', 
+        'rating','review_type')
+
+class DeleteReviewSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Review
+        fields = ('review_id')
+
+class ReportReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ('review_id','report_description')
 
 #Authentication serializers
 class loginLogoutSerializer(serializers.ModelSerializer):

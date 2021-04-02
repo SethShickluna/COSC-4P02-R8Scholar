@@ -1,25 +1,48 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Accordion, Button, ListGroup, ListGroupItem} from 'react-bootstrap'; 
+import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button, Row, Col } from 'reactstrap';;
 import StarRatings from 'react-star-ratings';
+import ReportForm from "./ReportReviewForm";
+import EditForm from "./EditReviewForm"; 
+import CommentForm from './CommentForm';
+import {BsFillTrashFill} from "react-icons/bs";
+import axiosInstance from "../axiosApi"; 
 
+const reviewTitle = {
+    color: "black", 
+    fontSize: "22px", 
+    fontWeight: "300"
+}
 
-const noCommentMessage = "No comments yet!";
-
-
+//props contains object called reviewItem containing 
+        /*
+        -Title {this.props.reviewItem.title}
+        -Content {this.props.reviewItem.content}
+        -Rating rating={this.props.reviewItem.rating}
+        -User {this.props.reviewItem.nickname}
+        -reviewID {this.props.reviewItem.reviewID}
+        -Comments (object)
+        */
+       //second props contains a boolean value which determines of the edit button should be there
+       //this.props.isOwner
 export default class ReviewItem extends Component {
 
     //props is going to consist of the review item passed by the course 
     constructor(props){
         super(props); 
-        //props contains object called reviewItem containing 
-        /*
-        -Title 
-        -Content
-        -Rating 
-        -User
-        -Comments (object)
-        */
+        console.log(props);
+        this.delete = this.delete.bind(this);
+    }
+
+    async delete() { 
+        try {
+            let response = await axiosInstance.post("/delete-review/", {
+                review_id: this.props.reviewItem.review_id, 
+            });
+            window.location.reload(); 
+            return response.status;
+        }catch(error){
+            console.log(error.message)
+        }
     }
 
     //the JSX that is rendered when this file is imported as a component 
@@ -27,39 +50,48 @@ export default class ReviewItem extends Component {
         return (
             <div className="App">
                 {/* container (card )which includes a title section + rating and a content section + button to see comments */}
-                    <Card style={{marginTop: '4%'}}>
-                        <Accordion>
-                            <Card.Body>
-                                <Card.Title>{this.props.reviewItem.title}<p style={{float: "right"}}>{new Date().getFullYear()}</p></Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{this.props.reviewItem.reviewer + " "} 
-                                    <StarRatings
+                <Card>
+                    <CardHeader>
+                        <Row>
+                            <Col className="col-md-7" align="left">
+                                <p style={reviewTitle}>{this.props.reviewItem.title}</p>
+                            </Col>
+                            <Col className="col-md-5" align="right">
+                                {this.props.isOwner ?
+                                <div style={{marginTop:"10px"}}>
+                                    <EditForm type={this.props.type} review={this.props.reviewItem}/>
+                                    <Button style={{marginLeft: "5px"}}color="danger" 
+                                        className="btn-round" type="button" onClick={this.delete}>
+                                        <BsFillTrashFill/> {" "} Delete
+                                    </Button>
+                                </div>
+                                : null} 
+                            </Col>
+                        </Row>
+                    </CardHeader>
+                    <CardBody>
+                        <CardTitle><h6>{this.props.reviewItem.nickname}</h6> <StarRatings
                                         rating={this.props.reviewItem.rating}
-                                        starDimension="25px"
-                                        starSpacing="5px"
+                                        starDimension="30px"
+                                        starSpacing="10px"
                                         starRatedColor="#3498db"
                                         numberOfStars={5}
-                                        name='avgRating'
-                                    />
-                                </Card.Subtitle>
-                                <Card.Text>
-                                    {this.props.reviewItem.content}
-                                </Card.Text>
-                                <Accordion.Toggle as={Button} variant="primary" eventKey="0">
-                                    Show Comments
-                                </Accordion.Toggle>
-                            </Card.Body>
-                            <Accordion.Collapse eventKey="0">
-                                <ListGroup >
-                                    {this.props.reviewItem.comments != null ?
-                                        this.props.reviewItem.comments.map((item, index) => 
-                                            <ListGroupItem key={index}>
-                                                {item.content}
-                                            </ListGroupItem> )
-                                        : "No comments yet!"} 
-                                </ListGroup>
-                            </Accordion.Collapse>
-                        </Accordion>    
-                    </Card>
+                                        name='instructorRating'
+                                    /></CardTitle>
+                        <CardText><h5>{this.props.reviewItem.content}</h5></CardText>
+                    </CardBody>
+                    <ListGroupItem>
+                        <Row>
+                            <Col align="left">
+                                
+                               <CommentForm review = {this.props.reviewItem}> </CommentForm>
+                            </Col>
+                            <Col align="right">
+                                <ReportForm reviewID={this.props.reviewItem.review_id}/>
+                            </Col>
+                        </Row>
+                    </ListGroupItem>
+                </Card>
             </div>
         );
     }

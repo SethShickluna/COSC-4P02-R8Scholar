@@ -1,148 +1,139 @@
 //form that is presented to user when they create a review 
 import React, {Component} from 'react'; 
-import Form from 'react-bootstrap/Form'; 
-import {Button} from 'react-bootstrap'; 
+import {Button, Form, FormText, FormGroup, Label, 
+    Input, Row, Container, Col, 
+    Spinner
+} from 'reactstrap'; 
+import {Link} from 'react-router-dom';
 import cookie from 'react-cookies'; 
-
+import axiosInstance from "../axiosApi"; 
 
 const questions = { 
     "course": [
-        "On a scale of 1 to 5, how did you find the lectures for this course? ", 
-        "On a scale of 1 - 5, was the homework for this course?", 
-        "On a scale of 1 - 5, how was the instructor for this course?"
+        "the lectures for this course?", 
+        "the homework for this course?", 
+        "the midterm/exam,or other evaluations, for this course?"
     ], 
     "instructor" : [
-        "On a scale of 1 to 5, how were the lecturing abilities of this instructor? ", 
-        "On a scale of 1 - 5, how was the homework this instructor assigned?", 
-        "On a scale of 1 - 5, how was the course this instructor taught?"
+        "the lecturing abilities of the instructor?", 
+        "the fairness of the instructor?", 
+        "the preparedness of the instructor?"
     ], 
     "department": [
-        "On a scale of 1 - 5, what is the quality of courses from this department?", 
-        "On a scale of 1 - 5, what " 
+        "the quality of courses in this program?", 
+        "the quality of instructors from this department?", 
+        "the overall quality of the department?", 
     ],  
-}
-
-const formStyle = { 
-    marginTop: '5%', 
-}
-
-const buttonStyle={
-    //height: '100vh',  
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
 }
 
 export default class ReviewForm extends Component { 
     constructor(props){
         super(props); 
         this.state = { 
-            reviewType: props.review, 
-            subject: props.name, 
+            reviewer : null,
             title: "", 
             content: "", 
-            rating1: 1, 
-            rating2: 1, 
-            rating3: 1, 
+            rating1: 0, 
+            rating2: 0, 
+            rating3: 0, 
         }
 
-        this.updateTitleInput = this.updateTitleInput.bind(this); 
-        this.updateContentInput = this.updateContentInput.bind(this); 
-        this.updateRating1 = this.updateRating1.bind(this); 
-        this.updateRating2 = this.updateRating2.bind(this); 
-        this.updateRating3 = this.updateRating3.bind(this); 
-        
+        this.handleInput = this.handleInput.bind(this);
         this.submitReview = this.submitReview.bind(this); 
     }
 
-    updateTitleInput(obj){
-        this.setState({
-            title: obj.target.value, 
-        }); 
+    async componentDidMount(){
+        //get the user 
+        try {
+            let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
+            const user = response.data;
+            this.setState({reviewer:user});
+            return user;
+        }catch(error){
+            //user is not logged in 
+        }
     }
 
-    updateContentInput(obj){
-        this.setState({
-            content: obj.target.value, 
-        }); 
-    }
-
-    updateRating1(obj){
-        this.setState({
-            rating1: parseFloat(obj.target.value), 
-        }); 
-    }
-
-    updateRating2(obj){
-        this.setState({
-            rating2: parseFloat(obj.target.value), 
-        }); 
-    }
-
-    updateRating3(obj){
-        this.setState({
-            rating3: parseFloat(obj.target.value), 
-        })
+    handleInput(obj){
+        this.setState({[obj.target.name]: obj.target.value}); 
     }
 
     //TODO make this require fields 
-    submitReview = () =>{
-
-        let overallRating = (this.state.rating1 + this.state.rating2 + this.state.rating3) / 3; 
-        
-        const request = { 
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({
-                reviewer: cookie.load('email'), 
-                subject: this.state.subject,
+    async submitReview (e){
+        e.preventDefault(); 
+        let overallRating = (Number(this.state.rating1) + Number(this.state.rating2) + Number(this.state.rating3)) / 3;
+        try { 
+            const review = await axiosInstance.post('/create-review/', {
+                nickname: this.state.reviewer.nickname,
+                subject: this.props.name,
                 title: this.state.title, 
                 content: this.state.content, 
                 rating: overallRating, 
-            }),
-        }; 
-        fetch("/api/create-review", request)
-        .then((response) => {
-            console.log(response.status); 
-        });
-        
-        
-      
+                review_type: this.props.review, 
+            });
+            window.location.reload();
+            return review;
+        }catch(error){
+            console.log("oops!"); 
+        }              
     }
 
     render() { 
-        return(
-            <div style={formStyle} name="review-form-container">
-                <Form>
-                    <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control isInvalid={this.state.title === null} placeholder="Title..." onChange={this.updateTitleInput}/>
-                    </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        {questions[this.state.reviewType].map((question, index) => 
-                        (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
-                        <Form.Label>{question}</Form.Label>
-                            <Form.Control onChange={index === 1 ?this.updateRating1 : index === 2 ? this.updateRating2 : this.updateRating3} as="select">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </Form.Control> </div>
-                        ))}
-                    </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>What did you think of this {this.state.reviewType}? </Form.Label>
-                        <Form.Control onChange={this.updateContentInput} as="textarea" rows={5} />
-                    </Form.Group>
-                    <div style={buttonStyle}>
-                        <Button onClick={this.submitReview} variant="primary" size="lg">
-                            Submit Review
-                        </Button>
+        return( 
+            <Container fluid>
+            <div style={{maxWidth:"60%"}}>
+                {this.state.reviewer !== null ?
+                    this.state.reviewer.is_verified ?
+                        <Form onSubmit={this.submitReview}>
+                            <FormGroup>
+                                <Label for="exampleEmail"><h4 className="title">Review Title:</h4></Label>
+                                <Input type="text" name="title" id="title" onChange={this.handleInput} placeholder="A Captivating Title" />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormText><h4 className="title">On a scale of 0-5 rate the following:</h4></FormText>
+                                {questions[this.props.review].map((question, index) => 
+                                (<div key={index} style={{marginTop: '10px'}}name={"dropdown-question" + index} > 
+                                <Label><b>{question}</b></Label>
+                                    <Input name={"rating"+(index+1)} onChange={this.handleInput} type="select">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </Input> </div>
+                                ))}
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="exampleText"> <h5 className="title">Tell us what you thought about this {this.props.review}</h5></Label>
+                                <Input type="textarea" onChange={this.handleInput} name="content" id="content" rows={5}/>
+                            </FormGroup>
+
+                            <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
+                        </Form>
+                    : 
+                    <div>
+                        <Container fluid>
+                            <Row>
+                                <Col align="center">
+                                    <h4>Please verify your account to leave a review.</h4>
+                                    <Link to="/verify"><Button color="danger">Verify Now</Button></Link>
+                                </Col>
+                            </Row>
+                        </Container>  
                     </div>
-                    
-                </Form>
+                    : 
+                    <div>
+                    <Container fluid>
+                            <Row>
+                                <Col align="center">
+                                    <Spinner color="black"/>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>}
             </div>
+            <div style={{marginBottom:"15%"}}/>
+            </Container>
         ); 
     }
 }

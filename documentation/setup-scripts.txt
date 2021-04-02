@@ -5,7 +5,11 @@ NodeJS, Python3
 install python/django dependencies: 
 cd into r8scholar/ 
 run the following line 
-pip install Django==3.1.5 djangorestframework==3.12.2 django-cors-headers==3.7.0
+pip install Django==3.1.5 djangorestframework==3.12.2 django-cors-headers==3.7.0 djangorestframework-simplejwt==4.6.0
+pip install django-rest-multiple-models djangorestframework-    
+pip install profanity-filter
+python -m spacy download en
+pip install schedule
 
 install NodeJS if you dont have it 
 https://nodejs.org/en/
@@ -13,17 +17,16 @@ then cd into r8scholar/frontend and run
 npm init -y this will install the node_modules folder and initialize a node project 
 then run 
 
-npm install --save-dev babel-core babel-loader babel-plugin-transform-class-properties babel-preset-es2015 babel-preset-react css-loader style-loader url-loader file-loader webpacknpm install --save-dev @babel/core
-npm install --save-dev @babel/core @babel/env @babel/preset-env @babel/preset-react
+npm install --save-dev babel-core babel-loader babel-plugin-transform-class-properties babel-preset-es2015 babel-preset-react 
+npm install --save css-loader style-loader url-loader file-loader webpack @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime
 
 then 
 
-npm install --save react react-dom bootstrap react-bootstrap
+npm install --save react react-dom react-router-dom reactstrap
 
 then 
 
-npm i react-icons react-icons-kit react-star-rating react-cookies
-
+npm i --save react-icons react-icons-kit react-star-ratings react-cookies axios
 
 to run the program cd into /r8scholar (the directory with manage.py) 
 

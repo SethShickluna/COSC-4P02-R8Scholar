@@ -1,0 +1,6 @@
+USER API CALLS:
+-remove password and verification_code from get serializer (BAD!)
+
+BUGS
+-sometimes when creating new users the verification code is replicated from a previous generation (unsure how to replicate)
+-fixed bug that courses page departments would direct to courses
