@@ -98,8 +98,9 @@ export default class Signup extends Component {
         let capital = password.toUpperCase() !== password; 
         let lower = password.toLowerCase() !== password;
         let number =  /\d/.test(password);
-        this.setState({validPassword: (length && capital && lower && number), validPassword2: password === this.state.verifPassword}); 
-        return length && capital && lower && number;
+        let symbol = password.match(/[|\\/~^:,;?!&%$@*+]/);
+        this.setState({validPassword: (length && capital && lower && number && symbol), validPassword2: password === this.state.verifPassword}); 
+        return length && capital && lower && number && symbol;
     }
 
     //min 4 character username 

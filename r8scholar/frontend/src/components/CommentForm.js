@@ -30,7 +30,6 @@ function CommentForm (props){
 		await fetch("/api/get-comments/?review_id="+props.review.review_id)
 			.then(response => response.json())
 			.then(result => {
-
 				setComments(result.reverse());
 			});
 	}

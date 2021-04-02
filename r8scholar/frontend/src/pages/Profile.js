@@ -87,7 +87,6 @@ export default class Profile extends Component {
     }
 
     async getReviews() {
-        console.log("Hi")
         try {
             let response = await axiosInstance.get("/get-user-reviews/?email="+cookie.load("email"));
             this.setState({reviews:response.data, loaded:true})

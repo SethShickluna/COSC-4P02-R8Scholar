@@ -19,7 +19,6 @@ import Course from "./pages/Course";
 import Courses from "./pages/Courses";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile"; 
-import Settings from "./pages/Settings"; 
 import Verification from "./pages/Verify";
 import SearchPage from "./pages/SearchPage";
 
@@ -49,7 +48,6 @@ export default class App extends Component {
                         <Route exact path="/courses/" component={Courses} />
                         <Route exact path="/profile/" component={Profile} />
                         <Route exact path="/account/" component={Profile} />
-                        <Route exact path="/settings/" component={Settings} />   W
                         <Route exact path="/departments/" component={Departments} />
                         <Route path="/course/:courseName/" component={Course} />
                         <Route path="/instructor/:profName/" component={Instructor} />

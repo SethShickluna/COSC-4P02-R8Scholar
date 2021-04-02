@@ -4,6 +4,8 @@ import StarRatings from 'react-star-ratings';
 import ReportForm from "./ReportReviewForm";
 import EditForm from "./EditReviewForm"; 
 import CommentForm from './CommentForm';
+import {BsFillTrashFill} from "react-icons/bs";
+import axiosInstance from "../axiosApi"; 
 
 const reviewTitle = {
     color: "black", 
@@ -27,11 +29,20 @@ export default class ReviewItem extends Component {
     //props is going to consist of the review item passed by the course 
     constructor(props){
         super(props); 
-        
+        console.log(props);
+        this.delete = this.delete.bind(this);
     }
 
-    edit(){ 
-        
+    async delete() { 
+        try {
+            let response = await axiosInstance.post("/delete-review/", {
+                review_id: this.props.reviewItem.review_id, 
+            });
+            window.location.reload(); 
+            return response.status;
+        }catch(error){
+            console.log(error.message)
+        }
     }
 
     //the JSX that is rendered when this file is imported as a component 
@@ -42,14 +53,17 @@ export default class ReviewItem extends Component {
                 <Card>
                     <CardHeader>
                         <Row>
-                            <Col className="col-md-10" align="left">
+                            <Col className="col-md-7" align="left">
                                 <p style={reviewTitle}>{this.props.reviewItem.title}</p>
                             </Col>
-                            <Col className="col-md-2" align="right">
+                            <Col className="col-md-5" align="right">
                                 {this.props.isOwner ?
                                 <div style={{marginTop:"10px"}}>
-                                    
                                     <EditForm type={this.props.type} review={this.props.reviewItem}/>
+                                    <Button style={{marginLeft: "5px"}}color="danger" 
+                                        className="btn-round" type="button" onClick={this.delete}>
+                                        <BsFillTrashFill/> {" "} Delete
+                                    </Button>
                                 </div>
                                 : null} 
                             </Col>

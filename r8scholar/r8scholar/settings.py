@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+#https://github.com/jazzband/django-rest-framework-simplejwt/issues/201
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '=o(6or27@t-c=xct_=kpi2!2+)7w6xq%4w6+-1mv@e9x095d(w'
@@ -62,7 +63,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
