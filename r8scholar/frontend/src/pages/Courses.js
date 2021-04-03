@@ -195,7 +195,7 @@ export default class Courses extends Component {
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.currentPage - 1 < 1}>
                                             <PaginationLink onClick={this.changePages} href="#">
-                                                {this.state.currentPage - 1}
+                                                {'<'}
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
@@ -205,7 +205,7 @@ export default class Courses extends Component {
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#">
-                                                {this.state.currentPage + 1}
+                                                {'>'}
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.displayedCourses === null}>
@@ -276,7 +276,7 @@ export default class Courses extends Component {
                             </PaginationItem>
                             <PaginationItem disabled={this.state.currentPage - 1 < 1}>
                                 <PaginationLink onClick={this.changePages} href="#">
-                                    {this.state.currentPage - 1}
+                                    {'<'}
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
@@ -286,7 +286,7 @@ export default class Courses extends Component {
                             </PaginationItem>
                             <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
                                 <PaginationLink onClick={this.changePages} href="#">
-                                    {this.state.currentPage + 1}
+                                    {'>'}
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem disabled={this.state.displayedCourses === null}>

@@ -1,50 +1,39 @@
 //npm modules
-import React, { Component } from "react";
-import {
-    Container,
-    Row,
-    Col,
-    Button,
-    Nav,
-    NavItem,
-    NavLink,
-    TabContent,
-    TabPane,
-    Spinner
-} from "reactstrap";
-import { Link } from "react-router-dom";
-import cookie from "react-cookies";
+import React, { Component } from 'react';
+import { Container, Row, Col, Button, Nav, NavItem, NavLink, TabContent, TabPane, Spinner } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import cookie from 'react-cookies';
 
 //js stuff
-import imageOne from "../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg";
+import imageOne from '../assets/images/ben-sweet-2LowviVHZ-E-unsplash.jpg';
 
 //components
-import EditNicknameForm from "../components/EditNicknameForm";
-import EditPasswordForm from "../components/EditPasswordForm";
-import DeleteProfileForm from "../components/DeleteProfileForm";
-import ReviewItem from "../components/ReviewItem";
-import SecondaryNav from "../components/SecondaryNav";
+import EditNicknameForm from '../components/EditNicknameForm';
+import EditPasswordForm from '../components/EditPasswordForm';
+import DeleteProfileForm from '../components/DeleteProfileForm';
+import ReviewItem from '../components/ReviewItem';
+import SecondaryNav from '../components/SecondaryNav';
 
 //axios
-import axiosInstance from "../axiosApi";
+import axiosInstance from '../axiosApi';
 
 const pageStyles = {
-    margin: "0 auto",
-    marginTop: "3%",
+    margin: '0 auto',
+    marginTop: '3%',
 };
 
 const pageBreak = {
     //this sets the margin for reviews and draws a line hovering under the titles
-    marginBottom: "2%",
-    marginTop: "2%",
-    height: "1px",
-    backgroundColor: "#dedede",
-    border: "none",
+    marginBottom: '2%',
+    marginTop: '2%',
+    height: '1px',
+    backgroundColor: '#dedede',
+    border: 'none',
 };
 
 const imgStyle = {
-    width: "100%",
-    height: "200px",
+    width: '100%',
+    height: '200px',
 };
 
 export default class Profile extends Component {
@@ -57,12 +46,12 @@ export default class Profile extends Component {
                 email: null,
                 nickname: null,
                 verified: false,
-                reviews: null, 
+                reviews: null,
                 loaded: false,
             },
             reviews: null,
-            activeTab: "1",
-            activeSubtab: "1",
+            activeTab: '1',
+            activeSubtab: '1',
         };
 
         this.authenicateUser = this.authenicateUser.bind(this);
@@ -74,27 +63,25 @@ export default class Profile extends Component {
 
     async authenicateUser() {
         try {
-            let response = await axiosInstance.get(
-                "/get-user/" + "?email=" + cookie.load("email")
-            );
+            let response = await axiosInstance.get('/get-user/' + '?email=' + cookie.load('email'));
             const user = response.data;
             this.setState({ user: user });
             this.getReviews();
             return user;
         } catch (error) {
-            this.props.history.push("/login"); //redirect to login if a valid token is not presented
+            this.props.history.push('/signin'); //redirect to signin if a valid token is not presented
         }
     }
 
     async getReviews() {
         try {
-            let response = await axiosInstance.get("/get-user-reviews/?email="+cookie.load("email"));
-            this.setState({reviews:response.data, loaded:true})
+            let response = await axiosInstance.get('/get-user-reviews/?email=' + cookie.load('email'));
+            this.setState({ reviews: response.data, loaded: true });
             return response.status;
-        }catch(error){
-            //user is not logged in 
+        } catch (error) {
+            //user is not logged in
         }
-        this.setState({loaded: true})
+        this.setState({ loaded: true });
     }
 
     render() {
@@ -108,14 +95,9 @@ export default class Profile extends Component {
                                 <Col>
                                     {!this.state.user.is_verified ? (
                                         <div>
-                                            <h2>
-                                                Your account is not verfied!
-                                            </h2>
+                                            <h2>Your account is not verfied!</h2>
                                             <Link to="/verify">
-                                                <Button
-                                                    color="danger"
-                                                    size="lg"
-                                                >
+                                                <Button color="danger" size="lg">
                                                     Verify Now
                                                 </Button>
                                             </Link>
@@ -127,61 +109,36 @@ export default class Profile extends Component {
                                 <Col sm={4}>
                                     <div>
                                         {/*insert image edit, accept image and input it */}
-                                        <h1 style={{ textAlign: "center" }}>
-                                            {this.state.user.nickname}
-                                        </h1>
+                                        <h1 style={{ textAlign: 'center' }}>{this.state.user.nickname}</h1>
                                     </div>
                                     <div style={pageBreak} /> {/* underline */}
                                     <div name="avg-rating-container">
                                         <div name="avg-rating-title">
-                                            <h4 style={{ textAlign: "center" }}>
-                                                Profile
-                                            </h4>
+                                            <h4 style={{ textAlign: 'center' }}>Profile</h4>
                                         </div>
-                                        <div
-                                            style={{ textAlign: "center" }}
-                                            name="avg-rating"
-                                        ></div>
+                                        <div style={{ textAlign: 'center' }} name="avg-rating"></div>
                                     </div>
-                                    <div
-                                        name="lecture-rating-container"
-                                        style={{ marginTop: "25px" }}
-                                    >
-                                        {" "}
+                                    <div name="lecture-rating-container" style={{ marginTop: '25px' }}>
+                                        {' '}
                                         {/*This container is for profile picture */}
-                                        <div name="lecture-rating-title">
-                                            {/*<h4 style={{ textAlign: 'center' }}> {Date()} </h4>*/}
-                                        </div>
-                                        <div
-                                            style={{ textAlign: "center" }}
-                                            name="lecture-rating"
-                                        >
-                                            <img
-                                                className="profile-pic"
-                                                src={imageOne}
-                                                style={imgStyle}
-                                            />
+                                        <div name="lecture-rating-title">{/*<h4 style={{ textAlign: 'center' }}> {Date()} </h4>*/}</div>
+                                        <div style={{ textAlign: 'center' }} name="lecture-rating">
+                                            <img className="profile-pic" src={imageOne} style={imgStyle} />
                                         </div>
                                     </div>
                                     <div style={pageBreak} /> {/* underline */}
                                 </Col>
 
-                                <Col style={{ marginTop: "53px" }} sm={8}>
+                                <Col style={{ marginTop: '53px' }} sm={8}>
                                     <div className="nav-tabs-navigation">
                                         <div className="nav-tabs-wrapper pointer-nav">
                                             <Nav role="tablist" tabs>
                                                 <NavItem>
                                                     <NavLink
-                                                        className={
-                                                            this.state
-                                                                .activeTab ===
-                                                            "1"
-                                                                ? "active"
-                                                                : ""
-                                                        }
+                                                        className={this.state.activeTab === '1' ? 'active' : ''}
                                                         onClick={() => {
                                                             this.setState({
-                                                                activeTab: "1",
+                                                                activeTab: '1',
                                                             });
                                                         }}
                                                     >
@@ -190,16 +147,10 @@ export default class Profile extends Component {
                                                 </NavItem>
                                                 <NavItem>
                                                     <NavLink
-                                                        className={
-                                                            this.state
-                                                                .activeTab ===
-                                                            "2"
-                                                                ? "active"
-                                                                : ""
-                                                        }
+                                                        className={this.state.activeTab === '2' ? 'active' : ''}
                                                         onClick={() => {
                                                             this.setState({
-                                                                activeTab: "2",
+                                                                activeTab: '2',
                                                             });
                                                         }}
                                                     >
@@ -208,16 +159,10 @@ export default class Profile extends Component {
                                                 </NavItem>
                                                 <NavItem>
                                                     <NavLink
-                                                        className={
-                                                            this.state
-                                                                .activeTab ===
-                                                            "3"
-                                                                ? "active"
-                                                                : ""
-                                                        }
+                                                        className={this.state.activeTab === '3' ? 'active' : ''}
                                                         onClick={() => {
                                                             this.setState({
-                                                                activeTab: "3",
+                                                                activeTab: '3',
                                                             });
                                                         }}
                                                     >
@@ -226,16 +171,10 @@ export default class Profile extends Component {
                                                 </NavItem>
                                                 <NavItem>
                                                     <NavLink
-                                                        className={
-                                                            this.state
-                                                                .activeTab ===
-                                                            "4"
-                                                                ? "active"
-                                                                : ""
-                                                        }
+                                                        className={this.state.activeTab === '4' ? 'active' : ''}
                                                         onClick={() => {
                                                             this.setState({
-                                                                activeTab: "4",
+                                                                activeTab: '4',
                                                             });
                                                         }}
                                                     >
@@ -246,49 +185,29 @@ export default class Profile extends Component {
                                         </div>
                                     </div>
                                     {/* Tab panes */}
-                                    <TabContent
-                                        className="following"
-                                        activeTab={this.state.activeTab}
-                                    >
+                                    <TabContent className="following" activeTab={this.state.activeTab}>
                                         <TabPane tabId="1" id="follows">
                                             <Row>
-                                                <Col
-                                                    className="ml-auto mr-auto"
-                                                    md="12"
-                                                >
-                                                    {this.state.loaded ? 
-                                                        this.state.reviews !== null ? 
-                                                        this.state.reviews.reverse().map((item, index) => 
-                                                        (<ReviewItem 
-                                                            id={index} 
-                                                            isOwner={item.nickname === this.state.currentUser} 
-                                                            key={"department-review"+index} 
-                                                            reviewItem={item}
-                                                            type="course"/>))
-                                                    : <p>You have not posted any reviews</p>
-                                                :<Spinner color="black"/>}
+                                                <Col className="ml-auto mr-auto" md="12">
+                                                    {this.state.loaded ? (
+                                                        this.state.reviews !== null ? (
+                                                            this.state.reviews.reverse().map((item, index) => <ReviewItem id={index} isOwner={item.nickname === this.state.currentUser} key={'department-review' + index} reviewItem={item} type="course" />)
+                                                        ) : (
+                                                            <p>You have not posted any reviews</p>
+                                                        )
+                                                    ) : (
+                                                        <Spinner color="black" />
+                                                    )}
                                                 </Col>
                                             </Row>
                                         </TabPane>
-                                        <TabPane
-                                            className="text-center"
-                                            tabId="2"
-                                            id="chnage-pass"
-                                        >
+                                        <TabPane className="text-center" tabId="2" id="chnage-pass">
                                             <EditPasswordForm />
                                         </TabPane>
-                                        <TabPane
-                                            className="text-center"
-                                            tabId="3"
-                                            id="change-nick"
-                                        >
+                                        <TabPane className="text-center" tabId="3" id="change-nick">
                                             <EditNicknameForm />
                                         </TabPane>
-                                        <TabPane
-                                            className="text-center"
-                                            tabId="4"
-                                            id="delete-profile"
-                                        >
+                                        <TabPane className="text-center" tabId="4" id="delete-profile">
                                             <DeleteProfileForm />
                                         </TabPane>
                                     </TabContent>
