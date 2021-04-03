@@ -148,7 +148,7 @@ export default class Courses extends Component {
                     <Row style={{ marginTop: "2%" }} align="center">
                         <Col>
                             <div className="title">
-                                <h1>Instructors</h1>
+                                <h1>Courses</h1>
                             </div>
                         </Col>
                     </Row>
@@ -188,7 +188,7 @@ export default class Courses extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -208,7 +208,7 @@ export default class Courses extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedInstructors === null}>
+                                        <PaginationItem disabled={this.state.displayedCourses === null}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -242,7 +242,7 @@ export default class Courses extends Component {
                                                 <tr key={index}>
                                                     <th>{(this.state.currentPage - 1) * this.state.perPage + index + 1}</th>
                                                     <th>
-                                                        <a style={linkStyle} href={"/instructor/" + item.name}>
+                                                        <a style={linkStyle} href={"/course/" + item.name}>
                                                             {item.name}
                                                         </a>
                                                     </th>
@@ -276,7 +276,7 @@ export default class Courses extends Component {
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example">
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -296,7 +296,7 @@ export default class Courses extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedInstructors === null}>
+                            <PaginationItem disabled={this.state.displayedCourses === null}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>
