@@ -76,7 +76,7 @@ export default class Courses extends Component {
             }),
         };
 
-        await fetch("/api/filter-instructorlist/", request).then((response) => {
+        await fetch("/api/filter-courselist/", request).then((response) => {
             response.json().then((data) => {
                 if (this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High") {
                     data = data.reverse();
@@ -142,7 +142,7 @@ export default class Courses extends Component {
 
     render() {
         return (
-            <div className="departments-page">
+            <div className="courses-page">
                 <SecondaryNav />
                 <Container fluid>
                     <Row style={{ marginTop: "2%" }} align="center">

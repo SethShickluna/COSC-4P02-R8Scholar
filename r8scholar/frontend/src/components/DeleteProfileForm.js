@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import cookie from "react-cookies";
-import { FormGroup, Label, Input, Button, Alert} from "reactstrap";
+import { FormGroup, Label, Input, Button, Alert } from "reactstrap";
 import axiosInstance from "../axiosApi";
 
 async function handleLogout() {
@@ -20,7 +20,6 @@ async function handleLogout() {
     }
 }
 
-
 export default class DeleteProfileForm extends Component {
     //make this a password form
     constructor(props) {
@@ -30,7 +29,7 @@ export default class DeleteProfileForm extends Component {
             password: "",
             invalidPassword: false,
             confirmed: false,
-            alertConfirm: false
+            alertConfirm: false,
         };
         //allows us to this "this" inside the methods
 
@@ -38,8 +37,8 @@ export default class DeleteProfileForm extends Component {
         // CHANGED TO ANONYMOUS
         this.handleInput = this.handleInput.bind(this);
         this.submitForm = this.submitForm.bind(this);
-        this.onDismiss = this.onDismiss.bind(this); 
-        this.onDismiss2 = this.onDismiss2.bind(this); 
+        this.onDismiss = this.onDismiss.bind(this);
+        this.onDismiss2 = this.onDismiss2.bind(this);
     }
 
     handleInput(obj) {
@@ -64,19 +63,19 @@ export default class DeleteProfileForm extends Component {
                 handleLogout();
                 return message;
             } catch (error) {
-                this.setState({invalidPassword: true}); 
+                this.setState({ invalidPassword: true });
             }
         } else {
-            this.setState({alertConfirm: true})
+            this.setState({ alertConfirm: true });
         }
     }
 
-    onDismiss(){
-        this.setState({invalidPassword: !this.state.invalidPassword});
+    onDismiss() {
+        this.setState({ invalidPassword: !this.state.invalidPassword });
     }
 
-    onDismiss2(){
-        this.setState({alertConfirm: !this.state.alertConfirm});
+    onDismiss2() {
+        this.setState({ alertConfirm: !this.state.alertConfirm });
     }
 
     render() {
@@ -89,32 +88,21 @@ export default class DeleteProfileForm extends Component {
                     <b>Please confirm that you wish to delete your r8scholar account.</b>
                 </Alert>
                 <h3>Delete Profile</h3>
-                <div style={{ marginBottom: "2%" }}/>
+                <div style={{ marginBottom: "2%" }} />
                 <FormGroup>
                     <Label for="password">Confirm password</Label>
-                    <Input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password..."
-                        autoComplete="off"
-                        onChange={this.handleInput}
-                    />
+                    <Input type="password" name="password" id="password" placeholder="Password..." autoComplete="off" onChange={this.handleInput} />
                     <FormGroup check>
-                    <div style={{ marginBottom: "1%" }}/>
-                    <Label className="form-check-label">
-                        <Input onClick={this.handleCheckbox} className="form-check-input" type="checkbox" value=""/>
-                        I am aware that my account and each review and comment associated with it will be deleted.
-                        <span className="form-check-sign">
-                            <span className="check"></span>
-                        </span>
-                    </Label>
+                        <Label className="form-check-label" style={{ margin: "5% 3%" }}>
+                            <Input onClick={this.handleCheckbox} className="form-check-input" type="checkbox" value="" />I am aware that my account and each review and comment associated with it will
+                            be deleted.
+                            <span className="form-check-sign">
+                                <span className="check"></span>
+                            </span>
+                        </Label>
+                    </FormGroup>
                 </FormGroup>
-                </FormGroup>
-                <Button
-                    color="danger"
-                    type="submit"
-                >
+                <Button color="danger" type="submit">
                     Delete Profile
                 </Button>
             </form>
