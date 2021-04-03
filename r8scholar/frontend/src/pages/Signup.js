@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import { Button, Card, Form, Input, Container, Row, Col, UncontrolledTooltip, FormGroup, Alert, Spinner } from 'reactstrap';
-import cookie from 'react-cookies';
-import axiosInstance from '../axiosApi';
-import Navbar from '../components/Navbar';
-import { MdInfoOutline } from 'react-icons/md';
+import React, { Component } from "react";
+import { Button, Card, Form, Input, Container, Row, Col, UncontrolledTooltip, FormGroup, Alert, Spinner } from "reactstrap";
+import cookie from "react-cookies";
+import axiosInstance from "../axiosApi";
+import Navbar from "../components/Navbar";
+import { MdInfoOutline } from "react-icons/md";
 
 const warningStyle = {
-    color: 'white',
-    fontWeight: '200',
-    fontSize: '16px',
+    color: "white",
+    fontWeight: "200",
+    fontSize: "16px",
 };
 
 export default class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            nickname: '',
-            password: '',
-            verifPassword: '',
+            email: "",
+            nickname: "",
+            password: "",
+            verifPassword: "",
             validEmail: false,
             validPassword: false,
             validPassword2: false,
@@ -47,13 +47,13 @@ export default class Signup extends Component {
 
     checkCredentials(name, value) {
         switch (name) {
-            case 'password':
+            case "password":
                 this.checkPassword(value);
                 break;
-            case 'nickname':
+            case "nickname":
                 this.checkNickname(value);
                 break;
-            case 'verifPassword':
+            case "verifPassword":
                 this.verifyPassword(value);
                 break;
             default:
@@ -72,7 +72,7 @@ export default class Signup extends Component {
         let length = email.length;
         if (length > 10) {
             // otherwise the next line would be problematic
-            if (email.substring(length - 10, length) === '@brocku.ca') {
+            if (email.substring(length - 10, length) === "@brocku.ca") {
                 this.setState({ validEmail: true });
                 return true;
             }
@@ -105,7 +105,7 @@ export default class Signup extends Component {
         if (this.checkEmail(this.state.email) && this.checkNickname(this.state.nickname) && this.checkPassword(this.state.password)) {
             try {
                 this.setState({ loading: true });
-                const response = await axiosInstance.post('/create-user/', {
+                const response = await axiosInstance.post("/create-user/", {
                     nickname: this.state.nickname,
                     email: this.state.email,
                     password: this.state.password,
@@ -116,7 +116,7 @@ export default class Signup extends Component {
                         this.authenticatesignin();
                         break;
                     default:
-                        console.log('Something went wrong. Please enter your information again.');
+                        console.log("Something went wrong. Please enter your information again.");
                 }
                 return response;
             } catch (error) {
@@ -130,17 +130,17 @@ export default class Signup extends Component {
 
     async authenticatesignin() {
         try {
-            const response = await axiosInstance.post('/token/obtain/', {
+            const response = await axiosInstance.post("/token/obtain/", {
                 //note the use of async and await in this function
                 email: this.state.email,
                 password: this.state.password,
             });
-            axiosInstance.defaults.headers['Authorization'] = 'JWT ' + response.data.access;
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            cookie.save('email', this.state.email, { path: '/' });
-            cookie.save('isLoggedIn', 'true', { path: '/' });
-            this.props.history.push('/verify');
+            axiosInstance.defaults.headers["Authorization"] = "JWT " + response.data.access;
+            localStorage.setItem("access_token", response.data.access);
+            localStorage.setItem("refresh_token", response.data.refresh);
+            cookie.save("email", this.state.email, { path: "/" });
+            cookie.save("isLoggedIn", "true", { path: "/" });
+            this.props.history.push("/verify");
             return data;
         } catch (error) {
             throw error;
@@ -148,7 +148,7 @@ export default class Signup extends Component {
     }
 
     toolTip() {
-        console.log('email selected');
+        console.log("email selected");
     }
 
     onDismiss() {
@@ -166,13 +166,14 @@ export default class Signup extends Component {
                 <div
                     className="page-header"
                     style={{
-                        backgroundImage: 'url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcou.on.ca%2Fwp-content%2Fuploads%2F2015%2F04%2FBrock-University-Cairns-after-dusk.jpg&f=1&nofb=1)',
+                        backgroundImage:
+                            "url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcou.on.ca%2Fwp-content%2Fuploads%2F2015%2F04%2FBrock-University-Cairns-after-dusk.jpg&f=1&nofb=1)",
                     }}
                 >
                     <div className="filter" />
                     <Container>
                         <Row>
-                            <div style={{ marginTop: '5%' }} />
+                            <div style={{ marginTop: "5%" }} />
                         </Row>
                         <Row>
                             <Col className="ml-auto mr-auto" lg="4">
@@ -187,7 +188,7 @@ export default class Signup extends Component {
 
                                     {this.state.loading ? (
                                         <div>
-                                            <h6 style={{ color: 'white' }}>One moment please. </h6>
+                                            <h6 style={{ color: "white" }}>One moment please. </h6>
                                             <Col align="center">
                                                 <Spinner color="black" />
                                             </Col>
@@ -196,23 +197,47 @@ export default class Signup extends Component {
                                         <Form className="register-form" onSubmit={this.submitForm}>
                                             <FormGroup>
                                                 <label>Email</label>
-                                                <MdInfoOutline id="email-tooltip" style={{ marginLeft: '5px', marginBottom: '3px' }} />
-                                                <Input placeholder="email@brocku.ca" valid={this.state.validEmail} invalid={!this.state.validEmail} name="email" id="email" type="text" onChange={this.handleInput} />
+                                                <MdInfoOutline id="email-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                                                <Input
+                                                    placeholder="email@brocku.ca"
+                                                    valid={this.state.validEmail}
+                                                    invalid={!this.state.validEmail}
+                                                    name="email"
+                                                    id="email"
+                                                    type="text"
+                                                    onChange={this.handleInput}
+                                                />
                                                 <UncontrolledTooltip placement="right" target="email-tooltip">
                                                     Please use the email given by Brock University, ending in '@brocku.ca'
                                                 </UncontrolledTooltip>
                                             </FormGroup>
 
                                             <label>Nickname</label>
-                                            <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: '5px', marginBottom: '3px' }} />
-                                            <Input placeholder="Nickname" valid={this.state.validNickname} invalid={!this.state.validNickname} name="nickname" id="nickname" type="text" onChange={this.handleInput} />
+                                            <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                                            <Input
+                                                placeholder="Nickname"
+                                                valid={this.state.validNickname}
+                                                invalid={!this.state.validNickname}
+                                                name="nickname"
+                                                id="nickname"
+                                                type="text"
+                                                onChange={this.handleInput}
+                                            />
                                             <UncontrolledTooltip placement="right" target="nickname-tooltip">
                                                 Nicknames must be at least 4 characters long. Make sure it's appropriate!
                                             </UncontrolledTooltip>
                                             <label>Password</label>
-                                            <MdInfoOutline id="password-tooltip" style={{ marginLeft: '5px', marginBottom: '3px' }} />
-                                            <Input placeholder="Password" valid={this.state.validPassword} invalid={!this.state.validPassword} id="password" name="password" type="password" onChange={this.handleInput} />
-                                            <UncontrolledTooltip style={{ minWidth: '70px' }} placement="right" target="password-tooltip">
+                                            <MdInfoOutline id="password-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                                            <Input
+                                                placeholder="Password"
+                                                valid={this.state.validPassword}
+                                                invalid={!this.state.validPassword}
+                                                id="password"
+                                                name="password"
+                                                type="password"
+                                                onChange={this.handleInput}
+                                            />
+                                            <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password-tooltip">
                                                 <h5>Password Requirements: </h5>
                                                 <ul>
                                                     <li>1 Uppercase</li>
@@ -223,7 +248,14 @@ export default class Signup extends Component {
                                                 </ul>
                                             </UncontrolledTooltip>
                                             <label>Password</label>
-                                            <Input placeholder="Re-Enter Password" valid={this.state.validPassword2} invalid={!this.state.validPassword2} name="verifPassword" type="password" onChange={this.handleInput} />
+                                            <Input
+                                                placeholder="Re-Enter Password"
+                                                valid={this.state.validPassword2}
+                                                invalid={!this.state.validPassword2}
+                                                name="verifPassword"
+                                                type="password"
+                                                onChange={this.handleInput}
+                                            />
 
                                             <FormGroup>
                                                 <Button block type="submit" id="button1" className="btn-round" color="info">
@@ -233,8 +265,8 @@ export default class Signup extends Component {
                                         </Form>
                                     )}
 
-                                    <h6 style={{ color: 'white' }}>
-                                        We <strong>strongly</strong> recommend that you use a different password than your Brock Univeristy accounts.{' '}
+                                    <h6 style={{ color: "white" }}>
+                                        We <strong>strongly</strong> recommend that you use a different password than your Brock Univeristy accounts.{" "}
                                     </h6>
                                 </Card>
                             </Col>

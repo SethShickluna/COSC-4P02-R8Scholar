@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import StarRatings from 'react-star-ratings';
-import { Spinner, Table, Container, Row, Col, Pagination, PaginationItem, PaginationLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import SecondaryNav from '../components/SecondaryNav';
+import React, { Component } from "react";
+import StarRatings from "react-star-ratings";
+import { Spinner, Table, Container, Row, Col, Pagination, PaginationItem, PaginationLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import SecondaryNav from "../components/SecondaryNav";
 
 const linkStyle = {
-    color: 'black',
+    color: "black",
 };
 
 export default class Departments extends Component {
@@ -18,7 +18,7 @@ export default class Departments extends Component {
             currentPage: 1,
             maxPage: 1,
             departmentRatings: {},
-            sortOption: 'Alphabetical A-Z',
+            sortOption: "Alphabetical A-Z",
             droppedDown: false,
             loaded: false,
         };
@@ -34,15 +34,15 @@ export default class Departments extends Component {
 
     getTopCourse = async (name) => {
         const request = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 department: name,
                 amount: 1,
             }),
         };
 
-        await fetch('/api/get-top-courses/', request)
+        await fetch("/api/get-top-courses/", request)
             .then((response) => {
                 if (response.ok) {
                     //yay
@@ -57,7 +57,7 @@ export default class Departments extends Component {
                 if (data !== null) {
                     courses[name] = data[0].name;
                 } else {
-                    courses[name] = 'No Data';
+                    courses[name] = "No Data";
                 }
                 this.setState({
                     courses: courses,
@@ -67,14 +67,14 @@ export default class Departments extends Component {
 
     getTopInstructor = async (name) => {
         const request = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 department: name,
                 amount: 1,
             }),
         };
-        await fetch('/api/get-top-instructors/', request)
+        await fetch("/api/get-top-instructors/", request)
             .then((response) => {
                 if (response.ok) {
                     //yay
@@ -89,7 +89,7 @@ export default class Departments extends Component {
                 if (data !== null) {
                     instructors[name] = data[0].name;
                 } else {
-                    instructors[name] = 'no data';
+                    instructors[name] = "no data";
                 }
                 this.setState({
                     instructors: instructors,
@@ -99,27 +99,27 @@ export default class Departments extends Component {
 
     getEntries = async () => {
         var requestType = () => {
-            if (this.state.sortOption === 'Rating: High to Low') {
-                return 'rating_high_low';
-            } else if (this.state.sortOption === 'Rating: Low to High') {
-                return 'rating_high_low';
+            if (this.state.sortOption === "Rating: High to Low") {
+                return "rating_high_low";
+            } else if (this.state.sortOption === "Rating: Low to High") {
+                return "rating_high_low";
             } else {
-                return 'name';
+                return "name";
             }
         };
 
         console.log(requestType());
         const request = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 filter_by: requestType(),
             }),
         };
 
-        await fetch('/api/filter-departmentlist/', request).then((response) => {
+        await fetch("/api/filter-departmentlist/", request).then((response) => {
             response.json().then((data) => {
-                if (this.state.sortOption === 'Alphabetical: Z-A' || this.state.sortOption === 'Rating: Low to High') {
+                if (this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High") {
                     data = data.reverse();
                 }
                 var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1);
@@ -139,12 +139,12 @@ export default class Departments extends Component {
     };
 
     changePages(button) {
-        var newPage = button.target.innerHTML; //reads the html of the pressed button
+        var newPage = button.target.id; //reads the html of the pressed button
         switch (newPage) {
-            case 'First':
+            case "First":
                 newPage = 1;
                 break;
-            case 'Last':
+            case "Last":
                 newPage = this.state.maxPage;
                 break;
         }
@@ -181,7 +181,7 @@ export default class Departments extends Component {
             <div className="departments-page">
                 <SecondaryNav />
                 <Container fluid>
-                    <Row style={{ marginTop: '2%' }} align="center">
+                    <Row style={{ marginTop: "2%" }} align="center">
                         <Col>
                             <div className="title">
                                 <h1>Departments</h1>
@@ -189,7 +189,7 @@ export default class Departments extends Component {
                         </Col>
                     </Row>
                     <Row align="center">
-                        {' '}
+                        {" "}
                         {/**Filters */}
                         <Col align="center">
                             <div>
@@ -202,36 +202,36 @@ export default class Departments extends Component {
                                     </DropdownToggle>
                                     <DropdownMenu container="body">
                                         <DropdownItem onClick={this.setFilter}>
-                                            {' '}
+                                            {" "}
                                             <a style={linkStyle}>Alphabetical: A-Z</a>
                                         </DropdownItem>
                                         <DropdownItem onClick={this.setFilter}>
-                                            {' '}
+                                            {" "}
                                             <a style={linkStyle}>Alphabetical: Z-A</a>
                                         </DropdownItem>
                                         <DropdownItem onClick={this.setFilter}>
-                                            {' '}
+                                            {" "}
                                             <a style={linkStyle}>Rating: High to Low</a>
                                         </DropdownItem>
                                         <DropdownItem onClick={this.setFilter}>
-                                            {' '}
+                                            {" "}
                                             <a style={linkStyle}>Rating: Low to High</a>
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             </div>
-                            <div style={{ marginTop: '3%' }} />
+                            <div style={{ marginTop: "3%" }} />
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
-                                            <PaginationLink onClick={this.changePages} href="#">
+                                        <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                                            <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.currentPage - 1 < 1}>
-                                            <PaginationLink onClick={this.changePages} href="#">
-                                                {'<'}
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage - 1}>
+                                                {"<"}
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
@@ -240,12 +240,12 @@ export default class Departments extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
-                                            <PaginationLink onClick={this.changePages} href="#">
-                                                {'>'}
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage + 1}>
+                                                {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedDepartments === null}>
-                                            <PaginationLink onClick={this.changePages} href="#">
+                                        <PaginationItem disabled={this.state.displayedInstructors === null}>
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
                                         </PaginationItem>
@@ -255,7 +255,7 @@ export default class Departments extends Component {
                         </Col>
                     </Row>
 
-                    <Row style={{ marginTop: '2%' }} align="center">
+                    <Row style={{ marginTop: "2%" }} align="center">
                         <Col className="col-md-1" />
                         <Col className="col-md-10">
                             <Table striped>
@@ -268,7 +268,7 @@ export default class Departments extends Component {
                                 </thead>
                                 <tbody>
                                     {this.state.displayedDepartments === null ? (
-                                        <Spinner style={{ width: '5rem', height: '5rem' }} color="black" />
+                                        <Spinner style={{ width: "5rem", height: "5rem" }} color="black" />
                                     ) : (
                                         this.state.displayedDepartments.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item, index) => {
                                             {
@@ -278,20 +278,20 @@ export default class Departments extends Component {
                                                 <tr key={index}>
                                                     <th>{(this.state.currentPage - 1) * this.state.perPage + index + 1}</th>
                                                     <th>
-                                                        <a style={linkStyle} href={'/department/' + item.name}>
+                                                        <a style={linkStyle} href={"/department/" + item.name}>
                                                             {item.name}
                                                         </a>
                                                     </th>
-                                                    <th style={{ minWidth: '100px' }}>
+                                                    <th style={{ minWidth: "100px" }}>
                                                         <StarRatings rating={item.rating} starDimension="25px" starSpacing="5px" starRatedColor="#3498db" numberOfStars={5} name="avgRating" />
                                                     </th>
                                                     <th>
-                                                        <a style={linkStyle} href={'/course/' + this.state.courses[item.name]}>
+                                                        <a style={linkStyle} href={"/course/" + this.state.courses[item.name]}>
                                                             {this.state.courses[item.name] !== null ? this.state.courses[item.name] : <Spinner color="dark" />}
                                                         </a>
                                                     </th>
                                                     <th>
-                                                        <a style={linkStyle} href={'/instructor/' + this.state.instructors[item.name]}>
+                                                        <a style={linkStyle} href={"/instructor/" + this.state.instructors[item.name]}>
                                                             {this.state.instructors[item.name]}
                                                         </a>
                                                     </th>
@@ -304,17 +304,17 @@ export default class Departments extends Component {
                         </Col>
                         <Col className="col-md-1" />
                     </Row>
-                    <div style={{ marginBottom: '3%' }} />
+                    <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example">
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
-                                <PaginationLink onClick={this.changePages} href="#">
+                            <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                                <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem disabled={this.state.currentPage - 1 < 1}>
-                                <PaginationLink onClick={this.changePages} href="#">
-                                    {'<'}
+                                <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage - 1}>
+                                    {"<"}
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
@@ -323,12 +323,12 @@ export default class Departments extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
-                                <PaginationLink onClick={this.changePages} href="#">
-                                    {'>'}
+                                <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage + 1}>
+                                    {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedDepartments === null}>
-                                <PaginationLink onClick={this.changePages} href="#">
+                            <PaginationItem disabled={this.state.displayedInstructors === null}>
+                                <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>
                             </PaginationItem>
