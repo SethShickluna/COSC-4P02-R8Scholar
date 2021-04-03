@@ -4,10 +4,6 @@ import StarRatings from "react-star-ratings";
 import { Container, Button, Row, Col, Table, Spinner } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const linkStyle = {
-    color: "black",
-};
-
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -133,9 +129,7 @@ export default class Home extends Component {
                                                         <tr>
                                                             <th scope="row">{index + 1}</th>
                                                             <th>
-                                                                <a style={linkStyle} href={"/course/" + item.name}>
-                                                                    {item.name}
-                                                                </a>
+                                                                <a href={"/course/" + item.name}>{item.name}</a>
                                                             </th>
                                                             <th style={{ minWidth: "100px" }}>
                                                                 <StarRatings rating={item.rating} starDimension="25px" starSpacing="5px" starRatedColor="#3498db" numberOfStars={5} name="avgRating" />
@@ -173,9 +167,7 @@ export default class Home extends Component {
                                                         <tr>
                                                             <th scope="row">{index + 1}</th>
                                                             <th>
-                                                                <a style={linkStyle} href={"/instructor/" + item.name}>
-                                                                    {item.name}
-                                                                </a>
+                                                                <a href={"/instructor/" + item.name}>{item.name}</a>
                                                             </th>
                                                             <th>
                                                                 <StarRatings rating={item.rating} starDimension="25px" starSpacing="5px" starRatedColor="#3498db" numberOfStars={5} name="avgRating" />
@@ -213,9 +205,7 @@ export default class Home extends Component {
                                                         <tr>
                                                             <th scope="row">{index + 1}</th>
                                                             <th>
-                                                                <a style={linkStyle} href={"/department/" + item.name}>
-                                                                    {item.name}
-                                                                </a>
+                                                                <a href={"/department/" + item.name}>{item.name}</a>
                                                             </th>
                                                             <th>
                                                                 <StarRatings rating={item.rating} starDimension="25px" starSpacing="5px" starRatedColor="#3498db" numberOfStars={5} name="avgRating" />

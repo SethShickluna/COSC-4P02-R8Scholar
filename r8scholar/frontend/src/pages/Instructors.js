@@ -4,10 +4,7 @@ import { Spinner, Table, Container, Row, Col, Pagination, PaginationItem, Pagina
 
 import SecondaryNav from "../components/SecondaryNav";
 
-const linkStyle = {
-    color: "black",
-    fontSize: "18",
-};
+const linkStyle = {};
 
 export default class Courses extends Component {
     constructor(props) {
@@ -98,15 +95,7 @@ export default class Courses extends Component {
     };
 
     changePages(button) {
-        var newPage = button.target.id; //reads the html of the pressed button
-        switch (newPage) {
-            case "First":
-                newPage = 1;
-                break;
-            case "Last":
-                newPage = this.state.maxPage;
-                break;
-        }
+        var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
             displayedInstructors: null,
             currentPage: Number(newPage),

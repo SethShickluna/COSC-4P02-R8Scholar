@@ -3,9 +3,7 @@ import StarRatings from "react-star-ratings";
 import { Spinner, Table, Container, Row, Col, Pagination, PaginationItem, PaginationLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 import SecondaryNav from "../components/SecondaryNav";
 
-const linkStyle = {
-    color: "black",
-};
+const linkStyle = {};
 
 export default class Departments extends Component {
     constructor(props) {
@@ -139,15 +137,7 @@ export default class Departments extends Component {
     };
 
     changePages(button) {
-        var newPage = button.target.id; //reads the html of the pressed button
-        switch (newPage) {
-            case "First":
-                newPage = 1;
-                break;
-            case "Last":
-                newPage = this.state.maxPage;
-                break;
-        }
+        var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
             displayedDepartments: null,
             currentPage: Number(newPage),
@@ -224,7 +214,7 @@ export default class Departments extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -244,7 +234,7 @@ export default class Departments extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedInstructors === null}>
+                                        <PaginationItem disabled={this.state.displayedDepartments === null}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -307,7 +297,7 @@ export default class Departments extends Component {
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example">
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -327,7 +317,7 @@ export default class Departments extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedInstructors === null}>
+                            <PaginationItem disabled={this.state.displayedDepartments === null}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>

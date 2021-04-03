@@ -4,9 +4,9 @@ import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { Button, Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from "reactstrap";
 import axiosInstance from "../axiosApi";
-import { MdBrightnessMedium } from "react-icons/md";
-
+import { MdAirlineSeatIndividualSuite, MdBrightnessMedium } from "react-icons/md";
 import cookie from "react-cookies";
+import { DarkModeToggle } from "./DarkModeToggle";
 
 const navLinkStyles = {
     fontSize: "20px",
@@ -64,6 +64,7 @@ function HomeNavbar() {
             window.removeEventListener("scroll", updateNavbarColor);
         };
     });
+
     return (
         <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
             <div style={{ paddingLeft: "5%" }} className="navbar-translate justify-content-left">
@@ -137,7 +138,7 @@ function HomeNavbar() {
                             </Button>
                         )}
                     </NavItem>
-                    <MdBrightnessMedium style={{ margin: "20% -21% 0% 10%", fontSize: "20" }} />
+                    <DarkModeToggle />
                 </Nav>
             </Collapse>
         </Navbar>
