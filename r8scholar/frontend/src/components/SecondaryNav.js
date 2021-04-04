@@ -134,8 +134,8 @@ function SecondaryNav() {
                                     </Link>
                                 )}
                             </NavItem>
-                            <DarkModeToggle />
                         </Nav>
+                        <DarkModeToggle />
                     </Collapse>
                 </Container>
             </Navbar>

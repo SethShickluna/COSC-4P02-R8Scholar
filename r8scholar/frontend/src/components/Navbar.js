@@ -138,8 +138,8 @@ function HomeNavbar() {
                             </Button>
                         )}
                     </NavItem>
-                    <DarkModeToggle />
                 </Nav>
+                <DarkModeToggle />
             </Collapse>
         </Navbar>
     );

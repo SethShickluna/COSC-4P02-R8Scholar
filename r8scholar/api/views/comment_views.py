@@ -59,3 +59,12 @@ class EditComment(APIView):
         comment.content = pf.censor(content) #Ensure any profanity in content is censored
         comment.save()
         return Response({'OK':'Comment Edited'}, status=status.HTTP_201_CREATED)
+
+#I will finish these and combine them into a single view (erikas)
+#Upvotes an existing comment
+class UpvoteComment(APIView):
+    print("test")
+
+#Downvotes an existing comment
+class DownvoteComment(APIView):
+    print("test")

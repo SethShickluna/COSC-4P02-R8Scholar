@@ -90,3 +90,11 @@ class EditReviewView(APIView):
         else: #review is on a department
             my_department.update_rating()
         return Response(ReviewSerializer(review).data, status=status.HTTP_201_CREATED)
+
+#Upvotes an existing review
+class UpvoteReview(APIView):
+    print("test")
+
+#Downvotes an existing review
+class DownvoteReview(APIView):
+    print("test")
