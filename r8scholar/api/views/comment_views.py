@@ -63,8 +63,26 @@ class EditComment(APIView):
 #I will finish these and combine them into a single view (erikas)
 #Upvotes an existing comment
 class UpvoteComment(APIView):
+    def post(self,request, format =None):
+        data = json.loads(request.body.decode("utf-8"))
+        #Data from frontend
+        review_id= data['comment_id']
+        email=data['email']
+        #CHECK IF USER HAS ALREADY VOTED ON COMMENT
+        #IF USER HAS NOT VOTED, UPDATE COMMENT VOTES BY +1
+        #IF USER HAS DOWNVOTED, UPDATE COMMENT VOTES BY +2
+        #ELSE DO NOTHING
     print("test")
 
 #Downvotes an existing comment
 class DownvoteComment(APIView):
+    def post(self,request, format =None):
+        data = json.loads(request.body.decode("utf-8"))
+        #Data from frontend
+        review_id= data['comment_id']
+        email=data['email']
+        #CHECK IF USER HAS ALREADY VOTED ON COMMENT
+        #IF USER HAS NOT VOTED, UPDATE COMMENT VOTES BY -1
+        #IF USER HAS UPVOTED, UPDATE COMMENT VOTES BY -2
+        #ELSE DO NOTHING
     print("test")

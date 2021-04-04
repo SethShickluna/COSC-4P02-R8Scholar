@@ -54,14 +54,14 @@ export default class Profile extends Component {
             activeSubtab: "1",
         };
 
-        this.authenicateUser = this.authenicateUser.bind(this);
+        this.authenicateUser = this.authenticateUser.bind(this);
     }
 
     componentDidMount() {
-        this.authenicateUser(); //check their token --otherwise send them off this page
+        this.authenticateUser(); //check their token --otherwise send them off this page
     }
 
-    async authenicateUser() {
+    async authenticateUser() {
         try {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
@@ -196,7 +196,7 @@ export default class Profile extends Component {
                                                                 .map((item, index) => (
                                                                     <ReviewItem
                                                                         id={index}
-                                                                        isOwner={item.nickname === this.state.currentUser}
+                                                                        isOwner={item.nickname === this.state.user.nickname}
                                                                         key={"department-review" + index}
                                                                         reviewItem={item}
                                                                         type="course"

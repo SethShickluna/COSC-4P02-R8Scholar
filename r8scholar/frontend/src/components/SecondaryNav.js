@@ -45,7 +45,6 @@ async function handleLogout() {
 
 function SecondaryNav() {
     const [bodyClick, setBodyClick] = React.useState(false);
-    const [darkMode, setDarkMode] = React.useState(cookie.load("darkMode"));
 
     return (
         <>

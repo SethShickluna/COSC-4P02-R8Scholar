@@ -1,5 +1,9 @@
 /* DARK MODE STYLES */
 
+.dark {
+    background-color: #363535;
+}
+
 /* dark mode toggle button */
 .darkmode-toggle {
     color: #f5593d;
@@ -12,19 +16,26 @@
 .dark body,
 .dark .home-page,
 .dark .courses-page,
+.dark .course-page,
 .dark .departments-page,
+.dark .department-page,
 .dark .instructors-page,
+.dark .instructor-page,
 .dark .profile-page {
     background-color: #363535;
     color: #f3f3f3;
 }
 
 .dark table {
-    color: #f3f3f3;
+    color: #c0c0c0;
 }
 
 .dark thead tbody {
     background-color: #f3f3f3;
+}
+
+.dark thead {
+    background-color: #202020 !important;
 }
 
 table a {
@@ -32,7 +43,7 @@ table a {
 }
 
 .dark table a {
-    color: #f3f3f3;
+    color: #f3f3f3 !important;
 }
 
 .dark button {
@@ -67,4 +78,71 @@ table a {
 
 .dark button.dropdown-item {
     background-color: #f1f1f1;
+}
+
+.dark #root div.nav-tabs-navigation .active.nav-link,
+.dark #following > div > div > div > div > form > button {
+    color: #dc3545;
+}
+
+.dark #following > div > div > div > div > form > .btn-outline-success:hover {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: black;
+}
+
+.dark input,
+.dark #follows > div > div > div > div > div.card-header,
+.dark #follows > div > div > div > div > li,
+.dark #content,
+.dark #following > div > div > div > div > form > div > div > select {
+    background-color: #d6d6d6 !important;
+}
+
+.dark .modal-content,
+.dark .modal-content button {
+    background-color: #f0f0f0 !important;
+}
+
+.dark .modal-content .btn-outline-info {
+    color: #dc3545;
+}
+
+.dark .modal-content .btn-outline-info:hover {
+    color: #f0f0f0;
+    border-color: #dc3545 !important;
+    background-color: #dc3545 !important;
+}
+
+.dark button.btn-round.btn.btn-default.btn-block:hover {
+    color: #f0f0f0 !important;
+    background-color: #dc3545 !important;
+}
+
+.dark button.btn-round.btn.btn-default.btn-block {
+    color: #dc3545 !important;
+}
+
+.dark #follows > div > div > div > div > div.card-body {
+    background-color: #f0f0f0;
+}
+
+.dark #root > div > div > div > div > div > div > nav > nav > ul > li.page-item.disabled,
+.dark #root > div > div > div > nav > nav > ul > li.page-item.disabled {
+    mix-blend-mode: color-burn;
+}
+
+.dark h4,
+.dark h5 {
+    color: #f1f1f1;
+}
+
+.dark .table td,
+.dark .table th {
+    border-bottom: 1px solid #6c6c6c;
+    border-top: 1px solid #6c6c6c;
+}
+
+.dark #follows > div > div > div > div > div.card-body > p > h5 {
+    color: #6c6c6c !important;
 }

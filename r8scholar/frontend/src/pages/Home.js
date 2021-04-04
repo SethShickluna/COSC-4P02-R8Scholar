@@ -100,7 +100,18 @@ export default class Home extends Component {
                     <div className="content-center">
                         <div className="container">
                             <div className="title-brand">
-                                <h1 className="presentation-title">Brock University R8Scholar</h1>
+                                <h1
+                                    style={{
+                                        userSelect: "none",
+                                        webkitUseSelect: "none",
+                                        khtmlUserSelect: "none",
+                                        mozUserSelect: "none",
+                                        msUserSelect: "none",
+                                    }}
+                                    className="presentation-title"
+                                >
+                                    Brock University R8Scholar
+                                </h1>
                             </div>
                         </div>
                     </div>

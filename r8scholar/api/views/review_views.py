@@ -93,8 +93,26 @@ class EditReviewView(APIView):
 
 #Upvotes an existing review
 class UpvoteReview(APIView):
+    def post(self,request, format =None):
+        data = json.loads(request.body.decode("utf-8"))
+        #Data from frontend
+        review_id= data['review_id']
+        email=data['email']
+        #CHECK IF USER HAS ALREADY VOTED ON REVIEW
+        #IF USER HAS NOT VOTED, UPDATE REVIEW VOTES +1
+        #IF USER HAS DOWNVOTED, UPDATE REVIEW VOTES BY +2
+        #ELSE DO NOTHING
     print("test")
 
 #Downvotes an existing review
 class DownvoteReview(APIView):
+    def post(self,request, format =None):
+        data = json.loads(request.body.decode("utf-8"))
+        #Data from frontend
+        review_id= data['review_id']
+        email=data['email']
+        #CHECK IF USER HAS ALREADY VOTED ON REVIEW
+        #IF USER HAS NOT VOTED, UPDATE REVIEW VOTES -1
+        #IF USER HAS UPVOTED, UPDATE REVIEW VOTES BY -2
+        #ELSE DO NOTHING
     print("test")

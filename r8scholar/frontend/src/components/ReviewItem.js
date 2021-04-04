@@ -7,6 +7,7 @@ import CommentForm from "./CommentForm";
 import { BsFillTrashFill } from "react-icons/bs";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import axiosInstance from "../axiosApi";
+import cookie, { setRawCookie } from "react-cookies";
 
 const reviewTitle = {
     color: "black",
@@ -29,8 +30,8 @@ export default class ReviewItem extends Component {
     //props is going to consist of the review item passed by the course
     constructor(props) {
         super(props);
-        console.log(props);
         this.delete = this.delete.bind(this);
+        this.vote = this.vote.bind(this);
     }
 
     async delete() {
@@ -45,17 +46,21 @@ export default class ReviewItem extends Component {
         }
     }
 
-    async vote(value) {
+    async vote(upvote) {
         try {
             let response;
-            if (value.target.id === "upvote") {
+            if (upvote) {
+                console.log("upvoted");
                 response = await axiosInstance.post("/upvote-review/", {
                     review_id: this.props.reviewItem.review_id,
+                    email: cookie.load("email"),
                 });
                 window.location.reload();
             } else {
+                console.log("downvoted");
                 response = await axiosInstance.post("/downvote-review/", {
                     review_id: this.props.reviewItem.review_id,
+                    email: cookie.load("email"),
                 });
                 window.location.reload();
             }
@@ -95,18 +100,18 @@ export default class ReviewItem extends Component {
                                             className="btn-round"
                                             type="button"
                                             id="upvote"
-                                            onClick={this.vote}
+                                            onClick={() => this.vote(true)}
                                         >
-                                            <MdThumbUp className="upvote" size="20px" />
+                                            <MdThumbUp size="20px" />
                                         </Button>
                                         <Button
                                             style={{ marginLeft: "5px", borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#f5593d" }}
                                             className="btn-round"
                                             type="button"
                                             id="downvote"
-                                            onClick={this.vote}
+                                            onClick={() => this.vote(false)}
                                         >
-                                            <MdThumbDown className="downvote" size="20px" />
+                                            <MdThumbDown size="20px" />
                                         </Button>
                                     </div>
                                 )}

@@ -84,9 +84,8 @@ function HomeNavbar() {
                 </button>
             </div>
             <Collapse navbar isOpen={navbarCollapse}>
-                <NavbarBrand style={title} href="/"></NavbarBrand>
                 <Nav className="mr-auto mt-2 mt-lg-0" navbar>
-                    <NavItem style={separate} className="active">
+                    <NavItem style={{ paddingLeft: "100px" }}>
                         <Link to="/courses">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Courses
