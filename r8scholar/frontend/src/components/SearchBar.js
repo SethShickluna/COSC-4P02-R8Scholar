@@ -28,6 +28,7 @@ class SearchBar extends Component {
             dropdownOpen: false,
         };
         this.doSearch = this.doSearch.bind(this);
+        this.toggleDropdown = this.toggleDropdown.bind(this);
     }
 
     doSearch = async (e) => {
@@ -66,11 +67,15 @@ class SearchBar extends Component {
         return a < b ? a : b;
     }
 
+    toggleDropdown() {
+        if (!this.state.results.length == 0) this.setState((prev) => ({ dropdownOpen: !prev.dropdownOpen }));
+    }
+
     render() {
         return (
             <div>
-                <Dropdown primary onSubmit={this.doFullSearch} isOpen={this.state.dropdownOpen}>
-                    <DropdownToggle style={toggleStyle} toggle={this.state.dropdownOpen}>
+                <Dropdown primary onSubmit={this.doFullSearch} isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                    <DropdownToggle style={toggleStyle}>
                         <Input className="search-bar" onChange={(e) => this.doSearch(e.target.value)} placeholder="Search" size="md" type="text"></Input>
                     </DropdownToggle>
                     <DropdownMenu container="body" style={menuStyle}>
