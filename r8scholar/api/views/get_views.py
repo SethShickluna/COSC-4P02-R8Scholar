@@ -70,33 +70,6 @@ class GetReviewsView(APIView):
                 return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         return Response({'Bad Request': 'No Subject to Query'}, status=status.HTTP_400_BAD_REQUEST)
 
-#Returns the number of reviews on a given subject
-class GetNumbReviews(APIView):
-    lookup_url_kwarg = 'subject'
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self,request,format=None):
-        subject = request.GET.get(self.lookup_url_kwarg)
-        try:
-            count = Review.objects.filter(subject=subject)
-        except Review.DoesNotExist:
-            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
-        return Response(count,status=status.HTTP_200_OK)
-
-#Returns the percentage of reviewers who would take the given subject again
-class GetPercentage(APIView):
-    lookup_url_kwarg = 'subject'
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self,request,format=None):
-        subject = request.GET.get(self.lookup_url_kwarg)
-        try:
-            numbWould = Review.objects.filter(subject=subject,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=subject,would_take_again=False).count()
-        except Review.DoesNotExist:
-            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
-        percentage = (numbWould/(numbWould+numbWouldnt))*100
-        return Response(percentage,status=status.HTTP_200_OK)
 
 #Gets comments for a given review
 class GetCommentsView(APIView):
@@ -130,6 +103,8 @@ class GetCourseView(APIView):
         name = request.GET.get(self.lookup_url_kwarg)
         if name != None:
             course = Course.objects.filter(name=name)
+            course.updatePercent()
+            course.updateNumReviews()
             if len(course) > 0:
                 data = self.serializer_class(course[0]).data
                 return Response(data, status=status.HTTP_200_OK)
@@ -146,6 +121,8 @@ class GetDepartmentView(APIView):
         name = request.GET.get(self.lookup_url_kwarg)
         if name != None:
             department = Department.objects.filter(name=name)
+            department.updatePercent()
+            department.updateNumReviews()
             if len(department) > 0:
                 data = self.serializer_class(department[0]).data
                 return Response(data, status=status.HTTP_200_OK)
@@ -162,6 +139,8 @@ class GetInstructorView(APIView):
         name = request.GET.get(self.lookup_url_kwarg)
         if name != None:
             instructor = Instructor.objects.filter(name=name)
+            instructor.updatePercent()
+            instructor.updateNumReviews()
             if len(instructor) > 0:
                 data = self.serializer_class(instructor[0]).data
                 return Response(data, status=status.HTTP_200_OK)

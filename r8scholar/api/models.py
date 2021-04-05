@@ -64,6 +64,8 @@ class Department(models.Model):
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
+    number_ratings = models.IntegerField(default=0)
+    percent_recommend = models.FloatField(default=0)
 
     class Meta:
         ordering = ['name']
@@ -103,6 +105,23 @@ class Department(models.Model):
                 count +=1
         self.courses_rating = my_sum / count
         self.save()
+    
+    def updatePercent(self):
+        try:
+            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
+        self.save()
+        
+    def updateNumReviews(self):
+        try:
+            count = Review.objects.filter(subject=name).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.number_ratings = count
+        self.save()
 
 #Models an instructor(individual who teaches a course)
 class Instructor(models.Model):
@@ -110,6 +129,8 @@ class Instructor(models.Model):
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
+    number_ratings = models.IntegerField(default=0)
+    percent_recommend = models.FloatField(default=0)
 
     class Meta:
         ordering = ['name']
@@ -125,6 +146,23 @@ class Instructor(models.Model):
         #set rating to new average 
         self.rating = (my_sum / count)
         self.save()
+    
+    def updatePercent(self):
+        try:
+            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
+        self.save()
+        
+    def updateNumReviews(self):
+        try:
+            count = Review.objects.filter(subject=name).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.number_ratings = count
+        self.save()
 
 #Models a course being offered by Brock University
 class Course(models.Model):
@@ -132,9 +170,28 @@ class Course(models.Model):
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
     course_full_name  = models.CharField(max_length=40,default=None)
+    number_ratings = models.IntegerField(default=0)
+    percent_recommend = models.FloatField(default=0)
 
     class Meta:
         ordering = ['name', 'course_full_name']
+
+    def updatePercent(self):
+        try:
+            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
+        self.save()
+        
+    def updateNumReviews(self):
+        try:
+            count = Review.objects.filter(subject=name).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.number_ratings = count
+        self.save()
 
     def update_rating(self): # NEEDS TESTING #
         count = 0
@@ -147,6 +204,8 @@ class Course(models.Model):
         #set rating to new average 
         self.rating = (my_sum / count)
         self.save()
+
+    
 
 #Tags for reviews
 class Tags(models.Model):
