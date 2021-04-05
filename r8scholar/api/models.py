@@ -26,7 +26,7 @@ class CustomUser(AbstractBaseUser):
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
     date_created = models.DateField(auto_now=True)
-    
+    last_pass_reset = models.DateField(auto_now=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
 

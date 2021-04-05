@@ -12,6 +12,7 @@ from .password_reset import email_password
 import json
 import random
 import string
+from datetime import date
 #Profanity Filter
 from profanity_filter import ProfanityFilter
 pf = ProfanityFilter()
@@ -24,13 +25,17 @@ class password_reset(APIView):
         try:
             user = CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist as e:
-            return Response({'Bad Request': 'Invalid email...'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request': 'Invalid email'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
+        #Ensure user has not alreay reset their password today
+        if(user.last_pass_reset == date.today()):
+            return Response({'Bad Request': 'Password already reset today'}, status=status.HTTP_400_BAD_REQUEST)
         required_chars = string.ascii_letters + string.digits + string.punctuation
-        temp_password = ''.join(random.choice(required_chars) for i in range(12))
+        temp_password = ''.join(random.choice(required_chars) for i in range(12)) #Create random password which meets all current password requirements
         user.set_password(temp_password)
+        user.last_pass_reset = date.today() #Update user with the date of their latest password reset
         user.save()
         email_password(user.email,temp_password)
-        return Response({'Ok': 'Password reset and email sent to user...'}, status=status.HTTP_200_OK)
+        return Response({'Ok': 'Password reset and email sent to user'}, status=status.HTTP_200_OK)
 
 #Allows user to change their nickname
 class change_nickname(APIView):
@@ -42,7 +47,7 @@ class change_nickname(APIView):
         try:
             user = CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist as e:
-            return Response({'Bad Request': 'Invalid email...'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'Bad Request': 'Invalid email'+str(e.errors)}, status=status.HTTP_400_BAD_REQUEST)
 
         if user.check_password(password):
             #Check new nickname for profanity
