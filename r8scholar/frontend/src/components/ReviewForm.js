@@ -33,13 +33,20 @@ export default class ReviewForm extends Component {
             reviewer : null,
             title: "", 
             content: "", 
-            rating1: 0, 
-            rating2: 0, 
-            rating3: 0, 
+            rating1: 1, 
+            rating2: 1, 
+            rating3: 1, 
+            tags: null, 
+            difficulty_rating: 1, 
+            would_take_again: true, 
+            tag_1: "null",
+            tag_2: "null",
+            tag_3: "null",
         }
 
         this.handleInput = this.handleInput.bind(this);
         this.submitReview = this.submitReview.bind(this); 
+        this.loadTags = this.loadTags.bind(this);
     }
 
     async componentDidMount(){
@@ -51,6 +58,19 @@ export default class ReviewForm extends Component {
             return user;
         }catch(error){
             //user is not logged in 
+        }
+        console.log(props.name);
+        this.loadTags(props.name);
+    }
+
+    async loadTags(type){ 
+        console.log("hi")
+        try{
+            let response = await axiosInstance.get("/get-tags/?subject="+type); 
+            this.setState({tags: response.data});
+            return response.status;
+        }catch(error){
+            throw error; 
         }
     }
 
@@ -70,9 +90,11 @@ export default class ReviewForm extends Component {
                 content: this.state.content, 
                 rating: overallRating, 
                 review_type: this.props.review, 
-                tag_1: "this is tag 1", 
-                tag_2: "this is tag 2", 
-                tag_3: "this is tag 3", 
+                difficulty_rating: this.state.difficulty, //implment UI for this, would_take_again, and tags 
+                would_take_again: this.state.would_take_again ? "true" : "false",
+                tag_1: "this is tag 1", //select from the index of the tags array 
+                tag_2: "this is tag 2", //you're left with the task of getting those active indexes (i dont care how) and sending them here
+                tag_3: "null", //this is what a tag which has been left empty is sent as 
             });
             window.location.reload();
             return review;
