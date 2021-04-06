@@ -126,21 +126,21 @@ class EditReviewView(APIView):
                 tag = Tags.objects.get(description=tag_1)
             except Tags.DoesNotExist:
                 return Response({'Bad':'Invalid tag description: '+tag_1},status=status.HTTP_400_BAD_REQUEST)
-            review.tags.add(tag)
+            review.tag_1 = tag
             review.save()
         if(not tag_2 == 'null'):
             try:
                 tag = Tags.objects.get(description=tag_2)
             except Tags.DoesNotExist:
                 return Response({'Bad':'Invalid tag description: '+tag_2},status=status.HTTP_400_BAD_REQUEST)
-            review.tags.add(tag)
+            review.tag_2 = tag
             review.save()
         if(not tag_3 == 'null'):
             try:
                 tag = Tags.objects.get(description=tag_3)
             except Tags.DoesNotExist:
                 return Response({'Bad':'Invalid tag description: '+tag_3},status=status.HTTP_400_BAD_REQUEST)
-            review.tags.add(tag)
+            review.tag_3 = tag
             review.save()
         #update rating of the review subject 
         if review_type == 'course':

@@ -236,9 +236,10 @@ class Review(models.Model):
     #Fields for giving other users ability to thumbs up/down a review
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
-    #Each review can have many tags
-    #https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/
-    tags = models.ManyToManyField(Tags)
+    #Each review can have three tags
+    tag_1 = models.ForeignKey(Tags,on_delete = models.DO_NOTHING)
+    tag_2 = models.ForeignKey(Tags,on_delete = models.DO_NOTHING)
+    tag_3 = models.ForeignKey(Tags,on_delete = models.DO_NOTHING)
     #Number of times this review has been reported
     numb_reports = models.IntegerField(default=0)
     #The date this review was initially created
