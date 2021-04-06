@@ -90,7 +90,8 @@ export default class ReviewForm extends Component {
                 content: this.state.content, 
                 rating: overallRating, 
                 review_type: this.props.review, 
-                difficulty_rating: this.state.difficulty, //implment UI for this, would_take_again, and tags 
+                //implment UI for this, would_take_again, and tags 
+                //difficulty_rating: this.state.difficulty, //dont uncomment TODO on backend 
                 would_take_again: this.state.would_take_again ? "true" : "false",
                 tag_1: "this is tag 1", //select from the index of the tags array 
                 tag_2: "this is tag 2", //you're left with the task of getting those active indexes (i dont care how) and sending them here
