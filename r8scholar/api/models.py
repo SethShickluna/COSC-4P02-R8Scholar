@@ -1,4 +1,7 @@
+#python 
+import uuid
 #Django#
+from rest_framework import Response, status
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
@@ -7,12 +10,12 @@ from django.db.models import constraints
 from django.db.models.deletion import CASCADE
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-import uuid
+
 from django.utils.timezone import datetime, now
 #Project Files#
 from .managers import CustomUserManager
 from .validators import profanity_validator, validate_brock_mail, password_validator, rating_validator
-from .generators import generate_validation_code
+from .generators import generate_validation_code, determine_type
 
 #Models a user of the site
 class CustomUser(AbstractBaseUser):
@@ -27,6 +30,8 @@ class CustomUser(AbstractBaseUser):
     is_verified = models.BooleanField('is_verified', default=False)
     date_created = models.DateField(auto_now=True)
     last_pass_reset = models.DateField(auto_now=True)
+    is_prof = models.BooleanField(default=False)
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
 
@@ -34,6 +39,9 @@ class CustomUser(AbstractBaseUser):
 
     def _str_(self):
         return self.email
+
+    def set_is_prof(self, email):
+        self.is_prof = not any(i.isdigit() for i in str(email))
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         '''
@@ -254,8 +262,8 @@ class Comment(models.Model):
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
-    date = models.DateTimeField(default=None)
-    numb_reports = models.IntegerField(default=None)
+    date_created = models.DateField(auto_now=True)
+    numb_reports = models.IntegerField(default=0)
 
     class Meta:
         constraints = [
