@@ -103,8 +103,6 @@ class GetCourseView(APIView):
         name = request.GET.get(self.lookup_url_kwarg)
         if name != None:
             course = Course.objects.filter(name=name)
-            course.updatePercent()
-            course.updateNumReviews()
             if len(course) > 0:
                 data = self.serializer_class(course[0]).data
                 return Response(data, status=status.HTTP_200_OK)
@@ -121,8 +119,6 @@ class GetDepartmentView(APIView):
         name = request.GET.get(self.lookup_url_kwarg)
         if name != None:
             department = Department.objects.filter(name=name)
-            department.updatePercent()
-            department.updateNumReviews()
             if len(department) > 0:
                 data = self.serializer_class(department[0]).data
                 return Response(data, status=status.HTTP_200_OK)
@@ -139,8 +135,6 @@ class GetInstructorView(APIView):
         name = request.GET.get(self.lookup_url_kwarg)
         if name != None:
             instructor = Instructor.objects.filter(name=name)
-            instructor.updatePercent()
-            instructor.updateNumReviews()
             if len(instructor) > 0:
                 data = self.serializer_class(instructor[0]).data
                 return Response(data, status=status.HTTP_200_OK)

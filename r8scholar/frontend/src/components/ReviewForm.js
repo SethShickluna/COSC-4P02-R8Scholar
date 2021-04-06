@@ -70,6 +70,9 @@ export default class ReviewForm extends Component {
                 content: this.state.content, 
                 rating: overallRating, 
                 review_type: this.props.review, 
+                tag_1: "this is tag 1", 
+                tag_2: "this is tag 2", 
+                tag_3: "this is tag 3", 
             });
             window.location.reload();
             return review;
