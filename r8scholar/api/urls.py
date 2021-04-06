@@ -36,6 +36,8 @@ urlpatterns = [
     path('get-user/', get_views.GetUser.as_view()), 
     path('get-reviews/', get_views.GetReviewsView.as_view()),
     path('get-comments/',get_views.GetCommentsView.as_view()),
+    path('get-numb-reviews/',get_views.GetNumbReviews.as_view()),
+    path('get-percentage/',get_views.GetPercentage.as_view()),
     path('get-user-reviews/',get_views.getUserReviews.as_view()),
     path('get-course/',get_views.GetCourseView.as_view(),name='get-course'),
     path('get-department/',get_views.GetDepartmentView.as_view(),name='get-department'),
@@ -56,16 +58,19 @@ urlpatterns = [
     path('edit-review/',review_views.EditReviewView.as_view(),name='edit-review'),
     path('delete-review/',review_views.DeleteReviewView.as_view(),name='delete-review'),
     path('report-review/',review_views.ReportReview.as_view(),name='report-review'),
+    path('thumbs-review/',review_views.ThumbsUpDown.as_view()),
     #Comment views
     path('edit-comment',comment_views.EditComment.as_view(),name='edit-comment'),
     path('delete-comment',comment_views.DeleteComment.as_view(),name='delete-comment'),
     path('report-comment',comment_views.ReportComment.as_view(),name='report-comment'),
+    path('thumbs-comment/',comment_views.ThumbsUpDown.as_view()),
     #authentication views
     path('login/',authentication_views.login.as_view(),name = 'login'),
     path('logout/',authentication_views.logout.as_view(),name = 'logout'),
     #edit user views
     path('change-nickname/',edit_user_views.change_nickname.as_view(),name='change-nickname'),
     path('change-password/',edit_user_views.change_password.as_view(),name = 'change-password'),
+    path('reset-password/',edit_user_views.password_reset.as_view(),name = 'reset-password'),
     path('delete-profile/',edit_user_views.delete_profile.as_view(),name = 'delete-profile'),
     #functionality views 
     path('verify-user/', functionality_views.VerifyUserView.as_view())

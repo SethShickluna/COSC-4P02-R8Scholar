@@ -1,4 +1,7 @@
+#python 
+import uuid
 #Django#
+from rest_framework import Response, status
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
@@ -7,7 +10,7 @@ from django.db.models import constraints
 from django.db.models.deletion import CASCADE
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-import uuid
+
 from django.utils.timezone import datetime, now
 #Project Files#
 from .managers import CustomUserManager
@@ -26,6 +29,7 @@ class CustomUser(AbstractBaseUser):
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
     date_created = models.DateField(auto_now=True)
+    last_pass_reset = models.DateField(auto_now=True)
     is_prof = models.BooleanField(default=False)
     
     USERNAME_FIELD = 'email'
@@ -68,6 +72,8 @@ class Department(models.Model):
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
+    number_ratings = models.IntegerField(default=0)
+    percent_recommend = models.FloatField(default=0)
 
     class Meta:
         ordering = ['name']
@@ -107,6 +113,23 @@ class Department(models.Model):
                 count +=1
         self.courses_rating = my_sum / count
         self.save()
+    
+    def updatePercent(self):
+        try:
+            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
+        self.save()
+        
+    def updateNumReviews(self):
+        try:
+            count = Review.objects.filter(subject=name).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.number_ratings = count
+        self.save()
 
 #Models an instructor(individual who teaches a course)
 class Instructor(models.Model):
@@ -114,6 +137,8 @@ class Instructor(models.Model):
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
+    number_ratings = models.IntegerField(default=0)
+    percent_recommend = models.FloatField(default=0)
 
     class Meta:
         ordering = ['name']
@@ -129,6 +154,23 @@ class Instructor(models.Model):
         #set rating to new average 
         self.rating = (my_sum / count)
         self.save()
+    
+    def updatePercent(self):
+        try:
+            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
+        self.save()
+        
+    def updateNumReviews(self):
+        try:
+            count = Review.objects.filter(subject=name).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.number_ratings = count
+        self.save()
 
 #Models a course being offered by Brock University
 class Course(models.Model):
@@ -136,9 +178,28 @@ class Course(models.Model):
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
     course_full_name  = models.CharField(max_length=40,default=None)
+    number_ratings = models.IntegerField(default=0)
+    percent_recommend = models.FloatField(default=0)
 
     class Meta:
         ordering = ['name', 'course_full_name']
+
+    def updatePercent(self):
+        try:
+            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
+        self.save()
+        
+    def updateNumReviews(self):
+        try:
+            count = Review.objects.filter(subject=name).count()
+        except Review.DoesNotExist:
+            return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
+        self.number_ratings = count
+        self.save()
 
     def update_rating(self): # NEEDS TESTING #
         count = 0
@@ -152,6 +213,12 @@ class Course(models.Model):
         self.rating = (my_sum / count)
         self.save()
 
+    
+
+#Tags for reviews
+class Tags(models.Model):
+    description = models.CharField(max_length=50,default=None)
+
 #Models a review of a course/instructor/department created by user 
 class Review(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -163,7 +230,16 @@ class Review(models.Model):
     title = models.CharField(max_length=45)
     content = models.TextField(default=None, null=True)
     rating = models.FloatField(default=None, validators=[rating_validator])
+    would_take_again = models.BooleanField(default=False)
+    #Fields for giving other users ability to thumbs up/down a review
+    thumbs_up = models.IntegerField(default=0)
+    thumbs_down = models.IntegerField(default=0)
+    #Each review can have many tags
+    #https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/
+    tags = models.ManyToManyField(Tags)
+    #Number of times this review has been reported
     numb_reports = models.IntegerField(default=0)
+    #The date this review was initially created
     date_created = models.DateField(auto_now=True)
     department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
     instructor_name = models.ForeignKey(Instructor, null=True, on_delete=models.DO_NOTHING)
@@ -172,6 +248,7 @@ class Review(models.Model):
 
     def _str_(self):
         return self.reviewer
+
 #Models a comment made by a user on a review 
 class Comment(models.Model):
     comment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -181,6 +258,9 @@ class Comment(models.Model):
     commenter = models.ForeignKey(CustomUser,default=None, on_delete = models.CASCADE)
     name = models.CharField(max_length=32)
     content = models.TextField(default=None)
+    #Fields for giving other users ability to thumbs up/down a comment
+    thumbs_up = models.IntegerField(default=0)
+    thumbs_down = models.IntegerField(default=0)
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
     date_created = models.DateField(auto_now=True)
     numb_reports = models.IntegerField(default=0)

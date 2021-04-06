@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 #Project Files
-from ..models import Comment, CustomUser, Review, Course, Department, Instructor
+from ..models import Comment, CustomUser, Review, Course, Department, Instructor, Tags
 from ..serializers import (CommentSerializer, CreateCommentSerializer, UserSerializer, ReviewSerializer, CreateUserSerializer, CreateReviewSerializer)
 from ..email_sender import email_user
 #universal python 
@@ -64,6 +64,8 @@ class CreateReviewView(APIView):
             title = serializer.data['title']
             content = serializer.data['content']
             rating = serializer.data['rating']
+            would_take_again = serializer.data['would_take_again']
+            tag_descriptions = serializer.data['tag_descriptions']
             review_type = serializer.data['review_type']
             #get user who left review and other objects 
             user = CustomUser.objects.get(nickname=nickname)
@@ -83,9 +85,18 @@ class CreateReviewView(APIView):
             content = pf.censor(str(content))
             #Create new review
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
-            title=title, content=content, rating=rating, department_name=my_department,
+            title=title, content=content, rating=rating,would_take_again=would_take_again, department_name=my_department,
             instructor_name=my_instructor, course_name=my_course, review_type=review_type)
             review.save()
+            #Add tags to review, if any were given
+            if len(tag_descriptions) > 0:
+                for tag_description in tag_descriptions:
+                    try:
+                        tag = Tags.objects.get(description=tag_description)
+                    except Tags.DoesNotExist:
+                        return Response({'Bad':'Invalid tag description: '+tag_description},status=status.HTTP_400_BAD_REQUEST)
+                    review.tags.add(tag)
+                    review.save()
             #update rating of the review subject 
             if review_type == 'course':
                 my_course.update_rating()

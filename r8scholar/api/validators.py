@@ -1,5 +1,7 @@
 #Django#
 from django.core.exceptions import ValidationError 
+#Python
+import string
 #Profanity filter 
 from profanity_filter import ProfanityFilter
 pf = ProfanityFilter()
@@ -21,7 +23,7 @@ def profanity_validator(string):
 
 #Ensures password conforms to minimum requirments for a secure password
 min_pass_len = 12 #Minimum password length
-special_characters = "/!%^-+@#$?_*()<>" #List of characters considered special characters
+special_characters = string.punctuation #List of characters considered special characters
 def password_validator(string):
     rules = [lambda string: any(i.isupper() for i in string), #String must have at least one uppercase character
         lambda string: any(i.islower() for i in string),  #String must have at least one lowercase character
@@ -38,5 +40,3 @@ def rating_validator(string):
         return string
     else:
         raise ValidationError("Rating must be between 0.0 and 5.0.")
-
-
