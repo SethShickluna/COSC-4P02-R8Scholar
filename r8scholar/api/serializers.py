@@ -81,7 +81,7 @@ class CreateReviewSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Review
         fields = ('nickname','subject','title', 'content', 
-        'rating','would_take_again','tag_descriptions','review_type')
+        'rating','would_take_again','tag_1','tag_2', 'tag_3','review_type')
 
 class CreateCommentSerializer(serializers.ModelSerializer):
     class Meta: 
