@@ -1,6 +1,6 @@
 #Project Files
-from ..models import Comment, CustomUser, Review, Course, Department, Instructor
-from ..serializers import (CommentSerializer, UserSerializer, ReviewSerializer, CourseSerializer, DepartmentSerializer, 
+from ..models import Comment, CustomUser, Review, Course, Department, Instructor, Tags
+from ..serializers import (CommentSerializer, TagSerializer, UserSerializer, ReviewSerializer, CourseSerializer, DepartmentSerializer, 
 InstructorSerializer)
 #REST
 from rest_framework import status, permissions
@@ -93,6 +93,21 @@ class GetCommentsView(APIView):
             data.append(CommentSerializer(comment).data)
         return Response(data, status=status.HTTP_200_OK)
 
+class getTags(APIView):
+    permission_classes = (permissions.AllowAny,)
+    lookup_url_kwarg = 'review_id'
+    serializer_class = TagSerializer
+
+    def get(self,request,format=None):
+        subject = request.GET.get(self.lookup_url_kwarg)
+        try:
+            tags = Tags.objects.filter(subject=subject)
+        except Tags.DoesNotExist:
+            return Response({'Bad Request': 'Invalid subject for tags: '+subject}, status=status.HTTP_400_BAD_REQUEST)
+        data = []
+        for tag in tags:
+            data.append(TagSerializer(tag).data)
+        return Response(data,status=status.HTTP_200_OK)
 
 class GetCourseView(APIView): 
     serializer_class = CourseSerializer

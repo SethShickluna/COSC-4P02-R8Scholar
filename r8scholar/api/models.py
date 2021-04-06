@@ -219,6 +219,7 @@ class Course(models.Model):
 #Tags for reviews
 class Tags(models.Model):
     description = models.CharField(max_length=50,default=None)
+    subject = models.CharField(max_length=50,default=None)
 
 #Models a review of a course/instructor/department created by user 
 class Review(models.Model):

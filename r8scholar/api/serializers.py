@@ -1,7 +1,7 @@
 #REST#
 from rest_framework import serializers
 #Project Files#
-from .models import Comment, Course, CustomUser, Department, Instructor, Review, Ticket
+from .models import Comment, Course, CustomUser, Department, Instructor, Review, Tags, Ticket
 from .validators import password_validator
 
 class UserSerializer(serializers.ModelSerializer):
@@ -55,6 +55,10 @@ class InstructorSerializer(serializers.ModelSerializer):
         model = Instructor
         fields = ('name', 'department', 'rating')
 
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tags
+        fields = ('description','subject')
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:

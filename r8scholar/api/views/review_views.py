@@ -90,7 +90,9 @@ class EditReviewView(APIView):
         content = data['content']
         rating = data['rating']
         would_take_again = data['would_take_again']
-        tag_descriptions = data['tag_descriptions']
+        tag_1 = data['tag_1']
+        tag_2 = data['tag_2']
+        tag_3 = data['tag_3']
         review_type = data['review_type']
         #get data for the type of reviewable being reviewed
         my_department = None
@@ -118,14 +120,28 @@ class EditReviewView(APIView):
         review.save()
         #Update tags on review
         review.tags.clear()
-        if len(tag_descriptions) > 0:
-            for tag_description in tag_descriptions:
-                try:
-                    tag = Tags.objects.get(description=tag_description)
-                except Tags.DoesNotExist:
-                    return Response({'Bad':'Invalid tag description: '+tag_description},status=status.HTTP_400_BAD_REQUEST)
-                review.tags.add(tag)
-                review.save()
+        #Add tags to review, if any were given
+        if(not tag_1 == 'null'):
+            try:
+                tag = Tags.objects.get(description=tag_1)
+            except Tags.DoesNotExist:
+                return Response({'Bad':'Invalid tag description: '+tag_1},status=status.HTTP_400_BAD_REQUEST)
+            review.tags.add(tag)
+            review.save()
+        if(not tag_2 == 'null'):
+            try:
+                tag = Tags.objects.get(description=tag_2)
+            except Tags.DoesNotExist:
+                return Response({'Bad':'Invalid tag description: '+tag_2},status=status.HTTP_400_BAD_REQUEST)
+            review.tags.add(tag)
+            review.save()
+        if(not tag_3 == 'null'):
+            try:
+                tag = Tags.objects.get(description=tag_3)
+            except Tags.DoesNotExist:
+                return Response({'Bad':'Invalid tag description: '+tag_3},status=status.HTTP_400_BAD_REQUEST)
+            review.tags.add(tag)
+            review.save()
         #update rating of the review subject 
         if review_type == 'course':
             my_course.update_rating()

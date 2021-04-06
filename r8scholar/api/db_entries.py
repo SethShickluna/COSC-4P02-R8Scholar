@@ -28,7 +28,7 @@ class ModelGenerator:
             my_department = Department.objects.get(name=data[1].strip())
             model = Course(name=data[0], department=my_department, rating=0, course_full_name=data[2])
         elif self.type == "Tag":
-            model = Tags(description=data[0])
+            model = Tags(description=data[0],subject = data[1].strip())
         print("Creating", model)
         model.save()
     
