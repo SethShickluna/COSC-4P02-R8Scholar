@@ -117,31 +117,10 @@ class EditReviewView(APIView):
         review.content = pf.censor(content)
         review.rating = rating
         review.would_take_again = would_take_again
+        review.tag_1 = tag_1
+        review.tag_2 = tag_2
+        review.tag_3 = tag_3
         review.save()
-        #Update tags on review
-        review.tags.clear()
-        #Add tags to review, if any were given
-        if(not tag_1 == 'null'):
-            try:
-                tag = Tags.objects.get(description=tag_1)
-            except Tags.DoesNotExist:
-                return Response({'Bad':'Invalid tag description: '+tag_1},status=status.HTTP_400_BAD_REQUEST)
-            review.tag_1 = tag
-            review.save()
-        if(not tag_2 == 'null'):
-            try:
-                tag = Tags.objects.get(description=tag_2)
-            except Tags.DoesNotExist:
-                return Response({'Bad':'Invalid tag description: '+tag_2},status=status.HTTP_400_BAD_REQUEST)
-            review.tag_2 = tag
-            review.save()
-        if(not tag_3 == 'null'):
-            try:
-                tag = Tags.objects.get(description=tag_3)
-            except Tags.DoesNotExist:
-                return Response({'Bad':'Invalid tag description: '+tag_3},status=status.HTTP_400_BAD_REQUEST)
-            review.tag_3 = tag
-            review.save()
         #update rating of the review subject 
         if review_type == 'course':
             my_course.update_rating()

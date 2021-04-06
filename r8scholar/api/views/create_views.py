@@ -88,30 +88,8 @@ class CreateReviewView(APIView):
             #Create new review
             review = Review(reviewer=user, nickname=nickname, subject=subject, 
             title=title, content=content, rating=rating,would_take_again=would_take_again, department_name=my_department,
-            instructor_name=my_instructor, course_name=my_course, review_type=review_type)
+            instructor_name=my_instructor, course_name=my_course, review_type=review_type,tag_1=tag_1,tag_2=tag_2,tag_3=tag_3)
             review.save()
-            #Add tags to review, if any were given
-            if(not tag_1 == 'null'):
-                try:
-                    tag = Tags.objects.get(description=tag_1)
-                except Tags.DoesNotExist:
-                    return Response({'Bad':'Invalid tag description: '+tag_1},status=status.HTTP_400_BAD_REQUEST)
-                review.tag_1 = tag
-                review.save()
-            if(not tag_2 == 'null'):
-                try:
-                    tag = Tags.objects.get(description=tag_2)
-                except Tags.DoesNotExist:
-                    return Response({'Bad':'Invalid tag description: '+tag_2},status=status.HTTP_400_BAD_REQUEST)
-                review.tag_2 = tag
-                review.save()
-            if(not tag_3 == 'null'):
-                try:
-                    tag = Tags.objects.get(description=tag_3)
-                except Tags.DoesNotExist:
-                    return Response({'Bad':'Invalid tag description: '+tag_3},status=status.HTTP_400_BAD_REQUEST)
-                review.tag_3 = tag
-                review.save()
             #update rating of the review subject 
             if review_type == 'course':
                 my_course.update_rating()

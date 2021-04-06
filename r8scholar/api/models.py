@@ -237,9 +237,9 @@ class Review(models.Model):
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
     #Each review can have three tags
-    tag_1 = models.ForeignKey(Tags,on_delete = models.DO_NOTHING)
-    tag_2 = models.ForeignKey(Tags,on_delete = models.DO_NOTHING)
-    tag_3 = models.ForeignKey(Tags,on_delete = models.DO_NOTHING)
+    tag_1 = models.CharField(max_length=100, default=None)
+    tag_2 = models.CharField(max_length=100, default=None)
+    tag_3 = models.CharField(max_length=100, default=None)
     #Number of times this review has been reported
     numb_reports = models.IntegerField(default=0)
     #The date this review was initially created
