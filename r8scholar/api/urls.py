@@ -56,14 +56,10 @@ urlpatterns = [
     path('edit-review/',review_views.EditReviewView.as_view(),name='edit-review'),
     path('delete-review/',review_views.DeleteReviewView.as_view(),name='delete-review'),
     path('report-review/',review_views.ReportReview.as_view(),name='report-review'),
-    path('upvote-review/',review_views.UpvoteReview.as_view(),name='upvote-review'),
-    path('downvote-review/',review_views.DownvoteReview.as_view(),name='downvote-review'),
     #Comment views
     path('edit-comment',comment_views.EditComment.as_view(),name='edit-comment'),
     path('delete-comment',comment_views.DeleteComment.as_view(),name='delete-comment'),
     path('report-comment',comment_views.ReportComment.as_view(),name='report-comment'),
-    path('upvote-comment',comment_views.UpvoteComment.as_view(),name='upvote-comment'),
-    path('downvote-comment',comment_views.DownvoteComment.as_view(),name='downvote-comment'),
     #authentication views
     path('login/',authentication_views.login.as_view(),name = 'login'),
     path('logout/',authentication_views.logout.as_view(),name = 'logout'),

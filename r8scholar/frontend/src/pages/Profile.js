@@ -66,6 +66,7 @@ export default class Profile extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({ user: user });
+            console.log(user)
             this.getReviews();
             return user;
         } catch (error) {

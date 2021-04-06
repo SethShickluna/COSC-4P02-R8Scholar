@@ -11,7 +11,7 @@ import cookie, { setRawCookie } from "react-cookies";
 
 const reviewTitle = {
     color: "black",
-    fontSize: "22px",
+    fontSize: "25px",
     fontWeight: "300",
 };
 
@@ -46,24 +46,13 @@ export default class ReviewItem extends Component {
         }
     }
 
-    async vote(upvote) {
+    async vote(up) {
         try {
-            let response;
-            if (upvote) {
-                console.log("upvoted");
-                response = await axiosInstance.post("/upvote-review/", {
-                    review_id: this.props.reviewItem.review_id,
-                    email: cookie.load("email"),
-                });
-                window.location.reload();
-            } else {
-                console.log("downvoted");
-                response = await axiosInstance.post("/downvote-review/", {
-                    review_id: this.props.reviewItem.review_id,
-                    email: cookie.load("email"),
-                });
-                window.location.reload();
-            }
+            response = await axiosInstance.post("/upvote-review/", {
+                review_id: this.props.reviewItem.review_id,
+                email: cookie.load("email"),
+                up_or_down: up ? "up" : "down", 
+            });
             return response.status;
         } catch (error) {
             console.log(error.message);
@@ -84,19 +73,17 @@ export default class ReviewItem extends Component {
                             {/* If user is logged in show edit review and delete review buttons, if logged out show up/down votes */}
                             <Col className="col-md-5" align="right">
                                 {this.props.isOwner ? (
-                                    <div style={{ marginTop: "10px" }}>
+                                    <div>
                                         <EditForm type={this.props.type} review={this.props.reviewItem} />
                                         <Button style={{ marginLeft: "5px" }} color="danger" className="btn-round" type="button" onClick={this.delete}>
                                             <BsFillTrashFill /> Delete
                                         </Button>
                                     </div>
                                 ) : (
-                                    <div style={{ marginTop: "10px" }}>
-                                        <Label disabled="true" style={{ marginRight: "15px", fontWeight: "bold", fontSize: "20px", color: "#000000", boxShadow: "5%" }} className="votes">
-                                            0
-                                        </Label>
+                                    <div>
+                                       
                                         <Button
-                                            style={{ marginLeft: "5px", borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#77dd77", boxShadow: "5%" }}
+                                            style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#77dd77", boxShadow: "5%" }}
                                             className="btn-round"
                                             type="button"
                                             id="upvote"
@@ -104,8 +91,11 @@ export default class ReviewItem extends Component {
                                         >
                                             <MdThumbUp size="20px" />
                                         </Button>
+                                        <Label disabled="true" style={{ margin: "15px", fontWeight: "bold", fontSize: "20px", color: "#000000", boxShadow: "5%" }} className="votes">
+                                            0
+                                        </Label>
                                         <Button
-                                            style={{ marginLeft: "5px", borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#f5593d" }}
+                                            style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#f5593d" }}
                                             className="btn-round"
                                             type="button"
                                             id="downvote"

@@ -12,7 +12,7 @@ from django.utils.timezone import datetime, now
 #Project Files#
 from .managers import CustomUserManager
 from .validators import profanity_validator, validate_brock_mail, password_validator, rating_validator
-from .generators import generate_validation_code
+from .generators import generate_validation_code, determine_type
 
 #Models a user of the site
 class CustomUser(AbstractBaseUser):
@@ -26,6 +26,7 @@ class CustomUser(AbstractBaseUser):
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
     date_created = models.DateField(auto_now=True)
+    is_prof = models.BooleanField(default=False)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
@@ -34,6 +35,9 @@ class CustomUser(AbstractBaseUser):
 
     def _str_(self):
         return self.email
+
+    def set_is_prof(self, email):
+        self.is_prof = not any(i.isdigit() for i in str(email))
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         '''
