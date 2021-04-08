@@ -17,11 +17,6 @@ export default class PasswordReset extends Component {
 
     async submitForm(e) {
         e.preventDefault(); //stop a reload
-<<<<<<< HEAD
-=======
-
-        //attempt to get an authentication token via post request
->>>>>>> 72d09718fd5c0dd9ca3b8373e043622f55680666
         try {
             const response = await axiosInstance.post("/reset-password/", {
                 email: this.state.email,
