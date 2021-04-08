@@ -89,7 +89,6 @@ export default class ReviewForm extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({reviewer:user});
-            return user
         }catch(error){
             //user is not logged in 
         }
