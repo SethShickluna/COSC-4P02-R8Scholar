@@ -51,7 +51,7 @@ export default class ReviewItem extends Component {
             response = await axiosInstance.post("/upvote-review/", {
                 review_id: this.props.reviewItem.review_id,
                 email: cookie.load("email"),
-                up_or_down: up ? "up" : "down", 
+                up_or_down: up ? "up" : "down",
             });
             return response.status;
         } catch (error) {
@@ -61,6 +61,8 @@ export default class ReviewItem extends Component {
 
     //the JSX that is rendered when this file is imported as a component
     render() {
+        console.log("SDDSDSAD");
+        console.log(this.props.reviewItem);
         return (
             <div className="App">
                 {/* container (card )which includes a title section + rating and a content section + button to see comments */}
@@ -81,7 +83,6 @@ export default class ReviewItem extends Component {
                                     </div>
                                 ) : (
                                     <div>
-                                       
                                         <Button
                                             style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#77dd77", boxShadow: "5%" }}
                                             className="btn-round"
@@ -110,8 +111,26 @@ export default class ReviewItem extends Component {
                     </CardHeader>
                     <CardBody>
                         <CardTitle>
-                            <h6>{this.props.reviewItem.nickname}</h6>{" "}
-                            <StarRatings rating={this.props.reviewItem.rating} starDimension="30px" starSpacing="10px" starRatedColor="#3498db" numberOfStars={5} name="instructorRating" />
+                            <h6 style={{ display: "inline" }}>{this.props.reviewItem.nickname}</h6>{" "}
+                            {this.props.reviewItem.would_take_again ? (
+                                <h6 style={{ display: "inline" }}> recommends the {this.props.reviewItem.review_type} </h6>
+                            ) : (
+                                <h6 style={{ display: "inline" }}> does not recommend the {this.props.reviewItem.review_type}</h6>
+                            )}
+                            <div style={{ float: "right" }}>
+                                <StarRatings rating={this.props.reviewItem.rating} starDimension="30px" starSpacing="10px" starRatedColor="#3498db" numberOfStars={5} name="instructorRating" />
+                            </div>
+                            {this.props.reviewItem.tag_1 != null ? (
+                                <p>
+                                    and describes the {this.props.reviewItem.review_type} as {this.props.reviewItem.tag_1}
+                                    {this.props.reviewItem.tag_2 != null ? (
+                                        <p style={{ display: "inline" }}>
+                                            , {this.props.reviewItem.tag_2}
+                                            {this.props.reviewItem.tag_3 != null ? <p style={{ display: "inline" }}>, {this.props.reviewItem.tag_3}</p> : null}
+                                        </p>
+                                    ) : null}
+                                </p>
+                            ) : null}
                         </CardTitle>
                         <CardText>
                             <h5>{this.props.reviewItem.content}</h5>
@@ -120,7 +139,7 @@ export default class ReviewItem extends Component {
                     <ListGroupItem>
                         <Row>
                             <Col align="left">
-                                <CommentForm review={this.props.reviewItem}> </CommentForm>
+                                <CommentForm review={this.props.reviewItem.content}> </CommentForm>
                             </Col>
                             <Col align="right">
                                 <ReportForm reviewID={this.props.reviewItem.review_id} />
