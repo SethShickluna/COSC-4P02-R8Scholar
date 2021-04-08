@@ -46,30 +46,25 @@ table a {
     color: #f3f3f3 !important;
 }
 
-.dark button {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
 .dark .navbar {
     background-color: #202020;
 }
 
 .dark .navbar .navbar-nav .nav-item .nav-link,
-.navbar .navbar-brand,
+.dark .navbar .navbar-brand,
 .dark h1 {
     color: #f3f3f3;
 }
 
-.dark nav.secondary-nav.navbar.navbar-expand-lg.bg-info,
-.dark .container-md,
-.black .profile-page {
+/* NAVBAR */
+.dark #root > div > div > .navbar {
     background-color: #202020 !important;
 }
 
-.dark .container-md {
-    padding: 50px;
+.dark #root > div > div > .navbar.navbar-transparent {
+    background-color: transparent !important;
 }
+/* END */
 
 .dark input.form-control-md.form-control {
     background-color: #d6d6d6;
@@ -80,22 +75,25 @@ table a {
     background-color: #f1f1f1;
 }
 
-.dark #root div.nav-tabs-navigation .active.nav-link,
-.dark #following > div > div > div > div > form > button {
-    color: #dc3545;
-}
-
-.dark #following > div > div > div > div > form > .btn-outline-success:hover {
+/* .dark #following > div > div > div > div > form > .btn-outline-success:hover {
     background-color: #dc3545 !important;
     border-color: #dc3545 !important;
     color: black;
-}
+} */
 
+/*PROFILE PAGE */
+.dark #root > div > div > div > div > div:nth-child(2) > div.col-sm-8 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link {
+    color: #f5593d !important;
+}
+/* END */
+
+/*REVIEW FORMS */
 .dark input,
 .dark #follows > div > div > div > div > div.card-header,
 .dark #follows > div > div > div > div > li,
 .dark #content,
-.dark #following > div > div > div > div > form > div > div > select {
+.dark #following > div > div > div > div > form > div > div > select,
+.dark #student-feedback > div > div > div > div > form > div > div > select {
     background-color: #d6d6d6 !important;
 }
 
@@ -104,24 +102,24 @@ table a {
     background-color: #f0f0f0 !important;
 }
 
-.dark .modal-content .btn-outline-info {
+/* .dark .modal-content .btn-outline-info {
     color: #dc3545;
-}
+} */
 
 .dark .modal-content .btn-outline-info:hover {
     color: #f0f0f0;
-    border-color: #dc3545 !important;
-    background-color: #dc3545 !important;
+    border-color: #f5593d !important;
+    background-color: #f5593d !important;
 }
 
-.dark button.btn-round.btn.btn-default.btn-block:hover {
+/* .dark button.btn-round.btn.btn-default.btn-block:hover {
     color: #f0f0f0 !important;
     background-color: #dc3545 !important;
-}
+} */
 
-.dark button.btn-round.btn.btn-default.btn-block {
+/* .dark button.btn-round.btn.btn-default.btn-block {
     color: #dc3545 !important;
-}
+} */
 
 .dark #follows > div > div > div > div > div.card-body {
     background-color: #f0f0f0;
