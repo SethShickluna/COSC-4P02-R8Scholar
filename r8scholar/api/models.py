@@ -1,5 +1,6 @@
 #python 
 import uuid
+from django.db.models.fields.related import ManyToManyField
 #Django#
 from rest_framework.response import Response
 from rest_framework import status
@@ -30,8 +31,8 @@ class CustomUser(AbstractBaseUser):
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
     date_created = models.DateField(auto_now=True)
-    last_pass_reset = models.DateField()
-    is_prof = models.BooleanField(default=False)
+    last_pass_reset = models.DateField(null=True)
+    is_prof = models.BooleanField(default=False,null=True)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
@@ -228,10 +229,15 @@ class Review(models.Model):
     reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.CASCADE)
     #User's nickname
     nickname = models.CharField(max_length=30, default=None)
+    #The instructor/course/department this review is related to
     subject = models.CharField(max_length=100)
+    #The title of the review
     title = models.CharField(max_length=45)
+    #The content of the review, i.e what the reviewer wrote about the subject of the review
     content = models.TextField(default=None, null=True)
+    #A rating between 1-5 representing the quality of the subject
     rating = models.FloatField(default=None, validators=[rating_validator])
+    #Indicates whether the reviewer would take again or recommend the subject
     would_take_again = models.BooleanField(default=False)
     #Fields for giving other users ability to thumbs up/down a review
     thumbs_up = models.IntegerField(default=0)
@@ -242,6 +248,8 @@ class Review(models.Model):
     tag_3 = models.CharField(max_length=100, default=None)
     #Number of times this review has been reported
     numb_reports = models.IntegerField(default=0)
+    #Users who have reported this review
+    users_reported = ManyToManyField(CustomUser,related_name='users_reported')
     #The date this review was initially created
     date_created = models.DateField(auto_now=True)
     department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
