@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import cookie from "react-cookies";
 import axiosInstance from "../axiosApi";
 import Navbar from "../components/Navbar";
+import PasswordReset from "../components/PasswordReset";
 
 export default class Login extends Component {
     constructor(props) {
@@ -91,13 +92,12 @@ export default class Login extends Component {
                                             Sign In
                                         </Button>
                                     </Form>
-                                    <div className="login">
-                                        <Link to="/signup">
-                                            <Button color="info" className="btn-link">
-                                                Need an account? Sign up Today!
-                                            </Button>
-                                        </Link>
-                                    </div>
+                                    <Link to="/signup">
+                                        <Button color="info" className="btn-link" to="/signup">
+                                            Need an account? Sign up Today!
+                                        </Button>
+                                    </Link>
+                                    <PasswordReset />
                                 </Card>
                             </Col>
                         </Row>

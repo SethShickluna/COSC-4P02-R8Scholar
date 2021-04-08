@@ -16,6 +16,7 @@ import SecondaryNav from "../components/SecondaryNav";
 
 //axios
 import axiosInstance from "../axiosApi";
+import ReviewForm from "../components/ReviewForm";
 
 const pageStyles = {
     margin: "0 auto",
@@ -66,7 +67,7 @@ export default class Profile extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({ user: user });
-            console.log(user)
+            console.log(user);
             this.getReviews();
             return user;
         } catch (error) {
@@ -155,7 +156,7 @@ export default class Profile extends Component {
                                                             });
                                                         }}
                                                     >
-                                                        Change Password
+                                                        Profile Settings
                                                     </NavLink>
                                                 </NavItem>
                                                 <NavItem>
@@ -167,19 +168,7 @@ export default class Profile extends Component {
                                                             });
                                                         }}
                                                     >
-                                                        Change Nickname
-                                                    </NavLink>
-                                                </NavItem>
-                                                <NavItem>
-                                                    <NavLink
-                                                        className={this.state.activeTab === "4" ? "active" : ""}
-                                                        onClick={() => {
-                                                            this.setState({
-                                                                activeTab: "4",
-                                                            });
-                                                        }}
-                                                    >
-                                                        Delete Profile
+                                                        Student Feedback
                                                     </NavLink>
                                                 </NavItem>
                                             </Nav>
@@ -212,14 +201,17 @@ export default class Profile extends Component {
                                                 </Col>
                                             </Row>
                                         </TabPane>
-                                        <TabPane className="text-center" tabId="2" id="chnage-pass">
+                                        <TabPane className="text-center" tabId="2" id="profile-settings">
                                             <EditPasswordForm />
-                                        </TabPane>
-                                        <TabPane className="text-center" tabId="3" id="change-nick">
                                             <EditNicknameForm />
-                                        </TabPane>
-                                        <TabPane className="text-center" tabId="4" id="delete-profile">
                                             <DeleteProfileForm />
+                                        </TabPane>
+                                        <TabPane className="text-center" tabId="3" id="student-feedback">
+                                            <Row>
+                                                <Col align="center">
+                                                    <ReviewForm name={"temp"} review="student" />
+                                                </Col>
+                                            </Row>
                                         </TabPane>
                                     </TabContent>
                                 </Col>

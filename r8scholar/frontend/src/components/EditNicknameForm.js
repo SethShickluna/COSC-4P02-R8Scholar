@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import cookie from "react-cookies";
-import { FormGroup, Label, Input, FormText, Button, Alert, UncontrolledTooltip } from "reactstrap";
+import { FormGroup, Label, Input, FormText, Button, Alert, UncontrolledTooltip, Collapse } from "reactstrap";
 import axiosInstance from "../axiosApi";
-import { MdInfoOutline } from "react-icons/md";
+import { MdInfoOutline, MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 export default class EditNicknameForm extends Component {
     //make  a password form
@@ -15,6 +15,7 @@ export default class EditNicknameForm extends Component {
             alertTriggered: false,
             invalidPassword: false,
             nameTaken: false,
+            isOpen: false,
         };
 
         //allows us to this "this" inside the methods
@@ -23,6 +24,7 @@ export default class EditNicknameForm extends Component {
         this.onDismiss = this.onDismiss.bind(this);
         this.onDismiss2 = this.onDismiss2.bind(this);
         this.onDismiss3 = this.onDismiss3.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
 
         this.checkNickname = this.checkNickname.bind(this);
     }
@@ -76,6 +78,10 @@ export default class EditNicknameForm extends Component {
         this.setState({ nameTaken: !this.state.nameTaken });
     }
 
+    toggleMenu() {
+        this.setState((prev) => ({ isOpen: !prev.isOpen }));
+    }
+
     render() {
         return (
             <form onSubmit={this.submitForm}>
@@ -88,33 +94,38 @@ export default class EditNicknameForm extends Component {
                 <Alert color="danger" isOpen={this.state.nameTaken} toggle={this.onDismiss3}>
                     <b>That nickname has been taken. Please choose another nickname and try again.</b>
                 </Alert>
-                <h3>Change Nickname</h3>
-                <div style={{ marginBottom: "2%" }}></div>
-                <FormGroup>
-                    <Label for="nickname">New Nickname</Label>
-                    <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
-                    <Input
-                        valid={this.state.validNickname}
-                        invalid={!this.state.validNickname}
-                        type="text"
-                        name="nickname"
-                        id="nickname"
-                        placeholder="New Nickname"
-                        autoComplete="off"
-                        onChange={this.handleInput}
-                    />
-                    <UncontrolledTooltip placement="right" target="nickname-tooltip">
-                        Nicknames must be at least 4 characters long. Make sure it's appropriate!
-                    </UncontrolledTooltip>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
-                    <Input type="password" name="password" id="password" placeholder="New Password" autoComplete="off" onChange={this.handleInput} />
-                </FormGroup>
-
-                <Button color="primary" type="submit">
+                <h3 onClick={this.toggleMenu} style={{ display: "inline-block" }}>
                     Change Nickname
-                </Button>
+                </h3>
+                {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
+                <Collapse isOpen={this.state.isOpen}>
+                    <div style={{ marginBottom: "2%" }}></div>
+                    <FormGroup>
+                        <Label for="nickname">New Nickname</Label>
+                        <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                        <Input
+                            valid={this.state.validNickname}
+                            invalid={!this.state.validNickname}
+                            type="text"
+                            name="nickname"
+                            id="nickname"
+                            placeholder="New Nickname"
+                            autoComplete="off"
+                            onChange={this.handleInput}
+                        />
+                        <UncontrolledTooltip placement="right" target="nickname-tooltip">
+                            Nicknames must be at least 4 characters long. Make sure it's appropriate!
+                        </UncontrolledTooltip>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input type="password" name="password" id="password" placeholder="New Password" autoComplete="off" onChange={this.handleInput} />
+                    </FormGroup>
+
+                    <Button color="primary" type="submit">
+                        Change Nickname
+                    </Button>
+                </Collapse>
             </form>
         );
     }
