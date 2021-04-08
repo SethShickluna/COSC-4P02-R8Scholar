@@ -117,8 +117,8 @@ class Department(models.Model):
     
     def updatePercent(self):
         try:
-            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+            numbWould = Review.objects.filter(subject=self.name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=self.name,would_take_again=False).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
@@ -126,7 +126,7 @@ class Department(models.Model):
         
     def updateNumReviews(self):
         try:
-            count = Review.objects.filter(subject=name).count()
+            count = Review.objects.filter(subject=self.name).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.number_ratings = count
@@ -158,8 +158,8 @@ class Instructor(models.Model):
     
     def updatePercent(self):
         try:
-            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+            numbWould = Review.objects.filter(subject=self.name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=self.name,would_take_again=False).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
@@ -167,7 +167,7 @@ class Instructor(models.Model):
         
     def updateNumReviews(self):
         try:
-            count = Review.objects.filter(subject=name).count()
+            count = Review.objects.filter(subject=self.name).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.number_ratings = count
@@ -187,8 +187,8 @@ class Course(models.Model):
 
     def updatePercent(self):
         try:
-            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+            numbWould = Review.objects.filter(subject=self.name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=self.name,would_take_again=False).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
@@ -196,7 +196,7 @@ class Course(models.Model):
         
     def updateNumReviews(self):
         try:
-            count = Review.objects.filter(subject=name).count()
+            count = Review.objects.filter(subject=self.name).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.number_ratings = count
