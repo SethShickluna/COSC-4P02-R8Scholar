@@ -93,9 +93,9 @@ class GetCommentsView(APIView):
             data.append(CommentSerializer(comment).data)
         return Response(data, status=status.HTTP_200_OK)
 
-class getTags(APIView):
+class GetTags(APIView):
     permission_classes = (permissions.AllowAny,)
-    lookup_url_kwarg = 'review_id'
+    lookup_url_kwarg = 'subject'
     serializer_class = TagSerializer
 
     def get(self,request,format=None):
