@@ -73,6 +73,7 @@ class Department(models.Model):
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
+    diff_rating = models.FloatField(default=None)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
     number_ratings = models.IntegerField(default=0)
     percent_recommend = models.FloatField(default=0)
@@ -83,13 +84,16 @@ class Department(models.Model):
     def update_rating(self): # NEEDS TESTING #
         count = 0
         my_sum = 0
+        my_sum2 = 0
         #get reviews that we are a subject of 
         for review in Review.objects.filter(department_name=self.name): #O(n) 
             my_sum += review.rating
+            my_sum2 += review.diff_rating
             count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
+        self.diff_rating = (my_sum2 / count)
         self.save()
     
     def update_instructor_rating(self):
@@ -138,6 +142,7 @@ class Instructor(models.Model):
     name  = models.CharField(max_length=50,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
+    diff_rating = models.FloatField(default=None)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
     number_ratings = models.IntegerField(default=0)
     percent_recommend = models.FloatField(default=0)
@@ -148,13 +153,16 @@ class Instructor(models.Model):
     def update_rating(self): # NEEDS TESTING #
         count = 0
         my_sum = 0
+        my_sum2 = 0
         #get reviews that we are a subject of 
         for review in Review.objects.filter(instructor_name=self.name): #O(n) 
             my_sum += review.rating
+            my_sum2 += review.diff_rating
             count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
+        self.diff_rating = (my_sum2 / count)
         self.save()
     
     def updatePercent(self):
@@ -179,6 +187,7 @@ class Course(models.Model):
     name = models.CharField(max_length=40, unique=True,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
+    diff_rating = models.FloatField(default=None)
     course_full_name  = models.CharField(max_length=40,default=None)
     number_ratings = models.IntegerField(default=0)
     percent_recommend = models.FloatField(default=0)
@@ -206,13 +215,16 @@ class Course(models.Model):
     def update_rating(self): # NEEDS TESTING #
         count = 0
         my_sum = 0
+        my_sum2 = 0
         #get reviews that we are a subject of 
         for review in Review.objects.filter(course_name=self.name): #O(n) 
             my_sum += review.rating
+            my_sum2 += review.diff_rating
             count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
+        self.diff_rating = (my_sum2 / count)
         self.save()
 
     
@@ -237,6 +249,8 @@ class Review(models.Model):
     content = models.TextField(default=None, null=True)
     #A rating between 1-5 representing the quality of the subject
     rating = models.FloatField(default=None, validators=[rating_validator])
+    #A rating between 1-5 representing the difficulty of the subject
+    diff_rating = models.FloatField(default=None, validators=[rating_validator])
     #Indicates whether the reviewer would take again or recommend the subject
     would_take_again = models.BooleanField(default=False)
     #Fields for giving other users ability to thumbs up/down a review

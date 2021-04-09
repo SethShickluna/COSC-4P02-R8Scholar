@@ -26,6 +26,10 @@ class filterCourseListBy(APIView):
             #Get list of courses sorted by rating
             for course in courses.order_by('-rating'): #negative rating for high to low 
                 course_list.append(CourseSerializer(course).data)
+        elif (str(filter_by)=="diff_rating_high_low"): #sort by diff_rating 
+            #Get list of courses sorted by diff_rating
+            for course in courses.order_by('-diff_rating'): #negative diff_rating for high to low 
+                course_list.append(CourseSerializer(course).data)
         #Get list of courses sorted by department
         elif(str(filter_by)=="department"):
             for course in courses.order_by('department'):
@@ -50,6 +54,10 @@ class filterInstructorListBy(APIView):
         if (str(filter_by)=="rating_high_low"): #sort by rating 
             #Get list of courses sorted by rating
             for instructor in instructors.order_by('-rating'): #negative rating for high to low 
+                instructor_list.append(InstructorSerializer(instructor).data)
+        elif(str(filter_by)=="diff_rating_high_low"): #sort by diff_rating 
+            #Get list of courses sorted by diff_rating
+            for instructor in instructors.order_by('-diff_rating'): #negative diff_rating for high to low 
                 instructor_list.append(InstructorSerializer(instructor).data)
         #Get list of instructors sorted by department
         elif(str(filter_by)=="department"):
@@ -77,6 +85,10 @@ class filterDepartmentListBy(APIView):
         if (str(filter_by)=="rating_high_low"): #sort by rating 
             #Get list of courses sorted by rating
             for course in departments.order_by('-rating'): #negative rating for high to low 
+                department_list.append(DepartmentSerializer(course).data)
+        elif(str(filter_by)=="diff_rating_high_low"): #sort by diff_rating 
+            #Get list of courses sorted by diff_rating
+            for course in departments.order_by('-diff_rating'): #negative diff_rating for high to low 
                 department_list.append(DepartmentSerializer(course).data)
         else: #default alphabetical 
             for course in departments.order_by('name'):
