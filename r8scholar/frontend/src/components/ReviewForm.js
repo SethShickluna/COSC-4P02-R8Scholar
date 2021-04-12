@@ -7,6 +7,7 @@ import {Button, Form, FormText, FormGroup, Label,
 import {Link} from 'react-router-dom';
 import cookie from 'react-cookies'; 
 import axiosInstance from "../axiosApi"; 
+import { Badge } from 'reactstrap';
 
 const questions = { 
     "course": [
@@ -38,19 +39,6 @@ const difficulty_questions = {
 ]
 }
 
-const review_tags = {
-    "course" : [
-        "empty tag",
-        ],
-        "instructor" :
-         ["Lots of Homework", 
-         "Tough Marker", 
-         "Approachable"
-        ],
-        "department" :
-         ["empty tag", 
-        ]
-}
 
 //TODO make the tags a variable list rather than static
 export default class ReviewForm extends Component { 
@@ -69,6 +57,7 @@ export default class ReviewForm extends Component {
             tag_1: "null",
             tag_2: "null",
             tag_3: "null",
+            tagCounter: 0,
         }
 
         this.handleInput = this.handleInput.bind(this);
@@ -76,6 +65,7 @@ export default class ReviewForm extends Component {
         this.submitReview = this.submitReview.bind(this); 
         this.loadTags = this.loadTags.bind(this);
         this.handleCheckboxToggle = this.handleCheckboxToggle.bind(this);
+        this.handleBadgeToggle = this.handleBadgeToggle.bind(this);
 
 
         this.printState= this.printState.bind(this);
@@ -135,7 +125,41 @@ export default class ReviewForm extends Component {
         }
     }//uncomment check state button in the form to check if this works
 
+    handleBadgeToggle(){ 
 
+        if (this.state.tagCounter == 0){ //if no tags, set 1
+
+        if (this.state.tag_1 =="null"){ 
+            this.setState({tag_1: obj.target.value}) //set to  the value 
+            console.log("Set : "+this.state.tag_1+" to : "+[obj.target.value])//check what is updated by the dropdown
+            this.setState({tagCounter: 1}) //set to  the value 
+        }
+
+    }
+    if (this.state.tagCounter == 1){ //if 1 tag, set 2
+        if (this.state.tag_2  == "null"){ 
+            this.setState({tag_2: obj.target.value}) //set to  the value 
+            console.log("Set : "+this.state.tag_2+" to : "+[obj.target.value])//check what is updated by the dropdown
+            this.setState({tagCounter: 2}) //set to  the value 
+        }
+    }
+        
+    if (this.state.tagCounter == 2){ //if 2 tags, set 3
+        if (this.state.tag_3  == "null"){ 
+            this.setState({tag_3: obj.target.value})
+            console.log("Set : "+this.state.tag_3+" to : "+[obj.target.value])//check what is updated by the dropdown
+            this.setState({tagCounter: 3}) //set to  the value  
+        }
+    }
+    
+
+    if (this.state.tagCounter == 3){ //if max tags. //remove first tag  and replace
+        this.setState({tag_1: obj.target.value}) //set to  the value 
+        console.log("Set : "+this.state.tag_1+" to : "+[obj.target.value])//check what is updated by the dropdown
+        this.setState({tagCounter: 2}) //set to  the value 
+    }
+
+    }
 
     printState(){
         let mySubject = this.props.review.substring(0, 1).toUpperCase() + this.props.review.substring(1, this.props.review.length);
@@ -147,6 +171,7 @@ export default class ReviewForm extends Component {
        console.log("Tag 1 : "+this.state.tag_1)
        console.log("Tag 2 : "+this.state.tag_2)
        console.log("Tag 3 : "+this.state.tag_3)
+       console.log("number of tags : "+this.state.tagCounter)
     }
     //TODO make this require fields 
     async submitReview (e){
@@ -222,7 +247,7 @@ export default class ReviewForm extends Component {
                             <FormGroup>
                                   {/*Form group for tags lists */}
                                   <FormText>Please select a tag. </FormText>
-                                  <Input name={"tag_1"} type ="select"   onClick = {this.handleTagInput} onChange = {this.handleTagInput}> 
+                                  <Input name={"tag_1"} type ="select" bsSize="sm" onClick = {this.handleTagInput} onChange = {this.handleTagInput}> 
                                   { this.state.tags !== null ? (
                                   
                                   this.state.tags.map((item, index) => (
@@ -239,7 +264,7 @@ export default class ReviewForm extends Component {
                                        <FormGroup>
                                   {/*Form group for tags lists */}
                                   <FormText>Please select a tag. </FormText>
-                                  <Input name={"tag_2"} type ="select"  onClick = {this.handleTagInput}  onChange = {this.handleTagInput}> 
+                                  <Input name={"tag_2"} type ="select" bsSize="sm" onClick = {this.handleTagInput}  onChange = {this.handleTagInput}> 
                                   { this.state.tags !== null ? (
                                   
                                   this.state.tags.map((item, index) => (
@@ -256,7 +281,7 @@ export default class ReviewForm extends Component {
                                        <FormGroup>
                                   {/*Form group for tags lists */}
                                   <FormText>Please select a tag. </FormText>
-                                  <Input name={"tag_3"} type ="select"   onClick = {this.handleTagInput} onChange = {this.handleTagInput}> 
+                                  <Input name={"tag_3"} type ="select" bsSize="sm" onClick = {this.handleTagInput} onChange = {this.handleTagInput}> 
                                   { this.state.tags !== null ? (
 
                                   this.state.tags.map((item, index) => (
@@ -269,7 +294,7 @@ export default class ReviewForm extends Component {
                                     }
                                     </Input>
                                        </FormGroup>
-                                           
+
                                        
                             <FormGroup>
                                 <Label for="exampleText"> <h5 className="title">Tell us what you thought about this {this.props.review}</h5></Label>
@@ -277,8 +302,7 @@ export default class ReviewForm extends Component {
                             </FormGroup>
 
                             <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
-                           <Button className="btn-round" size="lg" color="info" onClick={this.printState} outline>Get TAG </Button>  
-                           <Button className="btn-round" size="lg" color="danger" onClick={this.print} outline>Check tag status</Button> 
+                           
                         </Form>
                     : 
                     <div>
