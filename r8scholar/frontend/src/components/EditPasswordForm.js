@@ -121,10 +121,10 @@ export default class EditPasswordForm extends Component {
                 </Alert>
                 <h3 onClick={this.toggleMenu} style={{ display: "inline-block" }}>
                     Change Password
+                    {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
                 </h3>
-                {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
                 <Collapse isOpen={this.state.isOpen}>
-                    <div style={{ marginBottom: "2%" }}></div>
+                    <div style={{ marginBottom: "50px" }} />
                     <FormGroup>
                         <Label for="examplePassword">Old Password</Label>
                         <Input type="password" name="oldPassword" id="oldPassword" placeholder="Current Password" autoComplete="off" onChange={this.handleInput} />
@@ -170,6 +170,7 @@ export default class EditPasswordForm extends Component {
                     <Button color="primary" type="submit">
                         Change Password
                     </Button>
+                    <div style={{ marginBottom: "50px" }} />
                 </Collapse>
             </form>
         );

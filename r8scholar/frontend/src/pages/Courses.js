@@ -53,6 +53,7 @@ export default class Courses extends Component {
     };
 
     getEntries = async () => {
+        let time = Date.now();
         var requestType = () => {
             switch (this.state.sortOption) {
                 case "Rating: High to Low":
@@ -73,21 +74,25 @@ export default class Courses extends Component {
             }),
         };
 
-        await fetch("/api/filter-courselist/", request).then((response) => {
-            response.json().then((data) => {
-                if (this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High") {
-                    data = data.reverse();
-                }
-                var newMax = parseInt(Math.floor(data.length / this.state.perPage));
-                this.setState({
-                    displayedCourses: data,
-                    maxPage: newMax,
+        await fetch("/api/filter-courselist/", request)
+            .then((response) => {
+                response.json().then((data) => {
+                    if (this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High") {
+                        data = data.reverse();
+                    }
+                    var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1);
+                    this.setState({
+                        displayedCourses: data,
+                        maxPage: newMax,
+                    });
+                    this.state.displayedCourses.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item) => {
+                        this.getDepartmentRatings(item.department);
+                    });
                 });
-                this.state.displayedCourses.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item) => {
-                    this.getDepartmentRatings(item.department);
-                });
+            })
+            .finally(() => {
+                console.log(Date.now() - time);
             });
-        });
 
         this.setState({
             loaded: true,
@@ -97,15 +102,15 @@ export default class Courses extends Component {
     changePages(button) {
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
-            displayedCourses: null,
+            // displayedCourses: null,
             currentPage: Number(newPage),
         });
 
-        this.getEntries();
+        // this.getEntries();
 
-        this.setState({
-            loaded: true,
-        });
+        // this.setState({
+        //     loaded: true,
+        // });
     }
 
     activateMenu() {
@@ -177,7 +182,7 @@ export default class Courses extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage === 1} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -197,7 +202,7 @@ export default class Courses extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedCourses === null}>
+                                        <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage == this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -265,7 +270,7 @@ export default class Courses extends Component {
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example">
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -285,7 +290,7 @@ export default class Courses extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedCourses === null}>
+                            <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage == this.state.maxPage}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>

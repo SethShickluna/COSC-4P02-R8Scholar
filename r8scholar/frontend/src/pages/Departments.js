@@ -125,7 +125,7 @@ export default class Departments extends Component {
                     displayedDepartments: data,
                     maxPage: newMax,
                 });
-                this.state.displayedDepartments.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item) => {
+                this.state.displayedDepartments.map((item) => {
                     this.getTopInstructor(item.name);
                     this.getTopCourse(item.name);
                 });
@@ -139,14 +139,14 @@ export default class Departments extends Component {
     changePages(button) {
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
-            displayedDepartments: null,
+            // displayedDepartments: null,
             currentPage: Number(newPage),
         });
-        this.getEntries();
+        // this.getEntries();
 
-        this.setState({
-            loaded: true,
-        });
+        // this.setState({
+        //     loaded: true,
+        // });
     }
 
     activateMenu() {
@@ -214,7 +214,7 @@ export default class Departments extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage === 1} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -234,7 +234,7 @@ export default class Departments extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedDepartments === null}>
+                                        <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage == this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -297,7 +297,7 @@ export default class Departments extends Component {
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example">
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -317,7 +317,7 @@ export default class Departments extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedDepartments === null}>
+                            <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage == this.state.maxPage}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>

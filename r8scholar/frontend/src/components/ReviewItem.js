@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button, Row, Col, Label } from "reactstrap";
+import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button, Row, Col, Label, CardFooter } from "reactstrap";
 import StarRatings from "react-star-ratings";
 import ReportForm from "./ReportReviewForm";
 import EditForm from "./EditReviewForm";
@@ -13,6 +13,12 @@ const reviewTitle = {
     color: "black",
     fontSize: "25px",
     fontWeight: "300",
+};
+
+const tagStyle = {
+    maxInlineSize: "fit-content",
+    borderRadius: "15px",
+    height: "25px",
 };
 
 //props contains object called reviewItem containing
@@ -120,21 +126,31 @@ export default class ReviewItem extends Component {
                             <div style={{ float: "right" }}>
                                 <StarRatings rating={this.props.reviewItem.rating} starDimension="30px" starSpacing="10px" starRatedColor="#3498db" numberOfStars={5} name="instructorRating" />
                             </div>
-                            {this.props.reviewItem.tag_1 != null ? (
-                                <p>
-                                    and describes the {this.props.reviewItem.review_type} as {this.props.reviewItem.tag_1}
-                                    {this.props.reviewItem.tag_2 != null ? (
-                                        <p style={{ display: "inline" }}>
-                                            , {this.props.reviewItem.tag_2}
-                                            {this.props.reviewItem.tag_3 != null ? <p style={{ display: "inline" }}>, {this.props.reviewItem.tag_3}</p> : null}
-                                        </p>
-                                    ) : null}
-                                </p>
-                            ) : null}
                         </CardTitle>
                         <CardText>
                             <h5>{this.props.reviewItem.content}</h5>
                         </CardText>
+                        <CardFooter style={{ display: "grid", gridAutoFlow: "column", width: "min-content", gap: "20px" }}>
+                            {this.props.reviewItem.tag_1 != null ? (
+                                <>
+                                    <Button style={tagStyle} disabled>
+                                        <p style={{ marginTop: "-7px" }}>{this.props.reviewItem.tag_1}</p>
+                                    </Button>
+                                    {this.props.reviewItem.tag_2 != null ? (
+                                        <>
+                                            <Button style={tagStyle} disabled>
+                                                <p style={{ marginTop: "-7px" }}>{this.props.reviewItem.tag_2}</p>
+                                            </Button>
+                                            {this.props.reviewItem.tag_3 != null ? (
+                                                <Button style={tagStyle} disabled>
+                                                    <p style={{ marginTop: "-7px" }}>{this.props.reviewItem.tag_3}</p>
+                                                </Button>
+                                            ) : null}
+                                        </>
+                                    ) : null}
+                                </>
+                            ) : null}
+                        </CardFooter>
                     </CardBody>
                     <ListGroupItem>
                         <Row>

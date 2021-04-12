@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import StarRatings from "react-star-ratings";
 import { Container, Button, Row, Col, Table, Spinner } from "reactstrap";
 import { Link } from "react-router-dom";
+import PageBreak from "../components/PageBreak";
 
 export default class Home extends Component {
     constructor(props) {
@@ -121,7 +122,7 @@ export default class Home extends Component {
 
                 <Container fluid>
                     <div name="center-content">
-                        <Row align="center">
+                        <Row id="lists" align="center">
                             <Col>
                                 <div className="course-title">
                                     <h1>Top 5 Courses</h1>
@@ -160,7 +161,8 @@ export default class Home extends Component {
                                     </Link>
                                 </div>
                             </Col>
-                            <Col className="col-md-4">
+                            <PageBreak />
+                            <Col>
                                 <div className="instructor-title">
                                     <h1>Top 5 Instructors</h1>
                                 </div>
@@ -198,7 +200,8 @@ export default class Home extends Component {
                                     </Button>
                                 </Link>
                             </Col>
-                            <Col className="col-md-4">
+                            <PageBreak />
+                            <Col>
                                 <div className="department-title">
                                     <h1>Top 5 Departments</h1>
                                 </div>
@@ -238,16 +241,13 @@ export default class Home extends Component {
                             </Col>
                         </Row>
                     </div>
-
-                    <div style={{ marginTop: "5%" }}></div>
-
-                    <Row align="center">
+                    <PageBreak />
+                    <Row align="center" style={{ marginTop: "3%" }}>
                         <Col className="col-md-2" />
                         <Col className="col-md-8">
                             <div className="about-title">
                                 <h1>About Us</h1>
                             </div>
-
                             <div style={{ margin: "7% 0% 2% 0%" }} className="about-subtitle">
                                 <h2>Our Goal</h2>
                             </div>

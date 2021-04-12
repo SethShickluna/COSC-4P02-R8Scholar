@@ -46,101 +46,118 @@ table a {
     color: #f3f3f3 !important;
 }
 
-.dark .navbar {
-    background-color: #202020;
-}
-
 .dark .navbar .navbar-nav .nav-item .nav-link,
 .dark .navbar .navbar-brand,
 .dark h1 {
     color: #f3f3f3;
 }
 
-/* NAVBAR */
+/*============NAVBAR==========================================================*/
+
+.dark #root > div > div > .navbar.navbar-transparent {
+    background: transparent !important;
+}
+
 .dark #root > div > div > .navbar {
     background-color: #202020 !important;
 }
-
-.dark #root > div > div > .navbar.navbar-transparent {
-    background-color: transparent !important;
-}
-/* END */
-
-.dark input.form-control-md.form-control {
-    background-color: #d6d6d6;
-    color: black;
-}
+/*============================================================================*/
 
 .dark button.dropdown-item {
     background-color: #f1f1f1;
 }
 
-/* .dark #following > div > div > div > div > form > .btn-outline-success:hover {
-    background-color: #dc3545 !important;
-    border-color: #dc3545 !important;
-    color: black;
-} */
-
 /*PROFILE PAGE */
 .dark #root > div > div > div > div > div:nth-child(2) > div.col-sm-8 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link {
-    color: #f5593d !important;
+    color: #f0f0f0 !important;
 }
 /* END */
 
-/*REVIEW FORMS */
-.dark input,
-.dark #follows > div > div > div > div > div.card-header,
-.dark #follows > div > div > div > div > li,
-.dark #content,
-.dark #following > div > div > div > div > form > div > div > select,
-.dark #student-feedback > div > div > div > div > form > div > div > select {
-    background-color: #d6d6d6 !important;
+/*=====REVIEW_FORMS=============================================================*/
+.dark input {
+    background-color: #333333 !important;
+    color: #fff !important;
+    border-color: #333333 !important;
 }
-
-.dark .modal-content,
-.dark .modal-content button {
-    background-color: #f0f0f0 !important;
-}
-
-/* .dark .modal-content .btn-outline-info {
-    color: #dc3545;
-} */
-
-.dark .modal-content .btn-outline-info:hover {
-    color: #f0f0f0;
-    border-color: #f5593d !important;
-    background-color: #f5593d !important;
-}
-
-/* .dark button.btn-round.btn.btn-default.btn-block:hover {
-    color: #f0f0f0 !important;
-    background-color: #dc3545 !important;
-} */
-
-/* .dark button.btn-round.btn.btn-default.btn-block {
-    color: #dc3545 !important;
-} */
-
 .dark #follows > div > div > div > div > div.card-body {
     background-color: #f0f0f0;
 }
-
 .dark #root > div > div > div > div > div > div > nav > nav > ul > li.page-item.disabled,
 .dark #root > div > div > div > nav > nav > ul > li.page-item.disabled {
     mix-blend-mode: color-burn;
 }
-
 .dark h4,
 .dark h5 {
     color: #f1f1f1;
 }
-
 .dark .table td,
 .dark .table th {
     border-bottom: 1px solid #6c6c6c;
     border-top: 1px solid #6c6c6c;
 }
-
 .dark #follows > div > div > div > div > div.card-body > p > h5 {
     color: #6c6c6c !important;
+}
+
+.dark #follows > div > div > div > div > div.card-header,
+.dark #follows > div > div > div > div > li {
+    background-color: #e3e3e3;
+}
+
+.dark #follows > div > div > div > div > div.card-header,
+.dark #follows > div > div > div > div > li,
+.dark #following > div > div > div > div > form > div > div > select,
+.dark #student-feedback > div > div > div > div > form > div > div > select,
+.darl .form-control:focus,
+.dark input#title,
+textarea.form-control {
+    background-color: #b4b4b4 !important;
+}
+
+.dark .btn-primary.active {
+    background-color: #3f5a5a !important;
+}
+/*===========================================================================*/
+
+/*====THIS=IS=BROWSER=AUTOFILLING=INPUT=FIELDS===============================*/
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill,
+.dark textarea:-webkit-autofill:hover,
+.dark textarea:-webkit-autofill:focus,
+.dark select:-webkit-autofill,
+.dark select:-webkit-autofill:hover,
+.dark select:-webkit-autofill:focus {
+    border: 1px solid #333333;
+    -webkit-text-fill-color: #f1f1f1;
+    -webkit-box-shadow: 0 0 0px 1000px #333333 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/*===========PAGE_BREAK======================================================*/
+.dark .pageBreak {
+    box-shadow: 0px 0px 15px 0px #f1f1f1 !important;
+    background-color: #505050 !important;
+}
+/*===========================================================================*/
+/*==================MOBILE===================================================*/
+@media only screen and (max-width: 1100px) {
+    #root > div > div > div.container-fluid > div > #lists {
+        flex-flow: column;
+        flex-wrap: nowrap;
+        gap: 100px;
+        padding: 0px 0px 50px 0px;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1550px) {
+    #root > div > div > div.container-fluid > div > #lists {
+        flex-flow: column;
+        flex-wrap: nowrap;
+        gap: 100px;
+        padding: 0px 200px 50px 200px;
+        text-align: center;
+    }
 }

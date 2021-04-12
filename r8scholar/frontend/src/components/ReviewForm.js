@@ -180,9 +180,15 @@ export default class ReviewForm extends Component {
                                             );
                                         })}
                                     </ButtonGroup>
-                                    <Label for="exampleTags">
+                                    <Label for="exampleTags" style={{ paddingBottom: "30px" }}>
                                         <h5>
-                                            The {this.props.review} is {this.state.tagsSelected.join(", ")}
+                                            {this.state.tagsSelected.length > 0 ? (
+                                                <>
+                                                    The {this.props.review} is {this.state.tagsSelected.join(", ")}
+                                                </>
+                                            ) : (
+                                                <div>...</div>
+                                            )}
                                         </h5>
                                     </Label>
                                 </FormGroup>

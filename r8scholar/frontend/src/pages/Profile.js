@@ -113,7 +113,7 @@ export default class Profile extends Component {
                                         {/*insert image edit, accept image and input it */}
                                         <h1 style={{ textAlign: "center" }}>{this.state.user.nickname}</h1>
                                     </div>
-                                    <div style={pageBreak} /> {/* underline */}
+                                    <pageBreak /> {/* underline */}
                                     <div name="avg-rating-container">
                                         <div name="avg-rating-title">
                                             <h4 style={{ textAlign: "center" }}>Profile</h4>
@@ -128,7 +128,7 @@ export default class Profile extends Component {
                                             <img className="profile-pic" src={imageOne} style={imgStyle} />
                                         </div>
                                     </div>
-                                    <div style={pageBreak} /> {/* underline */}
+                                    <pageBreak /> {/* underline */}
                                 </Col>
 
                                 <Col style={{ marginTop: "53px" }} sm={8}>

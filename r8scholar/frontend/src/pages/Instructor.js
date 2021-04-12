@@ -1,6 +1,6 @@
 //npm modules
 import React, { Component } from "react";
-import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Spinner } from "reactstrap";
+import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Spinner, Progress } from "reactstrap";
 import { Link } from "react-router-dom";
 import cookie from "react-cookies";
 import StarRatings from "react-star-ratings";
@@ -9,6 +9,7 @@ import StarRatings from "react-star-ratings";
 import ReviewItem from "../components/ReviewItem";
 import ReviewForm from "../components/ReviewForm";
 import SecondaryNav from "../components/SecondaryNav";
+import PageBreak from "../components/PageBreak";
 
 //axios
 import axiosInstance from "../axiosApi";
@@ -26,15 +27,6 @@ const subRatingStyle = {
     border: "2px #7f8c8d",
 };
 
-const pageBreak = {
-    //this sets the margin for reviews and draws a line hovering under the titles
-    marginBottom: "2%",
-    marginTop: "2%",
-    height: "1px",
-    backgroundColor: "#dedede",
-    border: "none",
-};
-
 export default class Course extends Component {
     constructor(props) {
         super(props);
@@ -44,7 +36,7 @@ export default class Course extends Component {
             name: this.props.match.params.profName,
             department: null,
             rating: 0,
-            reviews: null,
+            reviews: [],
             instructors: [],
             courses: [],
             valid: false,
@@ -183,8 +175,17 @@ export default class Course extends Component {
                                             <StarRatings rating={this.state.rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
                                         </div>
                                     </div>
+                                    <div style={{ display: "grid", gridAutoFlow: "row", margin: "40px 0px 60px 0px", fontSize: "28px" }}>
+                                        <div style={{ fontWeight: "bolder" }}>Would you take another course with this instructor?</div>
+                                        <div className="progress-container progress-primary" style={{ margin: "20px" }}>
+                                            <span className="progress-badge">
+                                                80% of reviewers said {<div style={{ color: "#63d263", display: "inline", borderInline: "none", fontSize: "24px", fontWeight: "bolder" }}>yes</div>}
+                                            </span>
+                                            <Progress style={{ marginTop: "15px" }} striped max="100" value="80" barClassName="progress-bar-primary" />
+                                        </div>
+                                    </div>
                                     <div name="sub-rating-box" style={subRatingStyle}>
-                                        <div style={pageBreak} /> {/* underline */}
+                                        <PageBreak /> {/* underline */}
                                         <div style={{ marginTop: "25px" }} name="pop-prof-container">
                                             <div name="pop-professor-title">
                                                 <h3 style={{ textAlign: "center" }}>Popular Instructors</h3>
@@ -199,7 +200,7 @@ export default class Course extends Component {
                                                     : null}
                                             </div>
                                         </div>
-                                        <div style={pageBreak} /> {/* underline */}
+                                        <PageBreak /> {/* underline */}
                                         <div style={{ marginTop: "25px" }} name="pop-course-container">
                                             <div name="pop-course-title">
                                                 <h3 style={{ textAlign: "center" }}>Popular Courses</h3>
@@ -214,7 +215,7 @@ export default class Course extends Component {
                                                     : null}
                                             </div>
                                         </div>
-                                        <div style={pageBreak} /> {/* underline */}
+                                        <PageBreak /> {/* underline */}
                                         <div style={{ marginTop: "25px" }} name="pop-course-container">
                                             <div name="pop-course-title">
                                                 <h3 style={{ textAlign: "center" }}>
@@ -223,15 +224,7 @@ export default class Course extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div style={pageBreak} /> {/* underline */}
-                                    <div style={{ display: "grid", gridAutoFlow: "column", margin: "20px 60px 20px 60px", fontSize: "38px" }}>
-                                        <div>Total reviews</div>
-                                        <div style={{ justifySelf: "right" }}>0</div>
-                                    </div>
-                                    <div style={{ display: "grid", gridAutoFlow: "column", margin: "20px 60px 20px 60px", fontSize: "22px" }}>
-                                        <div>How many students would take another course?</div>
-                                        <div style={{ justifySelf: "right", marginRight: "-30px", fontSize: "38px" }}>0%</div>
-                                    </div>
+                                    <PageBreak /> {/* underline */}
                                 </Col>
                                 <Col md={6}>
                                     {" "}

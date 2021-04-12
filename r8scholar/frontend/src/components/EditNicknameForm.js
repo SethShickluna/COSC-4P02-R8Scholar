@@ -96,10 +96,10 @@ export default class EditNicknameForm extends Component {
                 </Alert>
                 <h3 onClick={this.toggleMenu} style={{ display: "inline-block" }}>
                     Change Nickname
+                    {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
                 </h3>
-                {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
                 <Collapse isOpen={this.state.isOpen}>
-                    <div style={{ marginBottom: "2%" }}></div>
+                    <div style={{ marginBottom: "50px" }} />
                     <FormGroup>
                         <Label for="nickname">New Nickname</Label>
                         <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
@@ -121,10 +121,10 @@ export default class EditNicknameForm extends Component {
                         <Label for="password">Password</Label>
                         <Input type="password" name="password" id="password" placeholder="New Password" autoComplete="off" onChange={this.handleInput} />
                     </FormGroup>
-
                     <Button color="primary" type="submit">
                         Change Nickname
                     </Button>
+                    <div style={{ marginBottom: "50px" }} />
                 </Collapse>
             </form>
         );

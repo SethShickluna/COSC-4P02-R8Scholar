@@ -177,7 +177,7 @@ export default class Courses extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedInstructors === null || this.state.currentPage === 1} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -197,7 +197,7 @@ export default class Courses extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedInstructors === null}>
+                                        <PaginationItem disabled={this.state.displayedInstructors === null || this.state.currentPage == this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -265,7 +265,7 @@ export default class Courses extends Component {
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example">
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedInstructors === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedInstructors === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -285,7 +285,7 @@ export default class Courses extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedInstructors === null}>
+                            <PaginationItem disabled={this.state.displayedInstructors === null || this.state.currentPage == this.state.maxPage}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>
