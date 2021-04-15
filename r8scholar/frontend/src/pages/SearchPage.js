@@ -17,7 +17,11 @@ export default class SearchPage extends Component {
             results:[], 
             currentPage: 1,
             loaded: false, 
+            perPage :20,//50 results per page 
+            maxPage:1, //DEFAULT MAX 1 PAGE
         };
+
+        this.changePages = this.changePages.bind(this);
     }
 
     componentDidMount(){
@@ -29,9 +33,10 @@ export default class SearchPage extends Component {
         .then((response) => {
             return response.json(); 
         }).then((data) => {
-            const combinedResults = data.Department.concat(data.Instructor, data.Course)
+            const combinedResults = data.Department.concat(data.Instructor, data.Course) //check this 
             this.setState({
                 results: combinedResults, 
+                maxPage : newMax, 
             })
         }); 
         this.setState({loaded:true}); 
@@ -53,6 +58,20 @@ export default class SearchPage extends Component {
             return "Instructor";  
         }
         return "Department"; 
+    }
+
+    changePages(button) {
+        var newPage = button.target.id; //reads the id of the pressed button
+        this.setState({
+            // results : null,//maybe this line is out to not set null
+            currentPage: Number(newPage),
+        });
+        //removed the this.getEntries
+        this.setState({
+            loaded: true,
+        });
+        console.log("Results for this page : "+this.state.results.length)
+        console.log("The number of pages : "+this.state.maxPage)
     }
 
     render() {
@@ -79,28 +98,28 @@ export default class SearchPage extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem color="danger">
-                                            <PaginationLink onClick={this.changePages}href="#">
+                                        <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
+                                            <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.currentPage - 1 < 1}>
-                                            <PaginationLink onClick={this.changePages} href="#">
-                                                {this.state.currentPage - 1}
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage - 1}>
+                                                {"<"}
                                             </PaginationLink>
-                                        </PaginationItem >
+                                        </PaginationItem>
                                         <PaginationItem className="active">
                                             <PaginationLink onClick={this.changePages} href="#">
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
-                                            <PaginationLink onClick={this.changePages} href="#">
-                                                {this.state.currentPage + 1}
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage + 1}>
+                                                {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem>
-                                            <PaginationLink onClick={this.changePages} href='#'>
+                                        <PaginationItem disabled={this.state.displayedCourses === null}>
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
                                         </PaginationItem>
@@ -113,27 +132,30 @@ export default class SearchPage extends Component {
                     <Row style={{marginTop:'2%'}} align="center">
                         <Col className="col-md-1"/>
                         <Col className="col-md-10">
-                            {this.state.results.length == 0 || this.state.results === null?
-                            <div>
-                                <h3>No matching results found.</h3>
-                                <h5><Link><a>Return Home</a></Link></h5>
-                            </div>
-                           :<Table striped>
-                               <thead>
+                        <Table striped>
+                                <thead>
                                     <th>Result</th>
                                     <th>Name</th>
                                     <th>Type / Full Name</th>
                                     <th>Rating</th>
-                               </thead>
-                               <tbody>
-                                   {this.state.loaded ? 
-                                    this.state.results.map((item, index) =>{
-                                        return(
-                                            <tr key={index}>  
-                                            <th>{index + 1}</th>                                     
-                                            <th><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></th>
-                                            <th>{this.getName(item)}</th>
-                                            <th style={{minWidth:"100px"}}><StarRatings
+                                </thead>
+                                <tbody>
+                                    {this.state.results === null ? (
+                                        <Spinner color="dark" />
+                                    ) : (
+                                        this.state.results.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item, index) => {
+                                            {
+                                                /**5 search results */
+                                            }
+                                            return (
+                                                <tr key={index}>
+                                                    <th>{(this.state.currentPage - 1) * this.state.perPage + index + 1}</th>
+                                                    <th><a style={linkStyle} href={"/"+this.determineType(item)}>{item.name}</a></th>
+                                                    
+                                                    <th>{this.getName(item)}</th>
+
+                                                    <th style={{minWidth:"100px"}}>
+                                                <StarRatings
                                                 rating={item.rating}
                                                 starDimension="25px"
                                                 starSpacing="5px"
@@ -141,15 +163,47 @@ export default class SearchPage extends Component {
                                                 numberOfStars={5}
                                                 name='avgRating'/>
                                             </th>
-                                        </tr>
-                                        ); 
-                                    })
-                                   :<Spinner color="black"/>}
-                               </tbody>
-                           </Table>}
+
+                                                </tr>
+                                            );
+                                        })
+                                    )}
+                                </tbody>
+                            </Table>
                         </Col>
                         <Col className="col-md-1"/>
                     </Row>
+                    <div>
+                                <nav aria-label="Page navigation example">
+                                    <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                                        <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
+                                            <PaginationLink onClick={this.changePages} href="#" id="1">
+                                                First
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem disabled={this.state.currentPage - 1 < 1}>
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage - 1}>
+                                                {"<"}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem className="active">
+                                            <PaginationLink onClick={this.changePages} href="#">
+                                                {this.state.currentPage}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem disabled={this.state.currentPage + 1 > this.state.maxPage}>
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.currentPage + 1}>
+                                                {">"}
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                        <PaginationItem disabled={this.state.displayedCourses === null}>
+                                            <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
+                                                Last
+                                            </PaginationLink>
+                                        </PaginationItem>
+                                    </Pagination>
+                                </nav>
+                            </div>
                     
                 </Container>
                     
