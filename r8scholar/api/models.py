@@ -276,8 +276,8 @@ class Comment(models.Model):
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
     #Fields to keep track of who has thumbs upped or thumbs downed a comment
-    users_thumbs_upped = models.ManyToManyField(CustomUser,related_name='users_thumbs_upped')
-    users_thumbs_downed = models.ManyToManyField(CustomUser,related_name='users_thumbs_downed')
+    users_thumbs_upped = models.ManyToManyField(CustomUser,related_name='c_users_thumbs_upped')
+    users_thumbs_downed = models.ManyToManyField(CustomUser,related_name='c_users_thumbs_downed')
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
     date_created = models.DateField(auto_now=True)
     numb_reports = models.IntegerField(default=0)
