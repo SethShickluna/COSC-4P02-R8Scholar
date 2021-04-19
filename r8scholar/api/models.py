@@ -242,6 +242,9 @@ class Review(models.Model):
     #Fields for giving other users ability to thumbs up/down a review
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
+    #Fields to keep track of who has thumbs upped or thumbs downed a review
+    users_thumbs_upped = models.ManyToManyField(CustomUser,related_name='users_thumbs_upped')
+    users_thumbs_downed = models.ManyToManyField(CustomUser,related_name='users_thumbs_downed')
     #Each review can have three tags
     tag_1 = models.CharField(max_length=100, default=None)
     tag_2 = models.CharField(max_length=100, default=None)
@@ -272,6 +275,9 @@ class Comment(models.Model):
     #Fields for giving other users ability to thumbs up/down a comment
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
+    #Fields to keep track of who has thumbs upped or thumbs downed a comment
+    users_thumbs_upped = models.ManyToManyField(CustomUser,related_name='users_thumbs_upped')
+    users_thumbs_downed = models.ManyToManyField(CustomUser,related_name='users_thumbs_downed')
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
     date_created = models.DateField(auto_now=True)
     numb_reports = models.IntegerField(default=0)

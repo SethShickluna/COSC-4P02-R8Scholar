@@ -17,30 +17,51 @@ class ThumbsUpDown(APIView):
         #Data from frontend
         data = json.loads(request.body.decode("utf-8"))
         comment_id = data['comment_id']
+        email = data['email']
         up_or_down = data['up_or_down']
-        add_or_remove = data['add_or_remove']
         try:
             comment = Comment.objects.get(comment_id=comment_id)
         except Comment.DoesNotExist:
             return Response({'Bad Request': 'comment doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return Response({'Bad Request': 'User doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
         if(up_or_down=='up'):
-            if(add_or_remove=='add'):
+            #Check if user already thumbs upped this comment
+            if(comment.users_thumbs_upped.filter(email=email)):
+                return Response({'OK':'comment not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+            #Check if user has already thumbs downed this comment
+            elif(comment.users_thumbs_downed.filter(email=email)):
+                comment.users_thumbs_downed.remove(user)
+                comment.thumbs_down -=1 if comment.thumbs_down > 0 else 0
                 comment.thumbs_up +=1
                 comment.save()
-                return Response({'OK':'comment updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
-            elif(add_or_remove=='remove'):
-                comment.thumbs_up -=1 if comment.thumbs_up > 0 else 0
+                comment.users_thumbs_upped.add(user)
+                return Response({'OK':'comment updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
+            #User has not rated this comment before
+            else:
+                comment.thumbs_up +=1
+                comment.users_thumbs_upped.add(user)
                 comment.save()
-                return Response({'OK':'comment updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+                return Response({'OK':'comment updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
         elif(up_or_down=='down'):
-            if(add_or_remove=='add'):
+            #Check if user has already thumbs downed this comment
+            if(comment.users_thumbs_downed.filter(email=email)):
+                return Response({'OK':'comment not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+            elif(comment.users_thumbs_upped.filter(email=email)):
+                comment.users_thumbs_upped.remove(user)
+                comment.thumbs_up -=1 if comment.thumbs_up > 0 else 0
                 comment.thumbs_down +=1
                 comment.save()
-                return Response({'OK':'comment updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
-            elif(add_or_remove=='remove'):
-                comment.thumbs_down -=1 if comment.thumbs_up > 0 else 0
+                comment.users_thumbs_downed.add(user)
+                return Response({'OK':'comment updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
+            #User has not rated this comment before
+            else:
+                comment.thumbs_down +=1
+                comment.users_thumbs_downed.add(user)
                 comment.save()
-                return Response({'OK':'comment updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+                return Response({'OK':'comment updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
         else:
             return Response({'Bad Request': 'up_or_down data invalid'}, status=status.HTTP_400_BAD_REQUEST)
 

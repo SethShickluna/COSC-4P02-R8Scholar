@@ -18,30 +18,51 @@ class ThumbsUpDown(APIView):
         #Data from frontend
         data = json.loads(request.body.decode("utf-8"))
         review_id = data['review_id']
+        email = data['email']
         up_or_down = data['up_or_down']
-        add_or_remove = data['add_or_remove']
         try:
             review = Review.objects.get(review_id=review_id)
         except Review.DoesNotExist:
             return Response({'Bad Request': 'Review doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return Response({'Bad Request': 'User doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
         if(up_or_down=='up'):
-            if(add_or_remove=='add'):
+            #Check if user already thumbs upped this review
+            if(review.users_thumbs_upped.filter(email=email)):
+                return Response({'OK':'Review not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+            #Check if user has already thumbs downed this review
+            elif(review.users_thumbs_downed.filter(email=email)):
+                review.users_thumbs_downed.remove(user)
+                review.thumbs_down -=1 if review.thumbs_down > 0 else 0
                 review.thumbs_up +=1
                 review.save()
-                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
-            elif(add_or_remove=='remove'):
-                review.thumbs_up -=1 if review.thumbs_up > 0 else 0
+                review.users_thumbs_upped.add(user)
+                return Response({'OK':'Review updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
+            #User has not rated this review before
+            else:
+                review.thumbs_up +=1
+                review.users_thumbs_upped.add(user)
                 review.save()
-                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+                return Response({'OK':'Review updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
         elif(up_or_down=='down'):
-            if(add_or_remove=='add'):
+            #Check if user has already thumbs downed this review
+            if(review.users_thumbs_downed.filter(email=email)):
+                return Response({'OK':'Review not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+            elif(review.users_thumbs_upped.filter(email=email)):
+                review.users_thumbs_upped.remove(user)
+                review.thumbs_up -=1 if review.thumbs_up > 0 else 0
                 review.thumbs_down +=1
                 review.save()
-                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
-            elif(add_or_remove=='remove'):
-                review.thumbs_down -=1 if review.thumbs_up > 0 else 0
+                review.users_thumbs_downed.add(user)
+                return Response({'OK':'Review updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
+            #User has not rated this review before
+            else:
+                review.thumbs_down +=1
+                review.users_thumbs_downed.add(user)
                 review.save()
-                return Response({'OK':'Review updated with thumbs'+up_or_down}, status=status.HTTP_200_OK)
+                return Response({'OK':'Review updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
         else:
             return Response({'Bad Request': 'up_or_down data invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -53,17 +74,28 @@ class ReportReview(APIView):
         #Data from frontend
         review_id = data['review_id']
         report_description = data['report_description']
+        email = data['email']
         try:
             #Get data on review that was reported
             review = Review.objects.get(review_id=review_id)
         except Review.DoesNotExist:
             return Response({'Bad Request': 'Review doesnt exist...'}, status=status.HTTP_400_BAD_REQUEST)
+        #Get data on user who reported review
+        try:
+            user_reported = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return Response({'Bad Request': 'User doesnt exist with email: '+email}, status=status.HTTP_400_BAD_REQUEST)
+        #Ensure the same user can't report a review multiple times
+        if(user_reported in review.users_reported.all()):
+            return Response({'Bad Request': f'User : {email} has already reported this review'}, status=status.HTTP_400_BAD_REQUEST)
         #Get data on user who created the review
         user = review.reviewer
         #Increment report counter
         review.numb_reports += 1
+        #Store user who reported review
+        review.users_reported.add(user_reported)
         review.save()
-        email_r8scholar(review_id,report_description,review.numb_reports,user.email,user.nickname,review.subject,review.title,review.content)
+        email_r8scholar(review_id,report_description,review.numb_reports,user.email,user.nickname,review.subject,review.title,review.content,review.date_created)
         return Response({'OK':'Report message sent'}, status=status.HTTP_201_CREATED)
 
 #Deletes an existing review
