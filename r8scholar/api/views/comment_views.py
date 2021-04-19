@@ -30,7 +30,10 @@ class ThumbsUpDown(APIView):
         if(up_or_down=='up'):
             #Check if user already thumbs upped this comment
             if(comment.users_thumbs_upped.filter(email=email)):
-                return Response({'OK':'comment not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+                comment.thumbs_up -= 1
+                comment.users_thumbs_upped.remove(user)
+                comment.save()
+                return Response({'OK':'thumbs '+up_or_down+' removed'}, status=status.HTTP_200_OK)
             #Check if user has already thumbs downed this comment
             elif(comment.users_thumbs_downed.filter(email=email)):
                 comment.users_thumbs_downed.remove(user)
@@ -48,7 +51,10 @@ class ThumbsUpDown(APIView):
         elif(up_or_down=='down'):
             #Check if user has already thumbs downed this comment
             if(comment.users_thumbs_downed.filter(email=email)):
-                return Response({'OK':'comment not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+                comment.thumbs_down -=1
+                comment.users_thumbs_downed.remove(user)
+                comment.save()
+                return Response({'OK':'thumbs '+up_or_down+' removed'}, status=status.HTTP_200_OK)
             elif(comment.users_thumbs_upped.filter(email=email)):
                 comment.users_thumbs_upped.remove(user)
                 comment.thumbs_up -=1 if comment.thumbs_up > 0 else 0

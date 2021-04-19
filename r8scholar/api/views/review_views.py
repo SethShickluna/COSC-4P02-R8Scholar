@@ -31,14 +31,17 @@ class ThumbsUpDown(APIView):
         if(up_or_down=='up'):
             #Check if user already thumbs upped this review
             if(review.users_thumbs_upped.filter(email=email)):
-                return Response({'OK':'Review not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+                review.thumbs_up -= 1
+                review.users_thumbs_upped.remove(user)
+                review.save()
+                return Response({'OK':'thumbs '+up_or_down+' removed'}, status=status.HTTP_200_OK)
             #Check if user has already thumbs downed this review
             elif(review.users_thumbs_downed.filter(email=email)):
                 review.users_thumbs_downed.remove(user)
                 review.thumbs_down -=1 if review.thumbs_down > 0 else 0
                 review.thumbs_up +=1
-                review.save()
                 review.users_thumbs_upped.add(user)
+                review.save()
                 return Response({'OK':'Review updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
             #User has not rated this review before
             else:
@@ -49,13 +52,16 @@ class ThumbsUpDown(APIView):
         elif(up_or_down=='down'):
             #Check if user has already thumbs downed this review
             if(review.users_thumbs_downed.filter(email=email)):
-                return Response({'OK':'Review not updated since user already did thumbs: '+up_or_down}, status=status.HTTP_200_OK)
+                review.thumbs_down -=1
+                review.users_thumbs_downed.remove(user)
+                review.save()
+                return Response({'OK':'thumbs '+up_or_down+' removed'}, status=status.HTTP_200_OK)
             elif(review.users_thumbs_upped.filter(email=email)):
                 review.users_thumbs_upped.remove(user)
                 review.thumbs_up -=1 if review.thumbs_up > 0 else 0
                 review.thumbs_down +=1
-                review.save()
                 review.users_thumbs_downed.add(user)
+                review.save()
                 return Response({'OK':'Review updated with thumbs '+up_or_down}, status=status.HTTP_200_OK)
             #User has not rated this review before
             else:
