@@ -127,6 +127,7 @@ class EditReviewView(APIView):
         title = data['title']
         content = data['content']
         rating = data['rating']
+        diff_rating = data['diff_rating']
         would_take_again = data['would_take_again']
         tag_1 = data['tag_1']
         tag_2 = data['tag_2']
@@ -154,6 +155,7 @@ class EditReviewView(APIView):
         review.title = pf.censor(title)
         review.content = pf.censor(content)
         review.rating = rating
+        review.diff_rating = diff_rating
         review.would_take_again = would_take_again
         review.tag_1 = tag_1
         review.tag_2 = tag_2
