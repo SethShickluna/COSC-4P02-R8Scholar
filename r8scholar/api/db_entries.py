@@ -3,10 +3,7 @@
 
 #-----running this script -----# 
 # 1. cd into /r8scholar (directory with manage.py)
-# 2. run the command --> python3 manage.py shell (this runs a python shell in our django environment)
-# 3. run this command the execute the script exec(open("./api/db_entries.py").read()) 
-from api.models import Instructor, Course, Department, Tags
-
+# 2. run the command --> python3 manage.py shell < "./api/db_entries.py" (this runs a python shell in our django environment)
 
 class ModelGenerator:
     
@@ -18,6 +15,7 @@ class ModelGenerator:
         
 
     def generate(self, data):
+        from api.models import Instructor, Course, Department, Tags
         model = None
         if self.type == "Department": 
             model = Department(name=data[0].strip(), courses_rating=0, instructors_rating=0, rating=0)
@@ -47,7 +45,7 @@ class ModelGenerator:
 
 
 
-if __name__ == "builtins": 
+if __name__ == "django.core.management.commands.shell": 
     ModelGenerator('./api/data/departments.txt', "Department") #make departments first cause dependencies
     ModelGenerator('./api/data/instructors.txt', "Instructor") #make instructor next 
     ModelGenerator('./api/data/courses.txt', "Course") #courses need departments and instructors 
