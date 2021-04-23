@@ -7,6 +7,7 @@ import {Button, Form, FormText, FormGroup, Label,
 import {Link} from 'react-router-dom';
 import cookie from 'react-cookies'; 
 import axiosInstance from "../axiosApi"; 
+import { Badge } from 'reactstrap';
 
 const questions = { 
     "course": [
@@ -38,19 +39,6 @@ const difficulty_questions = {
 ]
 }
 
-const review_tags = {
-    "course" : [
-        "empty tag",
-        ],
-        "instructor" :
-         ["Lots of Homework", 
-         "Tough Marker", 
-         "Approachable"
-        ],
-        "department" :
-         ["empty tag", 
-        ]
-}
 
 //TODO make the tags a variable list rather than static
 export default class ReviewForm extends Component { 
@@ -69,16 +57,20 @@ export default class ReviewForm extends Component {
             tag_1: "null",
             tag_2: "null",
             tag_3: "null",
+            tagCounter: 0,
         }
 
         this.handleInput = this.handleInput.bind(this);
+        this.handleTagInput = this.handleTagInput.bind(this);
         this.submitReview = this.submitReview.bind(this); 
         this.loadTags = this.loadTags.bind(this);
         this.handleCheckboxToggle = this.handleCheckboxToggle.bind(this);
+        this.handleBadgeToggle = this.handleBadgeToggle.bind(this);
+
+
         this.printState= this.printState.bind(this);
-        this.changeTag1 = this.changeTag1.bind(this); 
-        this.changeTag2 = this.changeTag2.bind(this); 
-        this.changeTag3 = this.changeTag3.bind(this); 
+        this.print= this.print.bind(this);
+
     }
 
     async componentDidMount(){
@@ -87,19 +79,29 @@ export default class ReviewForm extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({reviewer:user});
-            return user;
         }catch(error){
             //user is not logged in 
         }
-        console.log(props.name);
-        this.loadTags(props.name);
+ 
+        try{
+            let mySubject = this.props.review.substring(0, 1).toUpperCase() + this.props.review.substring(1, this.props.review.length);
+            let response = await axiosInstance.get("/get-tags/?subject="+mySubject); 
+            const list = response.data; 
+            this.setState({tags: list});
+        }catch(error){
+            //tags not found (this should never happen)
+        }
     }
-
-    async loadTags(type){ 
+    
+    async loadTags(){ 
         console.log("hi")
         try{
-            let response = await axiosInstance.get("/get-tags/?subject="+type); 
-            this.setState({tags: response.data});
+            let mySubject = this.props.review.substring(0, 1).toUpperCase() + this.props.review.substring(1, this.props.review.length);
+            let response = await axiosInstance.get("/get-tags/?subject="+mySubject); 
+            console.log(response);
+            const tagsList = response.data; 
+            this.setState({tags: tagsList});
+            
             return response.status;
         }catch(error){
             throw error; 
@@ -110,6 +112,11 @@ export default class ReviewForm extends Component {
         this.setState({[obj.target.name]: obj.target.value}); 
     }
 
+    handleTagInput(obj){
+        this.setState({[obj.target.name]: obj.target.value}); 
+        console.log("Set : "+[obj.target.name]+" to : "+[obj.target.value])//check what is updated by the dropdown
+    }
+
     handleCheckboxToggle(){ 
         if (this.state.would_take_again == false){ 
             this.setState({would_take_again : true})
@@ -118,15 +125,53 @@ export default class ReviewForm extends Component {
         }
     }//uncomment check state button in the form to check if this works
 
-    getAllTags(){ 
-        this.loadTags(this.props.review) //trying to get a type passed
+    handleBadgeToggle(){ 
+
+        if (this.state.tagCounter == 0){ //if no tags, set 1
+
+        if (this.state.tag_1 =="null"){ 
+            this.setState({tag_1: obj.target.value}) //set to  the value 
+            console.log("Set : "+this.state.tag_1+" to : "+[obj.target.value])//check what is updated by the dropdown
+            this.setState({tagCounter: 1}) //set to  the value 
+        }
+
+    }
+    if (this.state.tagCounter == 1){ //if 1 tag, set 2
+        if (this.state.tag_2  == "null"){ 
+            this.setState({tag_2: obj.target.value}) //set to  the value 
+            console.log("Set : "+this.state.tag_2+" to : "+[obj.target.value])//check what is updated by the dropdown
+            this.setState({tagCounter: 2}) //set to  the value 
+        }
+    }
+        
+    if (this.state.tagCounter == 2){ //if 2 tags, set 3
+        if (this.state.tag_3  == "null"){ 
+            this.setState({tag_3: obj.target.value})
+            console.log("Set : "+this.state.tag_3+" to : "+[obj.target.value])//check what is updated by the dropdown
+            this.setState({tagCounter: 3}) //set to  the value  
+        }
+    }
+    
+
+    if (this.state.tagCounter == 3){ //if max tags. //remove first tag  and replace
+        this.setState({tag_1: obj.target.value}) //set to  the value 
+        console.log("Set : "+this.state.tag_1+" to : "+[obj.target.value])//check what is updated by the dropdown
+        this.setState({tagCounter: 2}) //set to  the value 
     }
 
-    printState(){ 
-        console.log("tag 1 : "+this.state.tag_1)
-        console.log("tag 2 : "+this.state.tag_2)
-        console.log("tag 3 : "+this.state.tag_3)
+    }
 
+    printState(){
+        let mySubject = this.props.review.substring(0, 1).toUpperCase() + this.props.review.substring(1, this.props.review.length);
+        this.loadTags(); 
+        console.log("tag subject: "+mySubject)
+    }
+
+    print(){ 
+       console.log("Tag 1 : "+this.state.tag_1)
+       console.log("Tag 2 : "+this.state.tag_2)
+       console.log("Tag 3 : "+this.state.tag_3)
+       console.log("number of tags : "+this.state.tagCounter)
     }
     //TODO make this require fields 
     async submitReview (e){
@@ -154,35 +199,7 @@ export default class ReviewForm extends Component {
         }              
     }
 
-    changeTag1(){ 
-        if (this.state.tag_1 == "null"){ 
-            this.setState({tag_1 : "Lots of homework"})
-            console.log("set 1");
-        }else{ 
-            this.setState({tag_1 : "null"}) //reset to null
-            console.log("unset 1");
-        }
-    }
 
-    changeTag2(){ 
-        if (this.state.tag_2 == "null"){ 
-            this.setState({tag_2 : "Tough Marker"})
-            console.log("set 2");
-        }else{ 
-            this.setState({tag_2 : "null"}) //reset to null
-            console.log("unset 2");
-        }
-    }
-
-    changeTag3(){ 
-        if (this.state.tag_3 == "null"){ 
-            this.setState({tag_3 : "Approachable"})
-            console.log("set 3");
-        }else{ 
-            this.setState({tag_3 : "null"}) //reset to null
-            console.log("unset 3");
-        }
-    }
 
     render() { 
         return( 
@@ -223,36 +240,61 @@ export default class ReviewForm extends Component {
                                         <option>5</option>
                                     </Input> </div>
                                 ))}
-                            </FormGroup>
+                            </FormGroup> 
 
+                            Please select up to 3 tags.
+                            
                             <FormGroup>
-                                  <Label check>
-                                      <Input name={"would_take_again"} onChange ={this.handleCheckboxToggle} type="checkbox"  />
-                                       Would you recommend/re-take this {this.props.review}?
-                                       </Label>
-                                       </FormGroup> 
-
-                                       <FormGroup tag="fieldset">
-                                       <legend>Tags</legend>
-                                       <Label check>
-                                      <Input name={"tag_1"} onChange ={this.changeTag1} type="checkbox"  />
-                                      Lots of homework 
-                                       </Label>
+                                  {/*Form group for tags lists */}
+                                  <FormText>Please select a tag. </FormText>
+                                  <Input name={"tag_1"} type ="select" bsSize="sm" onClick = {this.handleTagInput} onChange = {this.handleTagInput}> 
+                                  { this.state.tags !== null ? (
+                                  
+                                  this.state.tags.map((item, index) => (
+                                       <option key={index}> {item.description}</option> 
+                                       
+                                       ))
+                                  ):(
+                                      <option> No tags available...</option> 
+                                  )
+                                    }
+                                    </Input>
                                        </FormGroup>
 
                                        <FormGroup>
-                                       <Label check>
-                                      <Input name={"tag_2"} onChange ={this.changeTag2} type="checkbox"  />
-                                      Tough Marker 
-                                       </Label>
+                                  {/*Form group for tags lists */}
+                                  <FormText>Please select a tag. </FormText>
+                                  <Input name={"tag_2"} type ="select" bsSize="sm" onClick = {this.handleTagInput}  onChange = {this.handleTagInput}> 
+                                  { this.state.tags !== null ? (
+                                  
+                                  this.state.tags.map((item, index) => (
+                                       <option key={index}> {item.description}</option> 
+                                       
+                                       ))
+                                  ):(
+                                      <option> No tags available...</option> 
+                                  )
+                                    }
+                                    </Input>
                                        </FormGroup>
+
                                        <FormGroup>
-                                       <Label check>
-                                      <Input name={"tag_3"} onChange ={this.changeTag3} type="checkbox"  />
-                                      Approachable
-                                       </Label>
+                                  {/*Form group for tags lists */}
+                                  <FormText>Please select a tag. </FormText>
+                                  <Input name={"tag_3"} type ="select" bsSize="sm" onClick = {this.handleTagInput} onChange = {this.handleTagInput}> 
+                                  { this.state.tags !== null ? (
+
+                                  this.state.tags.map((item, index) => (
+                                       <option key={index}> {item.description}</option> 
+                                       
+                                       ))
+                                  ):(
+                                      <option> No tags available...</option> 
+                                  )
+                                    }
+                                    </Input>
                                        </FormGroup>
-                                           
+
                                        
                             <FormGroup>
                                 <Label for="exampleText"> <h5 className="title">Tell us what you thought about this {this.props.review}</h5></Label>
@@ -260,7 +302,7 @@ export default class ReviewForm extends Component {
                             </FormGroup>
 
                             <Button className="btn-round" size="lg" color="success" type="submit" outline>Submit</Button>
-                           <Button className="btn-round" size="lg" color="info" onClick={this.printState} outline>check state</Button>  
+                           
                         </Form>
                     : 
                     <div>
