@@ -120,8 +120,10 @@ export default class ReviewForm extends Component {
     handleCheckboxToggle(){ 
         if (this.state.would_take_again == false){ 
             this.setState({would_take_again : true})
+            console.log("Set to true ");
         }else{ 
             this.setState({would_take_again : false})
+            console.log("Set to false ");
         }
     }//uncomment check state button in the form to check if this works
 
@@ -168,10 +170,19 @@ export default class ReviewForm extends Component {
     }
 
     print(){ 
-       console.log("Tag 1 : "+this.state.tag_1)
-       console.log("Tag 2 : "+this.state.tag_2)
-       console.log("Tag 3 : "+this.state.tag_3)
-       console.log("number of tags : "+this.state.tagCounter)
+        console.log("nickname : "+this.state.reviewer.nickname);
+        console.log("Subject : "+this.props.name);
+        console.log("Title : "+this.state.title); 
+        console.log("Content: "+this.state.content); 
+        console.log("rating1  : "+this.state.rating1); 
+        console.log("rating2 : "+this.state.rating2); 
+        console.log("rating3 : "+this.state.rating3); 
+        console.log("Type : "+this.props.review)
+        console.log("Difficulty : "+this.state.difficulty_rating);
+        console.log("WTA? : "+this.state.would_take_again);
+       console.log("Tag 1 : "+this.state.tag_1);
+       console.log("Tag 2 : "+this.state.tag_2);
+       console.log("Tag 3 : "+this.state.tag_3);
     }
     //TODO make this require fields 
     async submitReview (e){
@@ -186,7 +197,7 @@ export default class ReviewForm extends Component {
                 rating: overallRating, 
                 review_type: this.props.review, 
                 //implment UI for this, would_take_again, and tags 
-                //difficulty_rating: this.state.difficulty, //dont uncomment TODO on backend 
+                diff_rating: this.state.difficulty_rating, //dont uncomment TODO on backend 
                 would_take_again: this.state.would_take_again ? "true" : "false",
                 tag_1: "this is tag 1", //select from the index of the tags array 
                 tag_2: "this is tag 2", //you're left with the task of getting those active indexes (i dont care how) and sending them here
@@ -295,6 +306,11 @@ export default class ReviewForm extends Component {
                                     </Input>
                                        </FormGroup>
 
+                                       <FormGroup >
+       
+          <Input type="checkbox" onChange={this.handleCheckboxToggle} />
+          Would you recommend this {this.props.review}?
+      </FormGroup>
                                        
                             <FormGroup>
                                 <Label for="exampleText"> <h5 className="title">Tell us what you thought about this {this.props.review}</h5></Label>

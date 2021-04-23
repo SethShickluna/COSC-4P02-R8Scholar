@@ -34,6 +34,7 @@ export default class SearchPage extends Component {
             return response.json(); 
         }).then((data) => {
             const combinedResults = data.Department.concat(data.Instructor, data.Course) //check this 
+            var newMax = parseInt(Math.ceil(data.length / this.state.perPage));
             this.setState({
                 results: combinedResults, 
                 maxPage : newMax, 
