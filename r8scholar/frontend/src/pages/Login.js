@@ -93,7 +93,7 @@ export default class Login extends Component {
                                                 type={this.state.showPassword ? "text" : "password"}
                                                 onChange={this.handleInput}
                                             />
-                                            <MdRemoveRedEye className="pass-toggle" style={{ position: "absolute", color: "#000", top: "58px", right: "15px" }} onClick={this.toggleShowPassword} />
+                                            <MdRemoveRedEye className="pass-toggle" style={{ position: "absolute", color: "#000", top: "58px", right: "30px" }} onClick={this.toggleShowPassword} />
                                             <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password">
                                                 <h5>Password Requirements: </h5>
                                                 <ul>
