@@ -7,6 +7,11 @@ def email_r8scholar(review_id,report_description,numb_reports,email,nickname,sub
     sender_email = "r8scholar@gmail.com" #R8scholar email
     password = "nuThutL!itr&7het" #R8scholar email password
     message = f"""Subject: Reported Review
+
+
+
+
+
     Review id: {review_id}
     Date Created: {date_created}
     Report description: {report_description} 

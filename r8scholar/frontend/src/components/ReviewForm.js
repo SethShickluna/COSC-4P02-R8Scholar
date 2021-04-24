@@ -32,6 +32,13 @@ export default class ReviewForm extends Component {
         this.submitReview = this.submitReview.bind(this);
         this.handleCheckbox = this.handleCheckbox.bind(this);
         this.loadTags = this.loadTags.bind(this);
+        this.handleCheckboxToggle = this.handleCheckboxToggle.bind(this);
+        this.handleBadgeToggle = this.handleBadgeToggle.bind(this);
+
+
+        this.printState= this.printState.bind(this);
+        this.print= this.print.bind(this);
+
     }
 
     async componentDidMount() {

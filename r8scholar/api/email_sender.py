@@ -7,6 +7,11 @@ def email_user(user_email,verification_code):
     sender_email = "r8scholar@gmail.com" #R8scholar email
     password = "nuThutL!itr&7het" #R8scholar email password
     message = f"""Subject: R8scholar Account Verification
+
+
+
+
+
     Your verification code is: {verification_code}"""
     #Login to mail server and send email
     context = ssl.create_default_context()

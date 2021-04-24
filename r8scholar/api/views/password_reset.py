@@ -7,6 +7,11 @@ def email_password(user_email,new_pass):
     sender_email = "r8scholar@gmail.com" #R8scholar email
     password = "nuThutL!itr&7het" #R8scholar email password
     message = f"""Subject: R8scholar Account Password Reset
+
+
+
+
+
     Your new temporary password is: {new_pass}
     Please change your password immediatly upon logging into the site with your temporary password.
     If you did not request a password reset, then someone else has made the request using your email."""
