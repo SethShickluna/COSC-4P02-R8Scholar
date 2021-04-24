@@ -190,7 +190,7 @@ export default class Course extends Component {
                             <Row className="justify-content-md-center">
                                 <Col xs lg="3" style={{ minHeight: "90vh", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
                                     {/**Data and stuff */}
-                                    <h1 style={{ marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
+                                    <h1 style={{ fontSize: "44px", marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
                                         {this.state.name}
                                     </h1>
                                     <PageBreak /> {/* underline */}

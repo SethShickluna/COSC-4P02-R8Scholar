@@ -15,10 +15,6 @@ body * {
     font-weight: 450;
 }
 
-.home-page {
-    margin-top: -5%;
-}
-
 #root > div > div > div {
     background-color: #2f515405;
 }
