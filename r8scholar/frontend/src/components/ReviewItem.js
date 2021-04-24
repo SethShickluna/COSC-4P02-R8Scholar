@@ -16,9 +16,11 @@ const reviewTitle = {
 };
 
 const tagStyle = {
-    maxInlineSize: "fit-content",
     borderRadius: "15px",
     height: "25px",
+    backgroundColor: "#fbfcfc",
+    color: "#000",
+    width: "max-content",
 };
 
 //props contains object called reviewItem containing
@@ -67,7 +69,6 @@ export default class ReviewItem extends Component {
 
     //the JSX that is rendered when this file is imported as a component
     render() {
-        console.log("SDDSDSAD");
         console.log(this.props.reviewItem);
         return (
             <div className="App">
@@ -158,6 +159,7 @@ export default class ReviewItem extends Component {
                                 <CommentForm review={this.props.reviewItem.content}> </CommentForm>
                             </Col>
                             <Col align="right">
+                                <p style={{ display: "inline", marginRight: "5%", verticalAlign: "middle" }}>{this.props.reviewItem.date_created}</p>
                                 <ReportForm reviewID={this.props.reviewItem.review_id} />
                             </Col>
                         </Row>

@@ -1,6 +1,6 @@
 //npm modules
 import React, { Component } from "react";
-import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Progress } from "reactstrap";
+import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Progress, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import cookie from "react-cookies";
@@ -24,6 +24,7 @@ const subRatingStyle = {
     marginLeft: "15px",
     marginTop: "2%",
     border: "2px #7f8c8d",
+    textAlign: "center",
 };
 
 export default class Course extends Component {
@@ -43,6 +44,7 @@ export default class Course extends Component {
             loaded: false,
             activeTab: "1",
             currentUser: "",
+            would_take_again: null,
         };
     }
 
@@ -51,7 +53,6 @@ export default class Course extends Component {
         this.getAllReviews(this.state.name);
         this.checkOwnership();
         this.getPopularChoices();
-        console.log(this.state.reviews.length);
     }
 
     verifyCourse = async (myName) => {
@@ -127,6 +128,15 @@ export default class Course extends Component {
                     reviews: data,
                     loaded: true,
                 });
+            })
+            .then(() => {
+                let count = 0;
+                this.state.reviews.map((review) => {
+                    if (review.would_take_again) {
+                        count++;
+                    }
+                });
+                this.setState({ would_take_again: count / this.state.reviews.length });
             });
     }
 
@@ -149,52 +159,60 @@ export default class Course extends Component {
                 <Container fluid>
                     {this.state.loaded ? (
                         <div>
-                            <Row align="center">
-                                <Col>
-                                    <h1 className="title">{this.state.name}</h1>
-                                    <small className="text-muted">
-                                        <h3>{this.state.fullName}</h3>
-                                    </small>
-                                    <br />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={1} />
-                                <Col md={3}>
+                            <Row className="justify-content-md-center">
+                                <Col xs lg="3" style={{ minHeight: "900px", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
                                     {/**Data and stuff */}
-                                    <div name="avg-rating-container">
-                                        <div name="avg-rating-title">
-                                            <h4 style={{ textAlign: "center" }}>Overall Rating</h4>
-                                        </div>
-                                        <div style={{ textAlign: "center" }} name="avg-rating">
-                                            {/* this displays average # of stars*/}
-                                            <StarRatings rating={this.state.rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
-                                        </div>
-                                    </div>
-                                    <div name="general-stats" style={{ textAlign: "-webkit-center" }}>
-                                        <div style={{ justifySelf: "center", width: "min-content", display: "grid", gridAutoFlow: "column", margin: "30px 0px 0px 0px", fontSize: "1.825em" }}>
-                                            <div style={{ width: "min-content", fontWeight: "bolder" }}>Total reviews</div>
-                                            <div style={{ justifySelf: "right", fontWeight: "bolder", marginLeft: "110px", fontSize: "1.825em" }}>
-                                                {this.state.reviews != null ? this.state.reviews.length : 0}
+                                    <h1 style={{ marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
+                                        {this.state.name}
+                                    </h1>
+                                    <h3 style={{ textAlign: "center", margin: "15% 5%" }}>{this.state.fullName}</h3>
+                                    <PageBreak /> {/* underline */}
+                                    <div className="star-ratings" style={{ marginTop: "15%", marginBottom: "15%" }}>
+                                        <div name="avg-rating-container" style={{ marginBottom: "10%" }}>
+                                            <div name="avg-rating-title">
+                                                <h4 style={{ textAlign: "center" }}>Overall Rating</h4>
+                                            </div>
+                                            <div style={{ textAlign: "center" }} name="avg-rating">
+                                                {/* this displays average # of stars*/}
+                                                <StarRatings rating={this.state.rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
                                             </div>
                                         </div>
-                                        <div style={{ display: "grid", gridAutoFlow: "row", margin: "40px 0px 60px 0px", fontSize: "28px" }}>
-                                            <div style={{ fontWeight: "bolder" }}>Would you retake this course?</div>
-                                            <div className="progress-container progress-primary" style={{ margin: "20px" }}>
-                                                <span className="progress-badge">
-                                                    80% of reviewers said {<div style={{ color: "#63d263", display: "inline", borderInline: "none", fontSize: "24px", fontWeight: "bolder" }}>yes</div>}
-                                                </span>
-                                                <Progress style={{ marginTop: "15px" }} striped max="100" value="80" barClassName="progress-bar-primary" />
+                                        <div name="avg-rating-container">
+                                            <div name="avg-rating-title">
+                                                <h4 style={{ textAlign: "center" }}>Difficulty Rating</h4>
+                                            </div>
+                                            <div style={{ textAlign: "center" }} name="avg-rating">
+                                                {/* this displays average # of stars*/}
+                                                <StarRatings rating={this.state.rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
                                             </div>
                                         </div>
                                     </div>
+                                    <div style={{ textAlign: "center", margin: "40px 0px 60px 0px" }}>
+                                        {this.state.reviews === null ? (
+                                            <h3 style={{ margin: "0% 5%", fontWeight: "bold" }}>There are no reviews for this Course yet</h3>
+                                        ) : this.state.would_take_again <= 0 ? (
+                                            <h3 style={{ color: "#f5593dcc", margin: "0% 5%", fontWeight: "bold" }}>This Course is not recommended by anyone</h3>
+                                        ) : this.state.would_take_again <= 0.3 ? (
+                                            <h3 style={{ color: "#f5593dcc", margin: "0% 5%", fontWeight: "bold" }}>
+                                                This Course is only recommend by {Math.floor(this.state.would_take_again * 100)}% of reviewers
+                                            </h3>
+                                        ) : this.state.would_take_again < 0.6 ? (
+                                            <h3 style={{ color: "#e6be1abf", margin: "0% 5%", fontWeight: "bold" }}>
+                                                {Math.floor(this.state.would_take_again * 100)}% of reviewers recommend this course
+                                            </h3>
+                                        ) : (
+                                            <h3 style={{ color: "#77dd77cc", margin: "0% 5%", fontWeight: "bold" }}>
+                                                {Math.floor(this.state.would_take_again * 100)}% of reviewers recommend this course
+                                            </h3>
+                                        )}
+                                    </div>
+                                    <PageBreak /> {/* underline */}
                                     <div name="sub-rating-box" style={subRatingStyle}>
-                                        <PageBreak /> {/* underline */}
-                                        <div style={{ marginTop: "25px" }} name="pop-prof-container">
+                                        <div name="pop-prof-container">
                                             <div name="pop-professor-title">
-                                                <h3 style={{ textAlign: "center" }}>Popular Instructors</h3>
+                                                <h3>Popular Instructors</h3>
                                             </div>
-                                            <div name="pop-prof-name" style={{ textAlign: "center" }}>
+                                            <div name="pop-prof-name">
                                                 {this.state.instructors !== null
                                                     ? this.state.instructors.map((item, index) => (
                                                           <h4 key={index}>
@@ -204,10 +222,9 @@ export default class Course extends Component {
                                                     : null}
                                             </div>
                                         </div>
-                                        <PageBreak /> {/* underline */}
                                         <div style={{ marginTop: "25px" }} name="pop-course-container">
                                             <div name="pop-course-title">
-                                                <h3 style={{ textAlign: "center" }}>Popular Courses</h3>
+                                                <h3>Popular Courses</h3>
                                             </div>
                                             <div name="pop-course-name" style={{ textAlign: "center" }}>
                                                 {this.state.courses !== null
@@ -219,19 +236,18 @@ export default class Course extends Component {
                                                     : null}
                                             </div>
                                         </div>
-                                        <PageBreak /> {/* underline */}
-                                        <div style={{ marginTop: "25px" }} name="pop-course-container">
-                                            <div name="pop-course-title">
-                                                <h3 style={{ textAlign: "center" }}>
-                                                    Department of <a href={"/department/" + this.state.department}>{this.state.department}</a>
-                                                </h3>
-                                            </div>
-                                        </div>
                                     </div>
                                     <PageBreak /> {/* underline */}
                                 </Col>
-                                <Col md={6}>
-                                    {" "}
+                                <Col xs lg="7">
+                                    <Row align="center">
+                                        <Col style={{ margin: "5%", boxShadow: "7px 5px 36px -15px", backgroundColor: "#f6f6f6" }}>
+                                            <h3>
+                                                Course belongs to the Department of <a href={"/department/" + this.state.department}>{this.state.department}</a>
+                                            </h3>
+                                            <br />
+                                        </Col>
+                                    </Row>
                                     {/**Tabbed content */}
                                     <div className="nav-tabs-navigation">
                                         <div className="nav-tabs-wrapper pointer-nav">
@@ -243,7 +259,7 @@ export default class Course extends Component {
                                                             this.setState({ activeTab: "1" });
                                                         }}
                                                     >
-                                                        Reviews
+                                                        Reviews ({this.state.reviews !== null ? this.state.reviews.length : 0})
                                                     </NavLink>
                                                 </NavItem>
                                                 {cookie.load("isLoggedIn") === "true" ? (
@@ -263,7 +279,7 @@ export default class Course extends Component {
                                     </div>
                                     {/* Tab panes */}
                                     <TabContent className="following" activeTab={this.state.activeTab}>
-                                        <TabPane tabId="1" id="follows">
+                                        <TabPane tabId="1" id="follows" style={{ marginLeft: "0px" }}>
                                             <Row align="left">
                                                 <Col className="ml-auto mr-auto" md="10">
                                                     {
@@ -283,12 +299,27 @@ export default class Course extends Component {
                                                             <Container fluid>
                                                                 <Row>
                                                                     <Col align="center">
-                                                                        <h4>Nothing to see here. Would you like to leave a review?</h4>
+                                                                        <h4 style={{ display: "inline" }}>Nothing to see here. Would you like to leave a review?</h4>
                                                                     </Col>
                                                                 </Row>
                                                             </Container>
                                                         ) /* generate all the reviews for this page */
                                                     }
+                                                    <Container fluid>
+                                                        <Row>
+                                                            <Col align="center">
+                                                                {cookie.load("isLoggedIn") === "false" ? (
+                                                                    <>
+                                                                        <h4 style={{ display: "inline" }}>Please </h4>
+                                                                        <a style={{ fontSize: "24px" }} href="/login" className="btn-round lg" color="danger">
+                                                                            Sign In
+                                                                        </a>
+                                                                        <h4 style={{ display: "inline" }}> to leave a review!</h4>
+                                                                    </>
+                                                                ) : null}
+                                                            </Col>
+                                                        </Row>
+                                                    </Container>
                                                 </Col>
                                             </Row>
                                         </TabPane>
@@ -301,7 +332,6 @@ export default class Course extends Component {
                                         </TabPane>
                                     </TabContent>
                                 </Col>
-                                <Col md={2} />
                             </Row>
                         </div>
                     ) : (

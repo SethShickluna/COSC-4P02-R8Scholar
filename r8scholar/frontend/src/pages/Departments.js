@@ -245,7 +245,7 @@ export default class Departments extends Component {
                         </Col>
                     </Row>
 
-                    <Row style={{ marginTop: "2%" }} align="center">
+                    <Row style={{ marginTop: "2%", textAlign: "center" }} align="center">
                         <Col className="col-md-1" />
                         <Col className="col-md-10">
                             <Table striped>

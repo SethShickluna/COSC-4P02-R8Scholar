@@ -1,5 +1,13 @@
 /* DARK MODE STYLES */
 
+body * {
+    font-weight: 450;
+}
+
+#root > div > div > div {
+    background-color: #2f515405;
+}
+
 .dark {
     background-color: #363535;
 }
@@ -9,6 +17,11 @@
     color: #f5593d;
 }
 .dark .darkmode-toggle {
+    color: #d3d3d3;
+}
+
+/*=====PLACEHOLDER==TEXT==EVERYWHERE=========*/
+.dark #SearchBar > div > button > input::placeholder {
     color: #d3d3d3;
 }
 
@@ -51,6 +64,19 @@ table a {
 .dark h1 {
     color: #f3f3f3;
 }
+
+/*============COURSE-PAGE=====================================================*/
+.dark #root > div > div > div > div > div > div.col.col-lg-3,
+.dark #root > div > div > div > div > div > div.col.col-lg-7 > div.row > div {
+    background-color: #2c2c2c28 !important;
+    box-shadow: 0px 0px 50px -15px #000 !important;
+}
+.dark #root > div > div > div > div > div > div.col.col-lg-3 {
+    box-shadow: 0px 0px 40px 0px #000 !important;
+    z-index: 0 !important;
+}
+
+/*============================================================================*/
 
 /*============NAVBAR==========================================================*/
 
@@ -108,9 +134,9 @@ table a {
 .dark #follows > div > div > div > div > li,
 .dark #following > div > div > div > div > form > div > div > select,
 .dark #student-feedback > div > div > div > div > form > div > div > select,
-.darl .form-control:focus,
+.dark .form-control:focus,
 .dark input#title,
-textarea.form-control {
+.dark textarea.form-control {
     background-color: #b4b4b4 !important;
 }
 
@@ -136,13 +162,13 @@ textarea.form-control {
 }
 
 /*===========PAGE_BREAK======================================================*/
-.dark .pageBreak {
-    box-shadow: 0px 0px 15px 0px #f1f1f1 !important;
+.dark .PageBreak {
+    /* box-shadow: 0px 0px 15px 0px #f1f1f1 !important; */
     background-color: #505050 !important;
 }
 /*===========================================================================*/
 /*==================MOBILE===================================================*/
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1150px) {
     #root > div > div > div.container-fluid > div > #lists {
         flex-flow: column;
         flex-wrap: nowrap;
@@ -152,7 +178,7 @@ textarea.form-control {
     }
 }
 
-@media only screen and (min-width: 1100px) and (max-width: 1550px) {
+@media only screen and (min-width: 1150px) and (max-width: 1560px) {
     #root > div > div > div.container-fluid > div > #lists {
         flex-flow: column;
         flex-wrap: nowrap;
@@ -160,4 +186,10 @@ textarea.form-control {
         padding: 0px 200px 50px 200px;
         text-align: center;
     }
+
+    #SearchBar {
+        content-visibility: hidden !important;
+        width: 0% !important;
+    }
 }
+/*===========================================================================*/

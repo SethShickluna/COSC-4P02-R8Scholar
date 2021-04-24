@@ -19,8 +19,8 @@ import axiosInstance from "../axiosApi";
 import ReviewForm from "../components/ReviewForm";
 
 const pageStyles = {
-    margin: "0 auto",
-    marginTop: "3%",
+    paddingTop: "3%",
+    minHeight: "100%",
 };
 
 const pageBreak = {
@@ -71,7 +71,7 @@ export default class Profile extends Component {
             this.getReviews();
             return user;
         } catch (error) {
-            this.props.history.push("/signin"); //redirect to signin if a valid token is not presented
+            this.props.history.push("/login"); //redirect to signin if a valid token is not presented
         }
     }
 
