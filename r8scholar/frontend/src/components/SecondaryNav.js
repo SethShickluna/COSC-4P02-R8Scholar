@@ -47,10 +47,10 @@ function SecondaryNav() {
     const [bodyClick, setBodyClick] = React.useState(false);
 
     return (
-        <Navbar className="secondary-nav" color="info" expand="lg">
-            <div style={{ paddingLeft: "5%" }}>
+        <Navbar className="secondary-nav" color="info" expand="lg" fixed="top">
+            <div style={{ paddingLeft: "4%" }}>
                 <NavbarBrand style={title} href="/">
-                    R8Scholar Home
+                    R8Scholar
                 </NavbarBrand>
                 <button
                     className="navbar-toggler"
@@ -67,8 +67,15 @@ function SecondaryNav() {
                 </button>
             </div>
             <Collapse navbar toggler="#navbarTogglerDemo01">
-                <Nav className="mr-auto mt-2 mt-lg-0" navbar style={{ width: "100%" }}>
-                    <NavItem style={{ marginLeft: "50px" }}>
+                <Nav className="mr-auto mt-lg-0" navbar style={{ width: "100%" }}>
+                    <NavItem style={{ marginLeft: "3%" }}>
+                        <Link to="/">
+                            <NavLink style={separate} style={navLinkStyles}>
+                                Home
+                            </NavLink>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
                         <Link to="/courses">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Courses
@@ -98,7 +105,7 @@ function SecondaryNav() {
                             </Link>
                         </NavItem>
                     ) : null}
-                    <NavItem id="SearchBar" style={{ width: "35em", marginLeft: "auto", marginRight: "1%" }}>
+                    <NavItem id="SearchBar" style={{ width: "35em", minWidth: "200px", marginLeft: "auto", marginRight: "1%" }}>
                         <SearchBar color="transparent" />
                     </NavItem>
                     <NavItem style={{ alignSelf: "center", minWidth: "max-content" }}>
@@ -122,7 +129,7 @@ function SecondaryNav() {
                             </Button>
                         )}
                     </NavItem>
-                    <NavItem style={{ alignSelf: "center", marginLeft: "3%", marginRight: "2%" }}>
+                    <NavItem style={{ alignSelf: "center", marginLeft: "1%", marginRight: "4%" }}>
                         <DarkModeToggle />
                     </NavItem>
                 </Nav>

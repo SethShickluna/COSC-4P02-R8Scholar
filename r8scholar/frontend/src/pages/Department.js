@@ -19,14 +19,6 @@ const tableEntries = {
     fontSize: "18",
 };
 
-const subRatingStyle = {
-    marginRight: "15px",
-    marginLeft: "15px",
-    marginTop: "2%",
-    border: "2px #7f8c8d",
-    textAlign: "center",
-};
-
 export default class Course extends Component {
     6;
     constructor(props) {
@@ -55,7 +47,7 @@ export default class Course extends Component {
         this.getPopularChoices(this.state.name);
         this.getAllReviews(this.state.name);
         this.getAllCourses(this.state.name);
-        // this.getAllInstructors(this.state.name);
+        this.getAllInstructors(this.state.name);
         this.checkOwnership();
     }
 
@@ -82,15 +74,14 @@ export default class Course extends Component {
     };
 
     getPopularChoices = async (myName) => {
-        const request = {
+        let request = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                department: myName,
-                amount: 2,
+                name: "Beatrice Ombuki-Berman",
             }),
         };
-        await fetch("/api/get-top-courses/", request)
+        await fetch("/api/get-instructor/'", request)
             .then((response) => {
                 if (response.ok) {
                     //yay
@@ -103,6 +94,14 @@ export default class Course extends Component {
             .then((data) => {
                 this.setState({ courses: data });
             });
+        request = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                department: myName,
+                amount: 1,
+            }),
+        };
         await fetch("/api/get-top-instructors/", request)
             .then((response) => {
                 if (response.ok) {
@@ -110,7 +109,6 @@ export default class Course extends Component {
                     return response.json();
                 } else {
                     //nay
-                    console.log("____", response);
                     return null;
                 }
             })
@@ -136,12 +134,12 @@ export default class Course extends Component {
             });
     };
 
-    getAllCourses = async (myName) => {
+    getAllCourses = async (name) => {
         const request = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                department: myName,
+                department: name,
             }),
         };
         await fetch("/api/filter-course-department/", request).then((response) => {
@@ -153,22 +151,22 @@ export default class Course extends Component {
         });
     };
 
-    // getAllInstructors = async (myName) => {
-    //     const request = {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify({
-    //             department: myName,
-    //         }),
-    //     };
-    //     await fetch("/api/filter-instructor-department/", request).then((response) => {
-    //         response.json().then((data) => {
-    //             this.setState({
-    //                 allDeptInstructors: data,
-    //             });
-    //         });
-    //     });
-    // };
+    getAllInstructors = async (name) => {
+        const request = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                department: name,
+            }),
+        };
+        await fetch("/api/filter-instructor-department/", request).then((response) => {
+            response.json().then((data) => {
+                this.setState({
+                    allDeptInstructors: data,
+                });
+            });
+        });
+    };
 
     async checkOwnership() {
         //get the user
@@ -190,7 +188,7 @@ export default class Course extends Component {
                     {this.state.loaded ? (
                         <div>
                             <Row className="justify-content-md-center">
-                                <Col xs lg="3" style={{ minHeight: "900px", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
+                                <Col xs lg="3" style={{ minHeight: "90vh", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
                                     {/**Data and stuff */}
                                     <h1 style={{ marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
                                         {this.state.name}
@@ -218,7 +216,7 @@ export default class Course extends Component {
                                     </div>
                                     <div style={{ textAlign: "center", margin: "40px 0px 60px 0px" }}>
                                         {this.state.reviews === null ? (
-                                            <h3 style={{ margin: "0% 5%", fontWeight: "bold" }}>There are no reviews for this Instructor yet</h3>
+                                            <h3 style={{ margin: "0% 5%", fontWeight: "bold" }}>There are no reviews for this Department yet</h3>
                                         ) : this.state.would_take_again <= 0 ? (
                                             <h3 style={{ color: "#f5593dcc", margin: "0% 5%", fontWeight: "bold" }}>This Instructor is not recommended by anyone</h3>
                                         ) : this.state.would_take_again <= 0.3 ? (
@@ -260,40 +258,36 @@ export default class Course extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <PageBreak /> {/* underline */}
-                                    <div style={{ marginTop: "25px" }} name="pop-prof-container">
-                                        <div name="pop-professor-title">
-                                            <h3 style={{ textAlign: "center" }}>Popular Instructors</h3>
-                                        </div>
-                                        <div name="pop-prof-name" style={{ textAlign: "center" }}>
-                                            {this.state.instructors !== null ? (
-                                                this.state.instructors.map((item) => (
+                                    {this.state.instructors !== null ? (
+                                        <div name="pop-prof-container">
+                                            <PageBreak /> {/* underline */}
+                                            <div name="pop-professor-title">
+                                                <h3 style={{ textAlign: "center" }}>Popular Instructors</h3>
+                                            </div>
+                                            <div name="pop-prof-name" style={{ textAlign: "center" }}>
+                                                {this.state.instructors.map((item) => (
                                                     <h4>
                                                         <a href={"/instructor/" + item.name}>{item.name}</a>
                                                     </h4>
-                                                ))
-                                            ) : (
-                                                <h4>No instructors found</h4>
-                                            )}
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <PageBreak /> {/* underline */}
-                                    <div style={{ marginTop: "25px" }} name="pop-course-container">
-                                        <div name="pop-course-title">
-                                            <h3 style={{ textAlign: "center" }}>Popular Courses</h3>
-                                        </div>
-                                        <div name="pop-course-name" style={{ textAlign: "center" }}>
-                                            {this.state.courses !== null ? (
-                                                this.state.courses.map((item) => (
+                                    ) : null}
+                                    {this.state.courses !== null ? (
+                                        <div name="pop-course-container">
+                                            <PageBreak /> {/* underline */}
+                                            <div name="pop-course-title">
+                                                <h3 style={{ textAlign: "center" }}>Popular Courses</h3>
+                                            </div>
+                                            <div name="pop-course-name" style={{ textAlign: "center" }}>
+                                                {this.state.courses.map((item) => (
                                                     <h4>
                                                         <a href={"/course/" + item.name}>{item.name}</a>
                                                     </h4>
-                                                ))
-                                            ) : (
-                                                <h4>No courses found</h4>
-                                            )}
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
+                                    ) : null}
                                     <PageBreak /> {/* underline */}
                                 </Col>
                                 <Col xs lg="7">
@@ -355,7 +349,7 @@ export default class Course extends Component {
                                         </div>
                                     </div>
                                     {/* Tab panes */}
-                                    <TabContent className="following" activeTab={this.state.activeTab}>
+                                    <TabContent className="following" activeTab={this.state.activeTab} style={{ paddingLeft: "4%", paddingRight: "4%", marginBottom: "15%" }}>
                                         <TabPane tabId="1" id="follows" style={{ marginLeft: "0px" }}>
                                             <Row align="left">
                                                 <Col className="ml-auto mr-auto" md="10">
@@ -367,9 +361,10 @@ export default class Course extends Component {
                                                                     <ReviewItem
                                                                         id={index}
                                                                         isOwner={item.nickname === this.state.currentUser}
+                                                                        currentUser={this.state.currentUser}
                                                                         key={"department-review" + index}
                                                                         reviewItem={item}
-                                                                        type="course"
+                                                                        type="department"
                                                                     />
                                                                 ))
                                                         ) : (
@@ -403,7 +398,7 @@ export default class Course extends Component {
                                         <TabPane className="text-center" tabId="2" id="following">
                                             <Row>
                                                 <Col align="center">
-                                                    <ReviewForm name={this.state.name} review="course" />
+                                                    <ReviewForm name={this.state.name} review="department" />
                                                 </Col>
                                             </Row>
                                         </TabPane>
@@ -450,8 +445,8 @@ export default class Course extends Component {
                                             <Table striped>
                                                 <thead>
                                                     <th>Rank</th>
-                                                    <th>Course Code</th>
                                                     <th>Name</th>
+                                                    <th>Top Course</th>
                                                     <th>Rating</th>
                                                 </thead>
                                                 <tbody>
@@ -460,13 +455,13 @@ export default class Course extends Component {
                                                             <tr key={index}>
                                                                 <th>{index + 1}</th>
                                                                 <th>
-                                                                    <Link style={tableEntries} to={"/course/" + item.name}>
+                                                                    <Link style={tableEntries} to={"/instructor/" + item.name}>
                                                                         {item.name}
                                                                     </Link>
                                                                 </th>
                                                                 <th style={{ maxWidth: "200px" }}>
-                                                                    <Link style={tableEntries} to={"/course/" + item.name}>
-                                                                        {item.course_full_name}
+                                                                    <Link style={tableEntries} to={"/instructor/" + item.name}>
+                                                                        {"TOP COURSE"}
                                                                     </Link>
                                                                 </th>
                                                                 <th style={{ minWidth: "100px" }}>

@@ -6,10 +6,8 @@ def email_user(user_email,verification_code):
     smtp_server = "smtp.gmail.com"#Mail server(currently gmail)
     sender_email = "r8scholar@gmail.com" #R8scholar email
     password = "nuThutL!itr&7het" #R8scholar email password
-    message = """\
-    Subject: R8scholar Account Verification
-
-    You verification code is: """+str(verification_code)
+    message = f"""Subject: R8scholar Account Verification
+    Your verification code is: {verification_code}"""
     #Login to mail server and send email
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:

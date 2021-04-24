@@ -1,3 +1,32 @@
-Lots of homework|Instructor
-Tough marker|Instructor
+Helpful Staff|Department
+Quick to Reposnd|Department
+Slow to Respond|Department
+Lots of Resources|Department
+Hands-on|Department
+Hands-on|Instructor
+Hands-on|Course
+Theoretical|Department
+Theoretical|Instructor
+Theoretical|Course
+Lots of Homework|Instructor
+Tough Marker|Instructor
+Easy Marker|Instructor
+Caring|Instructor
 Approachable|Instructor
+Easy to Understand|Instructor
+Hard to Understand|Instructor
+Boring|Instructor
+Boring|Course
+Engaging|Instructor
+Engaging|Course
+Clear Grading Criteria|Instructor
+Clear Grading Criteria|Course
+Buy the Textbook|Course
+Lecture Driven|Course
+Time Consuming|Course
+Light Workload|Course
+No Assignments|Course
+No Tests|Course
+Participation Counts|Course
+Attendance Counts|Course
+Useful|Course

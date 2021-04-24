@@ -31,29 +31,29 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('review_id', 'reviewer', 'nickname', 'subject', 'title','content',
-        'rating', 'would_take_again','thumbs_up','thumbs_down','numb_reports','date_created', 'department_name', 'instructor_name', 
+        'rating','diff_rating', 'would_take_again','thumbs_up','thumbs_down','numb_reports','date_created', 'department_name', 'instructor_name', 
         'course_name', 'review_type','tag_1','tag_2', 'tag_3')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('comment_id', 'review_id', 'name', 'content','thumbs_up','thumbs_down', 'child', 'date', 'numb_reports')
+        fields = ('comment_id', 'review_id', 'name', 'content','thumbs_up','thumbs_down', 'child', 'date_created', 'numb_reports')
 
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('name', 'course_full_name', 'department', 'rating')
+        fields = ('name', 'course_full_name', 'department', 'rating', 'diff_rating')
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('name', 'courses_rating', 'instructors_rating', 'rating')
+        fields = ('name', 'courses_rating', 'instructors_rating', 'rating', 'diff_rating')
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ('name', 'department', 'rating')
+        fields = ('name', 'department', 'rating', 'diff_rating')
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -81,7 +81,7 @@ class CreateReviewSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Review
         fields = ('nickname','subject','title', 'content', 
-        'rating','would_take_again','tag_1','tag_2', 'tag_3','review_type')
+        'rating','diff_rating','would_take_again','tag_1','tag_2', 'tag_3','review_type')
 
 class CreateCommentSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -93,7 +93,7 @@ class EditReviewSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Review
         fields = ('review_id','subject','title', 'content', 
-        'rating','review_type')
+        'rating','diff_rating','review_type')
 
 class DeleteReviewSerializer(serializers.ModelSerializer): 
     class Meta: 

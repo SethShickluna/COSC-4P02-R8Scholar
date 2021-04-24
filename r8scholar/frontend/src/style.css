@@ -1,7 +1,22 @@
+div.course-page,
+div.courses-page,
+div.department-page,
+div.departments-page,
+div.instructor-page,
+div.instructors-page,
+div.profile-page,
+div.pager-headers {
+    padding-top: 100px;
+}
+
 /* DARK MODE STYLES */
 
 body * {
     font-weight: 450;
+}
+
+.home-page {
+    margin-top: -5%;
 }
 
 #root > div > div > div {
@@ -16,13 +31,14 @@ body * {
 .darkmode-toggle {
     color: #f5593d;
 }
+
 .dark .darkmode-toggle {
     color: #d3d3d3;
 }
 
 /*=====PLACEHOLDER==TEXT==EVERYWHERE=========*/
-.dark #SearchBar > div > button > input::placeholder {
-    color: #d3d3d3;
+.dark input::placeholder {
+    color: #fff;
 }
 
 /* dark mode home */
@@ -47,7 +63,8 @@ body * {
     background-color: #f3f3f3;
 }
 
-.dark thead {
+.dark thead,
+.dark #root > .tag {
     background-color: #202020 !important;
 }
 
@@ -93,6 +110,10 @@ table a {
     background-color: #f1f1f1;
 }
 
+.dark .pass-toggle {
+    color: #fff !important;
+}
+
 /*PROFILE PAGE */
 .dark #root > div > div > div > div > div:nth-child(2) > div.col-sm-8 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link {
     color: #f0f0f0 !important;
@@ -100,10 +121,16 @@ table a {
 /* END */
 
 /*=====REVIEW_FORMS=============================================================*/
-.dark input {
+.dark input,
+.dark #following > div > div > div > div > form > div > div > select,
+.dark #content {
     background-color: #333333 !important;
-    color: #fff !important;
-    border-color: #333333 !important;
+    color: #fff;
+    border-color: #626262 !important;
+}
+
+.dark input:focus {
+    color: #fff;
 }
 .dark #follows > div > div > div > div > div.card-body {
     background-color: #f0f0f0;
@@ -111,6 +138,7 @@ table a {
 .dark #root > div > div > div > div > div > div > nav > nav > ul > li.page-item.disabled,
 .dark #root > div > div > div > nav > nav > ul > li.page-item.disabled {
     mix-blend-mode: color-burn;
+    border-color: #626262;
 }
 .dark h4,
 .dark h5 {
@@ -130,23 +158,81 @@ table a {
     background-color: #e3e3e3;
 }
 
-.dark #follows > div > div > div > div > div.card-header,
-.dark #follows > div > div > div > div > li,
-.dark #following > div > div > div > div > form > div > div > select,
-.dark #student-feedback > div > div > div > div > form > div > div > select,
-.dark .form-control:focus,
-.dark input#title,
 .dark textarea.form-control {
     background-color: #b4b4b4 !important;
 }
 
-.dark .btn-primary.active {
+.btn-primary.active,
+#edit-review > form > div > div > button.active {
     background-color: #3f5a5a !important;
 }
-/*===========================================================================*/
+/*====REVIEW=COMMENT=AND=EDIT=FORMS=========================================*/
+.dark #comment-form,
+.dark #edit-comment,
+.dark #edit-review,
+.dark #delete-comment,
+.dark #reportComment,
+.dark #reportReview {
+    background-color: #2a2a2a !important;
+    color: #bbb8b8 !important;
+    border-color: #2a2a2a !important;
+}
 
-/*====THIS=IS=BROWSER=AUTOFILLING=INPUT=FIELDS===============================*/
-.dark input:-webkit-autofill,
+.dark #comment,
+.dark #comment-form #content,
+.dark #edit-comment #content,
+.dark #edit-review #content,
+.dark #edit-review #title,
+.dark #edit-review select {
+    background-color: #ffffffe8 !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+.dark #comment-form > div > div:nth-child(2) > div > div.modal-footer.row {
+    border-color: #2a2a2a !important;
+}
+
+.nav-tabs-navigation {
+    border-color: #f0f0f0;
+    margin-right: 7%;
+    margin-left: 7%;
+}
+
+.nav-tabs-wrapper {
+    margin: 0px;
+    padding: 0px;
+}
+
+#root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.dark .nav-tabs-navigation {
+    border-color: #66615b;
+    margin-right: 7%;
+    margin-left: 7%;
+}
+
+.dark #root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active {
+    background-color: #484848;
+    color: #f1f1f1;
+    box-shadow: 0px -6px 27px -5px #000 !important;
+}
+
+.dark #root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a {
+    color: #f1f1f1;
+}
+
+#root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link:after,
+#root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link:before,
+.dark #root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link:after,
+.dark #root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link:before {
+    border-bottom: none !important;
+}
+
+/*====THIS=IS==FIXES=BROWSER=INPUT=AUTOFILL=COLORING=FIELDS==================*/
 .dark input:-webkit-autofill:hover,
 .dark input:-webkit-autofill:focus,
 .dark textarea:-webkit-autofill,
@@ -154,7 +240,10 @@ table a {
 .dark textarea:-webkit-autofill:focus,
 .dark select:-webkit-autofill,
 .dark select:-webkit-autofill:hover,
-.dark select:-webkit-autofill:focus {
+.dark select:-webkit-autofill:focus,
+.dark #email,
+.dark #password,
+.dark #nickname {
     border: 1px solid #333333;
     -webkit-text-fill-color: #f1f1f1;
     -webkit-box-shadow: 0 0 0px 1000px #333333 inset;
@@ -166,9 +255,62 @@ table a {
     /* box-shadow: 0px 0px 15px 0px #f1f1f1 !important; */
     background-color: #505050 !important;
 }
+
 /*===========================================================================*/
 /*==================MOBILE===================================================*/
-@media only screen and (max-width: 1150px) {
+.navbar .navbar-collapse.show .navbar-nav .nav-item {
+    padding-right: 0% !important;
+}
+
+@media only screen and (max-width: 500px) {
+    #SearchBar {
+        max-width: 30vw;
+        min-width: 2vw;
+        position: absolute !important;
+        right: 200px !important;
+        top: 0px !important;
+        padding: 0% !important;
+        margin: 0% !important;
+        visibility: visible !important;
+        background: local !important;
+        z-index: 1000 !important;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #SearchBar {
+        width: 37vw !important;
+    }
+
+    .navbar-expand-lg .navbar-toggler {
+        display: grid !important;
+        padding: 10px 0px 0px 0px;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-nav {
+        margin: initial;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .navbar-collapse ul {
+        position: unset !important;
+    }
+
+    .navbar-expand-lg .navbar-nav,
+    .navbar-expand-lg .navbar-nav::after {
+        align-items: center !important;
+        height: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .navbar-expand-lg .navbar-nav {
+        text-align: center !important;
+    }
+
     #root > div > div > div.container-fluid > div > #lists {
         flex-flow: column;
         flex-wrap: nowrap;
@@ -176,9 +318,86 @@ table a {
         padding: 0px 0px 50px 0px;
         text-align: center;
     }
+
+    #root > div > div > nav > div > a {
+        display: contents !important;
+    }
+
+    .navbar-expand-lg .navbar-nav,
+    .navbar-expand-lg .navbar-nav::after {
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+        width: 100%;
+        align-self: baseline;
+    }
+
+    .navbar-collapse,
+    .navbar-collapse::after,
+    .navbar-collapse::before,
+    .navbar-collapsing {
+        overflow-y: visible !important;
+        overflow-x: visible !important;
+        overflow: visible !important;
+        padding: 0% !important;
+        margin: 0% !important;
+        position: fixed !important;
+        display: block !important;
+        top: 0 !important;
+        height: 100% !important;
+        width: 200px !important;
+        min-width: min-content !important;
+        right: 0 !important;
+        visibility: visible !important;
+        z-index: 1000 !important;
+        background-color: #272727 !important;
+        -webkit-transform: translateX(200px);
+        -moz-transform: translateX(200px);
+        -o-transform: translateX(200px);
+        -ms-transform: translateX(200px);
+        transform: translateX(200px);
+        -webkit-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        -moz-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        -o-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        -ms-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        border: none !important;
+    }
+
+    .nav-open .navbar-collapse {
+        -webkit-transform: translateX(0px);
+        -moz-transform: translateX(0px);
+        -o-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+
+    .navbar .navbar-nav .nav-item .nav-link {
+        color: #fff;
+    }
+
+    .navbar {
+        padding: 20px 5px 21px 0px !important;
+    }
+
+    .navbar-expand-lg .navbar-toggler {
+        display: inline-table;
+    }
+
+    #SearchBar {
+        max-width: 37vw;
+        min-width: 2vw;
+        position: absolute !important;
+        right: 200px !important;
+        top: 0px !important;
+        padding: 1% 4% 0% 0% !important;
+        margin: 0% !important;
+        visibility: visible !important;
+        background: local !important;
+        z-index: 1000 !important;
+    }
 }
 
-@media only screen and (min-width: 1150px) and (max-width: 1560px) {
+@media only screen and (min-width: 1300px) and (max-width: 1560px) {
     #root > div > div > div.container-fluid > div > #lists {
         flex-flow: column;
         flex-wrap: nowrap;
@@ -186,10 +405,9 @@ table a {
         padding: 0px 200px 50px 200px;
         text-align: center;
     }
-
     #SearchBar {
-        content-visibility: hidden !important;
-        width: 0% !important;
+        width: -webkit-fill-available !important;
     }
 }
+
 /*===========================================================================*/

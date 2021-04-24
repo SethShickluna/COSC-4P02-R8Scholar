@@ -14,11 +14,6 @@ import PageBreak from "../components/PageBreak";
 //axios
 import axiosInstance from "../axiosApi";
 
-const pageStyles = {
-    margin: "0 auto",
-    width: "90%",
-};
-
 const subRatingStyle = {
     marginRight: "15px",
     marginLeft: "15px",
@@ -159,8 +154,8 @@ export default class Course extends Component {
                 <Container fluid>
                     {this.state.loaded ? (
                         <div>
-                            <Row className="justify-content-md-center">
-                                <Col xs lg="3" style={{ minHeight: "900px", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
+                            <Row className="justify-content-md-center" s>
+                                <Col xs lg="3" style={{ minHeight: "90vh", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
                                     {/**Data and stuff */}
                                     <h1 style={{ marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
                                         {this.state.name}
@@ -206,36 +201,37 @@ export default class Course extends Component {
                                             </h3>
                                         )}
                                     </div>
-                                    <PageBreak /> {/* underline */}
                                     <div name="sub-rating-box" style={subRatingStyle}>
-                                        <div name="pop-prof-container">
-                                            <div name="pop-professor-title">
-                                                <h3>Popular Instructors</h3>
+                                        {this.state.instructors !== null ? (
+                                            <div name="pop-prof-container">
+                                                <PageBreak /> {/* underline */}
+                                                <div name="pop-professor-title">
+                                                    <h3>Popular Instructors</h3>
+                                                </div>
+                                                <div name="pop-prof-name">
+                                                    {this.state.instructors.map((item, index) => (
+                                                        <h4 key={index}>
+                                                            <a href={"/instructor/" + item.name}>{item.name}</a>
+                                                        </h4>
+                                                    ))}
+                                                </div>
                                             </div>
-                                            <div name="pop-prof-name">
-                                                {this.state.instructors !== null
-                                                    ? this.state.instructors.map((item, index) => (
-                                                          <h4 key={index}>
-                                                              <a href={"/instructor/" + item.name}>{item.name}</a>
-                                                          </h4>
-                                                      ))
-                                                    : null}
+                                        ) : null}
+                                        {this.state.courses !== null ? (
+                                            <div name="pop-course-container">
+                                                <PageBreak /> {/* underline */}
+                                                <div name="pop-course-title">
+                                                    <h3>Popular Courses</h3>
+                                                </div>
+                                                <div name="pop-course-name" style={{ textAlign: "center" }}>
+                                                    {this.state.courses.map((item, index) => (
+                                                        <h4 key={index}>
+                                                            <a href={"/course/" + item.name}>{item.name}</a>
+                                                        </h4>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div style={{ marginTop: "25px" }} name="pop-course-container">
-                                            <div name="pop-course-title">
-                                                <h3>Popular Courses</h3>
-                                            </div>
-                                            <div name="pop-course-name" style={{ textAlign: "center" }}>
-                                                {this.state.courses !== null
-                                                    ? this.state.courses.map((item, index) => (
-                                                          <h4 key={index}>
-                                                              <a href={"/course/" + item.name}>{item.name}</a>
-                                                          </h4>
-                                                      ))
-                                                    : null}
-                                            </div>
-                                        </div>
+                                        ) : null}
                                     </div>
                                     <PageBreak /> {/* underline */}
                                 </Col>
@@ -290,6 +286,7 @@ export default class Course extends Component {
                                                                     <ReviewItem
                                                                         id={index}
                                                                         isOwner={item.nickname === this.state.currentUser}
+                                                                        currentUser={this.state.currentUser}
                                                                         key={"department-review" + index}
                                                                         reviewItem={item}
                                                                         type="course"
@@ -308,7 +305,7 @@ export default class Course extends Component {
                                                     <Container fluid>
                                                         <Row>
                                                             <Col align="center">
-                                                                {cookie.load("isLoggedIn") === "false" ? (
+                                                                {cookie.load("isLoggedIn") != "true" ? (
                                                                     <>
                                                                         <h4 style={{ display: "inline" }}>Please </h4>
                                                                         <a style={{ fontSize: "24px" }} href="/login" className="btn-round lg" color="danger">

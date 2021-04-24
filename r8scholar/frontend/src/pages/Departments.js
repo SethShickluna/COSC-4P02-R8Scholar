@@ -35,6 +35,7 @@ export default class Departments extends Component {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                type: "department",
                 department: name,
                 amount: 1,
             }),
@@ -105,8 +106,6 @@ export default class Departments extends Component {
                 return "name";
             }
         };
-
-        console.log(requestType());
         const request = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -150,7 +149,6 @@ export default class Departments extends Component {
     }
 
     activateMenu() {
-        console.log(this.state.droppedDown);
         this.setState({
             droppedDown: !this.state.droppedDown,
         });
@@ -225,7 +223,7 @@ export default class Departments extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#">
+                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -295,7 +293,7 @@ export default class Departments extends Component {
                         <Col className="col-md-1" />
                     </Row>
                     <div style={{ marginBottom: "3%" }} />
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="Page navigation example" style={{ paddingBottom: "100px" }}>
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
                             <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
@@ -308,7 +306,7 @@ export default class Departments extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
-                                <PaginationLink onClick={this.changePages} href="#">
+                                <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
                                     {this.state.currentPage}
                                 </PaginationLink>
                             </PaginationItem>

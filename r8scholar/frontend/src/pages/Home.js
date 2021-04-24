@@ -16,11 +16,9 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => {
-            this.getTopCourses();
-            this.getTopDepartments();
-            this.getTopInstructors();
-        }, 200);
+        this.getTopCourses();
+        this.getTopDepartments();
+        this.getTopInstructors();
     }
 
     getTopInstructors = async () => {
@@ -28,6 +26,7 @@ export default class Home extends Component {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                type: "department",
                 department: "any",
                 amount: 5,
             }),
@@ -54,6 +53,7 @@ export default class Home extends Component {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                type: "department",
                 department: "any",
                 amount: 5,
             }),
@@ -117,17 +117,15 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </div>
-
                 <div style={{ marginTop: "2%" }}></div>
-
                 <Container fluid>
                     <div name="center-content">
-                        <Row id="lists" align="center">
-                            <Col>
+                        <Row id="lists" style={{ whiteSpace: "nowrap" }}>
+                            <Col style={{ textAlign: "-webkit-center", textAlignLast: "center" }}>
                                 <div className="course-title">
                                     <h1>Top 5 Courses</h1>
                                 </div>
-                                <div className="course-list" style={{ marginTop: "30px" }}>
+                                <div className="course-list" style={{ width: "95%", margin: "100px 0% 100px 0%" }}>
                                     <Table striped>
                                         <thead>
                                             <th>Rank</th>
@@ -154,19 +152,19 @@ export default class Home extends Component {
                                             )}
                                         </tbody>
                                     </Table>
-                                    <Link to="/courses">
-                                        <Button className="btn-round" size="lg" color="info">
-                                            View All Courses
-                                        </Button>
-                                    </Link>
                                 </div>
+                                <Link to="/courses">
+                                    <Button className="btn-round" size="lg" color="info">
+                                        View All Courses
+                                    </Button>
+                                </Link>
                             </Col>
                             <PageBreak />
-                            <Col>
+                            <Col style={{ textAlign: "-webkit-center", textAlignLast: "center" }}>
                                 <div className="instructor-title">
                                     <h1>Top 5 Instructors</h1>
                                 </div>
-                                <div className="instructor-list" style={{ marginTop: "30px" }}>
+                                <div className="instructor-list" style={{ width: "95%", margin: "100px  0% 100px  0%" }}>
                                     <Table striped>
                                         <thead>
                                             <th>Rank</th>
@@ -201,11 +199,11 @@ export default class Home extends Component {
                                 </Link>
                             </Col>
                             <PageBreak />
-                            <Col>
+                            <Col style={{ textAlign: "-webkit-center", textAlignLast: "center" }}>
                                 <div className="department-title">
                                     <h1>Top 5 Departments</h1>
                                 </div>
-                                <div className="department-list" style={{ marginTop: "30px" }}>
+                                <div className="department-list" style={{ width: "95%", margin: "100px  0% 100px  0%" }}>
                                     <Table striped>
                                         <thead>
                                             <th>Rank</th>
@@ -242,8 +240,7 @@ export default class Home extends Component {
                         </Row>
                     </div>
                     <PageBreak />
-                    <Row align="center" style={{ marginTop: "3%" }}>
-                        <Col className="col-md-2" />
+                    <Row align="center" style={{ margin: "3% 0% 3% 0%", justifyContent: "center" }}>
                         <Col className="col-md-8">
                             <div className="about-title">
                                 <h1>About Us</h1>
@@ -283,7 +280,6 @@ export default class Home extends Component {
                                 </p>
                             </div>
                         </Col>
-                        <Col className="col-md-2" />
                     </Row>
                 </Container>
             </div>

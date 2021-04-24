@@ -4,12 +4,7 @@ import cookie from "react-cookies";
 import axiosInstance from "../axiosApi";
 import Navbar from "../components/Navbar";
 import { MdInfoOutline } from "react-icons/md";
-
-const warningStyle = {
-    color: "white",
-    fontWeight: "200",
-    fontSize: "16px",
-};
+import { MdRemoveRedEye } from "react-icons/md";
 
 export default class Signup extends Component {
     constructor(props) {
@@ -26,6 +21,7 @@ export default class Signup extends Component {
             invalidInfo: false,
             incomplete: false,
             loading: false,
+            showPassword: false,
         };
 
         //allows us to this "this" inside the methods
@@ -34,10 +30,10 @@ export default class Signup extends Component {
         this.authenticatesignin = this.authenticatesignin.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
         this.onDismiss2 = this.onDismiss2.bind(this);
-
         this.checkPassword = this.checkPassword.bind(this);
         this.checkEmail = this.checkEmail.bind(this);
         this.checkNickname = this.checkNickname.bind(this);
+        this.toggleShowPassword = this.toggleShowPassword.bind(this);
     }
 
     handleInput(obj) {
@@ -110,7 +106,6 @@ export default class Signup extends Component {
                     email: this.state.email,
                     password: this.state.password,
                 });
-                console.log(response);
                 switch (response.status) {
                     case 201:
                         this.authenticatesignin();
@@ -147,16 +142,18 @@ export default class Signup extends Component {
         }
     }
 
-    toolTip() {
-        console.log("email selected");
-    }
-
     onDismiss() {
         this.setState({ invalidInfo: !this.state.invalidInfo });
     }
 
     onDismiss2() {
         this.setState({ incomplete: !this.state.incomplete });
+    }
+
+    toggleShowPassword() {
+        this.setState((prev) => ({
+            showPassword: !prev.showPassword,
+        }));
     }
 
     render() {
@@ -234,9 +231,10 @@ export default class Signup extends Component {
                                                 invalid={!this.state.validPassword}
                                                 id="password"
                                                 name="password"
-                                                type="password"
+                                                type={this.state.showPassword ? "text" : "password"}
                                                 onChange={this.handleInput}
                                             />
+                                            <MdRemoveRedEye className="pass-toggle" style={{ position: "absolute", top: "360px", right: "40px", color: "#000" }} onClick={this.toggleShowPassword} />
                                             <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password-tooltip">
                                                 <h5>Password Requirements: </h5>
                                                 <ul>

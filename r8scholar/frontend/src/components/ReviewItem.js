@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button, Row, Col, Label, CardFooter } from "reactstrap";
+import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button, Row, Col, Label, CardFooter, Progress } from "reactstrap";
 import StarRatings from "react-star-ratings";
 import ReportForm from "./ReportReviewForm";
 import EditForm from "./EditReviewForm";
@@ -21,6 +21,7 @@ const tagStyle = {
     backgroundColor: "#fbfcfc",
     color: "#000",
     width: "max-content",
+    marginRight: "1%",
 };
 
 //props contains object called reviewItem containing
@@ -56,7 +57,7 @@ export default class ReviewItem extends Component {
 
     async vote(up) {
         try {
-            response = await axiosInstance.post("/upvote-review/", {
+            response = await axiosInstance.post("/thumbs-review/", {
                 review_id: this.props.reviewItem.review_id,
                 email: cookie.load("email"),
                 up_or_down: up ? "up" : "down",
@@ -69,7 +70,6 @@ export default class ReviewItem extends Component {
 
     //the JSX that is rendered when this file is imported as a component
     render() {
-        console.log(this.props.reviewItem);
         return (
             <div className="App">
                 {/* container (card )which includes a title section + rating and a content section + button to see comments */}
@@ -80,40 +80,39 @@ export default class ReviewItem extends Component {
                                 <p style={reviewTitle}>{this.props.reviewItem.title}</p>
                             </Col>
                             {/* If user is logged in show edit review and delete review buttons, if logged out show up/down votes */}
-                            <Col className="col-md-5" align="right">
-                                {this.props.isOwner ? (
-                                    <div>
-                                        <EditForm type={this.props.type} review={this.props.reviewItem} />
-                                        <Button style={{ marginLeft: "5px" }} color="danger" className="btn-round" type="button" onClick={this.delete}>
-                                            <BsFillTrashFill /> Delete
-                                        </Button>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <Button
-                                            style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#77dd77", boxShadow: "5%" }}
-                                            className="btn-round"
-                                            type="button"
-                                            id="upvote"
-                                            onClick={() => this.vote(true)}
-                                        >
-                                            <MdThumbUp size="20px" />
-                                        </Button>
-                                        <Label disabled="true" style={{ margin: "15px", fontWeight: "bold", fontSize: "20px", color: "#000000", boxShadow: "5%" }} className="votes">
-                                            0
-                                        </Label>
-                                        <Button
-                                            style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#f5593d" }}
-                                            className="btn-round"
-                                            type="button"
-                                            id="downvote"
-                                            onClick={() => this.vote(false)}
-                                        >
-                                            <MdThumbDown size="20px" />
-                                        </Button>
-                                    </div>
-                                )}
-                            </Col>
+                            {this.props.isOwner ? (
+                                <Col className="col-md-5" style={{ marginLeft: "auto", minWidth: "max-content", maxWidth: "200px" }}>
+                                    <EditForm type={this.props.type} review={this.props.reviewItem} />
+                                    <Button style={{ marginLeft: "5px" }} color="danger" className="btn-round" type="button" onClick={this.delete}>
+                                        <BsFillTrashFill /> Delete
+                                    </Button>
+                                </Col>
+                            ) : (
+                                <Col className="col-md-3" align="right" style={{ marginLeft: "auto", minWidth: "max-content", maxWidth: "180px" }}>
+                                    <Button
+                                        style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#77dd77", float: "left" }}
+                                        className="btn-round"
+                                        type="button"
+                                        id="upvote"
+                                        onClick={() => this.vote(true)}
+                                    >
+                                        <MdThumbUp size="20px" />
+                                    </Button>
+                                    <Button
+                                        style={{ borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#f5593d" }}
+                                        className="btn-round"
+                                        type="button"
+                                        id="downvote"
+                                        onClick={() => this.vote(false)}
+                                    >
+                                        <MdThumbDown size="20px" />
+                                    </Button>
+                                    <Progress multi style={{ marginTop: "5%" }}>
+                                        <Progress var color="green" value={(this.props.reviewItem.thumbs_up / (this.props.reviewItem.thumbs_down + this.props.reviewItem.thumbs_up)) * 100} />
+                                        <Progress bar color="red" value={(this.props.reviewItem.thumbs_down / (this.props.reviewItem.thumbs_down + this.props.reviewItem.thumbs_up)) * 100} />
+                                    </Progress>
+                                </Col>
+                            )}
                         </Row>
                     </CardHeader>
                     <CardBody>
@@ -131,7 +130,7 @@ export default class ReviewItem extends Component {
                         <CardText>
                             <h5>{this.props.reviewItem.content}</h5>
                         </CardText>
-                        <CardFooter style={{ display: "grid", gridAutoFlow: "column", width: "min-content", gap: "20px" }}>
+                        <CardFooter>
                             {this.props.reviewItem.tag_1 != null ? (
                                 <>
                                     <Button style={tagStyle} disabled>
@@ -156,7 +155,7 @@ export default class ReviewItem extends Component {
                     <ListGroupItem>
                         <Row>
                             <Col align="left">
-                                <CommentForm review={this.props.reviewItem.content}> </CommentForm>
+                                <CommentForm review={this.props.reviewItem} currentUser={this.props.currentUser} />
                             </Col>
                             <Col align="right">
                                 <p style={{ display: "inline", marginRight: "5%", verticalAlign: "middle" }}>{this.props.reviewItem.date_created}</p>

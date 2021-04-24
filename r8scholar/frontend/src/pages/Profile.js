@@ -23,15 +23,6 @@ const pageStyles = {
     minHeight: "100%",
 };
 
-const pageBreak = {
-    //this sets the margin for reviews and draws a line hovering under the titles
-    marginBottom: "2%",
-    marginTop: "2%",
-    height: "1px",
-    backgroundColor: "#dedede",
-    border: "none",
-};
-
 const imgStyle = {
     width: "100%",
     height: "200px",
@@ -67,7 +58,6 @@ export default class Profile extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({ user: user });
-            console.log(user);
             this.getReviews();
             return user;
         } catch (error) {
@@ -159,18 +149,6 @@ export default class Profile extends Component {
                                                         Profile Settings
                                                     </NavLink>
                                                 </NavItem>
-                                                <NavItem>
-                                                    <NavLink
-                                                        className={this.state.activeTab === "3" ? "active" : ""}
-                                                        onClick={() => {
-                                                            this.setState({
-                                                                activeTab: "3",
-                                                            });
-                                                        }}
-                                                    >
-                                                        Student Feedback
-                                                    </NavLink>
-                                                </NavItem>
                                             </Nav>
                                         </div>
                                     </div>
@@ -205,13 +183,6 @@ export default class Profile extends Component {
                                             <EditPasswordForm />
                                             <EditNicknameForm />
                                             <DeleteProfileForm />
-                                        </TabPane>
-                                        <TabPane className="text-center" tabId="3" id="student-feedback">
-                                            <Row>
-                                                <Col align="center">
-                                                    <ReviewForm name={"temp"} review="student" />
-                                                </Col>
-                                            </Row>
                                         </TabPane>
                                     </TabContent>
                                 </Col>

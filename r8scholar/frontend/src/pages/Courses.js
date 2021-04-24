@@ -114,7 +114,6 @@ export default class Courses extends Component {
     }
 
     activateMenu() {
-        console.log(this.state.droppedDown);
         this.setState({
             droppedDown: !this.state.droppedDown,
         });
@@ -193,7 +192,7 @@ export default class Courses extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#">
+                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -212,7 +211,6 @@ export default class Courses extends Component {
                             </div>
                         </Col>
                     </Row>
-
                     <Row style={{ marginTop: "2%", textAlign: "center" }} align="center">
                         <Col className="col-md-1" />
                         <Col className="col-md-10">
@@ -222,7 +220,7 @@ export default class Courses extends Component {
                                     <th>Name</th>
                                     <th>Rating</th>
                                     <th>Department</th>
-                                    <th>Department Rating</th>
+                                    <th>Difficulty Rating</th>
                                 </thead>
                                 <tbody>
                                     {this.state.displayedCourses === null ? (
@@ -250,7 +248,7 @@ export default class Courses extends Component {
                                                     </th>
                                                     <th style={{ minWidth: "100px" }}>
                                                         <StarRatings
-                                                            rating={this.state.departmentRatings[item.department]}
+                                                            rating={item.diff_rating === null ? 0 : item.diff_rating}
                                                             starDimension="25px"
                                                             starSpacing="5px"
                                                             starRatedColor="#3498db"
@@ -268,7 +266,7 @@ export default class Courses extends Component {
                         <Col className="col-md-1" />
                     </Row>
                     <div style={{ marginBottom: "3%" }} />
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="Page navigation example" style={{ paddingBottom: "100px" }}>
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
                             <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
@@ -281,7 +279,7 @@ export default class Courses extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
-                                <PaginationLink onClick={this.changePages} href="#">
+                                <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
                                     {this.state.currentPage}
                                 </PaginationLink>
                             </PaginationItem>

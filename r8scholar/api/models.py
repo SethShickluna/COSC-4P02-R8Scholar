@@ -1,5 +1,6 @@
 #python 
 import uuid
+from django.db.models.fields.related import ManyToManyField
 #Django#
 from rest_framework.response import Response
 from rest_framework import status
@@ -30,8 +31,8 @@ class CustomUser(AbstractBaseUser):
     verification_code = models.CharField(max_length=10, default=generate_validation_code())
     is_verified = models.BooleanField('is_verified', default=False)
     date_created = models.DateField(auto_now=True)
-    last_pass_reset = models.DateField(auto_now=True)
-    is_prof = models.BooleanField(default=False)
+    last_pass_reset = models.DateField(null=True)
+    is_prof = models.BooleanField(default=False,null=True)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
@@ -72,6 +73,7 @@ class Department(models.Model):
     courses_rating = models.FloatField(default=0)
     instructors_rating = models.FloatField(default=0)
     rating = models.FloatField(default=0)
+    diff_rating = models.FloatField(default=None,null=True)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
     number_ratings = models.IntegerField(default=0)
     percent_recommend = models.FloatField(default=0)
@@ -82,13 +84,16 @@ class Department(models.Model):
     def update_rating(self): # NEEDS TESTING #
         count = 0
         my_sum = 0
+        my_sum2 = 0
         #get reviews that we are a subject of 
         for review in Review.objects.filter(department_name=self.name): #O(n) 
             my_sum += review.rating
+            my_sum2 += review.diff_rating
             count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
+        self.diff_rating = (my_sum2 / count)
         self.save()
     
     def update_instructor_rating(self):
@@ -117,8 +122,8 @@ class Department(models.Model):
     
     def updatePercent(self):
         try:
-            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+            numbWould = Review.objects.filter(subject=self.name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=self.name,would_take_again=False).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
@@ -126,7 +131,7 @@ class Department(models.Model):
         
     def updateNumReviews(self):
         try:
-            count = Review.objects.filter(subject=name).count()
+            count = Review.objects.filter(subject=self.name).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.number_ratings = count
@@ -137,6 +142,7 @@ class Instructor(models.Model):
     name  = models.CharField(max_length=50,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=None)
+    diff_rating = models.FloatField(default=None,null=True)
     course_full_name= models.CharField(max_length=30, default=None, null=True)
     number_ratings = models.IntegerField(default=0)
     percent_recommend = models.FloatField(default=0)
@@ -147,19 +153,22 @@ class Instructor(models.Model):
     def update_rating(self): # NEEDS TESTING #
         count = 0
         my_sum = 0
+        my_sum2 = 0
         #get reviews that we are a subject of 
         for review in Review.objects.filter(instructor_name=self.name): #O(n) 
             my_sum += review.rating
+            my_sum2 += review.diff_rating
             count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
+        self.diff_rating = (my_sum2 / count)
         self.save()
     
     def updatePercent(self):
         try:
-            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+            numbWould = Review.objects.filter(subject=self.name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=self.name,would_take_again=False).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
@@ -167,7 +176,7 @@ class Instructor(models.Model):
         
     def updateNumReviews(self):
         try:
-            count = Review.objects.filter(subject=name).count()
+            count = Review.objects.filter(subject=self.name).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.number_ratings = count
@@ -178,6 +187,7 @@ class Course(models.Model):
     name = models.CharField(max_length=40, unique=True,primary_key=True)
     department = models.ForeignKey(Department, on_delete = models.DO_NOTHING)
     rating = models.FloatField(default=0)
+    diff_rating = models.FloatField(default=None,null=True)
     course_full_name  = models.CharField(max_length=40,default=None)
     number_ratings = models.IntegerField(default=0)
     percent_recommend = models.FloatField(default=0)
@@ -187,8 +197,8 @@ class Course(models.Model):
 
     def updatePercent(self):
         try:
-            numbWould = Review.objects.filter(subject=name,would_take_again=True).count()
-            numbWouldnt = Review.objects.filter(subject=name,would_take_again=False).count()
+            numbWould = Review.objects.filter(subject=self.name,would_take_again=True).count()
+            numbWouldnt = Review.objects.filter(subject=self.name,would_take_again=False).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.percent_recommend = (numbWould/(numbWould+numbWouldnt))*100
@@ -196,7 +206,7 @@ class Course(models.Model):
         
     def updateNumReviews(self):
         try:
-            count = Review.objects.filter(subject=name).count()
+            count = Review.objects.filter(subject=self.name).count()
         except Review.DoesNotExist:
             return Response({'Review(s) Not Found': 'Invalid Review Subject.'}, status=status.HTTP_404_NOT_FOUND)
         self.number_ratings = count
@@ -205,13 +215,16 @@ class Course(models.Model):
     def update_rating(self): # NEEDS TESTING #
         count = 0
         my_sum = 0
+        my_sum2 = 0
         #get reviews that we are a subject of 
         for review in Review.objects.filter(course_name=self.name): #O(n) 
             my_sum += review.rating
+            my_sum2 += review.diff_rating
             count +=1 
         #store their ratings and sum 
         #set rating to new average 
         self.rating = (my_sum / count)
+        self.diff_rating = (my_sum2 / count)
         self.save()
 
     
@@ -228,20 +241,32 @@ class Review(models.Model):
     reviewer = models.ForeignKey(CustomUser,default=None, on_delete = models.CASCADE)
     #User's nickname
     nickname = models.CharField(max_length=30, default=None)
+    #The instructor/course/department this review is related to
     subject = models.CharField(max_length=100)
+    #The title of the review
     title = models.CharField(max_length=45)
+    #The content of the review, i.e what the reviewer wrote about the subject of the review
     content = models.TextField(default=None, null=True)
+    #A rating between 1-5 representing the quality of the subject
     rating = models.FloatField(default=None, validators=[rating_validator])
+    #A rating between 1-5 representing the difficulty of the subject
+    diff_rating = models.FloatField(default=None, validators=[rating_validator])
+    #Indicates whether the reviewer would take again or recommend the subject
     would_take_again = models.BooleanField(default=False)
     #Fields for giving other users ability to thumbs up/down a review
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
+    #Fields to keep track of who has thumbs upped or thumbs downed a review
+    users_thumbs_upped = models.ManyToManyField(CustomUser,related_name='users_thumbs_upped')
+    users_thumbs_downed = models.ManyToManyField(CustomUser,related_name='users_thumbs_downed')
     #Each review can have three tags
-    tag_1 = models.CharField(max_length=100, default=None)
-    tag_2 = models.CharField(max_length=100, default=None)
-    tag_3 = models.CharField(max_length=100, default=None)
+    tag_1 = models.CharField(max_length=100, default=None,null=True)
+    tag_2 = models.CharField(max_length=100, default=None,null=True)
+    tag_3 = models.CharField(max_length=100, default=None,null=True)
     #Number of times this review has been reported
     numb_reports = models.IntegerField(default=0)
+    #Users who have reported this review
+    users_reported = ManyToManyField(CustomUser,related_name='users_reported')
     #The date this review was initially created
     date_created = models.DateField(auto_now=True)
     department_name = models.ForeignKey(Department, null=True, on_delete = models.DO_NOTHING)
@@ -264,6 +289,9 @@ class Comment(models.Model):
     #Fields for giving other users ability to thumbs up/down a comment
     thumbs_up = models.IntegerField(default=0)
     thumbs_down = models.IntegerField(default=0)
+    #Fields to keep track of who has thumbs upped or thumbs downed a comment
+    users_thumbs_upped = models.ManyToManyField(CustomUser,related_name='c_users_thumbs_upped')
+    users_thumbs_downed = models.ManyToManyField(CustomUser,related_name='c_users_thumbs_downed')
     child = models.ForeignKey('self',default=None, null=True, on_delete=CASCADE)
     date_created = models.DateField(auto_now=True)
     numb_reports = models.IntegerField(default=0)

@@ -5,6 +5,7 @@ import cookie from "react-cookies";
 import axiosInstance from "../axiosApi";
 import Navbar from "../components/Navbar";
 import PasswordReset from "../components/PasswordReset";
+import { MdRemoveRedEye } from "react-icons/md";
 
 export default class Login extends Component {
     constructor(props) {
@@ -13,10 +14,11 @@ export default class Login extends Component {
             email: "",
             password: "",
             unauthorized: false,
+            showPassword: false,
         };
 
         this.handleInput = this.handleInput.bind(this);
-
+        this.toggleShowPassword = this.toggleShowPassword.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -50,6 +52,12 @@ export default class Login extends Component {
         }
     }
 
+    toggleShowPassword() {
+        this.setState((prev) => ({
+            showPassword: !prev.showPassword,
+        }));
+    }
+
     render() {
         return (
             <>
@@ -77,7 +85,15 @@ export default class Login extends Component {
                                         </FormGroup>
                                         <FormGroup>
                                             <label>Password</label>
-                                            <Input placeholder="Password" invalid={this.state.unauthorized} id="password" name="password" type="password" onChange={this.handleInput} />
+                                            <Input
+                                                placeholder="Password"
+                                                invalid={this.state.unauthorized}
+                                                id="password"
+                                                name="password"
+                                                type={this.state.showPassword ? "text" : "password"}
+                                                onChange={this.handleInput}
+                                            />
+                                            <MdRemoveRedEye className="pass-toggle" style={{ position: "absolute", color: "#000", top: "58px", right: "15px" }} onClick={this.toggleShowPassword} />
                                             <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password">
                                                 <h5>Password Requirements: </h5>
                                                 <ul>

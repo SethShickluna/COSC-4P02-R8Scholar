@@ -16,8 +16,8 @@ async function handleLogout() {
         axiosInstance.defaults.headers["Authorization"] = null;
         window.location.href = "/";
         return response;
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        throw error;
     }
 }
 
