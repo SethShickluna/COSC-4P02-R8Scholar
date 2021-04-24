@@ -9,6 +9,9 @@ def email_r8scholar(review_id,report_description,numb_reports,email,nickname,sub
     message = f"""Subject: Reported Review
 
 
+
+
+
     Review id: {review_id}
     Date Created: {date_created}
     Report description: {report_description} 

@@ -16,19 +16,11 @@ import SecondaryNav from "../components/SecondaryNav";
 
 //axios
 import axiosInstance from "../axiosApi";
+import ReviewForm from "../components/ReviewForm";
 
 const pageStyles = {
-    margin: "0 auto",
-    marginTop: "3%",
-};
-
-const pageBreak = {
-    //this sets the margin for reviews and draws a line hovering under the titles
-    marginBottom: "2%",
-    marginTop: "2%",
-    height: "1px",
-    backgroundColor: "#dedede",
-    border: "none",
+    paddingTop: "3%",
+    minHeight: "100%",
 };
 
 const imgStyle = {
@@ -66,11 +58,10 @@ export default class Profile extends Component {
             let response = await axiosInstance.get("/get-user/" + "?email=" + cookie.load("email"));
             const user = response.data;
             this.setState({ user: user });
-            console.log(user)
             this.getReviews();
             return user;
         } catch (error) {
-            this.props.history.push("/signin"); //redirect to signin if a valid token is not presented
+            this.props.history.push("/login"); //redirect to signin if a valid token is not presented
         }
     }
 
@@ -112,7 +103,7 @@ export default class Profile extends Component {
                                         {/*insert image edit, accept image and input it */}
                                         <h1 style={{ textAlign: "center" }}>{this.state.user.nickname}</h1>
                                     </div>
-                                    <div style={pageBreak} /> {/* underline */}
+                                    <pageBreak /> {/* underline */}
                                     <div name="avg-rating-container">
                                         <div name="avg-rating-title">
                                             <h4 style={{ textAlign: "center" }}>Profile</h4>
@@ -127,7 +118,7 @@ export default class Profile extends Component {
                                             <img className="profile-pic" src={imageOne} style={imgStyle} />
                                         </div>
                                     </div>
-                                    <div style={pageBreak} /> {/* underline */}
+                                    <pageBreak /> {/* underline */}
                                 </Col>
 
                                 <Col style={{ marginTop: "53px" }} sm={8}>
@@ -155,31 +146,7 @@ export default class Profile extends Component {
                                                             });
                                                         }}
                                                     >
-                                                        Change Password
-                                                    </NavLink>
-                                                </NavItem>
-                                                <NavItem>
-                                                    <NavLink
-                                                        className={this.state.activeTab === "3" ? "active" : ""}
-                                                        onClick={() => {
-                                                            this.setState({
-                                                                activeTab: "3",
-                                                            });
-                                                        }}
-                                                    >
-                                                        Change Nickname
-                                                    </NavLink>
-                                                </NavItem>
-                                                <NavItem>
-                                                    <NavLink
-                                                        className={this.state.activeTab === "4" ? "active" : ""}
-                                                        onClick={() => {
-                                                            this.setState({
-                                                                activeTab: "4",
-                                                            });
-                                                        }}
-                                                    >
-                                                        Delete Profile
+                                                        Profile Settings
                                                     </NavLink>
                                                 </NavItem>
                                             </Nav>
@@ -212,13 +179,9 @@ export default class Profile extends Component {
                                                 </Col>
                                             </Row>
                                         </TabPane>
-                                        <TabPane className="text-center" tabId="2" id="chnage-pass">
+                                        <TabPane className="text-center" tabId="2" id="profile-settings">
                                             <EditPasswordForm />
-                                        </TabPane>
-                                        <TabPane className="text-center" tabId="3" id="change-nick">
                                             <EditNicknameForm />
-                                        </TabPane>
-                                        <TabPane className="text-center" tabId="4" id="delete-profile">
                                             <DeleteProfileForm />
                                         </TabPane>
                                     </TabContent>

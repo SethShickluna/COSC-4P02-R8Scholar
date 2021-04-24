@@ -9,6 +9,9 @@ def email_user(user_email,verification_code):
     message = f"""Subject: R8scholar Account Verification
 
 
+
+
+
     Your verification code is: {verification_code}"""
     #Login to mail server and send email
     context = ssl.create_default_context()

@@ -4,7 +4,6 @@ import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { Button, Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from "reactstrap";
 import axiosInstance from "../axiosApi";
-import { MdAirlineSeatIndividualSuite, MdBrightnessMedium } from "react-icons/md";
 import cookie from "react-cookies";
 import { DarkModeToggle } from "./DarkModeToggle";
 
@@ -66,8 +65,8 @@ function HomeNavbar() {
     });
 
     return (
-        <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
-            <div style={{ paddingLeft: "5%" }} className="navbar-translate justify-content-left">
+        <Navbar className={classnames("fixed-top", navbarColor)} expand="lg" align="center">
+            <div style={{ paddingLeft: "4%", display: "inline-flex !important" }}>
                 <NavbarBrand style={title} data-placement="bottom" href="/" title="Landing Page">
                     R8Scholar
                 </NavbarBrand>
@@ -84,8 +83,15 @@ function HomeNavbar() {
                 </button>
             </div>
             <Collapse navbar isOpen={navbarCollapse}>
-                <Nav className="mr-auto mt-2 mt-lg-0" navbar>
-                    <NavItem style={{ paddingLeft: "100px" }}>
+                <Nav className="mr-auto mt-lg-0" navbar style={{ width: "100%" }}>
+                    <NavItem style={{ marginLeft: "3%" }}>
+                        <Link to="/">
+                            <NavLink style={separate} style={navLinkStyles}>
+                                Home
+                            </NavLink>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
                         <Link to="/courses">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Courses
@@ -115,10 +121,10 @@ function HomeNavbar() {
                             </Link>
                         </NavItem>
                     ) : null}
-                </Nav>
-                <SearchBar color="transparent" />
-                <Nav style={{ marginRight: "10%" }} navbar>
-                    <NavItem>
+                    <NavItem id="SearchBar" style={{ width: "35em", minWidth: "200px", marginLeft: "auto", marginRight: "1%" }}>
+                        <SearchBar color="transparent" />
+                    </NavItem>
+                    <NavItem style={{ alignSelf: "center", minWidth: "max-content" }}>
                         {" "}
                         {/**signup button */}
                         {cookie.load("isLoggedIn") === "true" ? (
@@ -126,19 +132,23 @@ function HomeNavbar() {
                                 Sign Out
                             </Button>
                         ) : (
-                            <Button className="btn-round lg" href="/signup" color="danger">
-                                <i className="nc-icon nc-spaceship before"></i>
+                            <Button style={{ alignSelf: "center", width: "170px" }} className="btn-round lg" href="/signup" color="danger">
+                                <i className="nc-icon nc-spaceship before" style={{ display: "inline", marginRight: "10%" }} />
                                 Sign up Today
                             </Button>
                         )}
+                    </NavItem>
+                    <NavItem style={{ alignSelf: "center", marginLeft: "1%", minWidth: "max-content" }}>
                         {cookie.load("isLoggedIn") === "true" ? null : (
                             <Button href="/login" className="btn-round lg" color="danger">
                                 Sign In
                             </Button>
                         )}
                     </NavItem>
+                    <NavItem style={{ alignSelf: "center", marginLeft: "1%", marginRight: "4%" }}>
+                        <DarkModeToggle />
+                    </NavItem>
                 </Nav>
-                <DarkModeToggle />
             </Collapse>
         </Navbar>
     );

@@ -15,7 +15,7 @@ export function DarkModeToggle() {
     }, [darkMode]);
 
     return (
-        <div className="darkmode-toggle" style={{ marginRight: "5%", marginLeft: "-5%" }}>
+        <div className="darkmode-toggle">
             <MdBrightnessMedium id="darkmode-toggle" size="20px" onClick={() => setDarkMode(!darkMode)} />
         </div>
     );

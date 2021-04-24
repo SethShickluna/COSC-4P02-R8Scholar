@@ -47,98 +47,94 @@ function SecondaryNav() {
     const [bodyClick, setBodyClick] = React.useState(false);
 
     return (
-        <>
-            {bodyClick ? (
-                <div
-                    id="bodyClick"
+        <Navbar className="secondary-nav" color="info" expand="lg" fixed="top">
+            <div style={{ paddingLeft: "4%" }}>
+                <NavbarBrand style={title} href="/">
+                    R8Scholar
+                </NavbarBrand>
+                <button
+                    className="navbar-toggler"
+                    id="navbarTogglerDemo01"
+                    type="button"
                     onClick={() => {
                         document.documentElement.classList.toggle("nav-open");
-                        setBodyClick(false);
+                        setBodyClick(true);
                     }}
-                />
-            ) : null}
-            <Navbar className="secondary-nav" color="info" expand="lg">
-                <Container fluid>
-                    <button
-                        className="navbar-toggler"
-                        id="navbarTogglerDemo01"
-                        type="button"
-                        onClick={() => {
-                            document.documentElement.classList.toggle("nav-open");
-                            setBodyClick(true);
-                        }}
-                    >
-                        <span className="navbar-toggler-bar bar1" />
-                        <span className="navbar-toggler-bar bar2" />
-                        <span className="navbar-toggler-bar bar3" />
-                    </button>
-                    <Collapse navbar toggler="#navbarTogglerDemo01">
-                        <NavbarBrand style={title} href="/">
-                            R8Scholar Home
-                        </NavbarBrand>
-                        <Nav className="mr-auto mt-2 mt-lg-0" navbar>
-                            <NavItem style={separate} className="active">
-                                <Link to="/courses">
-                                    <NavLink style={separate} style={navLinkStyles}>
-                                        Courses
-                                    </NavLink>
-                                </Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link to="/instructors">
-                                    <NavLink style={separate} style={navLinkStyles}>
-                                        Instructors
-                                    </NavLink>
-                                </Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link to="/departments">
-                                    <NavLink style={separate} style={navLinkStyles}>
-                                        Departments
-                                    </NavLink>
-                                </Link>
-                            </NavItem>
-                            {cookie.load("isLoggedIn") === "true" ? (
-                                <NavItem>
-                                    <Link to="/profile">
-                                        <NavLink style={separate} style={navLinkStyles}>
-                                            Profile
-                                        </NavLink>
-                                    </Link>
-                                </NavItem>
-                            ) : null}
-                        </Nav>
-                        <SearchBar color="primary" />
-                        <Nav style={{ paddingRight: "10%" }} navbar>
-                            <NavItem>
-                                {" "}
-                                {/**signup button */}
-                                {cookie.load("isLoggedIn") === "true" ? (
-                                    <Button className="btn-round" color="default" type="submit" onClick={handleLogout}>
-                                        Sign Out
-                                    </Button>
-                                ) : (
-                                    <Link to="/signup">
-                                        <Button className="btn-round" color="danger">
-                                            <i className="nc-icon nc-spaceship before"></i>
-                                            Sign up Today
-                                        </Button>
-                                    </Link>
-                                )}
-                                {cookie.load("isLoggedIn") === "true" ? null : (
-                                    <Link to="/login">
-                                        <Button className="btn-round lg" color="danger">
-                                            Sign In
-                                        </Button>
-                                    </Link>
-                                )}
-                            </NavItem>
-                        </Nav>
+                >
+                    <span className="navbar-toggler-bar bar1" />
+                    <span className="navbar-toggler-bar bar2" />
+                    <span className="navbar-toggler-bar bar3" />
+                </button>
+            </div>
+            <Collapse navbar toggler="#navbarTogglerDemo01">
+                <Nav className="mr-auto mt-lg-0" navbar style={{ width: "100%" }}>
+                    <NavItem style={{ marginLeft: "3%" }}>
+                        <Link to="/">
+                            <NavLink style={separate} style={navLinkStyles}>
+                                Home
+                            </NavLink>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/courses">
+                            <NavLink style={separate} style={navLinkStyles}>
+                                Courses
+                            </NavLink>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/instructors">
+                            <NavLink style={separate} style={navLinkStyles}>
+                                Instructors
+                            </NavLink>
+                        </Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/departments">
+                            <NavLink style={separate} style={navLinkStyles}>
+                                Departments
+                            </NavLink>
+                        </Link>
+                    </NavItem>
+                    {cookie.load("isLoggedIn") === "true" ? (
+                        <NavItem>
+                            <Link to="/profile">
+                                <NavLink style={separate} style={navLinkStyles}>
+                                    Profile
+                                </NavLink>
+                            </Link>
+                        </NavItem>
+                    ) : null}
+                    <NavItem id="SearchBar" style={{ width: "35em", minWidth: "200px", marginLeft: "auto", marginRight: "1%" }}>
+                        <SearchBar color="transparent" />
+                    </NavItem>
+                    <NavItem style={{ alignSelf: "center", minWidth: "max-content" }}>
+                        {" "}
+                        {/**signup button */}
+                        {cookie.load("isLoggedIn") === "true" ? (
+                            <Button className="btn-round lg outline" color="danger" type="submit" onClick={handleLogout}>
+                                Sign Out
+                            </Button>
+                        ) : (
+                            <Button className="btn-round lg" href="/signup" color="danger">
+                                <i className="nc-icon nc-spaceship before"></i>
+                                Sign up Today
+                            </Button>
+                        )}
+                    </NavItem>
+                    <NavItem style={{ alignSelf: "center", marginLeft: "1%", minWidth: "max-content" }}>
+                        {cookie.load("isLoggedIn") === "true" ? null : (
+                            <Button href="/login" className="btn-round lg" color="danger">
+                                Sign In
+                            </Button>
+                        )}
+                    </NavItem>
+                    <NavItem style={{ alignSelf: "center", marginLeft: "1%", marginRight: "4%" }}>
                         <DarkModeToggle />
-                    </Collapse>
-                </Container>
-            </Navbar>
-        </>
+                    </NavItem>
+                </Nav>
+            </Collapse>
+        </Navbar>
     );
 }
 

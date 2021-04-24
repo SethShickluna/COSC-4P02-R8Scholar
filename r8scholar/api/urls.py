@@ -49,6 +49,7 @@ urlpatterns = [
     path('filter-departmentlist/',filter_views.filterDepartmentListBy.as_view(),name='filter-departmentlist'),
     path('filter-instructorlist/',filter_views.filterInstructorListBy.as_view(),name='filter-instructorlist'),
     path('filter-course-department/',filter_views.GetCoursesPerDepartment.as_view()),
+    path('filter-instructor-department/',filter_views.GetInstructorsPerDepartment.as_view()),
     #create views 
     path('create-user/', create_views.CreateUserView.as_view(), name="create-user"), 
     path('create-review/', create_views.CreateReviewView.as_view()),
@@ -74,3 +75,4 @@ urlpatterns = [
     #functionality views 
     path('verify-user/', functionality_views.VerifyUserView.as_view())
 ]
+

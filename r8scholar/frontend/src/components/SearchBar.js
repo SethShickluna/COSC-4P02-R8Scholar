@@ -16,6 +16,7 @@ const linkStyle = {
 const toggleStyle = {
     background: "transparent",
     border: "0px solid transparent",
+    width: "100%",
 };
 
 class SearchBar extends Component {
@@ -54,6 +55,12 @@ class SearchBar extends Component {
         e.preventDefault();
     };
 
+    handleKeyPress = (e) => {
+        if (e.charCode === 13) {
+            this.props.history.push("/search/" + this.state.query);
+        }
+    };
+
     determineType(item) {
         if (item.course_full_name) {
             return "course/" + item.name;
@@ -73,34 +80,32 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div>
-                <Dropdown primary onSubmit={this.doFullSearch} isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                    <DropdownToggle style={toggleStyle}>
-                        <Input className="search-bar" onChange={(e) => this.doSearch(e.target.value)} placeholder="Search" size="md" type="text"></Input>
-                    </DropdownToggle>
-                    <DropdownMenu container="body" style={menuStyle}>
-                        <DropdownItem color={this.props.color}>Query for {this.state.query} returned: </DropdownItem>
-                        {!this.state.results.length
-                            ? null
-                            : this.state.results.slice(0, this.min(this.state.results.length, this.state.maxDisplayed)).map((item, index) => {
-                                  return (
-                                      <div>
-                                          <DropdownItem divider />
-                                          <DropdownItem key={index} href={"/" + this.determineType(item)} style={linkStyle}>
-                                              {item.course_full_name ? item.name + " - " + item.course_full_name : item.name}
-                                          </DropdownItem>
-                                      </div>
-                                  );
-                              })}
-                        <DropdownItem divider />
-                        <DropdownItem>
-                            <Link to={"/search/" + this.state.query}>
-                                <b>View All Results</b>
-                            </Link>
-                        </DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            </div>
+            <Dropdown primary onSubmit={this.doFullSearch} isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                <DropdownToggle style={toggleStyle}>
+                    <Input className="search-bar" onKeyPress={this.handleKeyPress} onChange={(e) => this.doSearch(e.target.value)} placeholder="Search" size="md" type="text"></Input>
+                </DropdownToggle>
+                <DropdownMenu container="body" style={menuStyle}>
+                    <DropdownItem color={this.props.color}>Query for {this.state.query} returned: </DropdownItem>
+                    {!this.state.results.length
+                        ? null
+                        : this.state.results.slice(0, this.min(this.state.results.length, this.state.maxDisplayed)).map((item, index) => {
+                              return (
+                                  <div>
+                                      <DropdownItem divider />
+                                      <DropdownItem key={index} href={"/" + this.determineType(item)} style={linkStyle}>
+                                          {item.course_full_name ? item.name + " - " + item.course_full_name : item.name}
+                                      </DropdownItem>
+                                  </div>
+                              );
+                          })}
+                    <DropdownItem divider />
+                    <DropdownItem>
+                        <Link to={"/search/" + this.state.query}>
+                            <b>View All Results</b>
+                        </Link>
+                    </DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
         );
     }
 }

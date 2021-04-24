@@ -35,6 +35,7 @@ export default class Departments extends Component {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                type: "department",
                 department: name,
                 amount: 1,
             }),
@@ -105,8 +106,6 @@ export default class Departments extends Component {
                 return "name";
             }
         };
-
-        console.log(requestType());
         const request = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -125,7 +124,7 @@ export default class Departments extends Component {
                     displayedDepartments: data,
                     maxPage: newMax,
                 });
-                this.state.displayedDepartments.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item) => {
+                this.state.displayedDepartments.map((item) => {
                     this.getTopInstructor(item.name);
                     this.getTopCourse(item.name);
                 });
@@ -139,18 +138,17 @@ export default class Departments extends Component {
     changePages(button) {
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
-            displayedDepartments: null,
+            // displayedDepartments: null,
             currentPage: Number(newPage),
         });
-        this.getEntries();
+        // this.getEntries();
 
-        this.setState({
-            loaded: true,
-        });
+        // this.setState({
+        //     loaded: true,
+        // });
     }
 
     activateMenu() {
-        console.log(this.state.droppedDown);
         this.setState({
             droppedDown: !this.state.droppedDown,
         });
@@ -214,7 +212,7 @@ export default class Departments extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage === 1} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -225,7 +223,7 @@ export default class Departments extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#">
+                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -234,7 +232,7 @@ export default class Departments extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedDepartments === null}>
+                                        <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage == this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -245,7 +243,7 @@ export default class Departments extends Component {
                         </Col>
                     </Row>
 
-                    <Row style={{ marginTop: "2%" }} align="center">
+                    <Row style={{ marginTop: "2%", textAlign: "center" }} align="center">
                         <Col className="col-md-1" />
                         <Col className="col-md-10">
                             <Table striped>
@@ -295,9 +293,9 @@ export default class Departments extends Component {
                         <Col className="col-md-1" />
                     </Row>
                     <div style={{ marginBottom: "3%" }} />
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="Page navigation example" style={{ paddingBottom: "100px" }}>
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedDepartments === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -308,7 +306,7 @@ export default class Departments extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
-                                <PaginationLink onClick={this.changePages} href="#">
+                                <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
                                     {this.state.currentPage}
                                 </PaginationLink>
                             </PaginationItem>
@@ -317,7 +315,7 @@ export default class Departments extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedDepartments === null}>
+                            <PaginationItem disabled={this.state.displayedDepartments === null || this.state.currentPage == this.state.maxPage}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>

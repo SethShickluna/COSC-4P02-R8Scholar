@@ -37,7 +37,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('comment_id', 'review_id', 'name', 'content','thumbs_up','thumbs_down', 'child', 'date', 'numb_reports')
+        fields = ('comment_id', 'review_id', 'name', 'content','thumbs_up','thumbs_down', 'child', 'date_created', 'numb_reports')
 
 
 class CourseSerializer(serializers.ModelSerializer):

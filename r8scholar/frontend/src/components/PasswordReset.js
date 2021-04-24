@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Card, Form, Input, FormGroup, Container, Row, Col, UncontrolledTooltip, FormFeedback, FormText } from "reactstrap";
 import { MdCheckCircle } from "react-icons/md";
+import axiosInstance from "../axiosApi";
 
 export default class PasswordReset extends Component {
     constructor(props) {
@@ -17,15 +18,15 @@ export default class PasswordReset extends Component {
 
     async submitForm(e) {
         e.preventDefault(); //stop a reload
-
-        //attempt to get an authentication token via post request
         try {
             const response = await axiosInstance.post("/reset-password/", {
                 email: this.state.email,
             });
+            const message = response.data;
             this.toggleStatus();
-            return response;
+            return message;
         } catch (error) {
+            console.log(error.message);
             this.toggleStatus();
             this.setState({ unauthorized: true });
         }

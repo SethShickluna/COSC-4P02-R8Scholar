@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import cookie from "react-cookies";
-import { FormGroup, Label, Input, Button, Alert } from "reactstrap";
+import { FormGroup, Label, Input, Button, Alert, Collapse } from "reactstrap";
 import axiosInstance from "../axiosApi";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 async function handleLogout() {
     try {
@@ -15,8 +16,8 @@ async function handleLogout() {
         axiosInstance.defaults.headers["Authorization"] = null;
         window.location.href = "/";
         return response;
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -30,6 +31,7 @@ export default class DeleteProfileForm extends Component {
             invalidPassword: false,
             confirmed: false,
             alertConfirm: false,
+            isOpen: false,
         };
         //allows us to this "this" inside the methods
 
@@ -39,6 +41,7 @@ export default class DeleteProfileForm extends Component {
         this.submitForm = this.submitForm.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
         this.onDismiss2 = this.onDismiss2.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
     }
 
     handleInput(obj) {
@@ -78,6 +81,10 @@ export default class DeleteProfileForm extends Component {
         this.setState({ alertConfirm: !this.state.alertConfirm });
     }
 
+    toggleMenu() {
+        this.setState((prev) => ({ isOpen: !prev.isOpen }));
+    }
+
     render() {
         return (
             <form onSubmit={this.submitForm}>
@@ -87,24 +94,30 @@ export default class DeleteProfileForm extends Component {
                 <Alert color="danger" isOpen={this.state.alertConfirm} toggle={this.onDismiss2}>
                     <b>Please confirm that you wish to delete your r8scholar account.</b>
                 </Alert>
-                <h3>Delete Profile</h3>
-                <div style={{ marginBottom: "2%" }} />
-                <FormGroup>
-                    <Label for="password">Confirm password</Label>
-                    <Input type="password" name="password" id="password" placeholder="Password..." autoComplete="off" onChange={this.handleInput} />
-                    <FormGroup check>
-                        <Label className="form-check-label" style={{ margin: "5% 3%" }}>
-                            <Input onClick={this.handleCheckbox} className="form-check-input" type="checkbox" value="" />I am aware that my account and each review and comment associated with it will
-                            be deleted.
-                            <span className="form-check-sign">
-                                <span className="check"></span>
-                            </span>
-                        </Label>
-                    </FormGroup>
-                </FormGroup>
-                <Button color="danger" type="submit">
+                <h3 onClick={this.toggleMenu} style={{ display: "inline-block" }}>
                     Delete Profile
-                </Button>
+                    {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
+                </h3>
+                <Collapse isOpen={this.state.isOpen}>
+                    <div style={{ marginBottom: "50px" }} />
+                    <FormGroup>
+                        <Label for="password">Confirm password</Label>
+                        <Input type="password" name="password" id="password" placeholder="Password..." autoComplete="off" onChange={this.handleInput} />
+                        <FormGroup check>
+                            <Label className="form-check-label" style={{ margin: "5% 3%" }}>
+                                <Input onClick={this.handleCheckbox} className="form-check-input" type="checkbox" value="" />I am aware that my account and each review and comment associated with it
+                                will be deleted.
+                                <span className="form-check-sign">
+                                    <span className="check"></span>
+                                </span>
+                            </Label>
+                        </FormGroup>
+                    </FormGroup>
+                    <Button color="danger" type="submit">
+                        Delete Profile
+                    </Button>
+                    <div style={{ marginBottom: "50px" }} />
+                </Collapse>
             </form>
         );
     }

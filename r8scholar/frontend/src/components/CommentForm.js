@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Input, Modal, FormGroup, Label, Form, FormText, Container, Row, Col } from "reactstrap";
 import cookie from "react-cookies";
-import { BsTrash } from "react-icons/bs";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import axiosInstance from "../axiosApi";
+import EditForm from "./EditCommentForm";
+import DeleteForm from "./DeleteCommentForm";
+import ReportCommentForm from "./ReportCommentForm";
 
 //props contains object called review
 
@@ -13,12 +15,11 @@ function CommentForm(props) {
     const [comments, setComments] = React.useState(null);
 
     const commentContainer = {
-        //backgroundColor: "#f5f6fa",
         border: "2px solid #dfe6e9",
         borderRadius: "12px",
-        width: "100%",
-        padding: "5px",
+        width: "-webkit-fill-available",
         marginTop: "20px",
+        padding: "3%",
     };
 
     React.useEffect(() => {
@@ -53,29 +54,18 @@ function CommentForm(props) {
         }
     };
 
-    async function vote(comment) {
+    const vote = async (up, comment_id) => {
         try {
-            let response;
-            if (upvote) {
-                console.log("upvoted");
-                response = await axiosInstance.post("/upvote-comment/", {
-                    comment_id: comment.id,
-                    email: cookie.load("email"),
-                });
-                window.location.reload();
-            } else {
-                console.log("downvoted");
-                response = await axiosInstance.post("/downvote-comment/", {
-                    comment_id: comment.id,
-                    email: cookie.load("email"),
-                });
-                window.location.reload();
-            }
+            response = await axiosInstance.post("/thumbs-comment/", {
+                comment_id: comment_id,
+                email: cookie.load("email"),
+                up_or_down: up ? "up" : "down",
+            });
             return response.status;
         } catch (error) {
             console.log(error.message);
         }
-    }
+    };
 
     return (
         <>
@@ -83,13 +73,12 @@ function CommentForm(props) {
                 View Comments
             </Button>
             <Modal isOpen={modal} toggle={() => setModal(false)} className="modal-lg" modalClassName="bd-example-modal-lg">
-                <div className="modal-header">
+                <div className="modal-header no-border-header text-center" id="comment-form">
                     <button aria-label="Close" className="close" data-dismiss="modal" type="button" onClick={() => setModal(false)}>
                         <span aria-hidden={true}>×</span>
                     </button>
                 </div>
-
-                <div className="modal-body">
+                <div className="modal-body" id="comment-form">
                     <Container>
                         <Row>
                             <Col className="col-md-7">
@@ -100,7 +89,6 @@ function CommentForm(props) {
                                     <FormGroup>
                                         <Input type="textarea" placeholder="What do you think of this review?" onChange={handleContentChange} name="content" fullWidth={true} id="content" rows={4} />
                                     </FormGroup>
-
                                     <Button className="btn-round" size="sm" color="info" type="submit" outline>
                                         Submit
                                     </Button>
@@ -108,46 +96,127 @@ function CommentForm(props) {
                             </Col>
                         </Row>
                         <Row>
-                            <div className="modal-footer">
-                                <h3>Comments {comments !== null ? " (" + comments.length + ")" : "(0)"}</h3>
-                            </div>
-                        </Row>
-                        <Row>
-                            <div>
-                                {comments === null || comments.length === 0 ? (
-                                    <h6>No Comments yet! Be the first to leave one?</h6>
-                                ) : (
-                                    comments.map((item, index) => {
-                                        return (
-                                            <div key={index} style={commentContainer} id={item.comment_id}>
-                                                <div style={{ display: "grid", gridAutoFlow: "column", textAlign: "center" }}>
-                                                    <h6>{item.name}</h6>
-                                                    <h6>0</h6>
-                                                </div>
-                                                <p style={{ display: "inline" }}>{item.content}</p>
-                                                <Button
-                                                    style={{ marginLeft: "5px", padding: "0", borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#77dd77" }}
-                                                    className="btn-round"
-                                                    type="button"
-                                                    id="upvote"
-                                                    onClick={() => this.vote(true)}
-                                                >
-                                                    <MdThumbUp size="20px" />
-                                                </Button>
-                                                <Button
-                                                    style={{ marginLeft: "5px", padding: "0", borderRadius: "45%", borderColor: "#f1f1ee", backgroundColor: "#f1f1ee", color: "#f5593d" }}
-                                                    className="btn-round"
-                                                    type="button"
-                                                    id="downvote"
-                                                    onClick={() => this.vote(false)}
-                                                >
-                                                    <MdThumbDown size="20px" />
-                                                </Button>
-                                            </div>
-                                        );
-                                    })
-                                )}
-                            </div>
+                            <Col>
+                                <Row className="modal-footer" style={{ marginTop: "2%", marginBottom: "2%", justifyContent: "center" }}>
+                                    <h3 style={{ alignContent: "center" }}>Comments {comments !== null ? " (" + comments.length + ")" : "(0)"}</h3>
+                                </Row>
+                                <Row align="center" style={{ marginBottom: "5%", justifyContent: "center" }}>
+                                    {comments === null || comments.length === 0 ? (
+                                        <h6>No Comments yet! Be the first to leave one?</h6>
+                                    ) : (
+                                        comments.map((item, index) => {
+                                            return (
+                                                <Row key={index} style={commentContainer} id="comment">
+                                                    <Col xs lg="9">
+                                                        <Row>
+                                                            <Col align="left">
+                                                                <h6>{item.name}</h6>
+                                                            </Col>
+                                                            {props.currentUser === item.name ? (
+                                                                <Col align="right">
+                                                                    <EditForm comment={item} />
+                                                                    <DeleteForm comment={item} />
+                                                                </Col>
+                                                            ) : null}
+                                                        </Row>
+                                                        <Row className="modal-footer" style={{ marginTop: "2%", paddingTop: "2%", justifyContent: "left" }}>
+                                                            <p style={{ paddingLeft: "2%" }}>{item.content}</p>
+                                                        </Row>
+                                                    </Col>
+                                                    <Col xs lg="2" style={{ alignSelf: "center", marginLeft: "auto" }}>
+                                                        <Row>
+                                                            <Col>{item.thumbs_up}</Col>
+                                                            <Col>{item.thumbs_down}</Col>
+                                                        </Row>
+                                                        {props.currentUser === item.name ? (
+                                                            <Row>
+                                                                <Col style={{ padding: "0%" }}>
+                                                                    <Button
+                                                                        disabled
+                                                                        style={{
+                                                                            marginLeft: "5px",
+                                                                            padding: "0",
+                                                                            borderRadius: "45%",
+                                                                            borderColor: "#f1f1ee",
+                                                                            backgroundColor: "#f1f1ee",
+                                                                            color: "#77dd77",
+                                                                        }}
+                                                                        className="btn-round"
+                                                                        type="button"
+                                                                        id="upvote"
+                                                                    >
+                                                                        <MdThumbUp size="20px" />
+                                                                    </Button>
+                                                                </Col>
+                                                                <Col style={{ padding: "0%" }}>
+                                                                    <Button
+                                                                        disabled
+                                                                        style={{
+                                                                            marginLeft: "5px",
+                                                                            padding: "0",
+                                                                            borderRadius: "45%",
+                                                                            borderColor: "#f1f1ee",
+                                                                            backgroundColor: "#f1f1ee",
+                                                                            color: "#f5593d",
+                                                                        }}
+                                                                        className="btn-round"
+                                                                        type="button"
+                                                                        id="downvote"
+                                                                    >
+                                                                        <MdThumbDown size="20px" />
+                                                                    </Button>
+                                                                </Col>
+                                                            </Row>
+                                                        ) : (
+                                                            <Row>
+                                                                <Col style={{ padding: "0%" }}>
+                                                                    <Button
+                                                                        style={{
+                                                                            marginLeft: "5px",
+                                                                            padding: "0",
+                                                                            borderRadius: "45%",
+                                                                            borderColor: "#f1f1ee",
+                                                                            backgroundColor: "#f1f1ee",
+                                                                            color: "#77dd77",
+                                                                        }}
+                                                                        className="btn-round"
+                                                                        type="button"
+                                                                        id="upvote"
+                                                                        onClick={() => vote(true, item.comment_id)}
+                                                                    >
+                                                                        <MdThumbUp size="20px" />
+                                                                    </Button>
+                                                                </Col>
+                                                                <Col style={{ padding: "0%" }}>
+                                                                    <Button
+                                                                        style={{
+                                                                            marginLeft: "5px",
+                                                                            padding: "0",
+                                                                            borderRadius: "45%",
+                                                                            borderColor: "#f1f1ee",
+                                                                            backgroundColor: "#f1f1ee",
+                                                                            color: "#f5593d",
+                                                                        }}
+                                                                        className="btn-round"
+                                                                        type="button"
+                                                                        id="downvote"
+                                                                        onClick={() => vote(false, item.comment_id)}
+                                                                    >
+                                                                        <MdThumbDown size="20px" />
+                                                                    </Button>
+                                                                </Col>
+                                                            </Row>
+                                                        )}
+                                                        <Row style={{ justifyContent: "center" }}>
+                                                            <ReportCommentForm comment_id={item.comment_id} />
+                                                        </Row>
+                                                    </Col>
+                                                </Row>
+                                            );
+                                        })
+                                    )}
+                                </Row>
+                            </Col>
                         </Row>
                     </Container>
                 </div>

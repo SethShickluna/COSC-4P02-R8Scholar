@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import cookie from "react-cookies";
-import { FormGroup, Label, Input, FormText, Button, Alert, UncontrolledTooltip } from "reactstrap";
+import { FormGroup, Label, Input, FormText, Button, Alert, UncontrolledTooltip, Collapse } from "reactstrap";
 import axiosInstance from "../axiosApi";
-import { MdInfoOutline } from "react-icons/md";
+import { MdInfoOutline, MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 export default class EditPasswordForm extends Component {
     //make this a password form
@@ -18,6 +18,7 @@ export default class EditPasswordForm extends Component {
             badPassword: false,
             validPassword: false,
             validVerifPassword: false,
+            isOpen: false,
         };
 
         //allows us to this "this" inside the methods
@@ -29,6 +30,7 @@ export default class EditPasswordForm extends Component {
 
         this.checkPassword = this.checkPassword.bind(this);
         this.verifyPassword = this.verifyPassword.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
     }
 
     handleInput(obj) {
@@ -101,6 +103,10 @@ export default class EditPasswordForm extends Component {
         this.setState({ badPassword: !this.state.badPassword });
     }
 
+    toggleMenu() {
+        this.setState((prev) => ({ isOpen: !prev.isOpen }));
+    }
+
     render() {
         return (
             <form onSubmit={this.submitForm}>
@@ -113,53 +119,59 @@ export default class EditPasswordForm extends Component {
                 <Alert color="success" isOpen={this.state.success} toggle={this.onDismiss2}>
                     <b>Good to go! Your password was changed successfully.</b>
                 </Alert>
-                <h3>Change Password</h3>
-                <div style={{ marginBottom: "2%" }}></div>
-                <FormGroup>
-                    <Label for="examplePassword">Old Password</Label>
-                    <Input type="password" name="oldPassword" id="oldPassword" placeholder="Current Password" autoComplete="off" onChange={this.handleInput} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="examplePassword">New Password</Label>
-                    <MdInfoOutline id="password-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
-                    <Input
-                        valid={this.state.validPassword}
-                        invalid={!this.state.validPassword}
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="New Password"
-                        autoComplete="off"
-                        onChange={this.handleInput}
-                    />
-                    <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password-tooltip">
-                        <h5>Password Requirements: </h5>
-                        <ul>
-                            <li>1 Uppercase</li>
-                            <li>1 Lowercase</li>
-                            <li>1 Number</li>
-                            <li>1 Symbol </li>
-                            <li>At least 12 characters</li>
-                        </ul>
-                    </UncontrolledTooltip>
-                </FormGroup>
-
-                <FormGroup>
-                    <Label for="examplePassword">Verify New Password</Label>
-                    <Input
-                        valid={this.state.validVerifPassword}
-                        invalid={!this.state.validVerifPassword}
-                        type="password"
-                        name="verifPassword"
-                        id="verifPassword"
-                        placeholder="Verify New Password"
-                        autoComplete="off"
-                        onChange={this.handleInput}
-                    />
-                </FormGroup>
-                <Button color="primary" type="submit">
+                <h3 onClick={this.toggleMenu} style={{ display: "inline-block" }}>
                     Change Password
-                </Button>
+                    {this.state.isOpen ? <MdKeyboardArrowUp style={{ marginTop: "-9px" }} size="40px" /> : <MdKeyboardArrowDown style={{ marginTop: "-9px" }} size="40px" />}
+                </h3>
+                <Collapse isOpen={this.state.isOpen}>
+                    <div style={{ marginBottom: "50px" }} />
+                    <FormGroup>
+                        <Label for="examplePassword">Old Password</Label>
+                        <Input type="password" name="oldPassword" id="oldPassword" placeholder="Current Password" autoComplete="off" onChange={this.handleInput} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="examplePassword">New Password</Label>
+                        <MdInfoOutline id="password-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                        <Input
+                            valid={this.state.validPassword}
+                            invalid={!this.state.validPassword}
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="New Password"
+                            autoComplete="off"
+                            onChange={this.handleInput}
+                        />
+                        <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password-tooltip">
+                            <h5>Password Requirements: </h5>
+                            <ul>
+                                <li>1 Uppercase</li>
+                                <li>1 Lowercase</li>
+                                <li>1 Number</li>
+                                <li>1 Symbol </li>
+                                <li>At least 12 characters</li>
+                            </ul>
+                        </UncontrolledTooltip>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="examplePassword">Verify New Password</Label>
+                        <Input
+                            valid={this.state.validVerifPassword}
+                            invalid={!this.state.validVerifPassword}
+                            type="password"
+                            name="verifPassword"
+                            id="verifPassword"
+                            placeholder="Verify New Password"
+                            autoComplete="off"
+                            onChange={this.handleInput}
+                        />
+                    </FormGroup>
+                    <Button color="primary" type="submit">
+                        Change Password
+                    </Button>
+                    <div style={{ marginBottom: "50px" }} />
+                </Collapse>
             </form>
         );
     }

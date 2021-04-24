@@ -53,6 +53,7 @@ export default class Courses extends Component {
     };
 
     getEntries = async () => {
+        let time = Date.now();
         var requestType = () => {
             switch (this.state.sortOption) {
                 case "Rating: High to Low":
@@ -73,21 +74,25 @@ export default class Courses extends Component {
             }),
         };
 
-        await fetch("/api/filter-courselist/", request).then((response) => {
-            response.json().then((data) => {
-                if (this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High") {
-                    data = data.reverse();
-                }
-                var newMax = parseInt(Math.floor(data.length / this.state.perPage));
-                this.setState({
-                    displayedCourses: data,
-                    maxPage: newMax,
+        await fetch("/api/filter-courselist/", request)
+            .then((response) => {
+                response.json().then((data) => {
+                    if (this.state.sortOption === "Alphabetical: Z-A" || this.state.sortOption === "Rating: Low to High") {
+                        data = data.reverse();
+                    }
+                    var newMax = parseInt(Math.floor(data.length / this.state.perPage) + 1);
+                    this.setState({
+                        displayedCourses: data,
+                        maxPage: newMax,
+                    });
+                    this.state.displayedCourses.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item) => {
+                        this.getDepartmentRatings(item.department);
+                    });
                 });
-                this.state.displayedCourses.slice((this.state.currentPage - 1) * this.state.perPage, this.state.currentPage * this.state.perPage).map((item) => {
-                    this.getDepartmentRatings(item.department);
-                });
+            })
+            .finally(() => {
+                console.log(Date.now() - time);
             });
-        });
 
         this.setState({
             loaded: true,
@@ -97,19 +102,12 @@ export default class Courses extends Component {
     changePages(button) {
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
-            displayedCourses: null,
+            // displayedCourses: null,
             currentPage: Number(newPage),
-        });
-
-        this.getEntries();
-
-        this.setState({
-            loaded: true,
         });
     }
 
     activateMenu() {
-        console.log(this.state.droppedDown);
         this.setState({
             droppedDown: !this.state.droppedDown,
         });
@@ -177,7 +175,7 @@ export default class Courses extends Component {
                             <div>
                                 <nav aria-label="Page navigation example">
                                     <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                                        <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
+                                        <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage === 1} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
                                             </PaginationLink>
@@ -188,7 +186,7 @@ export default class Courses extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#">
+                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -197,7 +195,7 @@ export default class Courses extends Component {
                                                 {">"}
                                             </PaginationLink>
                                         </PaginationItem>
-                                        <PaginationItem disabled={this.state.displayedCourses === null}>
+                                        <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage == this.state.maxPage}>
                                             <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                                 Last
                                             </PaginationLink>
@@ -207,8 +205,7 @@ export default class Courses extends Component {
                             </div>
                         </Col>
                     </Row>
-
-                    <Row style={{ marginTop: "2%" }} align="center">
+                    <Row style={{ marginTop: "2%", textAlign: "center" }} align="center">
                         <Col className="col-md-1" />
                         <Col className="col-md-10">
                             <Table striped>
@@ -217,7 +214,7 @@ export default class Courses extends Component {
                                     <th>Name</th>
                                     <th>Rating</th>
                                     <th>Department</th>
-                                    <th>Department Rating</th>
+                                    <th>Difficulty Rating</th>
                                 </thead>
                                 <tbody>
                                     {this.state.displayedCourses === null ? (
@@ -245,7 +242,7 @@ export default class Courses extends Component {
                                                     </th>
                                                     <th style={{ minWidth: "100px" }}>
                                                         <StarRatings
-                                                            rating={this.state.departmentRatings[item.department]}
+                                                            rating={item.diff_rating === null ? 0 : item.diff_rating}
                                                             starDimension="25px"
                                                             starSpacing="5px"
                                                             starRatedColor="#3498db"
@@ -263,9 +260,9 @@ export default class Courses extends Component {
                         <Col className="col-md-1" />
                     </Row>
                     <div style={{ marginBottom: "3%" }} />
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="Page navigation example" style={{ paddingBottom: "100px" }}>
                         <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
-                            <PaginationItem disabled={this.state.displayedCourses === null} color="danger">
+                            <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
                                 </PaginationLink>
@@ -276,7 +273,7 @@ export default class Courses extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
-                                <PaginationLink onClick={this.changePages} href="#">
+                                <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
                                     {this.state.currentPage}
                                 </PaginationLink>
                             </PaginationItem>
@@ -285,7 +282,7 @@ export default class Courses extends Component {
                                     {">"}
                                 </PaginationLink>
                             </PaginationItem>
-                            <PaginationItem disabled={this.state.displayedCourses === null}>
+                            <PaginationItem disabled={this.state.displayedCourses === null || this.state.currentPage == this.state.maxPage}>
                                 <PaginationLink onClick={this.changePages} href="#" id={this.state.maxPage}>
                                     Last
                                 </PaginationLink>

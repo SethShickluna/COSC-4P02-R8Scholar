@@ -18,7 +18,7 @@ class filterCourseListBy(APIView):
     def post(self,request):
         data = json.loads(request.body.decode("utf-8"))
         filter_by = data["filter_by"]
-
+        print(filter_by)
         courses = Course.objects.all() #consider all entries
         course_list = []
         #Filter by name
@@ -34,10 +34,15 @@ class filterCourseListBy(APIView):
         elif(str(filter_by)=="department"):
             for course in courses.order_by('department'):
                 course_list.append(CourseSerializer(course).data)
+        elif(str(filter_by)=="instructor"):
+            print("yess", courses[0].p)
+            for course in courses.order_by('instructor'):
+                print(course)
+                course_list.append(CourseSerializer(course).data)        
         else: #default alphabetical 
             for course in courses.order_by('name'):
                 course_list.append(CourseSerializer(course).data)
-
+        
         return Response(course_list, status=status.HTTP_200_OK) 
 #Returns a list of instructors filtered by either name(alphabetical), rating(highest to lowest), or rating(lowest to highest)
 # amount will specifiy how many instructors should be in the returned list
@@ -111,4 +116,18 @@ class GetCoursesPerDepartment(APIView):
                 course_list.append(CourseSerializer(course).data)
             return Response(course_list, status=status.HTTP_200_OK) 
         return Response({"Invalid Department Name": "No departments found"}, status=status.HTTP_400_BAD_REQUEST) 
-        
+
+class GetInstructorsPerDepartment(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self,request):
+        data = json.loads(request.body.decode("utf-8"))
+        dept_name = data["department"]
+        print(dept_name)
+        department = Department.objects.get(name=dept_name)
+        if department:
+            instructors = Instructor.objects.filter(department=department) 
+            instructor_list = []
+            for instructor in instructors: #serialize each entry and return 
+                instructor_list.append(CourseSerializer(instructor).data)
+            return Response(instructor_list, status=status.HTTP_200_OK) 
+        return Response({"Invalid Department Name": "No departments found"}, status=status.HTTP_400_BAD_REQUEST) 
