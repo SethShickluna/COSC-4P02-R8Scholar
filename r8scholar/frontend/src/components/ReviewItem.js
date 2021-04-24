@@ -3,8 +3,8 @@ import { Card, CardHeader, CardBody, CardTitle, CardText, ListGroupItem, Button,
 import StarRatings from "react-star-ratings";
 import ReportForm from "./ReportReviewForm";
 import EditForm from "./EditReviewForm";
+import DeleteForm from "./DeleteReviewForm";
 import CommentForm from "./CommentForm";
-import { BsFillTrashFill } from "react-icons/bs";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import axiosInstance from "../axiosApi";
 import cookie, { setRawCookie } from "react-cookies";
@@ -83,9 +83,7 @@ export default class ReviewItem extends Component {
                             {this.props.isOwner ? (
                                 <Col className="col-md-5" style={{ marginLeft: "auto", minWidth: "max-content", maxWidth: "200px" }}>
                                     <EditForm type={this.props.type} review={this.props.reviewItem} />
-                                    <Button style={{ marginLeft: "5px" }} color="danger" className="btn-round" type="button" onClick={this.delete}>
-                                        <BsFillTrashFill /> Delete
-                                    </Button>
+                                    <DeleteForm review={this.props.review} />
                                 </Col>
                             ) : (
                                 <Col className="col-md-3" align="right" style={{ marginLeft: "auto", minWidth: "max-content", maxWidth: "180px" }}>

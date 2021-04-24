@@ -55,6 +55,12 @@ class SearchBar extends Component {
         e.preventDefault();
     };
 
+    handleKeyPress = (e) => {
+        if (e.charCode === 13) {
+            this.props.history.push("/search/" + this.state.query);
+        }
+    };
+
     determineType(item) {
         if (item.course_full_name) {
             return "course/" + item.name;
@@ -76,7 +82,7 @@ class SearchBar extends Component {
         return (
             <Dropdown primary onSubmit={this.doFullSearch} isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
                 <DropdownToggle style={toggleStyle}>
-                    <Input className="search-bar" onChange={(e) => this.doSearch(e.target.value)} placeholder="Search" size="md" type="text"></Input>
+                    <Input className="search-bar" onKeyPress={this.handleKeyPress} onChange={(e) => this.doSearch(e.target.value)} placeholder="Search" size="md" type="text"></Input>
                 </DropdownToggle>
                 <DropdownMenu container="body" style={menuStyle}>
                     <DropdownItem color={this.props.color}>Query for {this.state.query} returned: </DropdownItem>

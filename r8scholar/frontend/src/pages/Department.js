@@ -1,6 +1,6 @@
 //npm modules
 import React, { Component } from "react";
-import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Table } from "reactstrap";
+import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Table, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import cookie from "react-cookies";
@@ -17,6 +17,24 @@ import axiosInstance from "../axiosApi";
 const tableEntries = {
     color: "black",
     fontSize: "18",
+};
+
+const subRatingStyle = {
+    marginRight: "15px",
+    marginLeft: "15px",
+    marginTop: "2%",
+    border: "2px #7f8c8d",
+    textAlign: "center",
+};
+
+const tagStyle = {
+    borderRadius: "15px",
+    height: "25px",
+    backgroundColor: "#fbfcfc",
+    color: "#000",
+    width: "max-content",
+    marginRight: "3%",
+    marginBottom: "5%",
 };
 
 export default class Course extends Component {
@@ -39,6 +57,7 @@ export default class Course extends Component {
             allDeptCourses: [],
             allDeptInstructors: [],
             currentUser: "",
+            top_tags: null,
         };
     }
 
@@ -131,6 +150,52 @@ export default class Course extends Component {
                     reviews: data,
                     loaded: true,
                 });
+            })
+            .then(() => {
+                // This counts number of total recomendations and review tags
+                let count = 0;
+                let totalTags = { tags: [], count: [] };
+                this.state.reviews.map((review) => {
+                    if (review.would_take_again) {
+                        count++;
+                    }
+                    if (review.tag_1 != null) {
+                        if (totalTags.tags.includes(review.tag_1)) {
+                            totalTags.count[totalTags.tags.indexOf(review.tag_1)]++;
+                        } else {
+                            totalTags.tags.push(review.tag_1);
+                            totalTags.count[totalTags.tags.indexOf(review.tag_1)] = 1;
+                        }
+                        if (review.tag_2 != null) {
+                            if (totalTags.tags.includes(review.tag_2)) {
+                                totalTags.count[totalTags.tags.indexOf(review.tag_2)]++;
+                            } else {
+                                totalTags.tags.push(review.tag_2);
+                                totalTags.count[totalTags.tags.indexOf(review.tag_2)] = 1;
+                            }
+                            if (review.tag_3 != null) {
+                                if (totalTags.tags.includes(review.tag_3)) {
+                                    totalTags.count[totalTags.tags.indexOf(review.tag_3)]++;
+                                } else {
+                                    totalTags.tags.push(review.tag_3);
+                                    totalTags.count[totalTags.tags.indexOf(review.tag_3)] = 1;
+                                }
+                            }
+                        }
+                    }
+                });
+                totalTags.count.sort((a, b) => {
+                    if (a > b) {
+                        [totalTags.tags[totalTags.count.indexOf(a)], totalTags.tags[totalTags.count.indexOf(b)]] = [
+                            totalTags.tags[totalTags.count.indexOf(b)],
+                            totalTags.tags[totalTags.count.indexOf(a)],
+                        ];
+                        return -1;
+                    }
+                });
+                totalTags.count.splice(3);
+                totalTags.tags.splice(3);
+                this.setState({ would_take_again: count / this.state.reviews.length, top_tags: totalTags });
             });
     };
 
@@ -188,7 +253,19 @@ export default class Course extends Component {
                     {this.state.loaded ? (
                         <div>
                             <Row className="justify-content-md-center">
-                                <Col xs lg="3" style={{ minHeight: "90vh", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
+                                <Col
+                                    xs
+                                    lg="3"
+                                    style={{
+                                        minHeight: "100vh",
+                                        minWidth: "min-content",
+                                        marginTop: "-10px",
+                                        justifyText: "center",
+                                        backgroundColor: "#f8f8f8",
+                                        boxShadow: "0px 0px 40px -15px",
+                                        zIndex: "-1",
+                                    }}
+                                >
                                     {/**Data and stuff */}
                                     <h1 style={{ fontSize: "44px", marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
                                         {this.state.name}
@@ -258,36 +335,53 @@ export default class Course extends Component {
                                             />
                                         </div>
                                     </div>
-                                    {this.state.instructors !== null ? (
-                                        <div name="pop-prof-container">
-                                            <PageBreak /> {/* underline */}
-                                            <div name="pop-professor-title">
-                                                <h3 style={{ textAlign: "center" }}>Popular Instructors</h3>
+                                    <div name="sub-rating-box" style={subRatingStyle}>
+                                        {this.state.instructors !== null ? (
+                                            <div name="pop-prof-container">
+                                                <PageBreak /> {/* underline */}
+                                                <div name="pop-professor-title">
+                                                    <h3 style={{ textAlign: "center" }}>Popular Instructors</h3>
+                                                </div>
+                                                <div name="pop-prof-name" style={{ textAlign: "center" }}>
+                                                    {this.state.instructors.map((item) => (
+                                                        <h4>
+                                                            <a href={"/instructor/" + item.name}>{item.name}</a>
+                                                        </h4>
+                                                    ))}
+                                                </div>
                                             </div>
-                                            <div name="pop-prof-name" style={{ textAlign: "center" }}>
-                                                {this.state.instructors.map((item) => (
-                                                    <h4>
-                                                        <a href={"/instructor/" + item.name}>{item.name}</a>
-                                                    </h4>
-                                                ))}
+                                        ) : null}
+                                        {this.state.courses !== null ? (
+                                            <div name="pop-course-container">
+                                                <PageBreak /> {/* underline */}
+                                                <div name="pop-course-title">
+                                                    <h3 style={{ textAlign: "center" }}>Popular Courses</h3>
+                                                </div>
+                                                <div name="pop-course-name" style={{ textAlign: "center" }}>
+                                                    {this.state.courses.map((item) => (
+                                                        <h4>
+                                                            <a href={"/course/" + item.name}>{item.name}</a>
+                                                        </h4>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ) : null}
-                                    {this.state.courses !== null ? (
-                                        <div name="pop-course-container">
-                                            <PageBreak /> {/* underline */}
-                                            <div name="pop-course-title">
-                                                <h3 style={{ textAlign: "center" }}>Popular Courses</h3>
+                                        ) : null}
+                                        {this.state.top_tags !== null ? (
+                                            <div name="top-tags-container">
+                                                <PageBreak /> {/* underline */}
+                                                <div name="top-tags-title" style={{ marginBottom: "5%" }}>
+                                                    <h3>Top Tags</h3>
+                                                </div>
+                                                <div name="top-tags">
+                                                    {this.state.top_tags.tags.map((item, index) => (
+                                                        <Button id={index} style={tagStyle} disabled>
+                                                            <p style={{ marginTop: "-7px" }}>{item}</p>
+                                                        </Button>
+                                                    ))}
+                                                </div>
                                             </div>
-                                            <div name="pop-course-name" style={{ textAlign: "center" }}>
-                                                {this.state.courses.map((item) => (
-                                                    <h4>
-                                                        <a href={"/course/" + item.name}>{item.name}</a>
-                                                    </h4>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ) : null}
+                                        ) : null}
+                                    </div>
                                     <PageBreak /> {/* underline */}
                                 </Col>
                                 <Col xs lg="7">

@@ -1,6 +1,6 @@
 //npm modules
 import React, { Component } from "react";
-import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Progress, Button } from "reactstrap";
+import { Container, Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import cookie from "react-cookies";
@@ -22,6 +22,16 @@ const subRatingStyle = {
     textAlign: "center",
 };
 
+const tagStyle = {
+    borderRadius: "15px",
+    height: "25px",
+    backgroundColor: "#fbfcfc",
+    color: "#000",
+    width: "max-content",
+    marginRight: "3%",
+    marginBottom: "5%",
+};
+
 export default class Course extends Component {
     constructor(props) {
         super(props);
@@ -40,6 +50,7 @@ export default class Course extends Component {
             activeTab: "1",
             currentUser: "",
             would_take_again: null,
+            top_tags: null,
         };
     }
 
@@ -125,13 +136,50 @@ export default class Course extends Component {
                 });
             })
             .then(() => {
+                // This counts number of total recomendations and review tags
                 let count = 0;
+                let totalTags = { tags: [], count: [] };
                 this.state.reviews.map((review) => {
                     if (review.would_take_again) {
                         count++;
                     }
+                    if (review.tag_1 != null) {
+                        if (totalTags.tags.includes(review.tag_1)) {
+                            totalTags.count[totalTags.tags.indexOf(review.tag_1)]++;
+                        } else {
+                            totalTags.tags.push(review.tag_1);
+                            totalTags.count[totalTags.tags.indexOf(review.tag_1)] = 1;
+                        }
+                        if (review.tag_2 != null) {
+                            if (totalTags.tags.includes(review.tag_2)) {
+                                totalTags.count[totalTags.tags.indexOf(review.tag_2)]++;
+                            } else {
+                                totalTags.tags.push(review.tag_2);
+                                totalTags.count[totalTags.tags.indexOf(review.tag_2)] = 1;
+                            }
+                            if (review.tag_3 != null) {
+                                if (totalTags.tags.includes(review.tag_3)) {
+                                    totalTags.count[totalTags.tags.indexOf(review.tag_3)]++;
+                                } else {
+                                    totalTags.tags.push(review.tag_3);
+                                    totalTags.count[totalTags.tags.indexOf(review.tag_3)] = 1;
+                                }
+                            }
+                        }
+                    }
                 });
-                this.setState({ would_take_again: count / this.state.reviews.length });
+                totalTags.count.sort((a, b) => {
+                    if (a > b) {
+                        [totalTags.tags[totalTags.count.indexOf(a)], totalTags.tags[totalTags.count.indexOf(b)]] = [
+                            totalTags.tags[totalTags.count.indexOf(b)],
+                            totalTags.tags[totalTags.count.indexOf(a)],
+                        ];
+                        return -1;
+                    }
+                });
+                totalTags.count.splice(3);
+                totalTags.tags.splice(3);
+                this.setState({ would_take_again: count / this.state.reviews.length, top_tags: totalTags });
             });
     }
 
@@ -155,7 +203,19 @@ export default class Course extends Component {
                     {this.state.loaded ? (
                         <div>
                             <Row className="justify-content-md-center" s>
-                                <Col xs lg="3" style={{ minHeight: "90vh", justifyText: "center", backgroundColor: "#f8f8f8", boxShadow: "0px 0px 40px -15px", zIndex: "-1" }}>
+                                <Col
+                                    xs
+                                    lg="3"
+                                    style={{
+                                        minHeight: "100vh",
+                                        minWidth: "min-content",
+                                        marginTop: "-10px",
+                                        justifyText: "center",
+                                        backgroundColor: "#f8f8f8",
+                                        boxShadow: "0px 0px 40px -15px",
+                                        zIndex: "-1",
+                                    }}
+                                >
                                     {/**Data and stuff */}
                                     <h1 style={{ fontSize: "44px", marginTop: "60px", marginBottom: "60px", textAlign: "center" }} className="title">
                                         {this.state.name}
@@ -228,6 +288,21 @@ export default class Course extends Component {
                                                         <h4 key={index}>
                                                             <a href={"/course/" + item.name}>{item.name}</a>
                                                         </h4>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ) : null}
+                                        {this.state.top_tags !== null ? (
+                                            <div name="pop-prof-container">
+                                                <PageBreak /> {/* underline */}
+                                                <div name="top-tags-title" style={{ marginBottom: "5%" }}>
+                                                    <h3>Top Tags</h3>
+                                                </div>
+                                                <div name="top-tags">
+                                                    {this.state.top_tags.tags.map((item, index) => (
+                                                        <Button id={index} style={tagStyle} disabled>
+                                                            <p style={{ marginTop: "-7px" }}>{item}</p>
+                                                        </Button>
                                                     ))}
                                                 </div>
                                             </div>

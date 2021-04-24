@@ -132,7 +132,8 @@ table a {
     background-color: #f0f0f0;
 }
 .dark #root > div > div > div > div > div > div > nav > nav > ul > li.page-item.disabled,
-.dark #root > div > div > div > nav > nav > ul > li.page-item.disabled {
+.dark #root > div > div > div > nav > nav > ul > li.page-item.disabled,
+#root > div > div > div > div > nav > nav > ul > li.page-item.disabled {
     mix-blend-mode: color-burn;
     border-color: #626262;
 }
