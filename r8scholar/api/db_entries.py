@@ -7,6 +7,7 @@
 # 3. run this command the execute the script exec(open("./api/db_entries.py").read()) 
 from api.models import Instructor, Course, Department, Tags
 
+
 class ModelGenerator:
     
     def __init__(self, filepath, my_type):
@@ -42,8 +43,12 @@ class ModelGenerator:
             self.generate(data=model)
         
         f.close()
-        
-ModelGenerator('./api/data/departments.txt', "Department") #make departments first cause dependencies
-ModelGenerator('./api/data/instructors.txt', "Instructor") #make instructor next 
-ModelGenerator('./api/data/courses.txt', "Course") #courses need departments and instructors 
-ModelGenerator('./api/data/tags.txt', "Tag")
+
+
+
+
+if __name__ == "builtins": 
+    ModelGenerator('./api/data/departments.txt', "Department") #make departments first cause dependencies
+    ModelGenerator('./api/data/instructors.txt', "Instructor") #make instructor next 
+    ModelGenerator('./api/data/courses.txt', "Course") #courses need departments and instructors 
+    ModelGenerator('./api/data/tags.txt', "Tag")

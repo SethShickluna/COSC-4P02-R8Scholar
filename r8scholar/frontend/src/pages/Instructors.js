@@ -95,16 +95,10 @@ export default class Courses extends Component {
     };
 
     changePages(button) {
+        button.preventDefault();
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
-            displayedInstructors: null,
             currentPage: Number(newPage),
-        });
-
-        this.getEntries();
-
-        this.setState({
-            loaded: true,
         });
     }
 
@@ -187,7 +181,7 @@ export default class Courses extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
+                                            <PaginationLink href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -274,7 +268,7 @@ export default class Courses extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
-                                <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
+                                <PaginationLink href="#" style={{ width: "55px", textAlign: "center" }} disabled>
                                     {this.state.currentPage}
                                 </PaginationLink>
                             </PaginationItem>

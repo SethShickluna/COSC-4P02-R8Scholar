@@ -15,9 +15,13 @@ body * {
     font-weight: 450;
 }
 
-#root > div > div > div {
-    background-color: #2f515405;
+#root {
+    background-color: #f8f8f8 !important;
 }
+
+/* #root > div > div > div {
+    background-color: #f7f7f705;
+} */
 
 .dark {
     background-color: #363535;
@@ -133,7 +137,7 @@ table a {
 }
 .dark #root > div > div > div > div > div > div > nav > nav > ul > li.page-item.disabled,
 .dark #root > div > div > div > nav > nav > ul > li.page-item.disabled,
-#root > div > div > div > div > nav > nav > ul > li.page-item.disabled {
+.dark #root > div > div > div > div > nav > nav > ul > li.page-item.disabled {
     mix-blend-mode: color-burn;
     border-color: #626262;
 }

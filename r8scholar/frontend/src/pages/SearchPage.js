@@ -64,6 +64,7 @@ export default class SearchPage extends Component {
     }
 
     changePages(button) {
+        button.preventDefault();
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
             // results : null,//maybe this line is out to not set null
@@ -84,7 +85,7 @@ export default class SearchPage extends Component {
         return (
             <div className="departments-page">
                 <SecondaryNav />
-                <Container fluid style={{ marginBottom: "100px" }}>
+                <Container fluid style={{ paddingBottom: "100px" }}>
                     <Row style={{ marginTop: "2%" }} align="center">
                         <Col>
                             <div>
@@ -132,7 +133,7 @@ export default class SearchPage extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
+                                            <PaginationLink href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -152,7 +153,7 @@ export default class SearchPage extends Component {
                         </Col>
                     </Row>
 
-                    <Row style={{ marginTop: "2%" }} align="center">
+                    <Row style={{ marginTop: "3%", marginBottom: "3%" }} align="center">
                         <Col className="col-md-1" />
                         <Col className="col-md-10">
                             <Table striped style={{ textAlign: "center" }}>
@@ -207,7 +208,7 @@ export default class SearchPage extends Component {
                                     </PaginationLink>
                                 </PaginationItem>
                                 <PaginationItem className="active">
-                                    <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
+                                    <PaginationLink href="#" style={{ width: "55px", textAlign: "center" }} disabled="true">
                                         {this.state.currentPage}
                                     </PaginationLink>
                                 </PaginationItem>

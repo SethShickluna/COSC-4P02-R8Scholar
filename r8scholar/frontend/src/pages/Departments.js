@@ -136,16 +136,11 @@ export default class Departments extends Component {
     };
 
     changePages(button) {
+        button.preventDefault();
         var newPage = button.target.id; //reads the id of the pressed button
         this.setState({
-            // displayedDepartments: null,
             currentPage: Number(newPage),
         });
-        // this.getEntries();
-
-        // this.setState({
-        //     loaded: true,
-        // });
     }
 
     activateMenu() {
@@ -160,7 +155,6 @@ export default class Departments extends Component {
             loaded: true,
             displayedDepartments: null,
         });
-
         this.getEntries();
     }
 
@@ -223,7 +217,7 @@ export default class Departments extends Component {
                                             </PaginationLink>
                                         </PaginationItem>
                                         <PaginationItem className="active">
-                                            <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px" }} disabled>
+                                            <PaginationLink href="#" style={{ width: "55px" }} disabled>
                                                 {this.state.currentPage}
                                             </PaginationLink>
                                         </PaginationItem>
@@ -306,7 +300,7 @@ export default class Departments extends Component {
                                 </PaginationLink>
                             </PaginationItem>
                             <PaginationItem className="active">
-                                <PaginationLink onClick={this.changePages} href="#" style={{ width: "55px", textAlign: "center" }} disabled>
+                                <PaginationLink href="#" style={{ width: "55px", textAlign: "center" }} disabled>
                                     {this.state.currentPage}
                                 </PaginationLink>
                             </PaginationItem>

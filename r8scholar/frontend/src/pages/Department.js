@@ -263,7 +263,6 @@ export default class Course extends Component {
                                         justifyText: "center",
                                         backgroundColor: "#f8f8f8",
                                         boxShadow: "0px 0px 40px -15px",
-                                        zIndex: "-1",
                                     }}
                                 >
                                     {/**Data and stuff */}
@@ -394,7 +393,7 @@ export default class Course extends Component {
                                         </Col>
                                     </Row>
                                     {/**Tabbed content */}
-                                    <div className="nav-tabs-navigation">
+                                    <div className="nav-tabs-navigation" style={{ minWidth: "max-content" }}>
                                         <div className="nav-tabs-wrapper pointer-nav">
                                             <Nav role="tablist" tabs>
                                                 <NavItem>
