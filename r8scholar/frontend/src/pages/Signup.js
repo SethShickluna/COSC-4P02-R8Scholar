@@ -173,7 +173,7 @@ export default class Signup extends Component {
                             <div style={{ marginTop: "5%" }} />
                         </Row>
                         <Row>
-                            <Col className="ml-auto mr-auto" lg="4">
+                            <Col className="ml-auto mr-auto" lg="4" style={{ minWidth: "fit-content", marginTop: "100px" }}>
                                 <Card className="card-register ml-auto mr-auto">
                                     <Alert color="danger" isOpen={this.state.invalidInfo} toggle={this.onDismiss}>
                                         <b>That email or nickname is in use! Please enter new information and try again.</b>
@@ -208,53 +208,57 @@ export default class Signup extends Component {
                                                     Please use the email given by Brock University, ending in '@brocku.ca'
                                                 </UncontrolledTooltip>
                                             </FormGroup>
-
-                                            <label>Nickname</label>
-                                            <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
-                                            <Input
-                                                placeholder="Nickname"
-                                                valid={this.state.validNickname}
-                                                invalid={!this.state.validNickname}
-                                                name="nickname"
-                                                id="nickname"
-                                                type="text"
-                                                onChange={this.handleInput}
-                                            />
-                                            <UncontrolledTooltip placement="right" target="nickname-tooltip">
-                                                Nicknames must be at least 4 characters long. Make sure it's appropriate!
-                                            </UncontrolledTooltip>
-                                            <label>Password</label>
-                                            <MdInfoOutline id="password-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
-                                            <Input
-                                                placeholder="Password"
-                                                valid={this.state.validPassword}
-                                                invalid={!this.state.validPassword}
-                                                id="password"
-                                                name="password"
-                                                type={this.state.showPassword ? "text" : "password"}
-                                                onChange={this.handleInput}
-                                            />
-                                            <MdRemoveRedEye className="pass-toggle" style={{ position: "absolute", top: "360px", right: "55px", color: "#000" }} onClick={this.toggleShowPassword} />
-                                            <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password-tooltip">
-                                                <h5>Password Requirements: </h5>
-                                                <ul>
-                                                    <li>1 Uppercase</li>
-                                                    <li>1 Lowercase</li>
-                                                    <li>1 Number</li>
-                                                    <li>1 Symbol </li>
-                                                    <li>At least 12 characters</li>
-                                                </ul>
-                                            </UncontrolledTooltip>
-                                            <label>Password</label>
-                                            <Input
-                                                placeholder="Re-Enter Password"
-                                                valid={this.state.validPassword2}
-                                                invalid={!this.state.validPassword2}
-                                                name="verifPassword"
-                                                type="password"
-                                                onChange={this.handleInput}
-                                            />
-
+                                            <FormGroup>
+                                                <label>Nickname</label>
+                                                <MdInfoOutline id="nickname-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                                                <Input
+                                                    placeholder="Nickname"
+                                                    valid={this.state.validNickname}
+                                                    invalid={!this.state.validNickname}
+                                                    name="nickname"
+                                                    id="nickname"
+                                                    type="text"
+                                                    onChange={this.handleInput}
+                                                />
+                                                <UncontrolledTooltip placement="right" target="nickname-tooltip">
+                                                    Nicknames must be at least 4 characters long. Make sure it's appropriate!
+                                                </UncontrolledTooltip>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <label>Password</label>
+                                                <MdInfoOutline id="password-tooltip" style={{ marginLeft: "5px", marginBottom: "3px" }} />
+                                                <Input
+                                                    placeholder="Password"
+                                                    valid={this.state.validPassword}
+                                                    invalid={!this.state.validPassword}
+                                                    id="password"
+                                                    name="password"
+                                                    type={this.state.showPassword ? "text" : "password"}
+                                                    onChange={this.handleInput}
+                                                />
+                                                <MdRemoveRedEye className="pass-toggle" style={{ position: "absolute", top: "58px", right: "30px", color: "#000" }} onClick={this.toggleShowPassword} />
+                                                <UncontrolledTooltip style={{ minWidth: "70px" }} placement="right" target="password-tooltip">
+                                                    <h5>Password Requirements: </h5>
+                                                    <ul>
+                                                        <li>1 Uppercase</li>
+                                                        <li>1 Lowercase</li>
+                                                        <li>1 Number</li>
+                                                        <li>1 Symbol </li>
+                                                        <li>At least 12 characters</li>
+                                                    </ul>
+                                                </UncontrolledTooltip>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <label>Password</label>
+                                                <Input
+                                                    placeholder="Re-Enter Password"
+                                                    valid={this.state.validPassword2}
+                                                    invalid={!this.state.validPassword2}
+                                                    name="verifPassword"
+                                                    type="password"
+                                                    onChange={this.handleInput}
+                                                />
+                                            </FormGroup>
                                             <FormGroup>
                                                 <Button block type="submit" id="button1" className="btn-round" color="info">
                                                     Register

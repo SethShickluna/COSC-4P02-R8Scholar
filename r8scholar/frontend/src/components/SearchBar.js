@@ -58,6 +58,7 @@ class SearchBar extends Component {
     handleKeyPress = (e) => {
         if (e.charCode === 13) {
             this.props.history.push("/search/" + this.state.query);
+            window.location.reload();
         }
     };
 

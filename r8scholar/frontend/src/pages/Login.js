@@ -72,7 +72,7 @@ export default class Login extends Component {
                     <div className="filter" />
                     <Container>
                         <Row>
-                            <Col className="ml-auto mr-auto" lg="4">
+                            <Col className="ml-auto mr-auto" lg="4" style={{ minWidth: "fit-content", marginTop: "100px" }}>
                                 <Card className="card-register ml-auto mr-auto">
                                     <h3 className="title mx-auto">Sign In</h3>
                                     <Form className="register-form" onSubmit={this.submitForm}>
