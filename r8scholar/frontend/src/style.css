@@ -329,11 +329,11 @@ table a {
         -o-transform: translateX(200px);
         -ms-transform: translateX(200px);
         transform: translateX(200px);
-        -webkit-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
-        -moz-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
-        -o-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
-        -ms-transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
-        transition: all 1s cubic-bezier(0.685, 0.0473, 0.346, 1);
+        -webkit-transition: all 0.333s cubic-bezier(0.5, 0.03, 0.5, 1);
+        -moz-transition: all 0.333s cubic-bezier(0.5, 0.03, 0.5, 1);
+        -o-transition: all 0.333s cubic-bezier(0.5, 0.03, 0.5, 1);
+        -ms-transition: all 0.333s cubic-bezier(0.5, 0.03, 0.5, 1);
+        transition: all 0.333s cubic-bezier(0.5, 0.03, 0.5, 1);
         border: none !important;
     }
 

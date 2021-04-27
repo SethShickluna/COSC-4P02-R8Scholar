@@ -86,7 +86,7 @@ function HomeNavbar() {
             <Collapse navbar isOpen={navbarCollapse}>
                 <Nav className="mr-auto mt-lg-0" navbar style={{ width: "100%" }}>
                     <NavItem style={{ marginLeft: "3%" }}>
-                        <Link onClick={toggleNavbarCollapse} to="/">
+                        <Link to="/">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Home
                             </NavLink>

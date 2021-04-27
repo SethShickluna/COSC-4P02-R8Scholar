@@ -118,8 +118,9 @@ function CommentForm(props) {
                                                 <Row key={index} style={commentContainer} id="comment">
                                                     <Col lg="9">
                                                         <Row>
-                                                            <Col align="left">
+                                                            <Col align="left" style={{ display: "inline-flex", justifyContent: "space-between" }}>
                                                                 <h6>{item.name}</h6>
+                                                                <h6>{item.date_created}</h6>
                                                             </Col>
                                                             {props.currentUser === item.name ? (
                                                                 <Col align="right">
