@@ -248,7 +248,7 @@ export default class Course extends Component {
                                     style={{
                                         minHeight: "100vh",
                                         minWidth: "min-content",
-                                        marginTop: "-10px",
+                                        marginTop: "-20px",
                                         justifyText: "center",
                                         backgroundColor: "#f8f8f8",
                                         boxShadow: "0px 0px 40px -15px",
@@ -259,7 +259,7 @@ export default class Course extends Component {
                                         {this.state.name}
                                     </h1>
                                     <PageBreak /> {/* underline */}
-                                    <div className="star-ratings" style={{ marginTop: "15%", marginBottom: "15%" }}>
+                                    <div className="star-ratings" style={{ marginTop: "15%", marginBottom: "15%", minWidth: "max-content" }}>
                                         <div name="avg-rating-container" style={{ marginBottom: "10%" }}>
                                             <div name="avg-rating-title">
                                                 <h4 style={{ textAlign: "center" }}>Overall Rating</h4>
@@ -357,9 +357,9 @@ export default class Course extends Component {
                                         </Col>
                                     </Row>
                                     {/**Tabbed content */}
-                                    <div className="nav-tabs-navigation" style={{ minWidth: "max-content" }}>
+                                    <div className="nav-tabs-navigation" style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}>
                                         <div className="nav-tabs-wrapper pointer-nav">
-                                            <Nav role="tablist" tabs>
+                                            <Nav role="tablist" tabs style={{ flexFlow: "nowrap" }}>
                                                 <NavItem>
                                                     <NavLink
                                                         className={this.state.activeTab === "1" ? "active" : ""}

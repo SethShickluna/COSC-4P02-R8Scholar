@@ -6,7 +6,7 @@ import { MdBrightnessMedium } from "react-icons/md";
 import { DarkModeToggle } from "./DarkModeToggle";
 
 // reactstrap components
-import { Collapse, Button, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container } from "reactstrap";
+import { Collapse, Button, NavbarBrand, Navbar, NavItem, NavLink, Nav } from "reactstrap";
 
 //axios
 import axiosInstance from "../axiosApi";
@@ -27,6 +27,7 @@ const title = {
 };
 
 async function handleLogout() {
+    toggleNavbarCollapse();
     try {
         const response = await axiosInstance.post("/logout/", {
             refresh_token: localStorage.getItem("refresh_token"),
@@ -46,21 +47,18 @@ async function handleLogout() {
 function SecondaryNav() {
     const [bodyClick, setBodyClick] = React.useState(false);
 
+    const toggleNavbarCollapse = () => {
+        document.documentElement.classList.toggle("nav-open");
+        setBodyClick(true);
+    };
+
     return (
         <Navbar className="secondary-nav" color="info" expand="lg" fixed="top">
             <div style={{ paddingLeft: "4%" }}>
                 <NavbarBrand style={title} href="/">
                     R8Scholar
                 </NavbarBrand>
-                <button
-                    className="navbar-toggler"
-                    id="navbarTogglerDemo01"
-                    type="button"
-                    onClick={() => {
-                        document.documentElement.classList.toggle("nav-open");
-                        setBodyClick(true);
-                    }}
-                >
+                <button className="navbar-toggler" id="navbarTogglerDemo01" type="button" onClick={toggleNavbarCollapse}>
                     <span className="navbar-toggler-bar bar1" />
                     <span className="navbar-toggler-bar bar2" />
                     <span className="navbar-toggler-bar bar3" />
@@ -69,28 +67,28 @@ function SecondaryNav() {
             <Collapse navbar toggler="#navbarTogglerDemo01">
                 <Nav className="mr-auto mt-lg-0" navbar style={{ width: "100%" }}>
                     <NavItem style={{ marginLeft: "3%" }}>
-                        <Link to="/">
+                        <Link onClick={toggleNavbarCollapse} to="/">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Home
                             </NavLink>
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/courses">
+                        <Link onClick={toggleNavbarCollapse} to="/courses">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Courses
                             </NavLink>
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/instructors">
+                        <Link onClick={toggleNavbarCollapse} to="/instructors">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Instructors
                             </NavLink>
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/departments">
+                        <Link onClick={toggleNavbarCollapse} to="/departments">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Departments
                             </NavLink>
@@ -98,7 +96,7 @@ function SecondaryNav() {
                     </NavItem>
                     {cookie.load("isLoggedIn") === "true" ? (
                         <NavItem>
-                            <Link to="/profile">
+                            <Link onClick={toggleNavbarCollapse} to="/profile">
                                 <NavLink style={separate} style={navLinkStyles}>
                                     Profile
                                 </NavLink>
@@ -116,7 +114,7 @@ function SecondaryNav() {
                                 Sign Out
                             </Button>
                         ) : (
-                            <Button className="btn-round lg" href="/signup" color="danger">
+                            <Button onClick={toggleNavbarCollapse} className="btn-round lg" href="/signup" color="danger">
                                 <i className="nc-icon nc-spaceship before"></i>
                                 Sign up Today
                             </Button>
@@ -124,7 +122,7 @@ function SecondaryNav() {
                     </NavItem>
                     <NavItem style={{ alignSelf: "center", marginLeft: "1%", minWidth: "max-content" }}>
                         {cookie.load("isLoggedIn") === "true" ? null : (
-                            <Button href="/login" className="btn-round lg" color="danger">
+                            <Button onClick={toggleNavbarCollapse} href="/login" className="btn-round lg" color="danger">
                                 Sign In
                             </Button>
                         )}

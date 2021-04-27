@@ -24,8 +24,8 @@ const pageStyles = {
 };
 
 const imgStyle = {
-    width: "100%",
-    height: "200px",
+    width: "350px",
+    height: "100%",
 };
 
 export default class Profile extends Component {
@@ -97,8 +97,8 @@ export default class Profile extends Component {
                                     ) : null}
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col sm={4}>
+                            <Row style={{ justifyContent: "center" }}>
+                                <Col sm={4} style={{ minWidth: "max-content" }}>
                                     <div>
                                         {/*insert image edit, accept image and input it */}
                                         <h1 style={{ textAlign: "center" }}>{this.state.user.nickname}</h1>
@@ -120,9 +120,8 @@ export default class Profile extends Component {
                                     </div>
                                     <pageBreak /> {/* underline */}
                                 </Col>
-
                                 <Col style={{ marginTop: "53px" }} sm={8}>
-                                    <div className="nav-tabs-navigation">
+                                    <div className="nav-tabs-navigation" style={{ minWidth: "max-content" }}>
                                         <div className="nav-tabs-wrapper pointer-nav">
                                             <Nav role="tablist" tabs>
                                                 <NavItem>

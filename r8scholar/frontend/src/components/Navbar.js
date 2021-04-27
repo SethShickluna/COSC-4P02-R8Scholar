@@ -23,6 +23,7 @@ const title = {
 };
 
 async function handleLogout() {
+    toggleNavbarCollapse();
     try {
         const response = await axiosInstance.post("/logout/", {
             refresh_token: localStorage.getItem("refresh_token"),
@@ -85,28 +86,28 @@ function HomeNavbar() {
             <Collapse navbar isOpen={navbarCollapse}>
                 <Nav className="mr-auto mt-lg-0" navbar style={{ width: "100%" }}>
                     <NavItem style={{ marginLeft: "3%" }}>
-                        <Link to="/">
+                        <Link onClick={toggleNavbarCollapse} to="/">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Home
                             </NavLink>
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/courses">
+                        <Link onClick={toggleNavbarCollapse} to="/courses">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Courses
                             </NavLink>
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/instructors">
+                        <Link onClick={toggleNavbarCollapse} to="/instructors">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Instructors
                             </NavLink>
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/departments">
+                        <Link onClick={toggleNavbarCollapse} to="/departments">
                             <NavLink style={separate} style={navLinkStyles}>
                                 Departments
                             </NavLink>
@@ -114,7 +115,7 @@ function HomeNavbar() {
                     </NavItem>
                     {cookie.load("isLoggedIn") === "true" ? (
                         <NavItem>
-                            <Link to="/profile">
+                            <Link onClick={toggleNavbarCollapse} to="/profile">
                                 <NavLink style={separate} style={navLinkStyles}>
                                     Profile
                                 </NavLink>
@@ -132,7 +133,7 @@ function HomeNavbar() {
                                 Sign Out
                             </Button>
                         ) : (
-                            <Button style={{ alignSelf: "center", width: "170px" }} className="btn-round lg" href="/signup" color="danger">
+                            <Button onClick={toggleNavbarCollapse} style={{ alignSelf: "center", width: "170px" }} className="btn-round lg" href="/signup" color="danger">
                                 <i className="nc-icon nc-spaceship before" style={{ display: "inline", marginRight: "10%" }} />
                                 Sign up Today
                             </Button>
@@ -140,7 +141,7 @@ function HomeNavbar() {
                     </NavItem>
                     <NavItem style={{ alignSelf: "center", marginLeft: "1%", minWidth: "max-content" }}>
                         {cookie.load("isLoggedIn") === "true" ? null : (
-                            <Button href="/login" className="btn-round lg" color="danger">
+                            <Button onClick={toggleNavbarCollapse} href="/login" className="btn-round lg" color="danger">
                                 Sign In
                             </Button>
                         )}

@@ -209,7 +209,7 @@ export default class Course extends Component {
                                     style={{
                                         minHeight: "100vh",
                                         minWidth: "min-content",
-                                        marginTop: "-10px",
+                                        marginTop: "-20px",
                                         justifyText: "center",
                                         backgroundColor: "#f8f8f8",
                                         boxShadow: "0px 0px 40px -15px",
@@ -221,7 +221,7 @@ export default class Course extends Component {
                                     </h1>
                                     <h3 style={{ textAlign: "center", margin: "15% 5%" }}>{this.state.fullName}</h3>
                                     <PageBreak /> {/* underline */}
-                                    <div className="star-ratings" style={{ marginTop: "15%", marginBottom: "15%" }}>
+                                    <div className="star-ratings" style={{ marginTop: "15%", marginBottom: "15%", minWidth: "max-content" }}>
                                         <div name="avg-rating-container" style={{ marginBottom: "10%" }}>
                                             <div name="avg-rating-title">
                                                 <h4 style={{ textAlign: "center" }}>Overall Rating</h4>
@@ -319,7 +319,7 @@ export default class Course extends Component {
                                         </Col>
                                     </Row>
                                     {/**Tabbed content */}
-                                    <div className="nav-tabs-navigation" style={{ minWidth: "max-content" }}>
+                                    <div className="nav-tabs-navigation" style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}>
                                         <div className="nav-tabs-wrapper pointer-nav">
                                             <Nav role="tablist" tabs>
                                                 <NavItem>

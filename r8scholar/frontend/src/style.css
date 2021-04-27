@@ -9,25 +9,18 @@ div.pager-headers {
     padding-top: 100px;
 }
 
-/* DARK MODE STYLES */
-
 body * {
     font-weight: 450;
 }
 
-#root {
+body {
     background-color: #f8f8f8 !important;
 }
 
-/* #root > div > div > div {
-    background-color: #f7f7f705;
-} */
-
 .dark {
-    background-color: #363535;
+    background-color: #363535 !important;
 }
 
-/* dark mode toggle button */
 .darkmode-toggle {
     color: #f5593d;
 }
@@ -36,12 +29,10 @@ body * {
     color: #d3d3d3;
 }
 
-/*=====PLACEHOLDER==TEXT==EVERYWHERE=========*/
 .dark input::placeholder {
     color: #fff;
 }
 
-/* dark mode home */
 .dark body,
 .dark .home-page,
 .dark .courses-page,
@@ -59,7 +50,8 @@ body * {
     color: #c0c0c0;
 }
 
-.dark thead tbody {
+.dark thead tbody,
+.dark button.dropdown-item {
     background-color: #f3f3f3;
 }
 
@@ -72,17 +64,16 @@ table a {
     color: black;
 }
 
-.dark table a {
+.dark .navbar .navbar-nav .nav-item .nav-link,
+.dark .navbar .navbar-brand,
+.dark h1,
+.dark table a,
+.dark .pass-toggle,
+.dark #root > div > div > div > div > div > div.col-sm-8 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link {
     color: #f3f3f3 !important;
 }
 
-.dark .navbar .navbar-nav .nav-item .nav-link,
-.dark .navbar .navbar-brand,
-.dark h1 {
-    color: #f3f3f3;
-}
-
-/*============COURSE-PAGE=====================================================*/
+/*============COURSE-INSTRUCTOR-DEPARTMENT-PAGE-SIDE-BAR=====================*/
 .dark #root > div > div > div > div > div > div.col.col-lg-3,
 .dark #root > div > div > div > div > div > div.col.col-lg-7 > div.row > div {
     background-color: #2c2c2c28 !important;
@@ -93,32 +84,15 @@ table a {
     z-index: 0 !important;
 }
 
-/*============================================================================*/
-
 /*============NAVBAR==========================================================*/
 
-.dark #root > div > div > .navbar.navbar-transparent {
+.dark .navbar.navbar-transparent {
     background: transparent !important;
 }
 
-.dark #root > div > div > .navbar {
+.dark .navbar {
     background-color: #202020 !important;
 }
-/*============================================================================*/
-
-.dark button.dropdown-item {
-    background-color: #f1f1f1;
-}
-
-.dark .pass-toggle {
-    color: #fff !important;
-}
-
-/*PROFILE PAGE */
-.dark #root > div > div > div > div > div:nth-child(2) > div.col-sm-8 > div.nav-tabs-navigation > div > ul > li > a.active.nav-link {
-    color: #f0f0f0 !important;
-}
-/* END */
 
 /*=====REVIEW_FORMS=============================================================*/
 .dark input,
@@ -167,6 +141,7 @@ table a {
 #edit-review > form > div > div > button.active {
     background-color: #3f5a5a !important;
 }
+
 /*====REVIEW=COMMENT=AND=EDIT=FORMS=========================================*/
 .dark #comment-form,
 .dark #edit-comment,
@@ -196,13 +171,10 @@ table a {
 
 .nav-tabs-navigation {
     border-color: #f0f0f0;
-    margin-right: 7%;
-    margin-left: 7%;
 }
 
 .nav-tabs-wrapper {
     margin: 0px;
-    padding: 0px;
 }
 
 #root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active {
@@ -212,8 +184,6 @@ table a {
 
 .dark .nav-tabs-navigation {
     border-color: #66615b;
-    margin-right: 7%;
-    margin-left: 7%;
 }
 
 .dark #root > div > div > div > div > div > div.col.col-lg-7 > div.nav-tabs-navigation > div > ul > li > a.active {
@@ -259,9 +229,9 @@ table a {
 
 /*===========================================================================*/
 /*==================MOBILE===================================================*/
-.navbar .navbar-collapse.show .navbar-nav .nav-item {
+/* .navbar .navbar-collapse.show .navbar-nav .nav-item {
     padding-right: 0% !important;
-}
+} */
 
 @media only screen and (max-width: 500px) {
     #SearchBar {
@@ -278,7 +248,7 @@ table a {
     }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 720px) {
     #SearchBar {
         width: 37vw !important;
     }
@@ -308,6 +278,10 @@ table a {
 }
 
 @media only screen and (max-width: 1300px) {
+    #following > div > div > div > div {
+        max-width: 90% !important;
+    }
+
     .navbar-expand-lg .navbar-nav {
         text-align: center !important;
     }
@@ -350,7 +324,6 @@ table a {
         right: 0 !important;
         visibility: visible !important;
         z-index: 1000 !important;
-        background-color: #272727 !important;
         -webkit-transform: translateX(200px);
         -moz-transform: translateX(200px);
         -o-transform: translateX(200px);
@@ -395,6 +368,24 @@ table a {
         visibility: visible !important;
         background: local !important;
         z-index: 1000 !important;
+    }
+
+    .dark .navbar-collapse,
+    .dark .navbar-collapse::after,
+    .dark .navbar-collapse::before,
+    .dark .navbar-collapsing {
+        background-color: #272727e8 !important;
+    }
+
+    .navbar-collapse,
+    .navbar-collapse::after,
+    .navbar-collapse::before,
+    .navbar-collapsing {
+        background-color: #747474e8 !important;
+    }
+
+    .dark #root > div > div > nav > div > button > span.navbar-toggler-bar {
+        background: #f3f3f3 !important;
     }
 }
 

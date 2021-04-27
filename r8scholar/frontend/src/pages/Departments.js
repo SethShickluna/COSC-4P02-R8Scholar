@@ -175,7 +175,7 @@ export default class Departments extends Component {
                         {/**Filters */}
                         <Col align="center">
                             <div>
-                                <h4>Filter Options:</h4>
+                                <h4 style={{ marginBottom: "1%" }}>Filter Options</h4>
                             </div>
                             <div>
                                 <UncontrolledDropdown className="btn-group">
@@ -236,9 +236,7 @@ export default class Departments extends Component {
                             </div>
                         </Col>
                     </Row>
-
-                    <Row style={{ marginTop: "2%", textAlign: "center" }} align="center">
-                        <Col className="col-md-1" />
+                    <Row style={{ marginTop: "2%", textAlign: "center", placeContent: "center" }} align="center">
                         <Col className="col-md-10">
                             <Table striped>
                                 <thead>
@@ -284,7 +282,6 @@ export default class Departments extends Component {
                                 </tbody>
                             </Table>
                         </Col>
-                        <Col className="col-md-1" />
                     </Row>
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example" style={{ paddingBottom: "100px" }}>

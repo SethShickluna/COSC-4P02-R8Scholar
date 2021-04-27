@@ -120,7 +120,7 @@ export default class Home extends Component {
                 <div style={{ marginTop: "2%" }}></div>
                 <Container fluid>
                     <div name="center-content">
-                        <Row id="lists" style={{ whiteSpace: "nowrap" }}>
+                        <Row id="lists">
                             <Col style={{ textAlign: "-webkit-center", textAlignLast: "center" }}>
                                 <div className="course-title">
                                     <h1>Top 5 Courses</h1>

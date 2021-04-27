@@ -177,12 +177,12 @@ export default class ReviewForm extends Component {
                                                 <Button
                                                     className="tag"
                                                     color="primary"
-                                                    style={{ margin: "10px", maxInlineSize: "fit-content", borderRadius: "10px", height: "30px" }}
+                                                    style={{ margin: "10px", maxInlineSize: "fit-content", borderRadius: "10px" }}
                                                     onClick={() => this.handleTagSelection(tag.description)}
                                                     onMouseDown={this.handleClick}
                                                     active={this.state.tagsSelected.indexOf(tag.description) != -1}
                                                 >
-                                                    <p style={{ marginTop: "-5px" }}>{tag.description}</p>
+                                                    <p style={{ margin: "-6px" }}>{tag.description}</p>
                                                 </Button>
                                             );
                                         })}

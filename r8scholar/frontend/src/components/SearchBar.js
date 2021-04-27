@@ -7,6 +7,7 @@ const menuStyle = {
     margin: "0",
     marginTop: "23px",
     borderRadius: "14px",
+    zIndex: "10000",
 };
 
 const linkStyle = {
@@ -56,7 +57,7 @@ class SearchBar extends Component {
     };
 
     handleKeyPress = (e) => {
-        if (e.charCode === 13) {
+        if (e.charCode === 13 && this.state.query != "") {
             this.props.history.push("/search/" + this.state.query);
             window.location.reload();
         }

@@ -22,6 +22,7 @@ const tagStyle = {
     color: "#000",
     width: "max-content",
     marginRight: "1%",
+    marginBottom: "1%",
 };
 
 //props contains object called reviewItem containing
@@ -114,14 +115,14 @@ export default class ReviewItem extends Component {
                         </Row>
                     </CardHeader>
                     <CardBody>
-                        <CardTitle>
-                            <h6 style={{ display: "inline" }}>{this.props.reviewItem.nickname}</h6>{" "}
+                        <CardTitle style={{ display: "flex", flexWrap: "wrap-reverse" }}>
+                            <h6 style={{ marginRight: "1%" }}>{this.props.reviewItem.nickname}</h6>
                             {this.props.reviewItem.would_take_again ? (
-                                <h6 style={{ display: "inline" }}> recommends the {this.props.reviewItem.review_type} </h6>
+                                <h6>recommends the {this.props.reviewItem.review_type} </h6>
                             ) : (
-                                <h6 style={{ display: "inline" }}> does not recommend the {this.props.reviewItem.review_type}</h6>
+                                <h6>does not recommend the {this.props.reviewItem.review_type}</h6>
                             )}
-                            <div style={{ float: "right" }}>
+                            <div style={{ marginLeft: "auto" }}>
                                 <StarRatings rating={this.props.reviewItem.rating} starDimension="30px" starSpacing="10px" starRatedColor="#3498db" numberOfStars={5} name="instructorRating" />
                             </div>
                         </CardTitle>

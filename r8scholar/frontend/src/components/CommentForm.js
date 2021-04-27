@@ -87,7 +87,16 @@ function CommentForm(props) {
                             <Col className="col-md-5" align="center">
                                 <Form onSubmit={(e) => submitComment(e)}>
                                     <FormGroup>
-                                        <Input type="textarea" placeholder="What do you think of this review?" onChange={handleContentChange} name="content" fullWidth={true} id="content" rows={4} />
+                                        <Input
+                                            style={{ padding: "5%" }}
+                                            type="textarea"
+                                            placeholder="What do you think of this review?"
+                                            onChange={handleContentChange}
+                                            name="content"
+                                            fullWidth={true}
+                                            id="content"
+                                            rows={4}
+                                        />
                                     </FormGroup>
                                     <Button className="btn-round" size="sm" color="info" type="submit" outline>
                                         Submit
@@ -107,7 +116,7 @@ function CommentForm(props) {
                                         comments.map((item, index) => {
                                             return (
                                                 <Row key={index} style={commentContainer} id="comment">
-                                                    <Col xs lg="9">
+                                                    <Col lg="9">
                                                         <Row>
                                                             <Col align="left">
                                                                 <h6>{item.name}</h6>
@@ -123,7 +132,7 @@ function CommentForm(props) {
                                                             <p style={{ paddingLeft: "2%" }}>{item.content}</p>
                                                         </Row>
                                                     </Col>
-                                                    <Col xs lg="2" style={{ alignSelf: "center", marginLeft: "auto" }}>
+                                                    <Col lg="2" style={{ maxWidth: "max-content", margin: "auto" }}>
                                                         <Row>
                                                             <Col>{item.thumbs_up}</Col>
                                                             <Col>{item.thumbs_down}</Col>
