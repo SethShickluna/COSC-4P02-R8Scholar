@@ -358,8 +358,8 @@ table a {
     }
 
     #SearchBar {
-        max-width: 37vw;
-        min-width: 2vw;
+        max-width: 35vw;
+        min-width: 2vw !important;
         position: absolute !important;
         right: 200px !important;
         top: 0px !important;

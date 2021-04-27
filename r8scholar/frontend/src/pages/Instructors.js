@@ -169,7 +169,7 @@ export default class Courses extends Component {
                             <div style={{ marginTop: "3%" }} />
                             <div>
                                 <nav aria-label="Page navigation example">
-                                    <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                                    <Pagination className="pagination justify-content-center" listClassName="justify-content-center" style={{ display: "flex" }}>
                                         <PaginationItem disabled={this.state.displayedInstructors === null || this.state.currentPage === 1} color="danger">
                                             <PaginationLink onClick={this.changePages} href="#" id="1">
                                                 First
@@ -254,7 +254,7 @@ export default class Courses extends Component {
                     </Row>
                     <div style={{ marginBottom: "3%" }} />
                     <nav aria-label="Page navigation example" style={{ paddingBottom: "100px" }}>
-                        <Pagination className="pagination justify-content-center" listClassName="justify-content-center">
+                        <Pagination className="pagination justify-content-center" listClassName="justify-content-center" style={{ display: "flex" }}>
                             <PaginationItem disabled={this.state.displayedInstructors === null || this.state.currentPage === 1} color="danger">
                                 <PaginationLink onClick={this.changePages} href="#" id="1">
                                     First
