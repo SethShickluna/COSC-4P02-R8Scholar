@@ -75,6 +75,7 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
+    'r8scholar.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -155,6 +156,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # we whitelist localhost:3000 because that's where frontend will be served
+CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['*']
+
 CORS_ORIGIN_WHITELIST = [
 'http://localhost:3000',
 'http://localhost:8000',

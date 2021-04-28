@@ -22,24 +22,6 @@ const title = {
     fontSize: "28px",
 };
 
-async function handleLogout() {
-    toggleNavbarCollapse();
-    try {
-        const response = await axiosInstance.post("/logout/", {
-            refresh_token: localStorage.getItem("refresh_token"),
-        });
-        cookie.save("isLoggedIn", "false", { path: "/" });
-        cookie.save("email", "", { path: "/" });
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        axiosInstance.defaults.headers["Authorization"] = null;
-        window.location.href = "/";
-        return response;
-    } catch (e) {
-        console.log(e);
-    }
-}
-
 function HomeNavbar() {
     const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
     const [navbarCollapse, setNavbarCollapse] = React.useState(false);
@@ -47,6 +29,24 @@ function HomeNavbar() {
     const toggleNavbarCollapse = () => {
         setNavbarCollapse(!navbarCollapse);
         document.documentElement.classList.toggle("nav-open");
+    };
+
+    const handleLogout = async () => {
+        toggleNavbarCollapse;
+        try {
+            const response = await axiosInstance.post("/logout/", {
+                refresh_token: localStorage.getItem("refresh_token"),
+            });
+            cookie.save("isLoggedIn", "false", { path: "/" });
+            cookie.save("email", "", { path: "/" });
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            axiosInstance.defaults.headers["Authorization"] = null;
+            window.location.href = "/";
+            return response;
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     React.useEffect(() => {
