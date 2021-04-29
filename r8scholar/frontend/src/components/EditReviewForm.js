@@ -17,8 +17,13 @@ function EditForm(props) {
 
     const questions = {
         course: ["the lectures for this course?", "the homework for this course?", "the midterm/exam,or other evaluations, for this course?", "how difficult is this course?"],
-        instructor: ["the lecturing abilities of the instructor?", "the fairness of the instructor?", "the preparedness of the instructor?"],
-        department: ["the quality of courses in this program?", "the quality of instructors from this department?", "the overall quality of the department?"],
+        instructor: ["the lecturing abilities of the instructor?", "the fairness of the instructor?", "the preparedness of the instructor?", "how difficulty is this instructor?"],
+        department: [
+            "the quality of courses in this program?",
+            "the quality of instructors from this department?",
+            "the overall quality of the department?",
+            "the overall difficulty of the department?",
+        ],
         student: ["the students cooperation and communication?", "the students work efficacy?", "how well did the student adapt to critisism?"],
     };
 
