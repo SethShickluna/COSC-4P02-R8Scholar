@@ -17,7 +17,7 @@ class ModelsTestCase(TestCase):
         Inst=Instructor.objects.get(name="instructortest")
         Course.objects.create(name="coursetest",department=Dept,rating=4.22,course_full_name="fullnametest")
         Cor=Course.objects.get(name="coursetest")
-        Review.objects.create(reviewer=Cuser,nickname="testnick",subject="tester",title="test",rating=2.5,department_name=Dept,instructor_name=Inst,course_name=Cor)
+        Review.objects.create(reviewer=Cuser,nickname="testnick",subject="tester",title="test",rating=2.5,department_name=Dept,instructor_name=Inst,course_name=Cor,diff_rating=2)
     def test_str_(self):
         CUser=CustomUser.objects.get(email="lb16tp@brocku.ca")
         self.assertEqual(CUser._str_(), 'lb16tp@brocku.ca')
