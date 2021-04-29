@@ -124,8 +124,8 @@ function CommentForm(props) {
                                                             </Col>
                                                             {props.currentUser === item.name ? (
                                                                 <Col align="right">
-                                                                    <EditForm comment={item} />
-                                                                    <DeleteForm comment={item} />
+                                                                    <EditForm content={item.content} comment_id={item.comment_id} />
+                                                                    <DeleteForm comment_id={item.comment_id} />
                                                                 </Col>
                                                             ) : null}
                                                         </Row>

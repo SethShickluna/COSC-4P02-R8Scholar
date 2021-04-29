@@ -12,9 +12,10 @@ function EditCommentForm(props) {
     };
 
     const editComment = async () => {
+        console.log("commentttt", props);
         try {
             let response = await axiosInstance.post("/edit-comment/", {
-                comment_id: props.comment.comment_id,
+                comment_id: props.comment_id,
                 comment: content,
             });
             window.location.reload();
@@ -34,12 +35,12 @@ function EditCommentForm(props) {
                     </button>
                 </div>
                 <div className="modal-body" id="edit-comment" style={{ textAlign: "center" }}>
-                    <Form onSubmit={() => editComment()}>
+                    <Form onSubmit={editComment}>
                         <FormGroup>
                             <Label for="exampleText" style={{ marginBottom: "7%" }}>
                                 Edit the content
                             </Label>
-                            <Input type="textarea" onChange={handleContentChange} name="content" id="content" rows={5} placeholder={props.comment.content} />
+                            <Input type="textarea" onChange={handleContentChange} name="content" id="content" rows={5} placeholder={props.content} />
                         </FormGroup>
                         <Button className="btn-round" size="md" color="success" type="submit" outline style={{ margin: "5%" }}>
                             Post

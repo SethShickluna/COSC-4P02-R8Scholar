@@ -40,20 +40,7 @@ export default class ReviewItem extends Component {
     //props is going to consist of the review item passed by the course
     constructor(props) {
         super(props);
-        this.delete = this.delete.bind(this);
         this.vote = this.vote.bind(this);
-    }
-
-    async delete() {
-        try {
-            let response = await axiosInstance.post("/delete-review/", {
-                review_id: this.props.reviewItem.review_id,
-            });
-            window.location.reload();
-            return response.status;
-        } catch (error) {
-            console.log(error.message);
-        }
     }
 
     async vote(up) {
@@ -71,6 +58,7 @@ export default class ReviewItem extends Component {
 
     //the JSX that is rendered when this file is imported as a component
     render() {
+        console.log("reivewItem", this.props);
         return (
             <div className="App">
                 {/* container (card )which includes a title section + rating and a content section + button to see comments */}
@@ -84,7 +72,7 @@ export default class ReviewItem extends Component {
                             {this.props.isOwner ? (
                                 <Col className="col-md-5" style={{ marginLeft: "auto", minWidth: "max-content", maxWidth: "200px" }}>
                                     <EditForm type={this.props.type} review={this.props.reviewItem} />
-                                    <DeleteForm review={this.props.review} />
+                                    <DeleteForm review={this.props.reviewItem} />
                                 </Col>
                             ) : (
                                 <Col className="col-md-3" align="right" style={{ marginLeft: "auto", minWidth: "max-content", maxWidth: "180px" }}>
