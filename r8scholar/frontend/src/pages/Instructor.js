@@ -41,6 +41,7 @@ export default class Course extends Component {
             name: this.props.match.params.profName,
             department: null,
             rating: 0,
+            diff_rating: 0,
             reviews: [],
             instructors: [],
             courses: [],
@@ -73,10 +74,12 @@ export default class Course extends Component {
             })
             .then((data) => {
                 if (data != null) {
+                    const diff_rating = data.diff_rating != null ? data.diff_rating : 0;
                     this.setState({
                         valid: true,
                         name: data.name,
                         rating: data.rating,
+                        diff_rating: diff_rating,
                         department: data.department,
                     });
                 }
@@ -275,7 +278,7 @@ export default class Course extends Component {
                                             </div>
                                             <div style={{ textAlign: "center" }} name="avg-rating">
                                                 {/* this displays average # of stars*/}
-                                                <StarRatings rating={this.state.rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
+                                                <StarRatings rating={this.state.diff_rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
                                             </div>
                                         </div>
                                     </div>

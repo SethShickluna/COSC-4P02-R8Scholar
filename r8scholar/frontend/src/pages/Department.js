@@ -46,6 +46,7 @@ export default class Course extends Component {
             //all the content that is gonna be retrieved from the api stored here locally
             name: this.props.match.params.deptName,
             rating: 0,
+            diff_rating: 0,
             instructorRating: 0,
             courseRating: 0,
             reviews: [],
@@ -81,11 +82,13 @@ export default class Course extends Component {
             })
             .then((data) => {
                 if (data != null) {
+                    const diff_rating = data.diff_rating != null ? data.diff_rating : 0;
                     this.setState({
                         valid: true,
                         name: data.name,
                         courseRating: data.courses_rating,
                         rating: data.rating,
+                        diff_rating: diff_rating,
                         instructorRating: data.instructors_rating,
                     });
                 }
@@ -286,7 +289,7 @@ export default class Course extends Component {
                                             </div>
                                             <div style={{ textAlign: "center" }} name="avg-rating">
                                                 {/* this displays average # of stars*/}
-                                                <StarRatings rating={this.state.rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
+                                                <StarRatings rating={this.state.diff_rating} starDimension="40px" starSpacing="10px" starRatedColor="#f1c40f" numberOfStars={5} name="avgRating" />
                                             </div>
                                         </div>
                                     </div>

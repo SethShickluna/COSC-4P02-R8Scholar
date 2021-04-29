@@ -12,7 +12,6 @@ function EditCommentForm(props) {
     };
 
     const editComment = async () => {
-        console.log("commentttt", props);
         try {
             let response = await axiosInstance.post("/edit-comment/", {
                 comment_id: props.comment_id,

@@ -10,6 +10,7 @@ function DeleteCommentForm(props) {
             let response = await axiosInstance.post("/delete-comment/", {
                 comment_id: props.comment_id,
             });
+            window.location.reload();
             return response.status;
         } catch (error) {
             throw error;
@@ -32,7 +33,7 @@ function DeleteCommentForm(props) {
                             <h4 style={{ textAlign: "center" }}>Are you sure you wish to delete your comment?</h4>
                             <div style={{ textAlign: "center", margin: "5%" }}>
                                 <Button className="btn-round" size="md" color="success" type="submit" style={{ marginRight: "5%" }} outline>
-                                    Dedlete
+                                    Delete
                                 </Button>
                             </div>
                         </Form>

@@ -94,7 +94,7 @@ export default class ReviewForm extends Component {
                 tag_1: this.state.tagsSelected[0] === undefined ? null : this.state.tagsSelected[0],
                 tag_2: this.state.tagsSelected[1] === undefined ? null : this.state.tagsSelected[1],
                 tag_3: this.state.tagsSelected[2] === undefined ? null : this.state.tagsSelected[2],
-                diff_rating: this.state.rating4,
+                diff_rating: Number(this.state.rating4),
             });
             window.location.reload();
             return review;

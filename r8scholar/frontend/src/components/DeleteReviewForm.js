@@ -7,6 +7,7 @@ function DeleteReviewForm(props) {
     const [loginModal, setLoginModal] = React.useState(false);
 
     const deleteReview = async () => {
+        console.log("props", props.review, props.review.review_id);
         try {
             let response = await axiosInstance.post("/delete-review/", {
                 review_id: props.review.review_id,
