@@ -60,9 +60,9 @@ urlpatterns = [
     path('report-review/',review_views.ReportReview.as_view(),name='report-review'),
     path('thumbs-review/',review_views.ThumbsUpDown.as_view()),
     #Comment views
-    path('edit-comment',comment_views.EditComment.as_view(),name='edit-comment'),
-    path('delete-comment',comment_views.DeleteComment.as_view(),name='delete-comment'),
-    path('report-comment',comment_views.ReportComment.as_view(),name='report-comment'),
+    path('edit-comment/',comment_views.EditComment.as_view(),name='edit-comment'),
+    path('delete-comment/',comment_views.DeleteComment.as_view(),name='delete-comment'),
+    path('report-comment/',comment_views.ReportComment.as_view(),name='report-comment'),
     path('thumbs-comment/',comment_views.ThumbsUpDown.as_view()),
     #authentication views
     path('login/',authentication_views.login.as_view(),name = 'login'),
