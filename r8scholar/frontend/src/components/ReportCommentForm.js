@@ -20,7 +20,7 @@ function ReportCommentForm(props) {
     const submit = async () => {
         try {
             let response = await axiosInstance.post("/report-comment/", {
-                review_id: 1, //insert the comment ID
+                comment_id: props.comment_id, //insert the comment ID
                 report_description: selected === "4" ? content : reasons[Number(selected) - 1],
             });
             //let user know it worked

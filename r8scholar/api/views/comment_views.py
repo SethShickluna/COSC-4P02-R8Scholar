@@ -88,7 +88,7 @@ class ReportComment(APIView):
         #Increment report counter
         comment.numb_reports += 1
         comment.save()
-        email_r8scholar(comment_id,report_description,comment.numb_reports,user.email,user.nickname,comment.content)
+        email_r8scholar(comment_id,report_description,comment.numb_reports,user.email,user.nickname,"comment", "comment", comment.content, comment.date_created)
         return Response({'OK':'Report message sent'}, status=status.HTTP_201_CREATED)
 
 #User can delete their comments

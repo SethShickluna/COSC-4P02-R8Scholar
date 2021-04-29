@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Input, Modal, FormGroup, Label } from "reactstrap";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
 import axiosInstance from "../axiosApi";
+import cookie from "react-cookies";
 
 function ReportForm(props) {
     const [loginModal, setLoginModal] = React.useState(false);
@@ -22,6 +23,7 @@ function ReportForm(props) {
             let response = await axiosInstance.post("/report-review/", {
                 review_id: props.reviewID,
                 report_description: selected === "4" ? content : reasons[Number(selected) - 1],
+                email: cookie.load("email"),
             });
             //let user know it worked
             setLoginModal(false);
